@@ -56,15 +56,18 @@ def pesos_ediciones(anio: int, modo: str = "interpolado") -> dict[str, float]:
     raise ValueError(anio)
 
 
-def alicuota_iva(clase: str, anio: int) -> float:
-    """Alícuota legal de IVA (sobre precio sin impuesto) por clase y año."""
+def alicuota_iva(clase: str, anio: int, exento: float = 0.0) -> float:
+    """Alícuota legal de IVA (sobre precio sin impuesto) por clase y año.
+
+    exento: fracción de la alícuota general que se carga a los bienes exentos por el IVA de
+    sus insumos (Pessino et al. 2023 usan 0,2; la medida principal, 0)."""
     f567 = F_567_2019 if anio == 2019 else 0.0
     if clase in ("G21", "MED"):
         return 0.21
     if clase == "G105":
         return 0.105
     if clase == "EX":
-        return 0.0
+        return 0.21 * exento
     if clase == "AVPO":   # Ley 27.430: 10,5% desde 02/2018
         if anio <= 2017:
             return 0.21
@@ -77,7 +80,7 @@ def alicuota_iva(clase: str, anio: int) -> float:
 
 
 def perfil_consumo(anio: int, ingreso_rel: np.ndarray, engho: pd.DataFrame,
-                   modo: str = "interpolado") -> pd.DataFrame:
+                   modo: str = "interpolado", exento: float = 0.0) -> pd.DataFrame:
     """Consumo y canasta que corresponden a hogares con `ingreso_rel` en `anio`.
 
     Devuelve DataFrame (una fila por elemento de ingreso_rel) con:
@@ -93,7 +96,7 @@ def perfil_consumo(anio: int, ingreso_rel: np.ndarray, engho: pd.DataFrame,
         g = e.gasto_articulos
         x = e.ingreso_rel.values
         cols = {"consumo_rel": e.consumo_rel.values}
-        legal = sum(e[c] / g * (alicuota_iva(c[4:], anio) / (1 + alicuota_iva(c[4:], anio)))
+        legal = sum(e[c] / g * (alicuota_iva(c[4:], anio, exento) / (1 + alicuota_iva(c[4:], anio, exento)))
                     for c in e.columns if c.startswith("iva_"))
         cols["iva_legal"] = legal.values
         for rubro in RUBROS_INTERNOS:
@@ -133,4 +136,8 @@ def cargar_insumos():
     if altos.exists():
         a = pd.read_csv(altos, index_col=0)
         rec = rec.join(a[[c for c in a.columns if c not in rec.columns]])
+    cn = PROCESSED / "cn_ingresos.csv"                     # scripts/aux_cuentas_nacionales.py
+    if cn.exists():
+        c = pd.read_csv(cn, index_col=0)
+        rec = rec.join(c[[x for x in c.columns if x not in rec.columns]])
     return engho, rec

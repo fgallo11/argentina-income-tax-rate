@@ -33,18 +33,22 @@ la jubilación. Los impuestos directos se llevan a la misma base (×13/12). Los 
 arman con el IPCF así corregido (`src/incidencia/eph.py`). Supuesto: los asalariados sin
 descuento jubilatorio no devengan aguinaldo.
 
-**Corrección de recursos.** En los deciles más bajos el gasto de consumo estimado supera
-al ingreso declarado (en el decil 1, entre 1,45 y 2,1 veces). Un hogar no puede gastar
-de forma sostenida más de lo que tiene: la diferencia es ingreso no declarado, ingreso
-transitoriamente bajo, ayuda de otros hogares o desahorro. En la estimación principal,
-cuando el gasto de un decil supera a su ingreso se toma el gasto como medida de sus
-recursos. **La comparación es por decil, no por hogar:** ningún hogar de la EPH declara
-gasto; el gasto del decil es el cociente gasto/ingreso que la ENGHo muestra para hogares
-con el mismo ingreso relativo, aplicado al ingreso del decil. No es el método CEQ, que
-mide los impuestos indirectos contra el consumo en todos los deciles; aquí se corrige
-sólo donde el gasto supera al ingreso (ver `docs/auditoria.md`, 2.3). La variante `ingreso_declarado` no corrige y se publica siempre al lado: las
-dos juntas delimitan el rango del decil 1. La corrección sólo opera en el decil 1 y,
-algunos años, en el 2 y el 3.
+**Medida principal: el ingreso declarado.** La pregunta del proyecto es qué parte de lo
+que se gana va a impuestos, así que el denominador es el ingreso, no el gasto. La
+encuesta subdeclara ingresos en todos los grupos salvo los asalariados registrados
+(cuentapropia, rentas, evasión, activos no declarados en el exterior), y la subdeclaración
+crece con el ingreso. Por eso la tasa medida del decil 10 está sobreestimada y la del
+decil 1 algo sobreestimada; la corrección consistente es ajustar los ingresos de todos los
+deciles a Cuentas Nacionales por fuente (sección 8, pendiente).
+
+**Variante `recursos_gasto`** (era la principal hasta la auditoría). En los deciles más
+bajos el gasto de consumo estimado supera al ingreso declarado (en el decil 1, entre 1,45 y
+2,1 veces); la variante toma el gasto como medida de sus recursos donde lo supera. La
+comparación es por decil, no por hogar: ningún hogar de la EPH declara gasto; el gasto del
+decil es el cociente gasto/ingreso que la ENGHo muestra para hogares con el mismo ingreso
+relativo. Dejó de ser la principal porque corrige la subdeclaración sólo abajo, lo que
+aplanaba el perfil (`docs/auditoria.md`, 2.3). Opera en el decil 1 y, algunos años, en el
+2 y el 3.
 
 ## 3. Impuestos directos: microsimulación sobre la EPH
 
@@ -122,21 +126,50 @@ Pasos:
 ingreso medio de la EPH. Bienes Personales sigue siendo una imputación (la EPH no releva
 patrimonio): se grafica rayado y existe la variante `sin_bienes_personales`.
 
-## 5 bis. Las dos lecturas
+## 5 bis. Ingreso declarado y ingreso ajustado a Cuentas Nacionales
 
-Los resultados se presentan siempre en dos versiones (`fig0_dos_versiones_*`):
+La figura central (`fig0_dos_versiones_*`) muestra:
 
-- **A. Sin corregir** (variante `sin_correcciones`): ingreso declarado en la EPH y
-  Ganancias sólo simulada. Es el criterio habitual de los estudios de incidencia.
-  Sobreestima el decil 1 y subestima el decil 10.
-- **B. Corregida** (variante `principal`): corrección de recursos (sección 2) y de
-  ingresos altos (sección 5). En el decil 1 equivale a medir impuesto sobre gasto, que es
-  casi proporcional por construcción, y subestima la carga si esos hogares de verdad
-  desahorran o se endeudan.
+- **A. Ingreso declarado** (variante `principal`). 2024: D1 31,4%, deciles medios ~25%,
+  D10 26,8%, promedio 25,4%.
+- **B. Ingreso ajustado a Cuentas Nacionales** (variante `ajuste_cn`,
+  `scripts/aux_cuentas_nacionales.py`). Cada fuente de ingreso se lleva al total de la
+  Cuenta de generación del ingreso del INDEC con un factor propio, aplicado a quien
+  declara esa fuente:
+  - salarios (bruto de registrados + no registrados) a la remuneración al trabajo
+    asalariado. La EPH capta 68%-78%. Para comparar se suman a la EPH las contribuciones
+    patronales simuladas, 18% del bruto de los registrados públicos y 6% de obra social
+    patronal, que la remuneración incluye;
+  - ingreso de cuentapropistas y patrones (más otras ocupaciones) al ingreso mixto bruto.
+    La EPH capta 50%-72%, menos en los últimos años.
 
-La carga real de los deciles 1 y 10 está entre A y B. En ninguna de las dos el sistema
-resulta progresivo: en A es regresivo en la punta baja; en B es aproximadamente
-proporcional, es decir, no redistribuye por el lado de los impuestos.
+  Para 2004-2015 no hay Cuenta de generación del ingreso en base 2004: se usa la cobertura
+  promedio 2016-2018. **Nivel neutro:** todos los impuestos se escalan por el mismo factor
+  para que la carga total sobre el ingreso total quede como en A. Llevar los impuestos a la
+  escala de lo recaudado (consumo de Cuentas Nacionales) sin tener el ingreso completo de
+  los hogares inflaba las tasas: el decil 1 daba 67%. El ajuste muestra cómo cambia el
+  reparto, no el nivel. 2024: D1 33,0%, D10 26,0%.
+- **Sensibilidad de activos externos** (variante `ajuste_cn_activos_ext`): además, 3% anual
+  sobre los activos externos de "otros sectores" (inversión de cartera + moneda y
+  depósitos; Posición de inversión internacional, INDEC, cuadro 18; a pesos con el tipo de
+  cambio A 3500 promedio) como ingreso no declarado, repartido como la Ganancias faltante
+  (declaraciones juradas: casi todo al decil 10). Es una cota alta: supone que nada de eso
+  se declara, que los billetes rinden como depósitos y que todo pertenece a hogares, aunque
+  el sector incluye empresas. 2024: D10 24,5%, debajo de todos los deciles medios.
+
+Resultado: la subdeclaración de salarios y de cuentapropia está repartida en toda la
+distribución y casi no cambia el perfil. Lo que puede volver regresiva también la punta
+alta es el ingreso de capital no declarado. Las rentas internas de los hogares
+(intereses, alquileres, dividendos) no tienen dato oficial: el INDEC no publica la cuenta
+del sector hogares. La EPH registra rentas por 0,4%-0,7% del PIB, una cifra inverosímil.
+
+**Contra el consumo** (variante `sobre_consumo`): impuestos ÷ (gasto + impuestos
+directos). 2024: D1 22,0%, D10 39,6%. Responde otra pregunta (qué parte de lo que se gasta
+va a impuestos) y no registra que los deciles altos ahorran y subdeclaran. No se grafica.
+
+La variante `altos_registros` ("techo" del decil 10) se sigue calculando pero no se
+grafica ni entra en los rangos: implica que el ingreso faltante pagó más Ganancias que la
+alícuota máxima (`docs/auditoria.md`, 3.4).
 
 ## 6. Tabla de supuestos
 
@@ -144,7 +177,7 @@ Efecto medido en puntos porcentuales de la tasa total de 2024, salvo indicación
 
 | Supuesto | Estado | Alternativa calculada | Efecto |
 |---|---|---|---|
-| Recursos del decil 1 = gasto cuando gasto > ingreso | Supuesto central | `ingreso_declarado` | D1: 22,0 → 31,4. D2: +1,2. Resto: 0 |
+| Recursos = ingreso declarado (no se reemplaza por gasto) | Medida principal | `recursos_gasto` | D1: 31,4 → 22,0. D2: −1,2. Resto: 0 |
 | Consumo por ingreso relativo e interpolación de ENGHo | Método | `criterio_inicial` | Elimina escalones de 2012 y 2017 |
 | Contribuciones patronales 50% trabajador / 50% precios | Supuesto | `contrib_100_trabajador`, `contrib_100_consumidor` | D1: 20,2 a 23,7. D5: 24,6 a 25,3. D10: 25,1 a 28,3 |
 | IVA al nivel recaudado (no al legal) | Anclado a datos | `iva_legal` | Promedio +1,6 |
@@ -162,14 +195,129 @@ Efecto medido en puntos porcentuales de la tasa total de 2024, salvo indicación
 ## 7. Población fija
 
 Los deciles no son las mismas personas a lo largo del tiempo. `scripts/08_poblacion_fija.py`
-aplica las reglas y la presión tributaria de cada año a la población de 2017 con ingresos
-llevados a cada año por RIPTE. La diferencia con la serie observada es el efecto de
-composición. Entre 2004 y 2015 el decil 1 sube 6,3 puntos en la serie observada y 3,5 con
-población fija: algo más de la mitad de la suba es presión tributaria y el resto es
-composición (más asalariados registrados y jubilados en ese decil).
+aplica las reglas y la presión tributaria de cada año a una población fija, con sus
+ingresos llevados a cada año por RIPTE y la canasta de la ENGHo de su momento. Se calcula
+con dos años base, porque el resultado depende de cuál se deja fijo (problema de números
+índice): **2004**, el primero de la serie (ENGHo 2004/05), y **2017**, la ENGHo más reciente
+(2017/18). Con base 2004 la serie coincide con la observada en 2004, como debe.
+
+Variación 2004-2015, en puntos de la tasa total:
+
+| | Observada | Población de 2004 | Población de 2017 |
+|---|---|---|---|
+| Decil 1 | +0,5 | +9,7 | +7,2 |
+| Decil 5 | +5,2 | +5,5 | +5,1 |
+| Decil 10 | +11,1 | +11,4 | +10,4 |
+
+En los deciles 5 y 10 casi todo el cambio es presión tributaria: las tres columnas se
+parecen. En el decil 1 las reglas habrían subido la carga entre 7 y 10 puntos, pero la
+serie observada casi no se movió. La diferencia mezcla dos cosas: cambió quién está en el
+decil (más asalariados registrados y jubilados) y cambió su gasto respecto de su ingreso
+entre ediciones de la ENGHo (el cociente del decil 1 es 1,59 en la 2004/05, 1,68 en la 2012/13 y 1,45 en la
+2017/18). Con estos datos no se pueden separar.
+
+## 6 bis. Lo que se tomó de Pessino et al. (2023) y De Rosa, Flores y Morgan (2024)
+
+Papers en `papers/`. Variantes nuevas (2024, total % del ingreso):
+
+| Variante | Qué hace | D1 | D5 | D10 | Prom. |
+|---|---|---|---|---|---|
+| `principal` | ingreso declarado | 31,4 | 25,0 | 26,8 | 25,4 |
+| `iva_exentos_20` | bienes exentos cargan 20% de la alícuota por insumos (Pessino et al.) | 31,2 | 24,9 | 26,9 | 25,4 |
+| `con_cheque` | suma impuesto a créditos y débitos (Pessino et al. lo incluyen como "cascada") | 34,7 | 26,8 | 28,1 | 27,0 |
+| `ajuste_cn_rentas` | Cuentas Nacionales + rentas de la EPH × 7 (las encuestas captan 1/5 a 1/10; De Rosa et al.) | 34,8 | 26,8 | 24,5 | 25,4 |
+| `ajuste_cn_rentas_activos_ext` | lo anterior + renta de activos externos | 36,0 | 27,7 | 23,3 | 25,4 |
+
+El panel B de la figura 0 usa `ajuste_cn_rentas` con la marca de `ajuste_cn_rentas_activos_ext`:
+con el ingreso de capital no declarado el decil 10 queda por debajo de todos los demás.
+
+**No vale para todos los años.** Con rentas ×7 y activos externos, el decil 10 queda por
+debajo de todos los deciles medios sólo en 2004, 2007, 2008, 2018, 2019 y 2024. En 2009-2017 y
+2020-2023 baja pero sigue por encima del promedio (Ganancias pesaba más en esos años). La
+figura 0 para cada año está en `outputs/figures/por_anio/` y su texto se adapta al resultado.
+
+Pendiente de Pessino et al. (no implementado):
+- **Compras informales:** el IVA y Ingresos Brutos de lo que se compra en comercios informales
+  se paga sólo en 20%. Los pobres compran más en la informalidad: hace menos regresivo el IVA.
+  Requiere el lugar de compra de la ENGHo.
+- **Cascada con matriz insumo-producto:** Ingresos Brutos y cheque acumulan distinto según el
+  producto (usaron el código fiscal de Buenos Aires 2018 y la matriz INDEC 1997).
+- **Derechos de importación** y **Ganancias de sociedades** repartida por deciles (100% al
+  capital, o 50% capital / 50% trabajo).
+- **Concepto de ingreso:** incluyen el alquiler imputado de la vivienda propia; la EPH no lo trae.
+- **Contribuciones con mercado integrado:** 50% recae en salarios informales.
+
+## 7 bis. Distancia entre deciles (figuras 6 y 6b)
+
+Brecha de ingresos: ingreso por persona del decil 10 dividido por el del decil 1 (como la
+"brecha de ingresos" que publica el INDEC), antes de impuestos directos y después de restar
+todos los impuestos estimados con la medida principal.
+
+Panel derecho: ingreso de bolsillo por persona de los diez deciles y, punteado, el ingreso
+declarado a ARCA por declarante del 1% más rico (no estrictamente comparable: es por persona
+que declara, no por miembro del hogar, y no incluye utilidades ni activos externos).
+- **Figura 6, en canastas básicas:** ingreso por persona / canasta básica total del Gran Buenos
+  Aires por adulto equivalente (INDEC). No depende de la inflación ni del tipo de cambio y,
+  a diferencia de una medida relativa (veces el promedio), muestra si el ingreso real crece.
+  La serie oficial empieza en 04/2016; antes de 2017 se usa la de 2017 llevada hacia atrás con
+  el IPC empalmado (las canastas oficiales de 2007-2015 están intervenidas). La canasta es por
+  adulto equivalente: el umbral de pobreza por persona es algo menor que 1.
+- **Figura 6b, en pesos de hoy:** pesos constantes del último mes publicado del IPC. Deflactor
+  (`scripts/aux_deflactor.py`): IPC-GBA del INDEC hasta 12/2006, IPC de San Luis 2007-2016 e
+  IPC Nacional del INDEC desde 2017.
+
+Los hogares del decil 1 tienen 3,9 personas en promedio; los del decil 10, 2,0. Es ingreso
+declarado en la encuesta: el decil 10 está subestimado y no incluye al 1% más rico.
+
+**Validación contra el INDEC.** Con los deciles armados sobre el ingreso tal como lo publica
+el INDEC (sin el ajuste de aguinaldo), el ingreso medio por persona de los diez deciles, sus
+límites, la media ($442.596) y la población (29.783.755) del cuarto trimestre de 2024 coinciden
+con el informe "Evolución de la distribución del ingreso (EPH)" del INDEC (cuadro 1). El decil
+10 promedia $1.430.619 por persona en pesos de ese trimestre: es por persona, no por hogar.
+
+## 7 ter. El 1% más rico (figura 7)
+
+`scripts/10_top1.py`, con las declaraciones juradas de Ganancias por tramo (anuarios de ARCA,
+2002-2023; 2024 extrapolado), como Alvaredo (2010). Grupo: el 1% de la población con mayores
+ingresos declarados (todo el grupo está dentro de las declaraciones). Ingreso, Ganancias y
+patrimonio se acumulan de los tramos más altos hacia abajo, interpolando en el corte.
+
+**Estimación principal ("completo"): todo lo que se le puede atribuir.** Ingreso = declarado
+al fisco + la mitad de las utilidades de las empresas (impuesto de sociedades / 30%; es dueño
+de la mitad) + renta del 3% de los activos externos privados (cartera y depósitos, INDEC).
+Impuestos = Ganancias declarada + Bienes Personales según su patrimonio + la mitad de la
+Ganancias de sociedades + aportes y contribuciones (la mitad del ingreso es salario, aportes
+con tope) + impuestos al consumo (entre la mitad y el total del cociente gasto/ingreso del 5%
+más rico de la ENGHo).
+
+2024: 30,1% (28,5-31,7 según el consumo). Sólo con lo declarado al fisco: 35,8%; sin los
+activos externos: 33,7%. Sigue siendo un techo: las rentas internas no declaradas no figuran
+en ninguna fuente. Pesa el supuesto de que la mitad del ingreso es salario (aportes y
+contribuciones: 8,2% del ingreso declarado).
+
+## 7 quater. Impuesto al cheque y combustibles
+
+La medida principal excluye el impuesto a los créditos y débitos bancarios y el de
+combustibles. Pessino et al. (2023) los incluyen ("en cascada" y "otros"). Variantes
+`con_cheque` y `con_cheque_y_combustibles`: recaudación por peso de consumo privado aplicada
+al consumo de cada decil, como Ingresos Brutos. Supuestos: el cheque se traslada entero a
+precios; combustibles se reparte como el consumo total (falta la canasta de combustibles por
+decil de la ENGHo). 2018 con cheque: D1 37,1%, D2 27,6%, D10 28,4% (Pessino et al.: 35,8%,
+30,8%, 24,9%).
 
 ## 8. Qué falta para cerrar los supuestos abiertos
 
+0. **Subdeclaración de ingresos en todos los deciles.** Hecho para salarios e ingreso mixto
+   (sección 5 bis). Falta lo que no tiene dato oficial: rentas de la propiedad de los hogares
+   y la Cuenta de generación del ingreso de 2004-2015. Plan original: ajustar el ingreso de la
+   EPH a Cuentas Nacionales por fuente, como Gómez Sabaini y Rossignolo: salarios,
+   ingreso de cuentapropistas (ingreso mixto), rentas de la propiedad y jubilaciones, cada
+   una con su propio factor, aplicado a quien declara esa fuente. Fuente: Cuenta de
+   Generación del Ingreso del INDEC (base 2004, publicada desde 2016; para 2004-2015 hay
+   que empalmar con series anteriores). Como la subdeclaración de rentas e ingreso mixto es
+   mucho mayor que la de salarios registrados y se concentra arriba, se espera que baje la
+   tasa de los deciles altos. Sensibilidad adicional para el decil 10: renta de los activos
+   externos no declarados del sector privado (Posición de Inversión Internacional, INDEC).
 1. **Altos ingresos.** Hecho en parte (sección 5). Falta: una medida del ingreso real del
    decil 10 que no dependa de la encuesta ni de lo declarado al fisco (Argentina no
    publica cuentas del sector hogares), las rentas exentas (los anuarios las informan de

@@ -9,18 +9,20 @@ import pandas as pd
 from .indirectos import perfil_consumo, tasas_indirectas
 
 IMPUESTOS = ["ganancias", "bienes_personales", "aportes", "contrib_trabajador",
-             "contrib_consumidor", "iva", "internos", "iibb"]
+             "contrib_consumidor", "iva", "internos", "iibb", "cheque", "combustibles"]
 DIRECTOS = ["ganancias", "bienes_personales", "aportes", "contrib_trabajador"]
-INDIRECTOS = ["contrib_consumidor", "iva", "internos", "iibb"]
+INDIRECTOS = ["contrib_consumidor", "iva", "internos", "iibb", "cheque", "combustibles"]
 
 
 @dataclass(frozen=True)
 class Variante:
     """Conjunto de supuestos. Los valores por defecto definen la variante principal."""
     nombre: str = "principal"
-    # Recursos del hogar: si el gasto de consumo estimado de un decil supera su ingreso
-    # declarado, se toma el gasto como medida de sus recursos (ingreso = max(ingreso, gasto)).
-    corregir_recursos: bool = True
+    # Recursos del hogar. Principal: el ingreso declarado (la pregunta es qué parte de lo
+    # que se gana va a impuestos). Con True, si el gasto de consumo estimado de un decil
+    # supera su ingreso declarado se toma el gasto (variante `recursos_gasto`; era la
+    # principal hasta la auditoría de 11/2026, que la objetó por corregir sólo abajo).
+    corregir_recursos: bool = False
     modo_engho: str = "interpolado"       # "interpolado" | "escalonado" | "2004" | "2012" | "2017"
     iva_nivel_legal: bool = False         # True: alícuota legal plena (sin evasión)
     fraccion_contrib_trabajador: float = 0.5
@@ -28,6 +30,10 @@ class Variante:
     incluir_bp: bool = True               # Bienes Personales imputado al decil 10
     calibrar_ganancias: bool = False      # reescalar Ganancias a la recaudación
     sobre_ipcf: bool = False              # denominador = ingreso de bolsillo
+    # Lectura "contra consumo": en TODOS los deciles los recursos son el gasto de consumo
+    # (ENGHo, por ingreso relativo) más los impuestos directos; los deciles siguen
+    # ordenados por ingreso. Es la medida de bienestar alternativa al ingreso corriente.
+    sobre_consumo: bool = False
     # Corrección de ingresos altos con datos tributarios (scripts/09_ingresos_altos.py):
     #   "no"        sólo lo simulado sobre la EPH
     #   "cobertura" Ganancias y Bienes Personales faltantes, por peso de consumo privado
@@ -35,11 +41,37 @@ class Variante:
     #   "registros" Ganancias y Bienes Personales faltantes por habitante, y se suma al
     #               ingreso el ingreso declarado al fisco que la EPH no capta
     altos_ingresos: str = "cobertura"
+    # Ajuste a Cuentas Nacionales (scripts/aux_cuentas_nacionales.py). El ingreso de cada
+    # fuente se lleva al total de Cuentas Nacionales con un factor por fuente, aplicado a
+    # quien declara esa fuente: salarios a la remuneración al trabajo asalariado, ingreso
+    # de independientes al ingreso mixto bruto. El nivel de la carga total se mantiene igual
+    # al de la medida principal (todos los impuestos se escalan por el mismo factor): el
+    # ajuste muestra cómo cambia el reparto. Llevar los impuestos a la escala de lo
+    # recaudado no es coherente mientras falten las rentas de los hogares en el ingreso.
+    ajuste_cn: bool = False
+    # Sensibilidad: renta anual de los activos externos del sector privado no financiero
+    # (inversión de cartera + moneda y depósitos, PII del INDEC) a esta tasa, sumada al
+    # ingreso de los deciles altos con el reparto de las declaraciones juradas. Cota alta:
+    # supone que nada de eso se declara y que los billetes rinden como depósitos.
+    renta_activos_ext: float = 0.0
+    # Impuestos que la medida principal excluye y que Pessino et al. (2023) incluyen: el
+    # impuesto a los créditos y débitos bancarios ("cheque") y el de combustibles. Se
+    # trasladan a precios y se reparten según el consumo de cada decil (supuesto: el
+    # cheque actúa en cascada como Ingresos Brutos; combustibles, sin canasta propia).
+    incluir_cheque: bool = False
+    incluir_combustibles: bool = False
+    # Pessino et al. (2023): los bienes exentos de IVA cargan el 20% de la alícuota por el IVA
+    # de sus insumos. Cambia el reparto del IVA entre deciles (el nivel sigue en lo recaudado).
+    iva_exentos: float = 0.0
+    # De Rosa, Flores y Morgan (2024): las encuestas captan entre 1/5 y 1/10 de las rentas de
+    # la propiedad. Con ajuste_cn, multiplica las rentas declaradas en la EPH (alquileres,
+    # intereses, ganancias de negocios) por este factor. 1 = sin ajuste.
+    factor_rentas: float = 1.0
 
 
 VARIANTES = [
     Variante(),
-    Variante("ingreso_declarado", corregir_recursos=False),
+    Variante("recursos_gasto", corregir_recursos=True),
     Variante("sin_correcciones", corregir_recursos=False, altos_ingresos="no"),
     Variante("engho_escalonado", modo_engho="escalonado"),
     Variante("iva_legal", iva_nivel_legal=True),
@@ -51,6 +83,14 @@ VARIANTES = [
     Variante("altos_registros", altos_ingresos="registros"),
     Variante("ganancias_calibrada", calibrar_ganancias=True, altos_ingresos="no"),
     Variante("sobre_ipcf", sobre_ipcf=True),
+    Variante("sobre_consumo", sobre_consumo=True),
+    Variante("ajuste_cn", ajuste_cn=True),
+    Variante("ajuste_cn_activos_ext", ajuste_cn=True, renta_activos_ext=0.03),
+    Variante("con_cheque", incluir_cheque=True),
+    Variante("con_cheque_y_combustibles", incluir_cheque=True, incluir_combustibles=True),
+    Variante("iva_exentos_20", iva_exentos=0.2),
+    Variante("ajuste_cn_rentas", ajuste_cn=True, factor_rentas=7.0),
+    Variante("ajuste_cn_rentas_activos_ext", ajuste_cn=True, factor_rentas=7.0, renta_activos_ext=0.03),
     Variante("criterio_inicial", corregir_recursos=False, modo_engho="escalonado", altos_ingresos="no"),
 ]
 
@@ -64,7 +104,7 @@ def incidencia_trimestre(q: pd.DataFrame, anio: int, engho: pd.DataFrame, rec: p
     q = q.set_index("decil").sort_index()
     media = q.ipcf.sum() / q.personas.sum()
     rel = (q.ipcf / q.personas / media).values
-    perfil = perfil_consumo(anio, rel, engho, v.modo_engho)
+    perfil = perfil_consumo(anio, rel, engho, v.modo_engho, v.iva_exentos)
     perfil.index = q.index
     consumo = perfil.consumo_rel * media * q.personas
     ti = tasas_indirectas(perfil, consumo.values, rec, v.iva_nivel_legal)
@@ -83,6 +123,10 @@ def incidencia_trimestre(q: pd.DataFrame, anio: int, engho: pd.DataFrame, rec: p
     t["iva"] = ti.iva * consumo
     t["internos"] = ti.internos * consumo
     t["iibb"] = ti.iibb * consumo
+    t["cheque"] = (rec["creditos_debitos"] / rec["consumo_privado"] * consumo) if v.incluir_cheque else 0.0 * consumo
+    t["combustibles"] = ((rec["sel_combustibles"] / rec["consumo_privado"] * consumo) if v.incluir_combustibles
+                         else 0.0 * consumo)
+    esc_pais = 1e6 / 12 * q.personas.sum() / rec["poblacion"]   # millones anuales país -> pesos mensuales EPH
     bp = pd.Series(0.0, index=q.index)
     if v.incluir_bp:
         # recaudación por peso de consumo privado, aplicada al consumo total de la encuesta
@@ -98,15 +142,32 @@ def incidencia_trimestre(q: pd.DataFrame, anio: int, engho: pd.DataFrame, rec: p
     if v.altos_ingresos != "no":
         partes = np.array([rec[f"parte_d{d}"] for d in q.index])
         if v.altos_ingresos == "registros":
-            esc = 1e6 / 12 * q.personas.sum() / rec["poblacion"]    # millones anuales país -> pesos mensuales EPH
+            esc = esc_pais
             adic = adic + rec["ingreso_faltante_mill"] * esc * partes
         else:
             esc = consumo.sum() / rec["consumo_privado"]
         t["ganancias"] = t.ganancias + rec["ganancias_faltante_mill"] * esc * partes
         if v.incluir_bp:
             t["bienes_personales"] = rec["bienes_personales"] * esc * partes
-    base = np.maximum(q.ipcf, consumo) if v.corregir_recursos else q.ipcf
+    if v.sobre_consumo:
+        base = consumo
+    else:
+        base = np.maximum(q.ipcf, consumo) if v.corregir_recursos else q.ipcf
+    if v.ajuste_cn:
+        den_sin_ajuste = (base + adic).sum()
+        adic = adic + (1 / rec["cob_asal"] - 1) * (q.masa_bruta_reg + q.ing_lab_asal_no_reg)
+        adic = adic + (1 / rec["cob_imb"] - 1) * (q.ing_lab_independiente + q.ing_otras_ocup)
+        adic = adic + (v.factor_rentas - 1) * q.rentas
+        if v.renta_activos_ext:
+            partes = np.array([rec[f"parte_d{d}"] for d in q.index])
+            activos = (rec["pii_cartera_musd"] + rec["pii_mondep_musd"]) * rec["tc"]   # millones de pesos
+            adic = adic + v.renta_activos_ext * activos * esc_pais * partes
     den = q.ipcf if v.sobre_ipcf else base + adic
+    if v.ajuste_cn:
+        # Nivel neutro: la carga total sobre el ingreso total queda como en la medida
+        # principal (el nivel con ingresos completos no se puede medir: faltan las rentas de
+        # los hogares en Cuentas Nacionales). El ajuste sólo cambia el reparto entre deciles.
+        t[IMPUESTOS] = t[IMPUESTOS] * den.sum() / den_sin_ajuste
 
     tasas = t[IMPUESTOS].div(den, axis=0)
     tot = t[IMPUESTOS].sum() / den.sum()

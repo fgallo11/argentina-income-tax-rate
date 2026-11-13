@@ -72,6 +72,57 @@ Los PDFs se leyeron con pdftotext; los numeros de pagina son los impresos en el 
 - Alternativa: si el error de medicion de ingreso o consumo explica la brecha, corregirlo primero, o usar el consumo como "ingreso disponible" si esta mejor medido (p. 273-274); asi no hay consumible negativo.
 - Contraste con Rossignolo (2016) arriba: sus indirectos suman 41,1% del ingreso de mercado en D1 (tabla 11-5), lo cual es el efecto "consumo sobre ingreso"; no verifique que haya aplicado el reescalamiento del Handbook.
 
+## 8. Pessino, Rasteletti, Artana y Lustig (2023), datos ~2018 (vía Argendata)
+
+"Distributional Effects of Taxation in Latin America" (BID, IDB-WP-01534; LSE LACIR WP 118).
+Diez países, impuestos directos e indirectos. Fundar publica en Argendata la serie de
+Argentina por decil (`TRIBUT/presion_tributaria_media_por_tipo_de_impuesto_y_decil.csv`,
+repositorio argendatafundar/data). Presión tributaria media, % del ingreso:
+
+| Decil | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Aportes y contribuciones | 5,0 | 7,5 | 8,0 | 8,4 | 8,2 | 8,0 | 8,2 | 8,4 | 8,4 | 7,0 |
+| IVA | 16,7 | 12,2 | 10,2 | 9,4 | 8,8 | 8,6 | 8,2 | 7,8 | 7,1 | 5,0 |
+| En cascada (IIBB, cheque) | 8,3 | 6,4 | 5,3 | 4,9 | 4,6 | 4,5 | 4,2 | 4,0 | 3,7 | 2,6 |
+| Ganancias personas | 0,8 | 1,2 | 1,3 | 1,5 | 1,4 | 1,5 | 1,7 | 2,2 | 3,0 | 9,0 |
+| Otros | 5,0 | 3,5 | 3,0 | 2,8 | 2,6 | 2,5 | 2,4 | 2,2 | 2,0 | 1,3 |
+| **Total** | **35,8** | **30,8** | **27,8** | **27,0** | **25,6** | **25,1** | **24,7** | **24,6** | **24,2** | **24,9** |
+
+No pude abrir el PDF del BID (acceso bloqueado): las cifras salen de Argendata. El usuario
+lo citó como publicado en Oxford Open Economics, vol. 4; no lo confirmé.
+
+## 9. International Tax Observatory (2026), "Progresividad fiscal y desigualdad"
+
+Informe para la Plataforma Regional de Cooperación Tributaria (PTLAC, abril de 2026), con
+tasas efectivas de De Rosa, Flores y Morgan (2024) y Fisher-Post y Gethin (2023). Región:
+la mitad más pobre paga ~30%; el 40% medio ~23%; el 10% y el 1% más ricos ~22%. Argentina
+está entre los países con mayor carga en la mitad inferior. Según la prensa (elDiarioAr,
+Análisis Digital, 18/05/2026), para Argentina: pobres ~37%, clase media ~29-30%, decil 10
+~25%, 1% ~30%. No encontré esas cifras argentinas en el texto del informe. Para Argentina no
+hay datos que permitan desagregar dentro del 1%.
+
+## 10. Lectura directa de los papers (carpeta `papers/`)
+
+- **Pessino, Rasteletti, Artana y Lustig (2023)**, IDB-WP-01534. Año ~2018. Ingreso bruto (de
+  mercado + transferencias, con alquiler imputado). Simulan todos los impuestos y los
+  reescalan a la recaudación como % del PIB. Indirectos: IVA por alícuota de cada bien (exentos
+  con 20% por insumos), internos, importación y cascada (Ingresos Brutos y cheque) con la
+  matriz insumo-producto de 1997 y el código fiscal de Buenos Aires 2018. Para Argentina
+  asignan los indirectos por decil y región desde la ENGHo a la EPH. Escenarios: Ganancias de
+  sociedades 100% al capital o 50/50; contribuciones con mercado segmentado o integrado; IVA
+  con compras informales que pagan 20%.
+- **De Rosa, Flores y Morgan (2024)**, World Development 184. Cuentas nacionales distributivas
+  para diez países. Corrigen la cola alta de la encuesta con datos tributarios, escalan cada
+  fuente a cuentas nacionales (para Argentina, con el promedio regional, porque no publica la
+  cuenta de hogares) e imputan las utilidades retenidas a los dueños de empresas. Las rentas
+  del capital de las encuestas se multiplican por 5 a 10. En Argentina la caída de la
+  desigualdad persiste tras los ajustes, más suave. Los impuestos tienen perfil regresivo,
+  más empinado en Argentina; Ganancias de sociedades es clave para gravar la cima.
+- **Brounstein, Bachas y Bajaña (2026)**, International Tax Observatory WP 48. Reforma de
+  Ecuador que recarga el impuesto a empresas con dueños en paraísos fiscales: bajó la
+  propiedad vía paraísos 12 puntos y subió la recaudación. Menciona las reglas argentinas
+  contra jurisdicciones no cooperantes. No aporta datos para este proyecto.
+
 ## No pude verificar
 - Gomez Sabaini y Rossignolo (2009), OIT "Argentina: analisis de la situacion tributaria...", y la version 2014: no encontre un PDF abierto. Solo la fila 2006 citada en el Cuadro 50 de Gaggero-Rossignolo (fuente secundaria, con errores de transcripcion en otras filas).
 - Fernandez Felices et al. 2016 (Estudios Economicos) y cualquier cifra con ENGH 2012/13: no abierta; el WP 105 abierto no tiene tabla numerica de presion total.

@@ -68,3 +68,19 @@ sólo donde el gasto del decil supera a su ingreso. Aplicada a todos, el decil 1
 
 Sin verificar: Gómez Sabaini y Rossignolo (OIT 2009), Fernández Felices et al. (2016),
 Dondo, Hanni, Martner y Podestá (2015).
+
+## 3. Contra Pessino et al. (~2018) y el International Tax Observatory (2026)
+
+| Decil | 1 | 2 | 3 | 5 | 9 | 10 | 1% más rico |
+|---|---|---|---|---|---|---|---|
+| Pessino et al., ~2018 (Argendata) | 35,8 | 30,8 | 27,8 | 25,6 | 24,2 | 24,9 | — |
+| Este proyecto, 2018 (principal) | 33,6 | 25,3 | 25,0 | 25,7 | 24,5 | 27,2 | — |
+| ITO 2026, según la prensa | ~37 | | | ~29-30 | | ~25 | ~30 |
+| Este proyecto, 2024 | 31,4 | 25,0 | 24,3 | 25,0 | 24,5 | 26,8 | 30,1 a 38,5 |
+
+La forma coincide: el decil 1 paga bastante más y del decil 3 al 9 la carga es pareja. Las
+diferencias: Pessino et al. incluyen más impuestos (cheque y otros en cascada, que pesan más
+abajo), lo que explica su decil 2 más alto; en el decil 10 este proyecto suma la Ganancias
+y los Bienes Personales que la encuesta no capta (declaraciones juradas), lo que lo sube.
+Para el 1% más rico el rango de este proyecto contiene el ~30% citado del ITO.
+

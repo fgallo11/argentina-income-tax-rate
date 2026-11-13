@@ -4,10 +4,14 @@
 Los deciles no son las mismas personas a lo largo del tiempo: cambia quién es asalariado
 registrado, cuentapropista o jubilado, y cuánto gana cada uno en relación con los demás.
 Para aislar el efecto de la POLÍTICA TRIBUTARIA se toma una población fija (los cuatro
-trimestres de la EPH de AÑO_BASE), se llevan sus ingresos nominales al nivel de cada año
+trimestres de la EPH del año base), se llevan sus ingresos nominales al nivel de cada año
 con el RIPTE (todos los ingresos se mueven igual: la distribución relativa no cambia) y
 se le aplican las reglas y la presión tributaria agregada de cada año. La canasta de
-consumo también queda fija (ENGHo 2017/18).
+consumo también queda fija: la ENGHo contemporánea del año base (2004/05 para 2004,
+2017/18 para 2017).
+
+Se calcula con dos años base, 2004 (el primero de la serie) y 2017 (la ENGHo más reciente).
+El resultado depende del año base (problema de números índice): se publican los dos.
 
   serie observada   = reglas del año + población del año
   serie contrafáctica = reglas del año + población de AÑO_BASE
@@ -27,7 +31,7 @@ from incidencia.eph import cargar_trimestre  # noqa: E402
 from incidencia.incidencia import IMPUESTOS, Variante, incidencia_trimestre  # noqa: E402
 from incidencia.indirectos import cargar_insumos  # noqa: E402
 
-ANIO_BASE = 2017
+BASES = {2004: "2004", 2017: "2017"}   # año base -> edición de la ENGHo
 
 
 def ripte_trim(P, anio, trim):
@@ -37,23 +41,25 @@ def ripte_trim(P, anio, trim):
 if __name__ == "__main__":
     P = Parametros()
     engho, rec = cargar_insumos()
-    base = {t: cargar_trimestre(ANIO_BASE, t) for t in (1, 2, 3, 4)}
-    v = Variante("poblacion_fija", modo_engho="2017")
     filas = []
-    for anio in range(2004, 2025):
-        trims = []
-        for t, df0 in base.items():
-            k = ripte_trim(P, anio, t) / ripte_trim(P, ANIO_BASE, t)
-            df = df0.copy()
-            for c in ("P21", "V2_M", "IPCF", "ITF"):
-                df[c] = df[c] * k
-            q = resumir_por_decil(simular(df, P, anio, t))
-            trims.append(incidencia_trimestre(q, anio, engho, rec.loc[anio], v))
-        p = (sum(trims) / 4).reset_index().rename(columns={"index": "decil"})
-        p.insert(0, "anio", anio)
-        filas.append(p)
-        print(anio, (p.set_index("decil").total.loc[[0, 1, 5, 10]] * 100).round(1).to_dict(), flush=True)
+    for anio_base, edicion in BASES.items():
+        base = {t: cargar_trimestre(anio_base, t) for t in (1, 2, 3, 4)}
+        v = Variante("poblacion_fija", modo_engho=edicion)
+        for anio in range(2004, 2025):
+            trims = []
+            for t, df0 in base.items():
+                k = ripte_trim(P, anio, t) / ripte_trim(P, anio_base, t)
+                df = df0.copy()
+                for c in ("P21", "V2_M", "IPCF", "ITF", "P47T", "TOT_P12", "V8_M", "V9_M", "V10_M"):
+                    df[c] = df[c] * k
+                q = resumir_por_decil(simular(df, P, anio, t))
+                trims.append(incidencia_trimestre(q, anio, engho, rec.loc[anio], v))
+            p = (sum(trims) / 4).reset_index().rename(columns={"index": "decil"})
+            p.insert(0, "anio", anio)
+            p.insert(0, "anio_base", anio_base)
+            filas.append(p)
+            print(anio_base, anio, (p.set_index("decil").total.loc[[0, 1, 5, 10]] * 100).round(1).to_dict(),
+                  flush=True)
     out = pd.concat(filas, ignore_index=True)
-    out.insert(0, "anio_base", ANIO_BASE)
     out[["anio_base", "anio", "decil"] + IMPUESTOS + ["total", "directos", "indirectos"]].to_csv(
         TABLES / "serie_poblacion_fija.csv", index=False)

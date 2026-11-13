@@ -239,6 +239,7 @@ def resumir_por_decil(s: pd.DataFrame) -> pd.DataFrame:
     t = pd.DataFrame({
         "decil": s.decil,
         "personas": w,
+        "hogares": w * (s.CH03 == 1),
         "ipcf": w * s.IPCF,
         "ing_pre_adic": w * s.ing_pre,
         "ap_jub": w * s.ap_jub,
@@ -253,6 +254,9 @@ def resumir_por_decil(s: pd.DataFrame) -> pd.DataFrame:
         "ing_lab_registrado": w * s.P21 * s.registrado,
         "ing_lab_asal_no_reg": w * s.P21 * (asal & ~s.registrado),
         "ing_lab_independiente": w * s.P21 * indep,
+        "ing_otras_ocup": w * s.TOT_P12,
+        "rentas": w * (s.V8_M + s.V9_M + s.V10_M),
+        "masa_bruta_reg_pub": w * s.bruto * (s.registrado & ~s.privado_reg),
         "n_registrados": w * s.registrado,
         "n_registrados_priv": w * s.privado_reg,
         "n_asal_no_registrados": w * (asal & ~s.registrado),

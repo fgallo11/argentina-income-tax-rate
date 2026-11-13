@@ -90,6 +90,20 @@ FUENTES_VARIAS = [
     ("macro", "smvm_mensual.csv", _serie("57.1_SMVMM_0_M_34")),
     ("macro", "consumo_privado_corriente_anual.csv", _serie("4.3_DGCP_2004_A_27")),
     ("macro", "pib_corriente_anual.csv", _serie("4.3_OGP_2004_A_17")),
+    # Cuentas Nacionales para el ajuste de ingresos (scripts/aux_cuentas_nacionales.py)
+    ("macro", "serie_cgi_10_26.xls",
+     "https://www.indec.gob.ar/ftp/cuadros/economia/serie_cgi_10_26.xls"),
+    ("macro", "cin_II_2026.xls",
+     "https://www.indec.gob.ar/ftp/cuadros/economia/cin_II_2026.xls"),
+    ("macro", "tipo_cambio_a3500_anual.csv",
+     "https://apis.datos.gob.ar/series/api/series/?ids=168.1_T_CAMBI500_D_0_0_17&collapse=year"
+     "&collapse_aggregation=avg&start_date=2003-01-01&limit=1000&format=csv"),
+    # Precios al consumidor para el deflactor (scripts/aux_deflactor.py)
+    ("macro", "ipc_97.2_ING_2008_M_17.csv", _serie("97.2_ING_2008_M_17")),          # IPC-GBA, INDEC
+    ("macro", "ipc_197.1_NIVEL_GENERAL_2014_0_13.csv", _serie("197.1_NIVEL_GENERAL_2014_0_13")),  # San Luis
+    ("macro", "ipc_148.3_INIVELNAL_DICI_M_26.csv", _serie("148.3_INIVELNAL_DICI_M_26")),  # IPC Nacional
+    # Canasta básica total, Gran Buenos Aires, por adulto equivalente (INDEC; figura 6)
+    ("macro", "cbt_gba_mensual.csv", _serie("444.1_CANASTA_batotGBA_0_0_26_47")),
     # Población total país (Banco Mundial, SP.POP.TOTL; uso auxiliar en validación)
     ("macro", "poblacion_total_wb.json",
      "https://api.worldbank.org/v2/country/ARG/indicator/SP.POP.TOTL?format=json&date=2003:2024&per_page=100"),

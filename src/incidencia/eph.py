@@ -11,6 +11,7 @@ COLS = [
     "CODUSU", "NRO_HOGAR", "COMPONENTE", "AGLOMERADO", "PONDERA", "PONDIH",
     "CH03", "CH04", "CH06", "ESTADO", "CAT_OCUP", "PP04A", "PP04B1", "PP04C", "PP04C99",
     "PP07H", "P21", "V2_M", "V21_M", "PP08J1", "P47T", "ITF", "IPCF",
+    "TOT_P12", "V8_M", "V9_M", "V10_M",   # otras ocupaciones; alquileres, ganancias de negocios, intereses
 ]
 NUMERICAS = [c for c in COLS if c != "CODUSU"]
 
@@ -102,7 +103,7 @@ def cargar_trimestre(anio: int, trim: int) -> pd.DataFrame:
     df["w"] = df["PONDIH"] if usa_pondih else df["PONDERA"]
     df = df[(df.w > 0) & df.IPCF.notna() & (df.IPCF >= 0)].copy()
     neg_p21 = int((df.P21 < 0).sum())
-    for c in ("P21", "V2_M", "P47T"):
+    for c in ("P21", "V2_M", "P47T", "TOT_P12", "V8_M", "V9_M", "V10_M"):
         df[c] = df[c].where(df[c] > 0, 0.0).fillna(0.0)
     df["anio"], df["trim"] = anio, trim
     df = _aguinaldo_devengado(df)

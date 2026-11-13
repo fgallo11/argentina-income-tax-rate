@@ -46,7 +46,12 @@ if __name__ == "__main__":
     serie.columns = [f"{m}_{'poblacion' if d == 0 else 'D' + str(d)}" for m, d in serie.columns]
     serie.reset_index().to_csv(TABLES / "serie_total_anual.csv", index=False)
 
-    rango = ancho.groupby(["anio", "decil"]).total.agg(["min", "max"]).reset_index()
+    # El rango cubre supuestos sobre la misma medida de recursos. Se excluyen la lectura
+    # contra consumo y las ajustadas a Cuentas Nacionales (otras medidas de ingreso) y el "techo" de ingresos altos, que implica
+    # una alícuota de Ganancias imposible sobre el ingreso faltante (docs/auditoria.md, 3.4).
+    fuera = {"sobre_consumo", "altos_registros", "ajuste_cn", "ajuste_cn_activos_ext", "ajuste_cn_rentas",
+             "ajuste_cn_rentas_activos_ext", "con_cheque", "con_cheque_y_combustibles"}
+    rango = ancho[~ancho.variante.isin(fuera)].groupby(["anio", "decil"]).total.agg(["min", "max"]).reset_index()
     rango = rango.merge(princ[["anio", "decil", "total"]], on=["anio", "decil"]).rename(
         columns={"total": "principal", "min": "minimo_variantes", "max": "maximo_variantes"})
     rango.to_csv(TABLES / "rango_por_decil_anual.csv", index=False)
