@@ -1,0 +1,45 @@
+# Aportes personales y contribuciones patronales a la seguridad social nacional.
+# Estados: verificado = leído en el texto de la norma (biblioteca.afip.gob.ar) en esta
+# reconstrucción; no_verificado = valor de uso corriente NO contrastado con texto primario.
+
+aportes_personales:
+  jubilacion:
+    # Ley 24.241 art. 11: 11%. Para afiliados al régimen de CAPITALIZACIÓN (AFJP) el aporte
+    # estuvo reducido: 5% (Dto. 1387/2001 art. 15, mod. Dto. 1676/2001 art. 5: verificado),
+    # +2 puntos desde 03/2003 (Dto. 2203/2002) = 7%, y los restablecimientos siguientes
+    # se suspendieron sucesivamente hasta el 01/01/2008 (Dtos. 390/2003, 809/2004,
+    # 940/2006 y 22/2007: verificado en el texto del Dto. 390/2003 y sus notas).
+    # Afiliados a REPARTO: 11% todo el período (Dto. 1676/2001).
+    tasa_general: 0.11
+    tasa_capitalizacion: 0.07
+    capitalizacion_hasta: "2007-12"     # último mes con aporte reducido (7%)
+    afjp_existen_hasta: "2008-11"       # Ley 26.425: el régimen de capitalización se elimina en 12/2008;
+                                        # hasta entonces esos aportes no eran recaudación del Estado
+    estado: verificado
+    # SUPUESTO: la EPH no informa el régimen previsional. Se asigna 7% a asalariados
+    # registrados del sector PRIVADO y 11% a los del sector público hasta 12/2007.
+  inssjp: {tasa: 0.03, norma: "Ley 19.032", estado: no_verificado}
+  obra_social: {tasa: 0.03, norma: "Ley 23.660", estado: no_verificado,
+                nota: "Se descuenta del salario (se usa para pasar de neto a bruto) pero NO se cuenta como impuesto: su destino no es el Estado."}
+
+contribuciones_patronales:
+  # Decreto 814/2001 art. 2 (SIPA + INSSJP + Asignaciones Familiares + Fondo Nac. de Empleo;
+  # no incluye obra social 6% ni ART). inc_a: empleadores privados de comercio/servicios
+  # con ventas sobre el umbral; inc_b: resto del sector privado.
+  # Las contribuciones NO tienen tope de base desde el Dto. 491/2004 (verificado en los
+  # considerandos del Dto. 1448/2008).
+  periodos:
+    - {desde: "2003-01", hasta: "2018-01", inc_a: 0.2100, inc_b: 0.1700, detraccion: 0.0,
+       norma: "Dto. 814/2001 mod. Ley 25.453", estado: no_verificado}
+    - {desde: "2018-02", hasta: "2018-12", inc_a: 0.2070, inc_b: 0.1750, detraccion: 2400.0,
+       norma: "Ley 27.430 art. 173 (cronograma)", estado: no_verificado,
+       nota: "El cronograma figura como imagen en la fuente oficial; valores no contrastados."}
+    - {desde: "2019-01", hasta: "2019-12", inc_a: 0.2040, inc_b: 0.1800, detraccion: 7003.68,
+       norma: "Ley 27.430 art. 173 (cronograma)", estado: no_verificado}
+    - {desde: "2020-01", hasta: "2024-12", inc_a: 0.2040, inc_b: 0.1800, detraccion: 7003.68,
+       norma: "Ley 27.541 arts. 19 y 22", estado: verificado}
+  # SUPUESTO de asignación (la EPH no informa ventas ni CUIT del empleador): inc_a para
+  # asalariados registrados privados en establecimientos de más de 40 personas; inc_b resto.
+  umbral_tamano_inc_a: 40
+  # Incidencia (decisión del proyecto): 50% trabajador, 50% consumidor.
+  fraccion_trabajador: 0.5

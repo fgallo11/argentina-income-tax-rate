@@ -1,0 +1,10 @@
+pandas
+numpy
+matplotlib
+pyarrow
+requests
+openpyxl
+xlrd
+pdfplumber
+pyyaml
+pytest

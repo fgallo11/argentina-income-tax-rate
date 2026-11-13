@@ -1,0 +1,1225 @@
+articulo,desc,subdesc,sector,clase_iva,regla_iva,clase_internos,participacion_gasto
+A0111101,Facturas y churros,Productos de panadería y pastelería,01,G105,panificados sin envasar (art. 28 a),,0.002207430594464238
+A0111102,"Galletas, grisines y tostadas",Productos de panadería y pastelería,01,G105,panificados sin envasar (art. 28 a),,0.0006688312830554588
+A0111103,Galletitas de agua envasadas,Productos de panadería y pastelería,01,G21,alimentos y bebidas: general,,0.0017623391868608871
+A0111104,Galletitas de agua sueltas,Productos de panadería y pastelería,01,G105,panificados sin envasar (art. 28 a),,7.428166394013492e-05
+A0111105,Galletitas dulces envasadas,Productos de panadería y pastelería,01,G21,alimentos y bebidas: general,,0.0037496839806958715
+A0111106,Galletitas dulces sueltas,Productos de panadería y pastelería,01,G105,panificados sin envasar (art. 28 a),,6.51344957546163e-05
+A0111107,Galletitas de otro tipo,Productos de panadería y pastelería,01,G21,alimentos y bebidas: general,,0.0007605746330262463
+A0111108,Masas secas o finas,Productos de panadería y pastelería,01,G21,alimentos y bebidas: general,,0.0001443052664363691
+A0111109,Pan envasado en rebanadas blanco,Productos de panadería y pastelería,01,G21,alimentos y bebidas: general,,0.0008002923788425292
+A0111110,Pan envasado en rebanadas integral,Productos de panadería y pastelería,01,G21,alimentos y bebidas: general,,0.00040880644257138633
+A0111111,Pan tipo francés fresco en piezas,Productos de panadería y pastelería,01,EX,pan común (art. 7 f),,0.01069897662946767
+A0111112,Pan integral fresco en piezas,Productos de panadería y pastelería,01,EX,pan común (art. 7 f),,0.00020190256084843283
+A0111113,Pan para hamburguesas - pebetes - panchos,Productos de panadería y pastelería,01,G21,alimentos y bebidas: general,,0.0004950794306384296
+A0111114,Pan rallado,Productos de panadería y pastelería,01,C567_21,pan rallado (Dto. 567/2019),,0.00044014855209536396
+A0111115,"Pancitos, bollitos, figazzitas saborizados",Productos de panadería y pastelería,01,G105,panificados sin envasar (art. 28 a),,4.8175515020878164e-05
+A0111116,Panes y panecillos frescos de otro tipo,Productos de panadería y pastelería,01,EX,pan común (art. 7 f),,0.0010075861906143177
+A0111117,Panes y panecillos precocidos y congelados,Productos de panadería y pastelería,01,G21,alimentos y bebidas: general,,3.011548301012848e-05
+A0111118,Pan blanco de molde por pieza,Productos de panadería y pastelería,01,EX,pan común (art. 7 f),,9.328334789755704e-05
+A0111119,"Tortas, tartas, pan dulce",Productos de panadería y pastelería,01,G21,alimentos y bebidas: general,,0.0016219501541028074
+A0111120,Otros productos de panadería y repostería,Productos de panadería y pastelería,01,G21,alimentos y bebidas: general,,0.0004112230593224543
+A0111121,Surtidos de productos de panadería y pastelería,Productos de panadería y pastelería,01,G21,alimentos y bebidas: general,,0.00025088744003419635
+A0111201,Arroz blanco,"Harinas, arroz y cereales",01,C567_21,arroz (Dto. 567/2019),,0.0020578777740010252
+A0111202,Arroz integral,"Harinas, arroz y cereales",01,C567_21,arroz (Dto. 567/2019),,6.009778841626706e-05
+A0111203,Otros arroces con aditamentos,"Harinas, arroz y cereales",01,G21,alimentos y bebidas: general,,1.55066082605197e-05
+A0111204,Fideos de arroz,"Harinas, arroz y cereales",01,G21,alimentos y bebidas: general,,9.21450033749823e-06
+A0111205,Avena,"Harinas, arroz y cereales",01,G21,alimentos y bebidas: general,,9.085084301426628e-05
+A0111206,Cereales en grano,"Harinas, arroz y cereales",01,G105,granos (art. 28 a),,8.695203034934309e-05
+A0111207,Cereales inflados,"Harinas, arroz y cereales",01,G21,alimentos y bebidas: general,,0.0004097586661121521
+A0111208,Féculas,"Harinas, arroz y cereales",01,G21,alimentos y bebidas: general,,5.432192662510428e-05
+A0111209,Harina de maíz,"Harinas, arroz y cereales",01,C567_21,harina de maíz (Dto. 567/2019),,0.0002950997762379945
+A0111210,Harina de trigo,"Harinas, arroz y cereales",01,C567_105,harina de trigo (art. 28 a; Dto. 567/2019),,0.0013456701506856638
+A0111211,"Mezcla de harina para pizza, ñoquis, torta frita","Harinas, arroz y cereales",01,G21,alimentos y bebidas: general,,0.00014191028820831114
+A0111212,Mezcla de cereales y fibras o frutas,"Harinas, arroz y cereales",01,G21,alimentos y bebidas: general,,7.474157029137224e-05
+A0111213,Sémola y semolín,"Harinas, arroz y cereales",01,G21,alimentos y bebidas: general,,3.5950870164872754e-05
+A0111214,Harinas integrales,"Harinas, arroz y cereales",01,G21,alimentos y bebidas: general,,4.82936715024608e-05
+A0111215,Semillas,"Harinas, arroz y cereales",01,G21,alimentos y bebidas: general,,4.6696796465980016e-05
+A0111216,"Otras harinas, cereales y fibras","Harinas, arroz y cereales",01,G21,alimentos y bebidas: general,,2.411597886772101e-05
+A0111217,"surtidos de harinas, arroz, cereales y fibras","Harinas, arroz y cereales",01,G21,alimentos y bebidas: general,,3.255656437732733e-05
+A0111301,Canelones,Pastas,01,G21,alimentos y bebidas: general,,5.622726825823606e-05
+A0111302,Empanadas preparadas sin cocinar,Pastas,01,G21,alimentos y bebidas: general,,5.952049911811491e-05
+A0111303,Fideos frescos,Pastas,01,G21,alimentos y bebidas: general,,0.0003851783929861455
+A0111304,Fideos secos,Pastas,01,C567_21,pastas secas (Dto. 567/2019),,0.003409901824189226
+A0111305,Ñoquis frescos,Pastas,01,G21,alimentos y bebidas: general,,0.00020240448038379621
+A0111306,Pastas deshidratadas con y sin relleno,Pastas,01,G21,alimentos y bebidas: general,,0.0001307483632253941
+A0111307,Pizzas preparadas sin cocinar,Pastas,01,G21,alimentos y bebidas: general,,0.0002498052554360435
+A0111308,Pre-pizza,Pastas,01,G21,alimentos y bebidas: general,,0.0007131939918670595
+A0111309,Ravioles frescos,Pastas,01,G21,alimentos y bebidas: general,,0.00149389000885093
+A0111310,"Tapas frescas para canelones, panqueques, lasagnas, etc.",Pastas,01,G21,alimentos y bebidas: general,,1.7711333821777214e-05
+A0111311,Tapas frescas para empanadas y pastelitos,Pastas,01,G21,alimentos y bebidas: general,,0.0006252465513458803
+A0111312,Tapas frescas para tartas,Pastas,01,G21,alimentos y bebidas: general,,0.0005546647721590152
+A0111313,Tartas preparadas sin cocinar,Pastas,01,G21,alimentos y bebidas: general,,0.0
+A0111314,"Rapiditas, fajitas, etc.",Pastas,01,G21,alimentos y bebidas: general,,5.9155524569036495e-05
+A0111315,"Otras pastas frescas rellenas,  tortelletis,  fideos rellenos, panzzotis, agnolottis, capellettis, sorrentinos, etc.",Pastas,01,G21,alimentos y bebidas: general,,0.0003214421719366736
+A0111316,Otros alimentos semipreparados en base a pastas,Pastas,01,G21,alimentos y bebidas: general,,2.611727621753962e-05
+A0111317,Surtidos de pastas,Pastas,01,G21,alimentos y bebidas: general,,2.2672143930432398e-05
+A0112101,Aguja,"Carne vacuna, fresca, congelada o semipreparadas",01,G105,carne bovina fresca (art. 28 a),,0.0006204367312817627
+A0112102,Asado,"Carne vacuna, fresca, congelada o semipreparadas",01,G105,carne bovina fresca (art. 28 a),,0.006367939401295078
+A0112103,Bife ancho,"Carne vacuna, fresca, congelada o semipreparadas",01,G105,carne bovina fresca (art. 28 a),,0.0017062262490017712
+A0112104,Bife angosto,"Carne vacuna, fresca, congelada o semipreparadas",01,G105,carne bovina fresca (art. 28 a),,0.0023602133078896178
+A0112105,Bife de chorizo,"Carne vacuna, fresca, congelada o semipreparadas",01,G105,carne bovina fresca (art. 28 a),,0.0004154966895251563
+A0112106,bola de lomo,"Carne vacuna, fresca, congelada o semipreparadas",01,G105,carne bovina fresca (art. 28 a),,0.0022318505481139193
+A0112107,Carnaza común,"Carne vacuna, fresca, congelada o semipreparadas",01,G105,carne bovina fresca (art. 28 a),,0.0008177465534912883
+A0112108,Carne picada,"Carne vacuna, fresca, congelada o semipreparadas",01,G105,carne bovina fresca (art. 28 a),,0.0074197867019986635
+A0112109,Cuadrada,"Carne vacuna, fresca, congelada o semipreparadas",01,G105,carne bovina fresca (art. 28 a),,0.001382009194693303
+A0112110,Cuadril,"Carne vacuna, fresca, congelada o semipreparadas",01,G105,carne bovina fresca (art. 28 a),,0.0022416636748430483
+A0112111,Falda,"Carne vacuna, fresca, congelada o semipreparadas",01,G105,carne bovina fresca (art. 28 a),,0.00039860946473822606
+A0112112,Hueso con carne,"Carne vacuna, fresca, congelada o semipreparadas",01,G105,carne bovina fresca (art. 28 a),,0.0014029251689991569
+A0112113,Hueso sin carne,"Carne vacuna, fresca, congelada o semipreparadas",01,G105,carne bovina fresca (art. 28 a),,6.820163471361909e-05
+A0112114,Lomo,"Carne vacuna, fresca, congelada o semipreparadas",01,G105,carne bovina fresca (art. 28 a),,0.0007062763200178584
+A0112115,Matambre - cima,"Carne vacuna, fresca, congelada o semipreparadas",01,G105,carne bovina fresca (art. 28 a),,0.0005668011644294698
+A0112116,Nalga,"Carne vacuna, fresca, congelada o semipreparadas",01,G105,carne bovina fresca (art. 28 a),,0.004011918742415409
+A0112117,Paleta,"Carne vacuna, fresca, congelada o semipreparadas",01,G105,carne bovina fresca (art. 28 a),,0.002024434705226649
+A0112118,Palomita,"Carne vacuna, fresca, congelada o semipreparadas",01,G105,carne bovina fresca (art. 28 a),,0.00015228504840023938
+A0112119,Peceto,"Carne vacuna, fresca, congelada o semipreparadas",01,G105,carne bovina fresca (art. 28 a),,0.0007696914878751118
+A0112120,Roast beef,"Carne vacuna, fresca, congelada o semipreparadas",01,G105,carne bovina fresca (art. 28 a),,0.0009152458108268977
+A0112121,Vacío,"Carne vacuna, fresca, congelada o semipreparadas",01,G105,carne bovina fresca (art. 28 a),,0.0015604241360913326
+A0112122,Otros cortes,"Carne vacuna, fresca, congelada o semipreparadas",01,G105,carne bovina fresca (art. 28 a),,0.0007984184341483549
+A0112123,Hígado,"Carne vacuna, fresca, congelada o semipreparadas",01,G105,carne bovina fresca (art. 28 a),,0.00022624314950735801
+A0112124,Lengua de vaca,"Carne vacuna, fresca, congelada o semipreparadas",01,G105,carne bovina fresca (art. 28 a),,4.58455408294006e-05
+A0112125,Mondongo,"Carne vacuna, fresca, congelada o semipreparadas",01,G105,carne bovina fresca (art. 28 a),,9.384926758536172e-05
+A0112126,Riñón,"Carne vacuna, fresca, congelada o semipreparadas",01,G105,carne bovina fresca (art. 28 a),,4.1520430997361704e-05
+A0112127,Otras achuras y menudencias vacunas,"Carne vacuna, fresca, congelada o semipreparadas",01,G105,carne bovina fresca (art. 28 a),,0.00017377372894000623
+A0112128,Hamburguesas para cocinar (semipreparados),"Carne vacuna, fresca, congelada o semipreparadas",01,G21,carne semipreparada,,0.0019599990200844515
+A0112129,Milanesas para cocinar (semipreparados),"Carne vacuna, fresca, congelada o semipreparadas",01,G21,carne semipreparada,,0.0030223660873631452
+A0112130,Otros alimentos semipreparados en base a carne para cocinar,"Carne vacuna, fresca, congelada o semipreparadas",01,G21,carne semipreparada,,4.5136258223996835e-05
+A0112131,Surtidos de carne fresca vacuna,"Carne vacuna, fresca, congelada o semipreparadas",01,G105,carne bovina fresca (art. 28 a),,0.0013689148775935678
+A0112201,"Pollo entero, medio pollo","Carne de ave, fresca, congelada o semipreparadas",01,AVPO,carne aviar (Ley 27.430),,0.005837511971294975
+A0112202,Pollo trozado,"Carne de ave, fresca, congelada o semipreparadas",01,AVPO,carne aviar (Ley 27.430),,0.006340846883698933
+A0112203,Otras aves,"Carne de ave, fresca, congelada o semipreparadas",01,AVPO,carne aviar (Ley 27.430),,1.6807033264435497e-05
+A0112204,Menudencias de ave,"Carne de ave, fresca, congelada o semipreparadas",01,AVPO,carne aviar (Ley 27.430),,0.0003539888557683214
+A0112205,Hamburguesas de pollo,"Carne de ave, fresca, congelada o semipreparadas",01,G21,ave semipreparada,,0.00027198824016248297
+A0112206,Supremas de pollo rebozadas,"Carne de ave, fresca, congelada o semipreparadas",01,G21,ave semipreparada,,0.005630711896366522
+A0112207,"Preparados de pollo: Formitas, patitas, etc.","Carne de ave, fresca, congelada o semipreparadas",01,G21,ave semipreparada,,0.0003875925341758966
+A0112208,Otros alimentos semipreparados en base a pollo para cocinar,"Carne de ave, fresca, congelada o semipreparadas",01,G21,ave semipreparada,,0.00014256874606681212
+A0112209,Surtidos de carne de ave,"Carne de ave, fresca, congelada o semipreparadas",01,AVPO,carne aviar (Ley 27.430),,4.314234401985306e-05
+A0112301,Lechón entero o medio,"Carne porcina u ovina, fresca o congelada",01,AVPO,carne porcina (Ley 27.430),,0.00027412881297868443
+A0112302,Costeleta - chuleta de cerdo,"Carne porcina u ovina, fresca o congelada",01,AVPO,carne porcina (Ley 27.430),,0.0010814600575379005
+A0112303,Paleta de cerdo,"Carne porcina u ovina, fresca o congelada",01,AVPO,carne porcina (Ley 27.430),,0.00010778505533764323
+A0112304,Lomo cerdo,"Carne porcina u ovina, fresca o congelada",01,AVPO,carne porcina (Ley 27.430),,8.426563931420571e-05
+A0112305,Carré de cerdo,"Carne porcina u ovina, fresca o congelada",01,AVPO,carne porcina (Ley 27.430),,0.00029638825675940407
+A0112306,Pechito de cerdo,"Carne porcina u ovina, fresca o congelada",01,AVPO,carne porcina (Ley 27.430),,0.00036442929393595353
+A0112307,Otros cortes de carne porcina,"Carne porcina u ovina, fresca o congelada",01,AVPO,carne porcina (Ley 27.430),,0.0008296213922830804
+A0112308,"Ovino y caprino, entero o por corte","Carne porcina u ovina, fresca o congelada",01,G105,carne ovina/caprina (art. 28 a),,0.0002600619451101411
+A0112309,"Achuras y menudencias, porcinas y ovinas","Carne porcina u ovina, fresca o congelada",01,G105,carne ovina/caprina (art. 28 a),,1.9983341180842487e-05
+A0112310,Otros alimentos semipreparados en base a carne porcina u ovina,"Carne porcina u ovina, fresca o congelada",01,G105,carne ovina/caprina (art. 28 a),,6.0560190637409866e-05
+A0112311,Surtidos de carne porcina u ovina,"Carne porcina u ovina, fresca o congelada",01,G105,carne ovina/caprina (art. 28 a),,5.8503856316841965e-05
+A0112401,Otras carnes frescas o congeladas,Otras carnes frescas o congeladas,01,G21,alimentos y bebidas: general,,6.051736552703747e-05
+A0112501,Chorizo fresco,"Embutidos frescos, fiambres y procesados en base a carne",01,G21,alimentos y bebidas: general,,0.0015543168774986304
+A0112502,Morcilla,"Embutidos frescos, fiambres y procesados en base a carne",01,G21,alimentos y bebidas: general,,0.00024172147152048205
+A0112503,Salchicha criolla,"Embutidos frescos, fiambres y procesados en base a carne",01,G21,alimentos y bebidas: general,,9.722582124608576e-05
+A0112504,Salchicha tipo viena con y sin piel,"Embutidos frescos, fiambres y procesados en base a carne",01,G21,alimentos y bebidas: general,,0.001083202905284722
+A0112505,Otros embutidos frescos,"Embutidos frescos, fiambres y procesados en base a carne",01,G21,alimentos y bebidas: general,,3.467658309351295e-05
+A0112506,Surtidos de embutidos frescos,"Embutidos frescos, fiambres y procesados en base a carne",01,G21,alimentos y bebidas: general,,1.3902867251875125e-05
+A0112507,Bondiola,"Embutidos frescos, fiambres y procesados en base a carne",01,G21,alimentos y bebidas: general,,7.004898503275226e-05
+A0112508,Jamón cocido,"Embutidos frescos, fiambres y procesados en base a carne",01,G21,alimentos y bebidas: general,,0.0013848760207505462
+A0112509,Jamón crudo,"Embutidos frescos, fiambres y procesados en base a carne",01,G21,alimentos y bebidas: general,,0.00024331320681483454
+A0112510,Lomito,"Embutidos frescos, fiambres y procesados en base a carne",01,G21,alimentos y bebidas: general,,4.984973017054684e-05
+A0112511,Matambre (fiambre),"Embutidos frescos, fiambres y procesados en base a carne",01,G21,alimentos y bebidas: general,,4.461300382075386e-05
+A0112512,Mortadela,"Embutidos frescos, fiambres y procesados en base a carne",01,G21,alimentos y bebidas: general,,0.0002665280894310235
+A0112513,Paleta (fiambre),"Embutidos frescos, fiambres y procesados en base a carne",01,G21,alimentos y bebidas: general,,0.0005585766337876476
+A0112514,"Panceta fresca, salada, ahumada","Embutidos frescos, fiambres y procesados en base a carne",01,G21,alimentos y bebidas: general,,7.142762856586515e-05
+A0112515,Salame,"Embutidos frescos, fiambres y procesados en base a carne",01,G21,alimentos y bebidas: general,,0.0003831833768324173
+A0112516,Salamín,"Embutidos frescos, fiambres y procesados en base a carne",01,G21,alimentos y bebidas: general,,0.0002250074143132982
+A0112517,Salchichón,"Embutidos frescos, fiambres y procesados en base a carne",01,G21,alimentos y bebidas: general,,3.0222632514861024e-05
+A0112518,Otros fiambres,"Embutidos frescos, fiambres y procesados en base a carne",01,G21,alimentos y bebidas: general,,0.00010704175626354543
+A0112519,Surtidos de fiambres,"Embutidos frescos, fiambres y procesados en base a carne",01,G21,alimentos y bebidas: general,,0.0005436720259264732
+A0112520,"Carnes en conserva, escabeches","Embutidos frescos, fiambres y procesados en base a carne",01,G21,alimentos y bebidas: general,,3.155803892363172e-06
+A0112521,Paté de foie - ave en lata,"Embutidos frescos, fiambres y procesados en base a carne",01,G21,alimentos y bebidas: general,,6.250395180817556e-05
+A0112522,Picadillo de carne en lata,"Embutidos frescos, fiambres y procesados en base a carne",01,G21,alimentos y bebidas: general,,0.00010297987495143332
+A0112523,Otras pastas de carne,"Embutidos frescos, fiambres y procesados en base a carne",01,G21,alimentos y bebidas: general,,2.6584215043547698e-05
+A0112524,Surtidos de procesados en base a carne,"Embutidos frescos, fiambres y procesados en base a carne",01,G21,alimentos y bebidas: general,,5.310835032686366e-07
+A0113101,Atún - lomo de atún- salmón- congrio,"Pescados y mariscos frescos, congelados o semipreparados",01,G21,alimentos y bebidas: general,,0.0002574098933946173
+A0113102,Brótola- lenguado,"Pescados y mariscos frescos, congelados o semipreparados",01,G21,alimentos y bebidas: general,,4.211451438553052e-05
+A0113103,Merluza,"Pescados y mariscos frescos, congelados o semipreparados",01,G21,alimentos y bebidas: general,,0.0011448525163591419
+A0113104,Pejerrey,"Pescados y mariscos frescos, congelados o semipreparados",01,G21,alimentos y bebidas: general,,3.1658811253327374e-05
+A0113105,Surubí,"Pescados y mariscos frescos, congelados o semipreparados",01,G21,alimentos y bebidas: general,,1.875595532051766e-05
+A0113106,Otros pescados de mar,"Pescados y mariscos frescos, congelados o semipreparados",01,G21,alimentos y bebidas: general,,8.910604842493231e-05
+A0113107,Otros pescados de río,"Pescados y mariscos frescos, congelados o semipreparados",01,G21,alimentos y bebidas: general,,0.00019072476192148502
+A0113108,"Almejas, berberechos, mejillones, cholgas, vieiras","Pescados y mariscos frescos, congelados o semipreparados",01,G21,alimentos y bebidas: general,,4.246320909700493e-05
+A0113109,Calamares,"Pescados y mariscos frescos, congelados o semipreparados",01,G21,alimentos y bebidas: general,,6.659671079923544e-05
+A0113110,Langostinos y camarones,"Pescados y mariscos frescos, congelados o semipreparados",01,G21,alimentos y bebidas: general,,3.963980422112104e-05
+A0113111,Otros mariscos,"Pescados y mariscos frescos, congelados o semipreparados",01,G21,alimentos y bebidas: general,,1.5071142739326593e-05
+A0113112,Filet preparado para cocinar,"Pescados y mariscos frescos, congelados o semipreparados",01,G21,alimentos y bebidas: general,,8.963039768366357e-05
+A0113113,Semipreparados congelados en base a pescado y mariscos,"Pescados y mariscos frescos, congelados o semipreparados",01,G21,alimentos y bebidas: general,,0.000192833443576705
+A0113114,"Surtidos de pescados y mariscos frescos, congelados y semipreparados","Pescados y mariscos frescos, congelados o semipreparados",01,G21,alimentos y bebidas: general,,3.086089389924635e-05
+A0113201,Atún en conserva,Pescados y mariscos en conserva,01,G21,alimentos y bebidas: general,,0.0009373274698841506
+A0113202,Caballa en conserva,Pescados y mariscos en conserva,01,G21,alimentos y bebidas: general,,7.260305865781913e-05
+A0113203,Filet de anchoas,Pescados y mariscos en conserva,01,G21,alimentos y bebidas: general,,1.7411310868608517e-05
+A0113204,Mariscos en conserva,Pescados y mariscos en conserva,01,G21,alimentos y bebidas: general,,4.473423454971882e-06
+A0113205,Sardinas en conserva,Pescados y mariscos en conserva,01,G21,alimentos y bebidas: general,,2.6554535293130615e-05
+A0113206,Otras conservas de pescado,Pescados y mariscos en conserva,01,G21,alimentos y bebidas: general,,1.9174940561118766e-05
+A0113207,Surtidos de pescados y mariscos en conserva,Pescados y mariscos en conserva,01,G21,alimentos y bebidas: general,,7.586991603333359e-06
+A0114101,Leche común entera,Leches,01,EX,leche sin aditivos (art. 7 f),,0.004152522753825174
+A0114102,Leche común descremada,Leches,01,EX,leche sin aditivos (art. 7 f),,0.0010293672558523209
+A0114103,Leche larga vida entera,Leches,01,EX,leche sin aditivos (art. 7 f),,0.0010974909278415
+A0114104,Leche larga vida descremada,Leches,01,EX,leche sin aditivos (art. 7 f),,0.00034120880434099736
+A0114105,Leche en polvo entera o descremada,Leches,01,EX,leche sin aditivos (art. 7 f),,0.0009069218729820171
+A0114106,"Leches condensadas, evaporadas",Leches,01,G21,leche con procesos/otros,,2.0059461944111668e-05
+A0114107,Leches preparadas con aditamentos,Leches,01,C567_21,leche con aditivos (Dto. 567/2019),,0.00023175045831176896
+A0114108,Otras leches fluidas,Leches,01,G21,alimentos y bebidas: general,,2.2584263381533746e-07
+A0114109,Leche de soja,Leches,01,G21,leche con procesos/otros,,5.3827207597217785e-06
+A0114110,Leches vegetales,Leches,01,G21,leche con procesos/otros,,8.663560459423911e-06
+A0114111,Surtidos de leche,Leches,01,G21,alimentos y bebidas: general,,0.0
+A0114112,Leche en polvo fortificada para lactantes,Leches,01,G21,leche con procesos/otros,,0.00021653731875517996
+A0114113,Leche fluida fortificada para lactantes,Leches,01,G21,leche con procesos/otros,,0.00028062530083481307
+A0114201,Queso crema para untar,Quesos,01,G21,alimentos y bebidas: general,,0.0014798685213583314
+A0114202,Queso de máquina,Quesos,01,G21,alimentos y bebidas: general,,0.0015171821895693482
+A0114203,Queso doble crema - cuartirolo,Quesos,01,G21,alimentos y bebidas: general,,0.004928476788386023
+A0114204,Queso fontina - gouda - chubut - edan - fymbo,Quesos,01,G21,alimentos y bebidas: general,,0.00014783225972323828
+A0114205,Queso fundido,Quesos,01,G21,alimentos y bebidas: general,,1.6921462702700532e-05
+A0114206,Queso paté-gras - mar del plata,Quesos,01,G21,alimentos y bebidas: general,,0.0002925826333919134
+A0114207,Queso port salut,Quesos,01,G21,alimentos y bebidas: general,,0.0005137010489571051
+A0114208,Queso para rallar,Quesos,01,G21,alimentos y bebidas: general,,0.0007230861567021275
+A0114209,Queso rallado,Quesos,01,G21,alimentos y bebidas: general,,0.0011379487276558839
+A0114210,Muzzarella,Quesos,01,G21,alimentos y bebidas: general,,0.0005537323700789745
+A0114211,Ricota,Quesos,01,G21,alimentos y bebidas: general,,7.994365978681781e-05
+A0114212,Otros quesos,Quesos,01,G21,alimentos y bebidas: general,,0.0002708204644610522
+A0114213,Surtidos de quesos,Quesos,01,G21,alimentos y bebidas: general,,7.231550629088277e-05
+A0114301,Crema de leche,Yogur y otros productos lácteos,01,G21,alimentos y bebidas: general,,0.0007356126668063123
+A0114302,Yogur natural o saborizado,Yogur y otros productos lácteos,01,C567_21,yogur (Dto. 567/2019),,0.00297646748867669
+A0114303,Yogur con aditamentos,Yogur y otros productos lácteos,01,C567_21,yogur (Dto. 567/2019),,0.0003487684480650107
+A0114304,Dulce de leche,Yogur y otros productos lácteos,01,G21,alimentos y bebidas: general,,0.000704998758562148
+A0114305,Postres lácteos,Yogur y otros productos lácteos,01,G21,alimentos y bebidas: general,,0.0006343455034644386
+A0114306,Otros productos lácteos,Yogur y otros productos lácteos,01,G21,alimentos y bebidas: general,,3.035438643114639e-06
+A0114307,Surtidos de productos lácteos,Yogur y otros productos lácteos,01,G21,alimentos y bebidas: general,,7.258623424401941e-06
+A0114401,Huevos de gallina,Huevos,01,C567_21,huevos (Dto. 567/2019),,0.0035605230141105997
+A0114402,Otros huevos,Huevos,01,G21,alimentos y bebidas: general,,8.678265685907684e-06
+A0115101,Aceite mezcla,Aceites,01,C567_21,aceite girasol/maíz/mezcla (Dto. 567/2019),,0.00044273115038509324
+A0115102,Aceite de girasol,Aceites,01,C567_21,aceite girasol/maíz/mezcla (Dto. 567/2019),,0.0027841113165464194
+A0115103,Aceite de maíz,Aceites,01,C567_21,aceite girasol/maíz/mezcla (Dto. 567/2019),,0.00010267036941746282
+A0115104,Aceite de oliva,Aceites,01,G21,alimentos y bebidas: general,,0.00043370097886600537
+A0115105,Aceite de soja,Aceites,01,G21,alimentos y bebidas: general,,9.034222943424305e-06
+A0115106,Otros aceites,Aceites,01,G21,alimentos y bebidas: general,,1.1722373175278795e-05
+A0115107,Surtidos de aceites,Aceites,01,G21,alimentos y bebidas: general,,1.941090730457747e-06
+A0115201,Grasa porcina,Grasas para la cocina,01,G21,alimentos y bebidas: general,,1.5611224199267817e-05
+A0115202,Grasa vacuna,Grasas para la cocina,01,G21,alimentos y bebidas: general,,7.242350889543865e-05
+A0115203,Margarina,Grasas para la cocina,01,G21,alimentos y bebidas: general,,8.096895029115904e-05
+A0115204,Otras grasas,Grasas para la cocina,01,G21,alimentos y bebidas: general,,3.88871248046643e-06
+A0115205,Surtidos de grasa para la cocina,Grasas para la cocina,01,G21,alimentos y bebidas: general,,4.594470432939514e-07
+A0115301,Manteca,Manteca,01,G21,alimentos y bebidas: general,,0.001175457531221955
+A0116101,Ananá,Frutas frescas o congeladas,01,G105,frutas frescas o congeladas (art. 28 a),,3.532172853305196e-05
+A0116102,Banana,Frutas frescas o congeladas,01,G105,frutas frescas o congeladas (art. 28 a),,0.0022443391466177463
+A0116103,"Cerezas, guindas frescas",Frutas frescas o congeladas,01,G105,frutas frescas o congeladas (art. 28 a),,8.808260252466047e-05
+A0116104,Ciruela,Frutas frescas o congeladas,01,G105,frutas frescas o congeladas (art. 28 a),,0.00016292947632569668
+A0116105,Damasco,Frutas frescas o congeladas,01,G105,frutas frescas o congeladas (art. 28 a),,2.0266560028800114e-05
+A0116106,Durazno,Frutas frescas o congeladas,01,G105,frutas frescas o congeladas (art. 28 a),,0.00036285674107728325
+A0116107,Frutillas frescas,Frutas frescas o congeladas,01,G105,frutas frescas o congeladas (art. 28 a),,0.00033303029212646327
+A0116108,Kiwi fresco,Frutas frescas o congeladas,01,G105,frutas frescas o congeladas (art. 28 a),,0.00011040118088163996
+A0116109,Limón,Frutas frescas o congeladas,01,G105,frutas frescas o congeladas (art. 28 a),,0.0004005162476552025
+A0116110,Mandarina,Frutas frescas o congeladas,01,G105,frutas frescas o congeladas (art. 28 a),,0.0006215097373715439
+A0116111,Manzana,Frutas frescas o congeladas,01,G105,frutas frescas o congeladas (art. 28 a),,0.0016292230629501277
+A0116112,Melón fresco,Frutas frescas o congeladas,01,G105,frutas frescas o congeladas (art. 28 a),,0.0001491030606167059
+A0116113,Naranja,Frutas frescas o congeladas,01,G105,frutas frescas o congeladas (art. 28 a),,0.0011122266637093579
+A0116114,Palta fresca,Frutas frescas o congeladas,01,G105,frutas frescas o congeladas (art. 28 a),,0.00027642633376729464
+A0116115,Pelón fresco,Frutas frescas o congeladas,01,G105,frutas frescas o congeladas (art. 28 a),,5.00098372412905e-05
+A0116116,Pera,Frutas frescas o congeladas,01,G105,frutas frescas o congeladas (art. 28 a),,0.00038072265900738995
+A0116117,Pomelo fresco,Frutas frescas o congeladas,01,G105,frutas frescas o congeladas (art. 28 a),,8.789714922247848e-05
+A0116118,Sandia fresca,Frutas frescas o congeladas,01,G105,frutas frescas o congeladas (art. 28 a),,0.00012926420210783687
+A0116119,Uva fresca,Frutas frescas o congeladas,01,G105,frutas frescas o congeladas (art. 28 a),,0.0002670894826682572
+A0116120,Otras frutas frescas,Frutas frescas o congeladas,01,G105,frutas frescas o congeladas (art. 28 a),,3.506496176091482e-05
+A0116121,Frutas congeladas,Frutas frescas o congeladas,01,G105,frutas frescas o congeladas (art. 28 a),,1.6469430798063533e-07
+A0116122,Surtidos de frutas frescas o congeladas,Frutas frescas o congeladas,01,G105,frutas frescas o congeladas (art. 28 a),,0.0004035256513136137
+A0116201,Ananá en almíbar o en conserva,"Frutas procesadas, secas o en conserva",01,C567_21,conservas de frutas/hortalizas/legumbres (Dto. 567/2019),,2.4137953873442953e-05
+A0116202,Duraznos en almíbar o en conserva,"Frutas procesadas, secas o en conserva",01,C567_21,conservas de frutas/hortalizas/legumbres (Dto. 567/2019),,0.00030880800834091784
+A0116203,Ensalada de frutas en almíbar o  en conserva,"Frutas procesadas, secas o en conserva",01,C567_21,conservas de frutas/hortalizas/legumbres (Dto. 567/2019),,3.535199333774216e-05
+A0116204,Otras frutas en conserva,"Frutas procesadas, secas o en conserva",01,C567_21,conservas de frutas/hortalizas/legumbres (Dto. 567/2019),,1.682628413727949e-05
+A0116205,Frutas secas,"Frutas procesadas, secas o en conserva",01,G21,alimentos y bebidas: general,,0.00036615572594454716
+A0116206,Ciruelas disecadas,"Frutas procesadas, secas o en conserva",01,G21,alimentos y bebidas: general,,1.2909501848896452e-05
+A0116207,Pasas de uva,"Frutas procesadas, secas o en conserva",01,G21,alimentos y bebidas: general,,4.062296483650141e-05
+A0116208,Otras frutas disecadas,"Frutas procesadas, secas o en conserva",01,G21,alimentos y bebidas: general,,2.3599792409728975e-05
+A0116209,"Surtidos de frutas procesadas, secas o en conserva","Frutas procesadas, secas o en conserva",01,C567_21,conservas de frutas/hortalizas/legumbres (Dto. 567/2019),,4.324512258772776e-06
+A0117101,Acelga fresca,Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,0.00040021730543888005
+A0117102,Ají fresco,Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,0.0009596079616530702
+A0117103,Ajo,Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,0.00020619323051341442
+A0117104,"Albahaca, perejil fresco",Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,0.00010179484376554373
+A0117105,Alcauciles,Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,1.5534796164270322e-05
+A0117106,"Apio, hinojo fresco",Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,6.279512856268687e-05
+A0117107,Arvejas frescas,Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,2.9004492209070443e-05
+A0117108,Batata fresca,Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,0.0002439603002096852
+A0117109,Berenjenas frescas,Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,0.00018780776088089595
+A0117110,Cebolla común fresca,Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,0.0018276823437660184
+A0117111,"Cebolla de verdeo, puerro fresco",Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,0.00018925851659571774
+A0117112,"Coliflor, brócoli fresco",Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,0.00016218868049380024
+A0117113,Chauchas frescas,Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,6.400984673218951e-05
+A0117114,Choclo fresco,Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,0.00025830423815322164
+A0117115,Espinaca fresca,Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,0.00020578375122240207
+A0117116,Hongos,Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,4.494298889718187e-05
+A0117117,Lechuga fresca,Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,0.001302008687884087
+A0117118,Mandioca fresca,Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,6.354545858145629e-05
+A0117119,Papa fresca,Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,0.003876288992800103
+A0117120,Pepino fresco,Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,6.664492032849941e-05
+A0117121,Rabanitos,Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,9.925129708349515e-06
+A0117122,"Radicheta, radicha, rúcula fresca",Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,0.00018510537460659555
+A0117123,Remolacha fresca,Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,9.518046149208606e-05
+A0117124,Repollo fresco,Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,0.00011895186857002907
+A0117125,Tomate perita fresco,Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,0.001404631534731162
+A0117126,Tomate redondo fresco,Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,0.0018936459132681777
+A0117127,Tomate Cherry,Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,0.0001315530635089853
+A0117128,"Verdurita, jardinera, ensaladas varias frescas",Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,0.00029794183235477747
+A0117129,Zanahoria fresca,Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,0.0009547545731842355
+A0117130,Zapallitos frescos,Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,0.00048436182892065655
+A0117131,Zapallo fresco,Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,0.0009310221423496353
+A0117132,Otras verduras y tubérculos frescos,Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,4.7888158367532446e-05
+A0117133,Otras legumbres frescas,Verduras frescas,01,G105,hortalizas frescas o congeladas (art. 28 a),,3.646768752447229e-06
+A0117134,Aceitunas,Verduras frescas,01,G21,hortaliza procesada,,0.0002351717887938749
+A0117201,Verduras congeladas,"Verduras, tubérculos y legumbres congelados y semipreparados",01,G105,hortalizas congeladas (art. 28 a),,0.00011774777276609142
+A0117202,Papas y otros tubérculos congelados,"Verduras, tubérculos y legumbres congelados y semipreparados",01,G105,hortalizas congeladas (art. 28 a),,0.0002323749654958391
+A0117203,Legumbres congeladas,"Verduras, tubérculos y legumbres congelados y semipreparados",01,G105,hortalizas congeladas (art. 28 a),,2.087019207023383e-05
+A0117204,Milanesa de soja,"Verduras, tubérculos y legumbres congelados y semipreparados",01,G21,semipreparado vegetal,,0.00027743833424776133
+A0117205,Semipreparados frescos o congeladas en base a verduras para cocinar,"Verduras, tubérculos y legumbres congelados y semipreparados",01,G21,semipreparado vegetal,,8.213421301339381e-05
+A0117206,"Surtidos de verduras, tubérculos y legumbres frescas o congeladas","Verduras, tubérculos y legumbres congelados y semipreparados",01,G21,semipreparado vegetal,,0.00112972289336959
+A0117301,Arvejas secas,"Verduras, tubérculos y legumbres secos o en conserva",01,G105,legumbres secas (art. 28 a),,1.684479235563842e-05
+A0117302,Lentejas secas,"Verduras, tubérculos y legumbres secos o en conserva",01,G105,legumbres secas (art. 28 a),,0.00016279761905816905
+A0117303,Porotos secos,"Verduras, tubérculos y legumbres secos o en conserva",01,G105,legumbres secas (art. 28 a),,4.9425826217593956e-05
+A0117304,Otras legumbres secas,"Verduras, tubérculos y legumbres secos o en conserva",01,G105,legumbres secas (art. 28 a),,1.9566842212252235e-05
+A0117305,Arvejas en conserva,"Verduras, tubérculos y legumbres secos o en conserva",01,C567_21,conservas de frutas/hortalizas/legumbres (Dto. 567/2019),,0.00021902810831420547
+A0117306,Choclo en conserva,"Verduras, tubérculos y legumbres secos o en conserva",01,C567_21,conservas de frutas/hortalizas/legumbres (Dto. 567/2019),,0.00016962184872627907
+A0117307,Lentejas en conserva,"Verduras, tubérculos y legumbres secos o en conserva",01,C567_21,conservas de frutas/hortalizas/legumbres (Dto. 567/2019),,4.470434823591716e-05
+A0117308,Porotos en conserva,"Verduras, tubérculos y legumbres secos o en conserva",01,C567_21,conservas de frutas/hortalizas/legumbres (Dto. 567/2019),,1.5082319278981944e-05
+A0117309,Otras legumbres en conserva,"Verduras, tubérculos y legumbres secos o en conserva",01,C567_21,conservas de frutas/hortalizas/legumbres (Dto. 567/2019),,9.029360844740897e-06
+A0117310,Tomates en conserva,"Verduras, tubérculos y legumbres secos o en conserva",01,C567_21,conservas de frutas/hortalizas/legumbres (Dto. 567/2019),,0.001662240783491494
+A0117311,Verduras en conserva,"Verduras, tubérculos y legumbres secos o en conserva",01,C567_21,conservas de frutas/hortalizas/legumbres (Dto. 567/2019),,0.00015725278123382666
+A0117312,Polvo para puré de papa o batata deshidratado,"Verduras, tubérculos y legumbres secos o en conserva",01,G21,alimentos y bebidas: general,,0.00021347875099428823
+A0117313,Polvo para puré zapallo deshidratado,"Verduras, tubérculos y legumbres secos o en conserva",01,G21,alimentos y bebidas: general,,9.080303826577613e-07
+A0117314,Otras verduras deshidratadas,"Verduras, tubérculos y legumbres secos o en conserva",01,G21,alimentos y bebidas: general,,9.441028873030335e-06
+A0117315,"Surtidos de verduras, tubérculos y legumbres secas o en conservas y derivadas","Verduras, tubérculos y legumbres secos o en conserva",01,C567_21,conservas de frutas/hortalizas/legumbres (Dto. 567/2019),,1.7045416173544225e-05
+A0118101,Azúcar,Azúcar y edulcorantes,01,C567_21,azúcar (Dto. 567/2019),,0.0016465081647870127
+A0118102,Edulcorante,Azúcar y edulcorantes,01,G21,alimentos y bebidas: general,,0.00040546976579818196
+A0118201,Dulce de batata,"Dulces, mermeladas y miel, exceptuando el Dulce de Leche",01,G21,alimentos y bebidas: general,,0.00016473496087880142
+A0118202,Dulce de membrillo,"Dulces, mermeladas y miel, exceptuando el Dulce de Leche",01,G21,alimentos y bebidas: general,,0.00011915875230173728
+A0118203,"Mermeladas, otros dulces y jaleas","Dulces, mermeladas y miel, exceptuando el Dulce de Leche",01,G21,alimentos y bebidas: general,,0.000645938719718981
+A0118204,Miel y similares,"Dulces, mermeladas y miel, exceptuando el Dulce de Leche",01,G105,miel (art. 28 a),,0.00011460877436993854
+A0118205,"Surtidos de dulces, mermeladas y miel","Dulces, mermeladas y miel, exceptuando el Dulce de Leche",01,G21,alimentos y bebidas: general,,9.30877962192173e-06
+A0118301,Helado individual,Helados,01,G21,alimentos y bebidas: general,,0.0008943982192947363
+A0118302,Helado envasado por kilo o litro,Helados,01,G21,alimentos y bebidas: general,,0.001167120242566534
+A0118303,Helado suelto,Helados,01,G21,alimentos y bebidas: general,,0.0012987149235203664
+A0118401,Alfajores,Chocolates y otros dulces (golosinas),01,G21,alimentos y bebidas: general,,0.001245704865510684
+A0118402,Barra de cereales,Chocolates y otros dulces (golosinas),01,G21,alimentos y bebidas: general,,0.00024658664375577284
+A0118403,Bombones y bocaditos de chocolate,Chocolates y otros dulces (golosinas),01,G21,alimentos y bebidas: general,,0.0002099048437548312
+A0118404,Caramelos o confites,Chocolates y otros dulces (golosinas),01,G21,alimentos y bebidas: general,,0.00041512603761275
+A0118405,Chicles,Chocolates y otros dulces (golosinas),01,G21,alimentos y bebidas: general,,0.0002651468244207753
+A0118406,Chocolate para taza/repostería,Chocolates y otros dulces (golosinas),01,G21,alimentos y bebidas: general,,0.00012862222133062966
+A0118407,Chocolates y chocolatines,Chocolates y otros dulces (golosinas),01,G21,alimentos y bebidas: general,,0.0008620325091913733
+A0118408,Chupetines,Chocolates y otros dulces (golosinas),01,G21,alimentos y bebidas: general,,5.2823577593674236e-05
+A0118409,Obleas cubiertas con chocolate o con confituras,Chocolates y otros dulces (golosinas),01,G21,alimentos y bebidas: general,,0.0001379764863489374
+A0118410,Pastillas en paquete,Chocolates y otros dulces (golosinas),01,G21,alimentos y bebidas: general,,9.960694400908517e-05
+A0118411,Turrón,Chocolates y otros dulces (golosinas),01,G21,alimentos y bebidas: general,,0.00030139007394244745
+A0118412,Otras golosinas y confituras,Chocolates y otros dulces (golosinas),01,G21,alimentos y bebidas: general,,0.00037224480737670524
+A0118413,Otros preparados de chocolate,Chocolates y otros dulces (golosinas),01,G21,alimentos y bebidas: general,,0.00035443685683541053
+A0118414,Surtidos de chocolates y otros dulces,Chocolates y otros dulces (golosinas),01,G21,alimentos y bebidas: general,,1.0878170322058787e-05
+A0119101,Sal fina,"Sal, especias y condimentos",01,G21,alimentos y bebidas: general,,0.00031981859152341384
+A0119102,Sal gruesa,"Sal, especias y condimentos",01,G21,alimentos y bebidas: general,,6.904376664719618e-05
+A0119103,Ají molido,"Sal, especias y condimentos",01,G21,alimentos y bebidas: general,,1.785019796968989e-05
+A0119104,Comino,"Sal, especias y condimentos",01,G21,alimentos y bebidas: general,,1.2623218351451135e-05
+A0119105,Orégano,"Sal, especias y condimentos",01,G21,alimentos y bebidas: general,,0.00010204019099046131
+A0119106,Pimentón,"Sal, especias y condimentos",01,G21,alimentos y bebidas: general,,5.273334403049027e-05
+A0119107,Pimienta,"Sal, especias y condimentos",01,G21,alimentos y bebidas: general,,5.549284487197916e-05
+A0119108,Otras especias,"Sal, especias y condimentos",01,G21,alimentos y bebidas: general,,0.00017843921614276665
+A0119109,Surtido de sal y especias,"Sal, especias y condimentos",01,G21,alimentos y bebidas: general,,2.650937719886172e-05
+A0119110,Ketchup,"Sal, especias y condimentos",01,G21,alimentos y bebidas: general,,9.366196912271065e-05
+A0119111,Mayonesa,"Sal, especias y condimentos",01,G21,alimentos y bebidas: general,,0.0010637673385684825
+A0119112,Mostaza,"Sal, especias y condimentos",01,G21,alimentos y bebidas: general,,0.00012219719898067124
+A0119113,Salsa en base a tomate,"Sal, especias y condimentos",01,G21,alimentos y bebidas: general,,0.00032939534937120857
+A0119114,Salsas varias,"Sal, especias y condimentos",01,G21,alimentos y bebidas: general,,8.599016217636604e-05
+A0119115,"Vinagre, aceto balsámico","Sal, especias y condimentos",01,G21,alimentos y bebidas: general,,0.00025939337969488747
+A0119116,Otros aderezos y condimentos,"Sal, especias y condimentos",01,G21,alimentos y bebidas: general,,3.5695650406431244e-05
+A0119117,Surtidos de salsas y condimentos,"Sal, especias y condimentos",01,G21,alimentos y bebidas: general,,1.53016218517514e-05
+A0119201,Alimentos preparados para niños y bebés,"Sopas, preparaciones para postres, alimentos para bebés, levadura y snacks",01,G21,alimentos y bebidas: general,,2.8551491473474754e-06
+A0119202,Caldos concentrados,"Sopas, preparaciones para postres, alimentos para bebés, levadura y snacks",01,G21,alimentos y bebidas: general,,0.0003804914512895723
+A0119203,Levadura,"Sopas, preparaciones para postres, alimentos para bebés, levadura y snacks",01,G21,alimentos y bebidas: general,,0.00010822384479057916
+A0119204,Polvo para hornear,"Sopas, preparaciones para postres, alimentos para bebés, levadura y snacks",01,G21,alimentos y bebidas: general,,8.083330867114584e-06
+A0119205,"Polvo para bizcochuelo, tortas, scones, budín, brownies","Sopas, preparaciones para postres, alimentos para bebés, levadura y snacks",01,G21,alimentos y bebidas: general,,0.00015863869663267655
+A0119206,Polvo para postres y helados,"Sopas, preparaciones para postres, alimentos para bebés, levadura y snacks",01,G21,alimentos y bebidas: general,,0.00022096553334441133
+A0119207,Productos para repostería,"Sopas, preparaciones para postres, alimentos para bebés, levadura y snacks",01,G21,alimentos y bebidas: general,,9.655253380577047e-05
+A0119208,Sopas concentradas,"Sopas, preparaciones para postres, alimentos para bebés, levadura y snacks",01,G21,alimentos y bebidas: general,,0.00019827842407064048
+A0119209,"Surtidos de sopas, preparaciones para postres y levadura","Sopas, preparaciones para postres, alimentos para bebés, levadura y snacks",01,G21,alimentos y bebidas: general,,0.0
+A0119210,"Chizitos, papas fritas, palitos (snacks)","Sopas, preparaciones para postres, alimentos para bebés, levadura y snacks",01,G21,alimentos y bebidas: general,,0.0012209924744995353
+A0119301,Gastos no discriminados en alimentos,Gastos no discriminados,01,G21,alimentos y bebidas: general,,0.0010865067822962524
+A0119302,Gastos no discriminados en alimentos y bebidas no alcohólicas,Gastos no discriminados,01,G21,alimentos y bebidas: general,,0.001045048595732113
+A0121101,Café instantáneo,Café,01,G21,alimentos y bebidas: general,,0.0008197112180419748
+A0121102,Café molido o en grano,Café,01,G21,alimentos y bebidas: general,,0.0004893117078619192
+A0121103,Café en saquitos,Café,01,G21,alimentos y bebidas: general,,9.938468764946608e-05
+A0121104,Café en cápsulas o bolsitas para máquinas de café,Café,01,G21,alimentos y bebidas: general,,0.00015413689373336108
+A0121105,Capuchino instantáneo,Café,01,G21,alimentos y bebidas: general,,4.654104628300204e-05
+A0121106,Capuchino en saquitos,Café,01,G21,alimentos y bebidas: general,,2.8973957411431097e-06
+A0121107,Malta instantánea,Café,01,G21,alimentos y bebidas: general,,2.5834439059768733e-05
+A0121201,"Té común en hebras, en hoja",Te y otras hierbas de infusión,01,C567_21,"yerba, mate cocido, té (Dto. 567/2019)",,4.559767088829254e-06
+A0121202,Té común en saquitos,Te y otras hierbas de infusión,01,C567_21,"yerba, mate cocido, té (Dto. 567/2019)",,0.00047027951340761426
+A0121203,Té saborizado,Te y otras hierbas de infusión,01,C567_21,"yerba, mate cocido, té (Dto. 567/2019)",,8.051911602619415e-05
+A0121301,Yerba mate,Yerba mate,01,C567_21,"yerba, mate cocido, té (Dto. 567/2019)",,0.0031787503292942895
+A0121302,Mate cocido en saquitos,Yerba mate,01,C567_21,"yerba, mate cocido, té (Dto. 567/2019)",,0.00020150126988299544
+A0121401,Cacao con o sin azúcar,Cacao y otras infusiones,01,G21,alimentos y bebidas: general,,0.00035368754266337354
+A0121402,Otras infusiones,Cacao y otras infusiones,01,G21,alimentos y bebidas: general,,5.236354660890655e-05
+A0121403,Infusiones preparadas listas para consumir,Cacao y otras infusiones,01,G21,alimentos y bebidas: general,,0.00020959186392210187
+A0121404,"Surtidos de café, té, yerba y cacao",Cacao y otras infusiones,01,G21,alimentos y bebidas: general,,0.0
+A0122101,Agua mineral,"Agua mineral, purificada y soda",01,G21,alimentos y bebidas: general,analcoholicas,0.002354444413474462
+A0122102,Agua potable,"Agua mineral, purificada y soda",01,EX,agua ordinaria (art. 7 f),,0.0003648780846733015
+A0122103,Hielo,"Agua mineral, purificada y soda",01,G21,alimentos y bebidas: general,,3.725767771308244e-05
+A0122104,Soda,"Agua mineral, purificada y soda",01,G21,alimentos y bebidas: general,analcoholicas,0.0006032639706594694
+A0122201,Gaseosas,Gaseosas,01,G21,alimentos y bebidas: general,analcoholicas,0.010425435545709244
+A0122301,Aperitivo sin alcohol en base a hierbas,Jugos y refrescos líquidos y en polvo,01,G21,alimentos y bebidas: general,analcoholicas,0.00024268769435562606
+A0122302,Jugos y refrescos en polvo para preparar bebidas,Jugos y refrescos líquidos y en polvo,01,G21,alimentos y bebidas: general,analcoholicas,0.001628746209429409
+A0122303,Jugos y refrescos líquidos para preparar bebidas,Jugos y refrescos líquidos y en polvo,01,G21,alimentos y bebidas: general,analcoholicas,0.00011977348145677073
+A0122304,Jugos y refrescos para beber sin diluir,Jugos y refrescos líquidos y en polvo,01,G21,alimentos y bebidas: general,analcoholicas,0.001140292035965911
+A0122305,jugos en base de soja saborizados,Jugos y refrescos líquidos y en polvo,01,G21,alimentos y bebidas: general,analcoholicas,6.972349024091539e-05
+A0122306,Aguas saborizadas frutales,Jugos y refrescos líquidos y en polvo,01,G21,alimentos y bebidas: general,analcoholicas,0.0012489673437424452
+A0122307,"Bebidas isotónicas, energizantes",Jugos y refrescos líquidos y en polvo,01,G21,alimentos y bebidas: general,analcoholicas,0.00021802901686292608
+A0122401,"Surtidos de agua mineral, bebidas gaseosas y jugos","Surtidos de agua mineral, bebidas gaseosas y jugos",01,G21,alimentos y bebidas: general,analcoholicas,1.461856723219332e-06
+A0123101,Gastos no discriminados en bebidas no alcohólicas,Otras bebidas no alcohólicas,01,G21,alimentos y bebidas: general,,1.3701342344672788e-06
+A0211101,"Ginebra, caña, grapa","Bebidas espirituosas, destiladas y licores",02,G21,general,alcohol,1.0407338784725676e-05
+A0211102,Whisky,"Bebidas espirituosas, destiladas y licores",02,G21,general,alcohol,9.586418879886829e-05
+A0211103,Licores,"Bebidas espirituosas, destiladas y licores",02,G21,general,alcohol,1.796894034014517e-05
+A0211104,Otras bebidas destiladas,"Bebidas espirituosas, destiladas y licores",02,G21,general,alcohol,0.00010270356936961307
+A0211105,Surtidos de bebidas destiladas,"Bebidas espirituosas, destiladas y licores",02,G21,general,alcohol,4.359530664207004e-06
+A0212201,Vino común,Vinos,02,G21,general,,0.0011453546144988055
+A0212202,Vino fino,Vinos,02,G21,general,,0.0031103558059147026
+A0212203,Vinos dulces o postre o espirituosos,Vinos,02,G21,general,,2.199537426266274e-05
+A0212204,Aperitivos,Vinos,02,G21,general,,0.0007268937353972257
+A0212205,Sidra,Vinos,02,G21,general,,0.00021006827982055485
+A0212206,Vino espumante,Vinos,02,G21,general,,0.0002824744889421194
+A0212207,Otros vinos espumantes,Vinos,02,G21,general,,2.1349835309443598e-05
+A0212208,Surtido de vinos,Vinos,02,G21,general,,6.68922067454335e-07
+A0213301,Cerveza,Cerveza,02,G21,general,cerveza,0.004599297886700779
+A0214401,Gastos en bebidas alcohólicas sin discriminar,Otras bebidas alcohólicas,02,G21,general,,4.340752174699076e-06
+A0221101,Cigarrillos,Tabaco,02,G21,general,tabaco,0.009140803825757554
+A0221102,"Cigarros, cigarritos, tabaco",Tabaco,02,G21,general,tabaco,4.600188830744484e-05
+A0221103,Hojas de coca,Tabaco,02,G21,general,,8.390288925108441e-05
+A0311101,Telas de algodón con o sin mezcla,Telas,03,G21,general,,0.0003096611244616378
+A0311102,Telas de lana con o sin mezcla,Telas,03,G21,general,,3.601091711062971e-05
+A0311103,Sintético puro,Telas,03,G21,general,,0.00015201667038962488
+A0311104,Otras telas,Telas,03,G21,general,,0.0002575524319492163
+A0311201,Fibra sintética para tejer,Hilados para tejer,03,G21,general,,7.012692063334992e-05
+A0311202,Hilo para tejer,Hilados para tejer,03,G21,general,,4.9754182180146984e-05
+A0311203,Lana con mezcla para tejer,Hilados para tejer,03,G21,general,,0.00011519127665323487
+A0311204,Lana pura para tejer,Hilados para tejer,03,G21,general,,8.223628846103735e-05
+A0311205,Otros hilados para tejer,Hilados para tejer,03,G21,general,,1.7053668943342177e-05
+A0312101,Camisa para hombres,Ropa exterior para hombre,03,G21,general,,0.0023719918142724957
+A0312102,"Remera, chomba, polera para hombres",Ropa exterior para hombre,03,G21,general,,0.003029312241465346
+A0312103,Pantalón de jean para hombres,Ropa exterior para hombre,03,G21,general,,0.0034564996296119702
+A0312104,Pantalón de vestir para hombres,Ropa exterior para hombre,03,G21,general,,0.0008726552967530757
+A0312105,"Pulover, chaleco, para hombres",Ropa exterior para hombre,03,G21,general,,0.0005746107823387848
+A0312106,Equipo de deporte para hombres,Ropa exterior para hombre,03,G21,general,,0.0003902194406015452
+A0312107,"Joggings (pantalón y/o buzo, campera)  para hombres",Ropa exterior para hombre,03,G21,general,,0.0016470723142353013
+A0312108,"Short, bermuda, traje de baño, malla para hombre",Ropa exterior para hombre,03,G21,general,,0.0008450328598862809
+A0312109,"Saco sport, blazer para hombres",Ropa exterior para hombre,03,G21,general,,0.0002468682263494998
+A0312110,"Traje, ambo para hombres",Ropa exterior para hombre,03,G21,general,,0.0006608179530687069
+A0312111,"Campera, anorak para hombres",Ropa exterior para hombre,03,G21,general,,0.0019440080413242991
+A0312112,"Sobretodo, impermeable y otros abrigos",Ropa exterior para hombre,03,G21,general,,0.00010962908516976443
+A0312113,Otras prendas exteriores para hombres,Ropa exterior para hombre,03,G21,general,,0.0003767860503242501
+A0312201,"Blusa, camisa para mujeres",Ropa exterior para mujer,03,G21,general,,0.0016849080552778515
+A0312202,"Remera, polera, para mujeres",Ropa exterior para mujer,03,G21,general,,0.0024651090491752186
+A0312203,Pantalón de jean para mujeres,Ropa exterior para mujer,03,G21,general,,0.002893813614566023
+A0312204,Pantalón de vestir para mujeres,Ropa exterior para mujer,03,G21,general,,0.0006425801783683669
+A0312205,"Pollera, pollera-pantalón para mujeres",Ropa exterior para mujer,03,G21,general,,0.00029643842077332357
+A0312206,"Vestido, jumper, conjunto de blusa y pollera para mujeres",Ropa exterior para mujer,03,G21,general,,0.0012440285739676459
+A0312207,"Pullover, chaleco, polerón para mujeres",Ropa exterior para mujer,03,G21,general,,0.0008782161821750126
+A0312208,"Joggings (pantalón y/o buzo, campera)  para mujeres",Ropa exterior para mujer,03,G21,general,,0.0007119247037009878
+A0312209,"Equipo de deporte: malla de gimnasia, pantalón deportivo, pollera de tenis, calzas, etc.",Ropa exterior para mujer,03,G21,general,,0.0003492319587425945
+A0312210,"Short, bermuda para mujeres",Ropa exterior para mujer,03,G21,general,,0.000302206348430527
+A0312211,"Traje de baño, malla para mujeres",Ropa exterior para mujer,03,G21,general,,0.00047758628674102963
+A0312212,"Blazer, saco para mujeres",Ropa exterior para mujer,03,G21,general,,0.0002775434599771235
+A0312213,Traje para mujeres,Ropa exterior para mujer,03,G21,general,,4.5392834222036185e-05
+A0312214,"Campera, anorak para mujeres",Ropa exterior para mujer,03,G21,general,,0.001634600730852488
+A0312215,"Tapado, sacón para mujeres",Ropa exterior para mujer,03,G21,general,,0.0002289708722060704
+A0312216,Impermeable y otros abrigos,Ropa exterior para mujer,03,G21,general,,0.00013350081309985374
+A0312217,Otras prendas exteriores para mujeres,Ropa exterior para mujer,03,G21,general,,0.0005439226429368478
+A0312218,"Calzas, leggins (algodón, lycra, etc.) excluye deportivas.",Ropa exterior para mujer,03,G21,general,,0.0007476944446761617
+A0312301,Batita de bebe,Ropa exterior para niños,03,G21,general,,9.527368728060025e-05
+A0312302,"Enterito, osito, patas para bebés",Ropa exterior para niños,03,G21,general,,0.00037723940042198986
+A0312303,Mantilla para bebés,Ropa exterior para niños,03,G21,general,,5.10098882568395e-05
+A0312304,"Blusa, camisa para niños y bebés",Ropa exterior para niños,03,G21,general,,0.0001879047554584455
+A0312305,"Remera, polera de algodón",Ropa exterior para niños,03,G21,general,,0.0014031051834921288
+A0312306,"Pantalón de jean, para niños y bebés",Ropa exterior para niños,03,G21,general,,0.0007522798051243066
+A0312307,Pantalón de vestir para niños,Ropa exterior para niños,03,G21,general,,0.00014967380043999203
+A0312308,Pollera para niñas,Ropa exterior para niños,03,G21,general,,5.521365495657508e-05
+A0312309,"Vestido, jumper, conjunto para niñas y bebés",Ropa exterior para niños,03,G21,general,,0.00045047694226422997
+A0312310,"Pullover, chaleco, saco para niños y bebés",Ropa exterior para niños,03,G21,general,,0.00027859960906485224
+A0312311,"Short, bermuda, jardinero para niños y bebés",Ropa exterior para niños,03,G21,general,,0.00046887317040837016
+A0312312,"Joggings (pantalón y/o buzo, campera) para niños y bebés",Ropa exterior para niños,03,G21,general,,0.001270365825789877
+A0312313,Equipo de deporte o gimnasia para niños,Ropa exterior para niños,03,G21,general,,0.0004079320456334186
+A0312314,"Traje de baño, malla para niños y bebés",Ropa exterior para niños,03,G21,general,,0.00013892087208998934
+A0312315,"Guardapolvo, delantal para niños",Ropa exterior para niños,03,G21,general,,0.0002635923128043563
+A0312316,"Camperas, tapados, anorak, abrigos para niños y bebés",Ropa exterior para niños,03,G21,general,,0.0007885452295398953
+A0312317,Otras prendas exteriores para niños y bebés,Ropa exterior para niños,03,G21,general,,0.0005026517682766524
+A0312318,"Calzas (algodón, lycra, etc.)",Ropa exterior para niños,03,G21,general,,0.00020988135462942915
+A0312401,Calzoncillo,Ropa interior para hombres,03,G21,general,,0.000675562325418831
+A0312402,Camiseta para hombres,Ropa interior para hombres,03,G21,general,,6.411618169379817e-05
+A0312403,"Medias, zoquetes para hombres",Ropa interior para hombres,03,G21,general,,0.0002919356865785049
+A0312404,Pijama para hombres,Ropa interior para hombres,03,G21,general,,4.7753629750568054e-05
+A0312405,Otras prendas interiores para hombres,Ropa interior para hombres,03,G21,general,,1.802147753366252e-05
+A0312501,Bombacha,Ropa interior para mujeres,03,G21,general,,0.0003114994137800301
+A0312502,Corpiño,Ropa interior para mujeres,03,G21,general,,0.00025743888079557046
+A0312503,Conjuntos de bombacha y corpiño,Ropa interior para mujeres,03,G21,general,,0.000715046184341224
+A0312504,body – camiseta,Ropa interior para mujeres,03,G21,general,,3.7999833976270956e-05
+A0312505,"Camisón, pijama",Ropa interior para mujeres,03,G21,general,,0.00021521201059792323
+A0312506,"Medias, zoquetes para mujeres",Ropa interior para mujeres,03,G21,general,,0.0001579366956200457
+A0312507,"Medibachas, panty",Ropa interior para mujeres,03,G21,general,,2.3108037232073557e-05
+A0312508,"Otras prendas interiores para mujeres: salto de cama, combinación, enagua, trusas, fajas, salidas de baño, etc.",Ropa interior para mujeres,03,G21,general,,3.0138616324675532e-05
+A0312601,Bombacha para niños y bebés,Ropa interior para niños,03,G21,general,,9.918562587710669e-05
+A0312602,Calzoncillo para niños,Ropa interior para niños,03,G21,general,,0.00010840998196869476
+A0312603,Camiseta para niños y bebés,Ropa interior para niños,03,G21,general,,4.616336587350452e-05
+A0312604,"Camisón, pijama para niños y bebés",Ropa interior para niños,03,G21,general,,6.56461812523391e-05
+A0312605,Escarpines para niños y bebés,Ropa interior para niños,03,G21,general,,1.5114642529617873e-05
+A0312606,"Medias, zoquetes para niños y bebés",Ropa interior para niños,03,G21,general,,0.0001450422838106612
+A0312607,"Pañal, chiripa de tela para bebés",Ropa interior para niños,03,G21,general,,9.001672118248092e-05
+A0312608,Otras prendas interiores para niños y bebés,Ropa interior para niños,03,G21,general,,5.122238989099567e-05
+A0313101,Babero,Complementos y accesorios para vestir,03,G21,general,,2.9740536761874436e-05
+A0313102,"Bufanda, chalina, pañuelo de cuello, guantes",Complementos y accesorios para vestir,03,G21,general,,0.00017155746762751833
+A0313103,Corbata,Complementos y accesorios para vestir,03,G21,general,,4.5864379746099244e-05
+A0313104,Pañuelo de mano,Complementos y accesorios para vestir,03,G21,general,,1.0192121152948908e-05
+A0313105,"Cinturón, tiradores",Complementos y accesorios para vestir,03,G21,general,,0.00012614225695031705
+A0313106,"Sombrero, gorro, boina",Complementos y accesorios para vestir,03,G21,general,,0.0001128149006484198
+A0313107,Otros accesorios para vestir,Complementos y accesorios para vestir,03,G21,general,,2.7477582994310713e-05
+A0313201,Botones,Artículos para coser y tejer,03,G21,general,,1.0107143629065665e-05
+A0313202,Cierres,Artículos para coser y tejer,03,G21,general,,2.7756994357433557e-05
+A0313203,Hilo para coser,Artículos para coser y tejer,03,G21,general,,5.190796939708852e-05
+A0314101,Lavandería y lavadero automático de ropa de vestir,"Limpieza, reparación, alquiler de ropa",03,G21,general,,0.0005295354464199539
+A0314102,"Tintorería, limpieza a seco de ropa de vestir","Limpieza, reparación, alquiler de ropa",03,G21,general,,0.0002183380323848138
+A0314103,Arreglos y hechuras con modista o sastre,"Limpieza, reparación, alquiler de ropa",03,G21,general,,0.00021522193070323508
+A0314104,Alquiler de prendas de vestir y cazado,"Limpieza, reparación, alquiler de ropa",03,G21,general,,4.021645388096983e-05
+A0321101,Zapatos acordonados para hombres,Calzado para hombre,03,G21,general,,0.0009853222792508853
+A0321102,Zapatos mocasín para hombres,Calzado para hombre,03,G21,general,,0.00046599819783169636
+A0321103,Botas de lluvia para hombres,Calzado para hombre,03,G21,general,,3.873144174302065e-05
+A0321104,"Botas, botines para hombres",Calzado para hombre,03,G21,general,,0.00034726155855021023
+A0321105,"Sandalias, ojotas, chinelas para hombres",Calzado para hombre,03,G21,general,,0.0003498859179130058
+A0321106,Alpargatas para hombres,Calzado para hombre,03,G21,general,,5.119902881397888e-05
+A0321107,Zapatillas para hombres,Calzado para hombre,03,G21,general,,0.006609200159951088
+A0321108,Otros calzados para hombres,Calzado para hombre,03,G21,general,,0.00020556870128152468
+A0321201,Zapatos de vestir para mujeres,Calzado para mujer,03,G21,general,,0.0013569063137287617
+A0321202,"Sandalias, zuecos para mujeres",Calzado para mujer,03,G21,general,,0.0013306383406710095
+A0321203,"Botas, botitas de lluvia para mujeres",Calzado para mujer,03,G21,general,,0.00023938684901630045
+A0321204,"Botas, botitas para mujeres",Calzado para mujer,03,G21,general,,0.0009347198993470983
+A0321205,"Chinelas, ojotas",Calzado para mujer,03,G21,general,,0.00019783625225082324
+A0321206,Alpargatas para mujeres,Calzado para mujer,03,G21,general,,5.844604802814386e-05
+A0321207,Zapatillas para mujeres,Calzado para mujer,03,G21,general,,0.003955601021270355
+A0321208,Otros calzados para mujeres,Calzado para mujer,03,G21,general,,0.00018185376851856391
+A0321301,Zapatos para niñas,Calzado para niño,03,G21,general,,0.0005933367193820792
+A0321302,Zapatos para niños,Calzado para niño,03,G21,general,,0.0005525624426880694
+A0321303,"Sandalias, ojotas para niños y bebés",Calzado para niño,03,G21,general,,0.00033547814392377535
+A0321304,"Botas, botitas de lluvia para niños y bebés",Calzado para niño,03,G21,general,,4.417426429087641e-05
+A0321305,"Botas, botitas para niños y bebés",Calzado para niño,03,G21,general,,0.00010851572039691363
+A0321306,Alpargatas para niños y bebés,Calzado para niño,03,G21,general,,2.7218802944510447e-05
+A0321307,Zapatillas para niños y bebés,Calzado para niño,03,G21,general,,0.0027849386099922536
+A0321308,Otros calzados para niños y bebés,Calzado para niño,03,G21,general,,0.00014865541553555134
+A0322101,Limpieza de calzado,"Limpieza, reparación y alquiler de calzado",03,G21,general,,9.772331722370107e-06
+A0322102,Reparación de calzado,"Limpieza, reparación y alquiler de calzado",03,G21,general,,0.00016509893455594473
+A0411101,"Alquiler de la vivienda de uso permanente (incluye el gasto de habitación en pensión, hotel, casa de familia, etc.",Alquiler de la vivienda,04,EX,alquiler de vivienda y expensas (art. 7 h.22 / no alcanzado),,0.04501347067254298
+A0411102,Gastos del pensionista (habitación y comida),Alquiler de la vivienda,04,EX,alquiler de vivienda y expensas (art. 7 h.22 / no alcanzado),,0.0004299613613619688
+A0412201,Alquiler de la vivienda de uso secundario,Alquiler de otras viviendas ,04,EX,alquiler de vivienda y expensas (art. 7 h.22 / no alcanzado),,0.0004567939387555307
+A0412202,Alquiler de la vivienda de uso mixto,Alquiler de otras viviendas ,04,EX,alquiler de vivienda y expensas (art. 7 h.22 / no alcanzado),,1.3522889673016752e-05
+A0412203,Alquiler de la vivienda ocupada por otro hogar,Alquiler de otras viviendas ,04,EX,alquiler de vivienda y expensas (art. 7 h.22 / no alcanzado),,0.001001706399713242
+A0412205,"Alquiler temporal de casa, departamento, casa quinta, etc.",Alquiler de otras viviendas ,04,EX,alquiler de vivienda y expensas (art. 7 h.22 / no alcanzado),,0.0031371319758829977
+A0412206,Alquiler tiempo compartido,Alquiler de otras viviendas ,04,EX,alquiler de vivienda y expensas (art. 7 h.22 / no alcanzado),,2.461291206793182e-05
+A0431101,Arena/canto rodado,Materiales para la reparación de la vivienda,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.00029180527734695065
+A0431102,"Cal, cemento",Materiales para la reparación de la vivienda,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.00037336658606291963
+A0431103,Ladrillo,Materiales para la reparación de la vivienda,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.000287232363279724
+A0431104,Revoque premezclado,Materiales para la reparación de la vivienda,04,G21,vivienda: general (servicios públicos residenciales 21%),,5.7120292644077166e-05
+A0431105,"Madera, listones, placas, tablas",Materiales para la reparación de la vivienda,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.00016749929639881317
+A0431106,Cañerías y sus accesorios,Materiales para la reparación de la vivienda,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.00014584400836206097
+A0431107,"Grifería: canillas, duchas",Materiales para la reparación de la vivienda,04,G21,vivienda: general (servicios públicos residenciales 21%),,9.188508428956672e-05
+A0431108,"Artefactos sanitarios y de cocina (bidet, pileta, mesada, bañera, etc.)",Materiales para la reparación de la vivienda,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.00012829397464311236
+A0431109,"Carpintería metálica y de madera, ventanas, puertas, rejas, herrajes",Materiales para la reparación de la vivienda,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.00044591318501960086
+A0431110,"Membrana para techo, tejas, techado asfáltico",Materiales para la reparación de la vivienda,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.00017401887207385563
+A0431111,"Pisos, zócalos, revestimientos",Materiales para la reparación de la vivienda,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.000483068562138805
+A0431112,"Moquette, papel para pared",Materiales para la reparación de la vivienda,04,G21,vivienda: general (servicios públicos residenciales 21%),,4.877937812816384e-05
+A0431113,Pintura y accesorios,Materiales para la reparación de la vivienda,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.0008462605995875745
+A0431114,"Otros materiales: vidrio, vigueta, placa de yeso (durlok, knauf, etc)",Materiales para la reparación de la vivienda,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.00033646209393763967
+A0431115,Gastos no desglosables,Materiales para la reparación de la vivienda,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.0008746467081756861
+A0432101,Albañil,Servicios para la conservación y la reparación de la vivienda,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.002873018381461813
+A0432102,Carpintero,Servicios para la conservación y la reparación de la vivienda,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.0001438180374461834
+A0432103,Cerrajero,Servicios para la conservación y la reparación de la vivienda,04,G21,vivienda: general (servicios públicos residenciales 21%),,4.242702599089536e-05
+A0432104,Electricista,Servicios para la conservación y la reparación de la vivienda,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.00025436372166304206
+A0432105,Gasista,Servicios para la conservación y la reparación de la vivienda,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.0002978376953171445
+A0432106,Pintor y empapelador,Servicios para la conservación y la reparación de la vivienda,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.0009101798291861351
+A0432107,Plomero,Servicios para la conservación y la reparación de la vivienda,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.0004495982404095043
+A0432108,"Otros servicios: maestro mayor de obra, contratista, yesero, ceramista, colocador de alfombra, pulidor de pisos, poc",Servicios para la conservación y la reparación de la vivienda,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.0005541475124365413
+A0432109,Gastos no desglosables en servicios para la reparación o construcción,Servicios para la conservación y la reparación de la vivienda,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.0006580923206100706
+A0441101,Agua corriente de la vivienda principal,Suministro de agua,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.010213997515573541
+A0441102,Otros sistemas de aprovisionamiento de agua,Suministro de agua,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.00026239735661092665
+A0441103,Agua corriente de la vivienda secundaria,Suministro de agua,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.00010000547344641344
+A0441104,Gastos de  suministro de agua realizados para una vivienda ocupada por otro hogar,Suministro de agua,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.00014125514085214615
+A0442101,"Recolección de residuos - Barrido de calles, quitado de nieve, hielo, agua de la vivienda principal",Recogida de basura,04,EX,"tasa municipal, no es precio",,0.0008833413113774785
+A0442102,"Recolección de residuos - Barrido de calles, quitado de nieve, hielo, agua de la vivienda secundaria",Recogida de basura,04,EX,"tasa municipal, no es precio",,1.0515914932313307e-05
+A0443101,Cloacas y desagües pluviales,Alcantarillado,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.0001629736448974919
+A0444101,Gastos comunes (expensas) de la vivienda principal,Gastos comunes por la vivienda y/o cochera y otros gastos,04,EX,alquiler de vivienda y expensas (art. 7 h.22 / no alcanzado),,0.012012682375268235
+A0444102,Gastos comunes (expensas) de la cochera principal,Gastos comunes por la vivienda y/o cochera y otros gastos,04,EX,alquiler de vivienda y expensas (art. 7 h.22 / no alcanzado),,0.00012404080670556526
+A0444103,Abonos para mantenimiento de la vivienda principal,Gastos comunes por la vivienda y/o cochera y otros gastos,04,EX,alquiler de vivienda y expensas (art. 7 h.22 / no alcanzado),,4.123093826939123e-05
+A0444104,Gastos comunes (expensas) de la vivienda secundaria,Gastos comunes por la vivienda y/o cochera y otros gastos,04,EX,alquiler de vivienda y expensas (art. 7 h.22 / no alcanzado),,0.00024689637137160353
+A0444105,Gastos comunes (expensas) de la cochera secundaria,Gastos comunes por la vivienda y/o cochera y otros gastos,04,EX,alquiler de vivienda y expensas (art. 7 h.22 / no alcanzado),,1.8932154766180904e-05
+A0444106,Abonos para mantenimiento de la vivienda secundaria,Gastos comunes por la vivienda y/o cochera y otros gastos,04,EX,alquiler de vivienda y expensas (art. 7 h.22 / no alcanzado),,3.561554206151382e-05
+A0444107,"Destapaciones de cañerías, limpieza de pozo ciego y cámara séptica",Gastos comunes por la vivienda y/o cochera y otros gastos,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.00046753394636111286
+A0444108,Limpieza y desinfección de tanques de agua,Gastos comunes por la vivienda y/o cochera y otros gastos,04,G21,vivienda: general (servicios públicos residenciales 21%),,5.7020238487601506e-05
+A0444109,Expensas del tiempo compartido,Gastos comunes por la vivienda y/o cochera y otros gastos,04,EX,alquiler de vivienda y expensas (art. 7 h.22 / no alcanzado),,5.5027794330628515e-05
+A0451101,Electricidad de la vivienda principal Kw/h,Electricidad,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.03417705238529973
+A0451102,Electricidad (kw) de la vivienda secundaria,Electricidad,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.0003184712407887126
+A0451103,Gastos de electricidad realizados para una vivienda ocupada por otro hogar,Electricidad,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.0003531378521303654
+A0452101,Gas envasado en garrrafas,Gas,04,G105,gas licuado (art. 28; no verificado),,0.0053164412050916605
+A0452102,Gas a granel,Gas,04,G105,gas licuado (art. 28; no verificado),,4.824185492942257e-05
+A0452103,Gas natural por red domiciliaria (m3) de la vivienda principal,Gas,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.016932181605526855
+A0452104,Gas envasado en tubo,Gas,04,G105,gas licuado (art. 28; no verificado),,0.0006090852335113457
+A0452105,Gas natural por red domiciliaria (m3) de la vivienda secundaria,Gas,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.0001071667547050473
+A0452106,Gastos de  gas realizados para una vivienda ocupada por otro hogar,Gas,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.00021188271127821925
+A0453101,Kerosene,Otros combustibles sólidos y líquidos,04,G21,vivienda: general (servicios públicos residenciales 21%),,1.6803999842077236e-05
+A0453102,"Leña, carbón",Otros combustibles sólidos y líquidos,04,G21,vivienda: general (servicios públicos residenciales 21%),,0.0006779435627249947
+A0453103,Otros combustibles para el hogar,Otros combustibles sólidos y líquidos,04,G21,vivienda: general (servicios públicos residenciales 21%),,1.6234066019637772e-05
+A0511101,Juego de dormitorio,Muebles para el dormitorio,05,G21,equipamiento: general,,0.0001810909524474498
+A0511102,Cama,Muebles para el dormitorio,05,G21,equipamiento: general,,0.00036644269086938197
+A0511103,Colchón o somieres,Muebles para el dormitorio,05,G21,equipamiento: general,,0.0016067477245758953
+A0511104,"Cómoda, mesa de luz",Muebles para el dormitorio,05,G21,equipamiento: general,,0.00010304884609113369
+A0511105,"Placard, ropero",Muebles para el dormitorio,05,G21,equipamiento: general,,0.0003985428702687927
+A0511106,"Cuna, moisés",Muebles para el dormitorio,05,G21,equipamiento: general,,0.0001368199649453036
+A0511201,Juego de comedor,Muebles para el living y el comedor,05,G21,equipamiento: general,,0.0002145480511389654
+A0511202,Juego de living,Muebles para el living y el comedor,05,G21,equipamiento: general,,0.0001236305717370384
+A0511203,"Mesas de comedor, cocina",Muebles para el living y el comedor,05,G21,equipamiento: general,,0.00021792152841087505
+A0511204,"Sillas, banquetas, bancos",Muebles para el living y el comedor,05,G21,equipamiento: general,,0.00030695103084568204
+A0511205,"Modular, bar, aparador, vitrina, biblioteca",Muebles para el living y el comedor,05,G21,equipamiento: general,,0.0002184814900859994
+A0511206,"Sillón, sofá",Muebles para el living y el comedor,05,G21,equipamiento: general,,0.0004892556721983813
+A0511301,"Amoblamiento para cocina (alacenas, placares, etc.)","Otros muebles (cocina, baño, etc..)",05,G21,equipamiento: general,,0.00037932939956279325
+A0511302,"Muebles de baño (vanitory, placares, etc.)","Otros muebles (cocina, baño, etc..)",05,G21,equipamiento: general,,6.161123703788039e-05
+A0511303,"Muebles de jardín de metal, plástico","Otros muebles (cocina, baño, etc..)",05,G21,equipamiento: general,,9.969596871459652e-05
+A0511304,"Muebles para bebé: coche de paseo,  babysilla, corralito, andador, catre de baño para bebé","Otros muebles (cocina, baño, etc..)",05,G21,equipamiento: general,,8.237052020728541e-05
+A0511305,"Escritorio, mesas para TV, PC, equipos de música","Otros muebles (cocina, baño, etc..)",05,G21,equipamiento: general,,0.0001102456558230519
+A0511306,"Otros muebles: repisa, revistero, etc.","Otros muebles (cocina, baño, etc..)",05,G21,equipamiento: general,,0.00013347646643724445
+A0511401,"Artefactos para iluminación (lámparas, veladores, etc.)",Accesorios para el hogar,05,G21,equipamiento: general,,0.0001976416439166742
+A0511402,"Cuadros, espejos, platos, reloj de pared, etc.",Accesorios para el hogar,05,G21,equipamiento: general,,0.0001184142082316143
+A0511403,"Otros artículos para decoración (adornos, portarretratos, jarrones, etc.)",Accesorios para el hogar,05,G21,equipamiento: general,,3.866836358148637e-05
+A0512101,Alfombras (excluye moquete),Alfombras ,05,G21,equipamiento: general,,1.7625269987252886e-05
+A0512102,"Felpudos, alfombritas",Alfombras ,05,G21,equipamiento: general,,1.735288911198851e-05
+A0513101,Reparación y limpieza de muebles,"Reparación de muebles, accesorios y materiales para pisos",05,G21,equipamiento: general,,6.641458548068384e-05
+A0513102,Reparación y limpieza de accesorios para el hogar,"Reparación de muebles, accesorios y materiales para pisos",05,G21,equipamiento: general,,1.1194083271646292e-05
+A0513103,Reparación de alfombras,"Reparación de muebles, accesorios y materiales para pisos",05,G21,equipamiento: general,,9.727357151655713e-07
+A0521101,Almohadas y almohadones,Ropa de cama (incluye almohada),05,G21,equipamiento: general,,0.00015593267417075883
+A0521102,"Colchas, acolchados, cubrecamas",Ropa de cama (incluye almohada),05,G21,equipamiento: general,,0.0003184038993392042
+A0521103,"Frazadas, mantas",Ropa de cama (incluye almohada),05,G21,equipamiento: general,,9.595738578052744e-05
+A0521104,"Sabanas, fundas",Ropa de cama (incluye almohada),05,G21,equipamiento: general,,0.0004699635103443748
+A0521201,Cortinas,Otros artículos textiles para el hogar (cortinas y otros),05,G21,equipamiento: general,,0.00016164468619834105
+A0521202,Manteles incluidos individuales,Otros artículos textiles para el hogar (cortinas y otros),05,G21,equipamiento: general,,3.395503344843149e-05
+A0521203,Repasadores/servilletas,Otros artículos textiles para el hogar (cortinas y otros),05,G21,equipamiento: general,,2.2714388476600077e-05
+A0521204,"Telas para confeccionar sábanas, manteles, toallas, servilletas, etc.",Otros artículos textiles para el hogar (cortinas y otros),05,G21,equipamiento: general,,1.907217448268234e-05
+A0521205,"Toallas, toallones",Otros artículos textiles para el hogar (cortinas y otros),05,G21,equipamiento: general,,0.00012475241002740886
+A0521206,Otros artículos de blanco y mantelería,Otros artículos textiles para el hogar (cortinas y otros),05,G21,equipamiento: general,,2.147428943431726e-05
+A0521207,"Otros productos textiles para el hogar  (cubre muebles, toldos, banderas, etc.)",Otros artículos textiles para el hogar (cortinas y otros),05,G21,equipamiento: general,,1.894280397353343e-05
+A0521301,Reparación de productos textiles para el hogar,Reparación de artículos textiles para el hogar (cortinas y otros),05,G21,equipamiento: general,,1.0254561919447168e-06
+A0531101,"Cocina, anafe a gas",Artefactos grandes para cocinar y conservar los alimentos,05,G21,equipamiento: general,,0.0009420778935432289
+A0531102,"Cocina, anafe eléctrico",Artefactos grandes para cocinar y conservar los alimentos,05,G21,equipamiento: general,,0.00010839869720640867
+A0531103,Horno a gas,Artefactos grandes para cocinar y conservar los alimentos,05,G21,equipamiento: general,,4.858578716506392e-05
+A0531104,Horno eléctrico,Artefactos grandes para cocinar y conservar los alimentos,05,G21,equipamiento: general,,0.00019078570123635475
+A0531105,Microondas,Artefactos grandes para cocinar y conservar los alimentos,05,G21,equipamiento: general,,0.00016064432630001038
+A0531106,Freezer,Artefactos grandes para cocinar y conservar los alimentos,05,G21,equipamiento: general,,0.00023548209009601346
+A0531107,Heladera sin freezer,Artefactos grandes para cocinar y conservar los alimentos,05,G21,equipamiento: general,,0.00012187929998905691
+A0531108,Heladera con freezer,Artefactos grandes para cocinar y conservar los alimentos,05,G21,equipamiento: general,,0.0018729158443007998
+A0531109,Otros artefactos grandes para cocinar y conservar alimentos,Artefactos grandes para cocinar y conservar los alimentos,05,G21,equipamiento: general,,0.00010817433423596983
+A0531201,Aire acondicionado,"Artefactos  grandes para limpiar, climatizar y conservar la vivienda",05,G21,equipamiento: general,,0.0014527649894242843
+A0531202,"Aspiradora, enceradora","Artefactos  grandes para limpiar, climatizar y conservar la vivienda",05,G21,equipamiento: general,,3.7598888531024915e-05
+A0531203,"Calefón, termotanque a gas","Artefactos  grandes para limpiar, climatizar y conservar la vivienda",05,G21,equipamiento: general,,0.00029858459121004784
+A0531204,"Calefón, termotanque a otros combustibles","Artefactos  grandes para limpiar, climatizar y conservar la vivienda",05,G21,equipamiento: general,,0.00012870707974739354
+A0531205,Estufa a kerosene/gasoil,"Artefactos  grandes para limpiar, climatizar y conservar la vivienda",05,G21,equipamiento: general,,2.3366216967728864e-06
+A0531206,"Estufa, calefactor a gas","Artefactos  grandes para limpiar, climatizar y conservar la vivienda",05,G21,equipamiento: general,,0.00012469251849667794
+A0531207,"Estufa, calefactor eléctrico","Artefactos  grandes para limpiar, climatizar y conservar la vivienda",05,G21,equipamiento: general,,0.0001386123520346361
+A0531208,Extractor de aire,"Artefactos  grandes para limpiar, climatizar y conservar la vivienda",05,G21,equipamiento: general,,1.6448847350534068e-05
+A0531209,Lavavajilla,"Artefactos  grandes para limpiar, climatizar y conservar la vivienda",05,G21,equipamiento: general,,7.777009192871396e-05
+A0531210,"Otros artefactos grandes para limpiar, climatizar y conservar la vivienda","Artefactos  grandes para limpiar, climatizar y conservar la vivienda",05,G21,equipamiento: general,,6.012146540816091e-05
+A0531301,Lavarropa y lavasecarropa,Artefactos eléctricos grandes para limpiar y conservar la ropa,05,G21,equipamiento: general,,0.0017005379260372577
+A0531302,Secarropa,Artefactos eléctricos grandes para limpiar y conservar la ropa,05,G21,equipamiento: general,,0.00015781720679507538
+A0531303,Máquina de coser o tejer,Artefactos eléctricos grandes para limpiar y conservar la ropa,05,G21,equipamiento: general,,3.66441880401918e-05
+A0531304,Otros artefactos para limpiar y conservar la ropa,Artefactos eléctricos grandes para limpiar y conservar la ropa,05,G21,equipamiento: general,,3.295813641214752e-06
+A0532101,"Abrelatas, cuchillo, pelapapas eléctrico",Artefactos eléctricos pequeños para el hogar,05,G21,equipamiento: general,,8.4319060188327e-06
+A0532102,"Cafetera, pava, tetera eléctrica",Artefactos eléctricos pequeños para el hogar,05,G21,equipamiento: general,,0.00012894478191850873
+A0532103,"Licuadora, batidora, procesadora, juguera, molinillo p/café, exprimidor, tostadora, freidora, panquequera y helador",Artefactos eléctricos pequeños para el hogar,05,G21,equipamiento: general,,0.00027322947938594765
+A0532104,Plancha eléctrica para la ropa,Artefactos eléctricos pequeños para el hogar,05,G21,equipamiento: general,,5.80795448544438e-05
+A0532105,"Ventilador de mesa o de pie, turbo circulador",Artefactos eléctricos pequeños para el hogar,05,G21,equipamiento: general,,0.00020273992517040213
+A0532106,"Ventilador de techo, de pared",Artefactos eléctricos pequeños para el hogar,05,G21,equipamiento: general,,3.4737594623087134e-05
+A0532107,Otros artefactos eléctricos pequeños para el hogar,Artefactos eléctricos pequeños para el hogar,05,G21,equipamiento: general,,4.6010760850920755e-05
+A0532108,Mantas y almohadillas eléctricas,Artefactos eléctricos pequeños para el hogar,05,G21,equipamiento: general,,1.1642801213475312e-05
+A0533101,Reparación de artefactos  grandes  para cocinar y conservar alimentos,Reparación de artefactos para el hogar,05,G21,equipamiento: general,,8.493676407229769e-05
+A0533102,"Reparación de artefactos para limpiar, climatizar y conservar la vivienda",Reparación de artefactos para el hogar,05,G21,equipamiento: general,,0.00010089670179783033
+A0533103,Reparación de artefactos para limpiar y conservar la ropa,Reparación de artefactos para el hogar,05,G21,equipamiento: general,,0.00011200829971248546
+A0533104,Reparación de artefactos eléctricos pequeños para el hogar,Reparación de artefactos para el hogar,05,G21,equipamiento: general,,1.534771617491267e-05
+A0541101,Asadera y fuente para horno,"Artículos de metal para la cocina: batería, cubierto y otros",05,G21,equipamiento: general,,9.44722854050405e-05
+A0541102,"Budinera, tartera, pizzera","Artículos de metal para la cocina: batería, cubierto y otros",05,G21,equipamiento: general,,5.013077835425862e-05
+A0541103,"Cacerola, olla, jarro, hervidor, colador","Artículos de metal para la cocina: batería, cubierto y otros",05,G21,equipamiento: general,,0.0008922712447317747
+A0541104,"Plancha para bifes, parrilla (no eléctricos)","Artículos de metal para la cocina: batería, cubierto y otros",05,G21,equipamiento: general,,0.00011701389683119031
+A0541105,"Sartén, panquequera (no eléctricos)","Artículos de metal para la cocina: batería, cubierto y otros",05,G21,equipamiento: general,,0.00022152237430378438
+A0541106,"Pava, cafetera, tetera (no eléctricos)","Artículos de metal para la cocina: batería, cubierto y otros",05,G21,equipamiento: general,,8.597926177157996e-05
+A0541107,"Mate, bombilla","Artículos de metal para la cocina: batería, cubierto y otros",05,G21,equipamiento: general,,9.352740886645702e-05
+A0541108,"Fuentes de mesa, bols, cazuelas, tarros para cocina","Artículos de metal para la cocina: batería, cubierto y otros",05,G21,equipamiento: general,,3.144079398279336e-05
+A0541109,Cubiertos sueltos o en juego,"Artículos de metal para la cocina: batería, cubierto y otros",05,G21,equipamiento: general,,0.0001972289098654513
+A0541110,"Espumadera, cucharón, colador, batidor, pisapapa","Artículos de metal para la cocina: batería, cubierto y otros",05,G21,equipamiento: general,,3.525595115808563e-05
+A0541111,"Exprimidor, rallador, abrelatas, destapador, molinillo manual (no eléctricos)","Artículos de metal para la cocina: batería, cubierto y otros",05,G21,equipamiento: general,,4.99715396544538e-05
+A0541112,"Azucarera, mantequera, salero, dulcera, yerbera, aceitera, vinagrera, especiero","Artículos de metal para la cocina: batería, cubierto y otros",05,G21,equipamiento: general,,1.659691121875348e-05
+A0541113,"Otros utensilios de metal (termo, sifón recargable, cortantes, moldes de muffins, etc.)","Artículos de metal para la cocina: batería, cubierto y otros",05,G21,equipamiento: general,,0.00019368149144957273
+A0541201,"Fuentes, bols, asadera de loza, cristal, cerámica","Loza, cristalería y cerámica",05,G21,equipamiento: general,,0.00017698640668601802
+A0541202,Copas y vasos sueltos o en juego,"Loza, cristalería y cerámica",05,G21,equipamiento: general,,0.0004107691611221912
+A0541203,Platos sueltos o en juego,"Loza, cristalería y cerámica",05,G21,equipamiento: general,,0.0004246103637806369
+A0541204,Tazas sueltas o en juego,"Loza, cristalería y cerámica",05,G21,equipamiento: general,,0.00015555694973489639
+A0541205,Otros artículos de loza y cristalería,"Loza, cristalería y cerámica",05,G21,equipamiento: general,,7.39292038377752e-05
+A0541301,"Bandejas, platos, vasos, bols, fuentes",Artículos de plástico y madera para la cocina,05,G21,equipamiento: general,,0.00021259881829253726
+A0541302,"Dulcera, mantequera, salero, azucarera, yerbera, aceitera, vinagrera, especiero, tarros para el hogar",Artículos de plástico y madera para la cocina,05,G21,equipamiento: general,,1.9081610404615768e-05
+A0541303,"Espumadera, cucharón, colador de té, batidor",Artículos de plástico y madera para la cocina,05,G21,equipamiento: general,,2.4522611482357594e-05
+A0541304,"Mamadera, utensilios para bebé",Artículos de plástico y madera para la cocina,05,G21,equipamiento: general,,6.932157882477213e-05
+A0541305,Recipientes para conservar alimentos,Artículos de plástico y madera para la cocina,05,G21,equipamiento: general,,0.00011837983236823446
+A0541306,Otros artículos de plástico,Artículos de plástico y madera para la cocina,05,G21,equipamiento: general,,0.000105991893944899
+A0541307,Otros artículos de madera,Artículos de plástico y madera para la cocina,05,G21,equipamiento: general,,1.9297894400169014e-05
+A0541401,Heladera portátil,Otros artículos no eléctricos de materiales diversos,05,G21,equipamiento: general,,8.877493569916531e-05
+A0541402,"Chango, bolsas, canastos para compras, fundas para ropa",Otros artículos no eléctricos de materiales diversos,05,G21,equipamiento: general,,7.690614947523365e-05
+A0541403,Tabla de planchar,Otros artículos no eléctricos de materiales diversos,05,G21,equipamiento: general,,2.35107459631889e-05
+A0541404,"Otros artículos no eléctricos de materiales diversos: buzón, caja de seguridad, balanza de cocina, purificadores",Otros artículos no eléctricos de materiales diversos,05,G21,equipamiento: general,,0.00016533562287173722
+A0551101,Bomba de agua,Herramientas eléctricas y mecánicas,05,G21,equipamiento: general,,8.346855456246617e-05
+A0551102,"Cortadora de césped, tractores de jardín, bordeadora",Herramientas eléctricas y mecánicas,05,G21,equipamiento: general,,0.000263004673392918
+A0551103,Generador de electricidad,Herramientas eléctricas y mecánicas,05,G21,equipamiento: general,,4.461794138644568e-05
+A0551104,Soldadores eléctricos,Herramientas eléctricas y mecánicas,05,G21,equipamiento: general,,0.0001658879336013904
+A0551105,"Taladro, sierra, pulidora",Herramientas eléctricas y mecánicas,05,G21,equipamiento: general,,0.0002253660327845896
+A0551106,Otras herramientas eléctricas y mecánicas,Herramientas eléctricas y mecánicas,05,G21,equipamiento: general,,0.0003343342312146069
+A0551201,Reparación de herramientas eléctricas y mecánicas,Alquiler y reparación de herramientas eléctricas y mecánicas,05,G21,equipamiento: general,,4.1145962608740195e-05
+A0551202,Alquiler de herramientas eléctricas y mecánicas,Alquiler y reparación de herramientas eléctricas y mecánicas,05,G21,equipamiento: general,,1.878709728096534e-05
+A0552101,Escalera,Herramientas pequeñas y artículos de ferretería para la vivienda y el jardín,05,G21,equipamiento: general,,6.619986242141134e-05
+A0552102,Herramientas de mano,Herramientas pequeñas y artículos de ferretería para la vivienda y el jardín,05,G21,equipamiento: general,,9.676508254372203e-05
+A0552103,Herramientas y accesorios para jardinería,Herramientas pequeñas y artículos de ferretería para la vivienda y el jardín,05,G21,equipamiento: general,,2.1740309394137045e-05
+A0552104,Artículos de ferretería,Herramientas pequeñas y artículos de ferretería para la vivienda y el jardín,05,G21,equipamiento: general,,7.249780607575283e-05
+A0552201,Pilas y baterías para uso general,Materiales eléctricos  y de iluminación,05,G21,equipamiento: general,,0.0002683773199336089
+A0552202,Cables,Materiales eléctricos  y de iluminación,05,G21,equipamiento: general,,0.00018731199196566695
+A0552203,Enchufes e interruptores,Materiales eléctricos  y de iluminación,05,G21,equipamiento: general,,0.00012992770745791167
+A0552204,"Lámpara incandescente, lámpara bajo consumo, tubo fluorescente, halógenas, dicroicas, etc.",Materiales eléctricos  y de iluminación,05,G21,equipamiento: general,,0.0008638246226750137
+A0552205,"Linternas, faroles tipo sol de noche",Materiales eléctricos  y de iluminación,05,G21,equipamiento: general,,5.8566999040657494e-05
+A0552206,Timbres y alarmas,Materiales eléctricos  y de iluminación,05,G21,equipamiento: general,,3.3332138517269736e-05
+A0552207,"Transformadores, estabilizadores, disyuntores, jabalinas",Materiales eléctricos  y de iluminación,05,G21,equipamiento: general,,1.8180345193258945e-05
+A0552208,Otros materiales eléctricos y de iluminación,Materiales eléctricos  y de iluminación,05,G21,equipamiento: general,,0.00023595845695830651
+A0552301,Reparación de herramientas pequeñas,Alquiler y reparación de herramientas pequeñas,05,G21,equipamiento: general,,6.738827767389976e-06
+A0561101,Acondicionadores y suavizantes para ropa,Productos de limpieza ,05,G21,equipamiento: general,,0.000643937845511126
+A0561102,"Apresto, almidón",Productos de limpieza ,05,G21,equipamiento: general,,1.4958328668459002e-05
+A0561103,"Cera, brillo para pisos",Productos de limpieza ,05,G21,equipamiento: general,,9.203484486073097e-05
+A0561104,Crema limpiadora,Productos de limpieza ,05,G21,equipamiento: general,,6.214086776614088e-05
+A0561105,"Desengrasante, desinfectante, líquidos limpiadores",Productos de limpieza ,05,G21,equipamiento: general,,0.0011288155429769022
+A0561106,Desodorante y aromatizante de ambientes/baño,Productos de limpieza ,05,G21,equipamiento: general,,0.0006231493879988247
+A0561107,Detergente líquido para ropa,Productos de limpieza ,05,G21,equipamiento: general,,0.0022305324275829408
+A0561108,Detergente liquido para vajilla,Productos de limpieza ,05,G21,equipamiento: general,,0.0012176375891431146
+A0561109,Insecticidas varios,Productos de limpieza ,05,G21,equipamiento: general,,0.0005224881017711304
+A0561110,Jabón en pan,Productos de limpieza ,05,G21,equipamiento: general,,0.00015254007962264626
+A0561111,Jabón en polvo para ropa,Productos de limpieza ,05,G21,equipamiento: general,,0.001666825494952086
+A0561112,Lavandina,Productos de limpieza ,05,G21,equipamiento: general,,0.0012202741430407972
+A0561113,"Limpiametales, lustramuebles",Productos de limpieza ,05,G21,equipamiento: general,,0.00012035291957052227
+A0561114,Limpiavidrios,Productos de limpieza ,05,G21,equipamiento: general,,2.7830809768539996e-05
+A0561115,Polvo limpiador,Productos de limpieza ,05,G21,equipamiento: general,,4.516311424599162e-05
+A0561116,"Pomada, renovador para calzado",Productos de limpieza ,05,G21,equipamiento: general,,1.539949200066858e-05
+A0561117,Otros artículos de limpieza,Productos de limpieza ,05,G21,equipamiento: general,,0.00012235879956728045
+A0561201,"Balde, palangana, cestos",Utensilios de limpieza ,05,G21,equipamiento: general,,0.00027288039448955385
+A0561202,"Escoba, escobillón, plumero, lampazo, secador y cepillos varios",Utensilios de limpieza ,05,G21,equipamiento: general,,0.0004924580165385175
+A0561203,"Esponja, lana de acero, estropajo",Utensilios de limpieza ,05,G21,equipamiento: general,,0.0001493366967409668
+A0561204,Guantes de goma,Utensilios de limpieza ,05,G21,equipamiento: general,,7.613231788242226e-05
+A0561205,Paños de celulosa,Utensilios de limpieza ,05,G21,equipamiento: general,,2.481135398469528e-05
+A0561206,"Trapo de piso, rejilla, patines, gamuzas",Utensilios de limpieza ,05,G21,equipamiento: general,,0.00014938337617108568
+A0561207,"Otros utensilios de limpieza: pala para recoger basura, tabla de lavar",Utensilios de limpieza ,05,G21,equipamiento: general,,0.00010386822443110676
+A0561301,"Agujas de coser y tejer, alfileres, broches",Otros artículos descartables y otros para el hogar,05,G21,equipamiento: general,,2.8741688489705153e-05
+A0561302,Otros accesorios para coser y tejer,Otros artículos descartables y otros para el hogar,05,G21,equipamiento: general,,4.663060508242167e-05
+A0561303,"Bandejas, platos, vasos y recipientes descartables",Otros artículos descartables y otros para el hogar,05,G21,equipamiento: general,,5.1647782574841005e-05
+A0561304,"Bolsas para freezer, filtro para cafetera",Otros artículos descartables y otros para el hogar,05,G21,equipamiento: general,,2.9460753876672794e-05
+A0561305,"Papel de aluminio, manteca, film para cocina",Otros artículos descartables y otros para el hogar,05,G21,equipamiento: general,,7.223789202684667e-05
+A0561306,Servilletas de papel y rollos de papel,Otros artículos descartables y otros para el hogar,05,G21,equipamiento: general,,0.001117405094909192
+A0561307,"Velas, velones, sahumerios",Otros artículos descartables y otros para el hogar,05,G21,equipamiento: general,,7.190579272925905e-05
+A0561308,Adhesivos varios,Otros artículos descartables y otros para el hogar,05,G21,equipamiento: general,,1.164671024253834e-05
+A0561309,Bolsas para residuos,Otros artículos descartables y otros para el hogar,05,G21,equipamiento: general,,0.00025802468931761344
+A0561310,Fósforos,Otros artículos descartables y otros para el hogar,05,G21,equipamiento: general,,6.098008656520214e-05
+A0561311,"Otros artículos: escarbadientes,  broches, perchas, repuesto filtro de agua, etc.",Otros artículos descartables y otros para el hogar,05,G21,equipamiento: general,,5.3804431202470155e-05
+A0562101,"Servicio doméstico con retiro por hora (sueldo, aguinaldo y viáticos)","Servicio doméstico (limpieza, cocina, planchado y cuidado de niños)",05,EX,trabajo en casas particulares: no es venta gravada,,0.010464029515543203
+A0562102,"Servicio doméstico sin retiro (cama adentro),(sueldo, aguinaldo y viáticos)","Servicio doméstico (limpieza, cocina, planchado y cuidado de niños)",05,EX,trabajo en casas particulares: no es venta gravada,,0.0005429369561515511
+A0562103,Gastos en seguridad social por la contratación del personal doméstico,"Servicio doméstico (limpieza, cocina, planchado y cuidado de niños)",05,EX,trabajo en casas particulares: no es venta gravada,,0.00015186242579465095
+A0562104,"Servicio doméstico con retiro mensual (sueldo, aguinaldo y viáticos)","Servicio doméstico (limpieza, cocina, planchado y cuidado de niños)",05,EX,trabajo en casas particulares: no es venta gravada,,0.0028076595731959773
+A0562105,"Tareas de asistencia y cuidado de personas  (sueldo, aguinaldo y viáticos)","Servicio doméstico (limpieza, cocina, planchado y cuidado de niños)",05,EX,trabajo en casas particulares: no es venta gravada,,0.0025415106427552256
+A0562201,"Jardinero, chofer, mayordomo, etc. (sueldo, aguinaldo y viáticos)","Otros servicios domésticos (jardinero, chofer, mayordomo, etc..)",05,EX,trabajo en casas particulares: no es venta gravada,,0.0009415726102447153
+A0562202,"Gastos en seguridad social por la contratación del personal doméstico  (jardinero, chofer, mayordomo, etc.)","Otros servicios domésticos (jardinero, chofer, mayordomo, etc..)",05,EX,trabajo en casas particulares: no es venta gravada,,2.8419145774399256e-05
+A0562203,"Servicio de seguridad (vigilancia, seguridad privada, servicio de alarma, etc.)","Otros servicios domésticos (jardinero, chofer, mayordomo, etc..)",05,EX,trabajo en casas particulares: no es venta gravada,,0.0007955667743334803
+A0562204,"Indemnizaciones a personas que trabajan en el hogar (domésticos, jardinero, chofer, mayordomo, etc.)","Otros servicios domésticos (jardinero, chofer, mayordomo, etc..)",05,EX,trabajo en casas particulares: no es venta gravada,,0.0
+A0562301,"Limpieza de ropa de cama, blanco y mantelería.","Limpieza de textiles para el hogar (manteles, sábanas, etc..)",05,G21,equipamiento: general,,9.733339540553368e-06
+A0562302,Limpieza de cortinas y alfombras,"Limpieza de textiles para el hogar (manteles, sábanas, etc..)",05,G21,equipamiento: general,,5.98043571629826e-07
+A0562401,Alquiler de textiles para el hogar,Otros servicios para el hogar,05,G21,equipamiento: general,,2.227783235644057e-06
+A0562402,"Alquiler de vajilla (platos, vasos)",Otros servicios para el hogar,05,G21,equipamiento: general,,9.79962486185507e-06
+A0562403,Alquiler de mesas y sillas,Otros servicios para el hogar,05,G21,equipamiento: general,,6.977128742789521e-06
+A0562404,"Fumigación, desratización",Otros servicios para el hogar,05,G21,equipamiento: general,,8.109422669960144e-05
+A0611101,Alergia,Productos farmacéuticos,06,MED,medicamentos (art. 7 f: reventa exenta),,0.0016598067699304462
+A0611102,Antibióticos y antisépticos,Productos farmacéuticos,06,MED,medicamentos (art. 7 f: reventa exenta),,0.0017717348192223816
+A0611103,Anticonceptivos,Productos farmacéuticos,06,MED,medicamentos (art. 7 f: reventa exenta),,0.0005814699241994191
+A0611104,Antiinflamatorios,Productos farmacéuticos,06,MED,medicamentos (art. 7 f: reventa exenta),,0.001082167219286789
+A0611105,Cardíacos,Productos farmacéuticos,06,MED,medicamentos (art. 7 f: reventa exenta),,0.0012259635577773107
+A0611106,Dermatológicos,Productos farmacéuticos,06,MED,medicamentos (art. 7 f: reventa exenta),,0.0010045852513948272
+A0611107,Diabetes,Productos farmacéuticos,06,MED,medicamentos (art. 7 f: reventa exenta),,0.0012041275521039042
+A0611108,Diarrea,Productos farmacéuticos,06,MED,medicamentos (art. 7 f: reventa exenta),,0.0001933809634049902
+A0611109,Digestivos,Productos farmacéuticos,06,MED,medicamentos (art. 7 f: reventa exenta),,0.0013401888262892247
+A0611110,Fiebre o dolor,Productos farmacéuticos,06,MED,medicamentos (art. 7 f: reventa exenta),,0.0028232700798523115
+A0611111,Homeopáticos y hierbas medicinales,Productos farmacéuticos,06,MED,medicamentos (art. 7 f: reventa exenta),,8.351785440671426e-05
+A0611112,"psiquiátricos, nervios",Productos farmacéuticos,06,MED,medicamentos (art. 7 f: reventa exenta),,0.002102872702892647
+A0611113,Oncológicos,Productos farmacéuticos,06,MED,medicamentos (art. 7 f: reventa exenta),,0.00021921402175893037
+A0611114,Presión,Productos farmacéuticos,06,MED,medicamentos (art. 7 f: reventa exenta),,0.0029031160891289896
+A0611115,Productos dietéticos,Productos farmacéuticos,06,MED,medicamentos (art. 7 f: reventa exenta),,7.94826222750125e-05
+A0611116,Tiroides y hormonas,Productos farmacéuticos,06,MED,medicamentos (art. 7 f: reventa exenta),,0.0006390218335061408
+A0611117,Tos,Productos farmacéuticos,06,MED,medicamentos (art. 7 f: reventa exenta),,0.0003224649342999273
+A0611118,Vacunas y sueros,Productos farmacéuticos,06,MED,medicamentos (art. 7 f: reventa exenta),,0.00023392491990293577
+A0611119,Vitaminas o tónicos,Productos farmacéuticos,06,MED,medicamentos (art. 7 f: reventa exenta),,0.0008305741047600731
+A0611120,Otros medicamentos,Productos farmacéuticos,06,MED,medicamentos (art. 7 f: reventa exenta),,0.003655350536479643
+A0612101,"Alcohol, agua oxigenada, antisépticos, desinfectantes",Elementos para los primeros auxilios y otros productos médicos,06,G21,salud: general,,0.00012803217823880342
+A0612102,Algodón,Elementos para los primeros auxilios y otros productos médicos,06,G21,salud: general,,0.0001345286221532666
+A0612103,Gasas y vendas,Elementos para los primeros auxilios y otros productos médicos,06,G21,salud: general,,6.339544126267522e-05
+A0612104,"Jeringas, agujas",Elementos para los primeros auxilios y otros productos médicos,06,G21,salud: general,,1.305890531972051e-05
+A0612105,Preservativos,Elementos para los primeros auxilios y otros productos médicos,06,G21,salud: general,,3.222916433385499e-05
+A0612106,"Tela adhesiva, curitas",Elementos para los primeros auxilios y otros productos médicos,06,G21,salud: general,,4.057187524334661e-05
+A0612107,Termómetro,Elementos para los primeros auxilios y otros productos médicos,06,G21,salud: general,,8.817905733186845e-06
+A0612108,Otros elementos para primeros auxilios,Elementos para los primeros auxilios y otros productos médicos,06,G21,salud: general,,0.00014449208236138976
+A0613101,Limpieza de lentes de contactos,Artefactos y equipos terapéuticos y sus reparaciones,06,G21,salud: general,,3.189683973583413e-05
+A0613102,Anteojos,Artefactos y equipos terapéuticos y sus reparaciones,06,G21,salud: general,,0.0014053419166673452
+A0613103,Lentes de contacto,Artefactos y equipos terapéuticos y sus reparaciones,06,G21,salud: general,,0.000199543503151127
+A0613104,Anticonceptivos mecánicos,Artefactos y equipos terapéuticos y sus reparaciones,06,G21,salud: general,,1.3656916463721111e-05
+A0613105,"Aparatos y accesorios ortopédicos y terapéuticos (silla de ruedas, bastón, plantillas, etc.)",Artefactos y equipos terapéuticos y sus reparaciones,06,G21,salud: general,,5.879001580654595e-05
+A0613106,"Equipo para nebulización, oxígeno, vaporización, tensiómetro, medidor de glucosa, etc.",Artefactos y equipos terapéuticos y sus reparaciones,06,G21,salud: general,,4.228076611695668e-05
+A0613107,"Prótesis dentaria, coronas, perno, aparatos de ortodoncia",Artefactos y equipos terapéuticos y sus reparaciones,06,G21,salud: general,,0.000711200318829735
+A0613108,"Otras prótesis (audífonos, marcapasos, etc.)",Artefactos y equipos terapéuticos y sus reparaciones,06,G21,salud: general,,0.00013336012621772045
+A0613109,"Reparaciones de anteojos, aparatos ortopédicos, nebulizadores",Artefactos y equipos terapéuticos y sus reparaciones,06,G21,salud: general,,2.6716336246592283e-05
+A0621101,Consulta clínica general,Consultas médicas,06,G21,salud: general,,0.0010083662871182488
+A0621102,Consulta cardiología,Consultas médicas,06,G21,salud: general,,0.0002506163396109812
+A0621103,Consulta gastroenterología,Consultas médicas,06,G21,salud: general,,0.00012193984912511092
+A0621104,"Consulta ginecología, obstetricia",Consultas médicas,06,G21,salud: general,,0.00024070662663742534
+A0621105,"Consulta nariz, garganta y oído",Consultas médicas,06,G21,salud: general,,0.00012421434808984987
+A0621106,Consulta oftalmología,Consultas médicas,06,G21,salud: general,,0.00035529236567056165
+A0621107,Consulta pediatría,Consultas médicas,06,G21,salud: general,,0.0003609019860513197
+A0621108,Consulta psiquiatría,Consultas médicas,06,G21,salud: general,,0.0002470538139155528
+A0621109,Otras consultas médicas,Consultas médicas,06,G21,salud: general,,0.0005156640712857566
+A0621110,Compra de chequeras y ordenes para consultas médicas,Consultas médicas,06,EX,coseguros de obra social (art. 7 h.7),,0.00014451842232395787
+A0622101,Consulta odontológica general,Servicios odontológicos,06,G21,salud: general,,0.000931008546307988
+A0622102,Consulta odontológica: extracción,Servicios odontológicos,06,G21,salud: general,,0.00034367863046202415
+A0622103,Consulta odontológica: obturación (arreglo de caries),Servicios odontológicos,06,G21,salud: general,,0.000281802432962411
+A0622104,Tratamiento de conducto,Servicios odontológicos,06,G21,salud: general,,0.0005079865040812041
+A0622105,Implantes dentarios,Servicios odontológicos,06,G21,salud: general,,0.0014260728024045057
+A0622106,"Otras consultas odontológicas (limpieza, blanqueo, etc.)",Servicios odontológicos,06,G21,salud: general,,0.0008530974557591161
+A0622107,Compra de chequeras y ordenes para servicios odontológicos,Servicios odontológicos,06,EX,coseguros de obra social (art. 7 h.7),,0.0001083888167429684
+A0623101,Alquiler de aparatos y accesorios ortopédicos y terapéuticos,Servicios auxiliares para pacientes ambulatorios,06,G21,salud: general,,1.6380036771336138e-05
+A0623102,"Consulta traumatología, reumatología",Servicios auxiliares para pacientes ambulatorios,06,G21,salud: general,,0.000292975661525617
+A0623103,Psicología,Servicios auxiliares para pacientes ambulatorios,06,G21,salud: general,,0.0014072642120588933
+A0623104,Psicopedagogía,Servicios auxiliares para pacientes ambulatorios,06,G21,salud: general,,0.00020368850722811616
+A0623105,Fisioterapia y kinesiología,Servicios auxiliares para pacientes ambulatorios,06,G21,salud: general,,0.00039213820998674933
+A0623106,Fonoaudiología,Servicios auxiliares para pacientes ambulatorios,06,G21,salud: general,,7.52169016116046e-05
+A0623107,Tratamientos oncológicos,Servicios auxiliares para pacientes ambulatorios,06,G21,salud: general,,0.00012013456343169653
+A0623108,Enfermería,Servicios auxiliares para pacientes ambulatorios,06,G21,salud: general,,3.317710603206629e-05
+A0623109,"Análisis de laboratorio comunes (sangre, orina, materia fecal, etc.)",Servicios auxiliares para pacientes ambulatorios,06,G21,salud: general,,0.00047262499105221435
+A0623110,"Análisis de laboratorio complejos (estudio hormonal, anticuerpos, radioinmunoensayos, etc.)",Servicios auxiliares para pacientes ambulatorios,06,G21,salud: general,,0.00022210010382556333
+A0623111,"Estudios radiológicos comunes (radiografía simple sin contraste, electrocardiograma, encefalograma, etc.)",Servicios auxiliares para pacientes ambulatorios,06,G21,salud: general,,0.00017824730491627604
+A0623112,"Estudios radiológicos complejos (ecografía, mamografía, tomografía, centellograma, densitometría ósea, resonancia magnética, ecodoppler, endoscopia, biopsia, etc.)",Servicios auxiliares para pacientes ambulatorios,06,G21,salud: general,,0.0006924930388651676
+A0623113,"Aplicación de inyecciones, presión arterial",Servicios auxiliares para pacientes ambulatorios,06,G21,salud: general,,7.852017460661926e-05
+A0623114,Diálisis,Servicios auxiliares para pacientes ambulatorios,06,G21,salud: general,,2.2409543599247003e-06
+A0623115,Traslado en ambulancia,Servicios auxiliares para pacientes ambulatorios,06,G21,salud: general,,5.8079518126698915e-06
+A0623116,Otros servicios y/o tratamientos para la salud,Servicios auxiliares para pacientes ambulatorios,06,G21,salud: general,,0.0008217181333408223
+A0623117,Compra de chequeras y ordenes para servicios auxiliares ,Servicios auxiliares para pacientes ambulatorios,06,EX,coseguros de obra social (art. 7 h.7),,0.0001083888167429684
+A0623118,Otros gastos,Servicios auxiliares para pacientes ambulatorios,06,G21,salud: general,,0.0002667319012347523
+A0631101,Cirugía con internación,"Internaciones, cirugías y partos",06,G21,salud: general,,0.0005563206731719812
+A0631102,Cirugía sin internación,"Internaciones, cirugías y partos",06,G21,salud: general,,0.0005807238798675663
+A0631103,Internación,"Internaciones, cirugías y partos",06,G21,salud: general,,3.6890146966815624e-05
+A0631104,"Internación diurna (incluye análisis, radiografía y otros estudios)","Internaciones, cirugías y partos",06,G21,salud: general,,9.619711159144684e-06
+A0631105,Parto,"Internaciones, cirugías y partos",06,G21,salud: general,,1.529344600292548e-05
+A0641101,Cuota de afiliación voluntaria a un sistema de salud (prepaga),Seguros relacionados con la salud,06,G105,medicina prepaga (art. 28; no verificado),,0.017817675673072495
+A0641102,Cuota adicional a la obra social obligatoria,Seguros relacionados con la salud,06,G105,medicina prepaga (art. 28; no verificado),,0.004366987683987323
+A0641103,Cuota de emergencia médica,Seguros relacionados con la salud,06,G105,medicina prepaga (art. 28; no verificado),,0.0007181441899581561
+A0711101,Compra de  automóvil,Compra de automóviles.,07,G21,transporte: general,vehiculos,0.03904484412111944
+A0711102,Compra de camión u ómnibus,Compra de automóviles.,07,G21,transporte: general,vehiculos,0.00017792798546420384
+A0711103,Compra de camioneta o combi,Compra de automóviles.,07,G21,transporte: general,vehiculos,0.007170809495692393
+A0711201,Venta de  automóvil,Venta de automóviles.,07,G21,transporte: general,,-0.016814107215873304
+A0711202,Venta de camión u ómnibus,Venta de automóviles.,07,G21,transporte: general,,-1.5980107468690945e-05
+A0711203,Venta de camioneta o combi,Venta de automóviles.,07,G21,transporte: general,,-0.0012989249686649936
+A0712101,"Compra de motocicleta, ciclomotor, cuatriciclo",Compra de motocicletas,07,G21,transporte: general,,0.002247345155960079
+A0712201,"Venta de motocicleta, ciclomotor, cuatriciclo",Venta de motocicletas,07,G21,transporte: general,,-0.0007300148959537633
+A0713101,Compra de bicicleta para adulto,Compra de bicicletas,07,G21,transporte: general,,0.00031077471384520467
+A0713201,Venta de bicicleta para adulto,Venta de bicicletas,07,G21,transporte: general,,-3.5680717024913975e-05
+A0714101,"Compra de vehículos de tracción a sangre: sulky, carro, etc. y caballo para transporte, etc.",Compra de otros vehículos,07,G21,transporte: general,,5.208312286273572e-05
+A0714102,Compra de otros vehículos,Compra de otros vehículos,07,G21,transporte: general,,0.00028946273635674786
+A0714201,"Venta de vehículos de tracción a sangre: sulky, carro, etc. y caballo para transporte, etc.",Venta de otros vehículos,07,G21,transporte: general,,-1.878497869598739e-05
+A0714202,Venta de otros vehículos,Venta de otros vehículos,07,G21,transporte: general,,-0.00016187722936985928
+A0721101,Baterías,Piezas de repuesto y accesorios para equipo de transporte personal,07,G21,transporte: general,,0.0003096846345972318
+A0721102,Bujías,Piezas de repuesto y accesorios para equipo de transporte personal,07,G21,transporte: general,,4.9138845886077474e-05
+A0721103,"Cubiertas, neumáticos",Piezas de repuesto y accesorios para equipo de transporte personal,07,G21,transporte: general,,0.0009221590394496861
+A0721104,Equipos de gas y su instalación,Piezas de repuesto y accesorios para equipo de transporte personal,07,G21,transporte: general,,0.00012071617329518732
+A0721105,"Accesorios varios (matafuegos, balizas, portaequipaje, alarma, etc.)",Piezas de repuesto y accesorios para equipo de transporte personal,07,G21,transporte: general,,4.833681656128677e-05
+A0721106,Repuestos y accesorios para el vehículo de uso del hogar,Piezas de repuesto y accesorios para equipo de transporte personal,07,G21,transporte: general,,0.00034002301315168206
+A0721107,"Productos de limpieza y conservación para el vehículo de uso del hogar: fundas, cubreautos, espumas, etc.",Piezas de repuesto y accesorios para equipo de transporte personal,07,G21,transporte: general,,3.323418545451898e-05
+A0722102,Nafta súper,Nafta,07,G21,transporte: general,,0.04218806454300977
+A0722103,Nafta premium,Nafta,07,G21,transporte: general,,0.00982594721120038
+A0722201,"Diesel, gasoil",Diesel,07,G21,transporte: general,,0.007368149547285601
+A0722202,Diesel premium,Diesel,07,G21,transporte: general,,0.0017922504985877915
+A0722301,"Gas natural comprimido, GNC",GNC,07,G21,transporte: general,,0.003467016071517432
+A0722401,Otros gastos en combustibles,Otros combustibles ,07,G21,transporte: general,,0.00015229883570633604
+A0723101,"Cambio y/o compra de aceite, lubricantes",Conservación y reparación de equipos de transporte personal,07,G21,transporte: general,,0.004385516598519336
+A0723102,Balanceo de ruedas,Conservación y reparación de equipos de transporte personal,07,G21,transporte: general,,0.00022227163992223856
+A0723103,Chapa y pintura,Conservación y reparación de equipos de transporte personal,07,G21,transporte: general,,0.0005012242553306691
+A0723104,Inspección técnica,Conservación y reparación de equipos de transporte personal,07,G21,transporte: general,,0.00038479124288973425
+A0723105,"Lavado, engrase",Conservación y reparación de equipos de transporte personal,07,G21,transporte: general,,0.001239023255209409
+A0723106,Reparaciones diversas y sus repuestos,Conservación y reparación de equipos de transporte personal,07,G21,transporte: general,,0.002919461418138749
+A0724101,Alquiler de la cochera,Otros servicios relativos al equipo de transporte personal,07,G21,transporte: general,,0.0018779636423729776
+A0724102,Guardería de embarcación,Otros servicios relativos al equipo de transporte personal,07,G21,transporte: general,,4.0986611279760436e-05
+A0724103,Estacionamiento mensual,Otros servicios relativos al equipo de transporte personal,07,G21,transporte: general,,0.00030051542985796997
+A0724104,Estacionamiento por hora y/o estadía,Otros servicios relativos al equipo de transporte personal,07,G21,transporte: general,,0.0005454743781162482
+A0724105,Lecciones para conducir,Otros servicios relativos al equipo de transporte personal,07,G21,transporte: general,,3.7941727987396915e-05
+A0724106,Obtención de licencia de conducir,Otros servicios relativos al equipo de transporte personal,07,G21,transporte: general,,0.00010655439902837134
+A0724107,"Abono de peaje, telepeaje",Otros servicios relativos al equipo de transporte personal,07,G21,transporte: general,,0.0005509102073220284
+A0724108,Peaje diario,Otros servicios relativos al equipo de transporte personal,07,G21,transporte: general,,0.0010169921437727459
+A0724109,Alquiler de autos sin chofer,Otros servicios relativos al equipo de transporte personal,07,G21,transporte: general,,7.710408278582055e-06
+A0724110,Localización de vehículos,Otros servicios relativos al equipo de transporte personal,07,G21,transporte: general,,5.230308063822246e-05
+A0724111,"Otros gastos por viajes de turismo, negocios, etc. (alquiler de bicicletas, motos, etc.)",Otros servicios relativos al equipo de transporte personal,07,G21,transporte: general,,0.00010004177433385627
+A0731101,Abono de tren corta distancia,Transporte ferroviario de pasajeros,07,EX,transporte urbano de pasajeros y taxis (art. 7 h.12),,1.0133130980076975e-05
+A0731102,Boleto de tren de media y larga distancia,Transporte ferroviario de pasajeros,07,G105,transporte de pasajeros de larga distancia (art. 28),,4.637024832054624e-05
+A0731103,Boleto tren corta distancia,Transporte ferroviario de pasajeros,07,EX,transporte urbano de pasajeros y taxis (art. 7 h.12),,0.0008445283304852527
+A0731104,Subterráneo,Transporte ferroviario de pasajeros,07,EX,transporte urbano de pasajeros y taxis (art. 7 h.12),,0.000850811244459811
+A0732101,Abono de colectivo urbano o suburbano,Transporte automotor de pasajeros ,07,EX,transporte urbano de pasajeros y taxis (art. 7 h.12),,0.000392385920830956
+A0732102,"Abono mensual de chárter (combi, ómnibus)",Transporte automotor de pasajeros ,07,EX,transporte urbano de pasajeros y taxis (art. 7 h.12),,0.00014920858026805302
+A0732103,"Pasaje diario en chárter (combi, ómnibus)",Transporte automotor de pasajeros ,07,EX,transporte urbano de pasajeros y taxis (art. 7 h.12),,0.0003798574868408861
+A0732104,Boleto de colectivo urbano o suburbano,Transporte automotor de pasajeros ,07,EX,transporte urbano de pasajeros y taxis (art. 7 h.12),,0.014925044889702066
+A0732105,Ómnibus de media y larga distancia dentro del país,Transporte automotor de pasajeros ,07,G105,transporte de pasajeros de larga distancia (art. 28),,0.001172304958029371
+A0732106,"Remis, alquiler de auto con chofer",Transporte automotor de pasajeros ,07,EX,transporte urbano de pasajeros y taxis (art. 7 h.12),,0.003924220556575064
+A0732107,Taxi,Transporte automotor de pasajeros ,07,EX,transporte urbano de pasajeros y taxis (art. 7 h.12),,0.0027218194192313635
+A0732108,Transporte escolar mensual,Transporte automotor de pasajeros ,07,EX,transporte urbano de pasajeros y taxis (art. 7 h.12),,0.0007265525414771932
+A0732109,"Otros abonos (remis, taxi)",Transporte automotor de pasajeros ,07,EX,transporte urbano de pasajeros y taxis (art. 7 h.12),,0.00019332107841099188
+A0732110,Pasaje de larga distancia en charter o combi,Transporte automotor de pasajeros ,07,EX,transporte urbano de pasajeros y taxis (art. 7 h.12),,6.28010683211527e-05
+A0732111,Ómnibus de media y larga distancia internacional,Transporte automotor de pasajeros ,07,EX,transporte internacional (art. 7 h.13),,0.000145649394050149
+A0733101,Pasajes de avión de cabotaje,Transporte aéreo de pasajeros ,07,G105,transporte de pasajeros de larga distancia (art. 28),,0.0008758143201860633
+A0733102,Pasajes de avión internacional,Transporte aéreo de pasajeros ,07,EX,transporte internacional (art. 7 h.13),,0.003966580887408099
+A0734101,Abono de lancha,Transporte acuático de pasajeros,07,EX,transporte urbano de pasajeros y taxis (art. 7 h.12),,4.056310605014921e-05
+A0734102,"Pasaje de buque, lancha y aliscafo dentro del país",Transporte acuático de pasajeros,07,G105,transporte de pasajeros de larga distancia (art. 28),,1.7996246028499103e-05
+A0734103,"Pasaje de buque, lancha y aliscafo internacional",Transporte acuático de pasajeros,07,EX,transporte internacional (art. 7 h.13),,5.420753633945178e-05
+A0735101,Otros transportes públicos,Transporte combinado de pasajeros,07,EX,transporte urbano de pasajeros y taxis (art. 7 h.12),,3.0379895965893493e-05
+A0735102,Compra de tarjeta recargable de transporte público,Transporte combinado de pasajeros,07,EX,transporte urbano de pasajeros y taxis (art. 7 h.12),,2.2705046626048732e-05
+A0736101,"Servicio de mudanza, flete, guardamuebles",Otros servicios de transporte,07,EX,transporte público de pasajeros (art. 7 h.12),,0.00029412862448050024
+A0811101,Servicios  de mensajería,Servicios postales,08,G21,general,,1.5499824799024593e-05
+A0811102,"Estampilla postal, envío de cartas, postales",Servicios postales,08,G21,general,,6.721962014249837e-06
+A0811103,"Telegrama, telex",Servicios postales,08,G21,general,,0.0
+A0811104,Otros servicios postales,Servicios postales,08,G21,general,,3.601156496932085e-05
+A0821101,Equipos fijos de teléfono y de fax,Equipos telefónicos y de facsímile,08,G21,general,,0.0006271627483321282
+A0821102,Equipos móviles de teléfono celular,Equipos telefónicos y de facsímile,08,G21,general,,0.0048282522660150675
+A0821103,Accesorios de equipos telefónicos fijos,Equipos telefónicos y de facsímile,08,G21,general,,8.766905302439732e-05
+A0821104,Accesorios para equipos de telefonía móvil,Equipos telefónicos y de facsímile,08,G21,general,,4.329702436669644e-05
+A0821105,Reparaciones de equipos telefónicos y de fax,Equipos telefónicos y de facsímile,08,G21,general,,8.096204258130864e-05
+A0831101,Servicio de teléfono fijo en el hogar,Servicio de teléfonos fijos,08,G21,general,,0.006871195367773941
+A0831102,Tarjetas para teléfono fijo en el hogar,Servicio de teléfonos fijos,08,G21,general,,5.427278574861633e-05
+A0831103,"Instalaciones de telefonía fija, habilitaciones, etc.",Servicio de teléfonos fijos,08,G21,general,,2.9762649216309422e-05
+A0831104,Servicio de teléfono de la vivienda secundaria,Servicio de teléfonos fijos,08,G21,general,,4.227643999693732e-05
+A0831201,Abono a celular con factura fija,Servicio de telefonía móvil,08,G21,general,telefonia,0.019212688504105416
+A0831202,Abono a celular con factura libre,Servicio de telefonía móvil,08,G21,general,telefonia,0.0014829172642327874
+A0831203,Tarjetas o recarga virtual para teléfonos móviles,Servicio de telefonía móvil,08,G21,general,telefonia,0.004010452899366617
+A0831301,Conexión a Internet desde teléfono fijo,Otros servicios telefónicos,08,G21,general,,0.0006791415314757942
+A0831302,Conexión a Internet por cable,Otros servicios telefónicos,08,G21,general,,0.0012426022880018385
+A0831303,Conexión a Internet satelital,Otros servicios telefónicos,08,G21,general,,0.0014315716751834842
+A0831304,Conexión a Internet móvil,Otros servicios telefónicos,08,G21,general,,0.00023757948854956495
+A0831305,Recarga de paquete de datos (Internet móvil),Otros servicios telefónicos,08,G21,general,,3.1725214774225847e-06
+A0831306,"Conexión a Internet desde locutorio, cabinas, etc.",Otros servicios telefónicos,08,G21,general,,5.702025744117059e-06
+A0831307,Internet Banda Ancha,Otros servicios telefónicos,08,G21,general,,0.01034383171297731
+A0831308,"Tarjetas telefónicas para larga distancia, llamadas desde locutorios, teléfonos públicos, envío y recepción de",Otros servicios telefónicos,08,G21,general,,3.189995905159128e-06
+A0911101,"Radio, equipo de música, GPS  para el vehículo de uso del hogar",Equipos de TV y reproductores audiovisuales.,09,G21,esparcimiento: general,,4.497295676979755e-05
+A0911102,Televisor,Equipos de TV y reproductores audiovisuales.,09,G21,esparcimiento: general,,0.00417608930186683
+A0911103,"Reproductor de DVD, Blue Ray (incluye portátil)",Equipos de TV y reproductores audiovisuales.,09,G21,esparcimiento: general,,2.0839746043080918e-05
+A0911104,"Otros equipos para TV, DVD: home cinema, home teather, etc.)",Equipos de TV y reproductores audiovisuales.,09,G21,esparcimiento: general,,3.167976379430881e-05
+A0911105,"Accesorios para TV, DVD: conectividad, control remoto, etc.",Equipos de TV y reproductores audiovisuales.,09,G21,esparcimiento: general,,1.4179612980544152e-05
+A0911106,"Blu ray , DVD, CD rom etc.",Equipos de TV y reproductores audiovisuales.,09,G21,esparcimiento: general,,8.81954865425504e-06
+A0911107,Consola de sonido,Equipos de TV y reproductores audiovisuales.,09,G21,esparcimiento: general,,2.767765921469337e-05
+A0911201,"Radio, radiograbador, radiodespertador","Equipos de radio, minicomponentes, etc..",09,G21,esparcimiento: general,,4.613285711646286e-05
+A0911202,"Equipo musical, minicomponente, microcomponente, etc.","Equipos de radio, minicomponentes, etc..",09,G21,esparcimiento: general,,0.0003900387551352013
+A0911203,"Reproductor multimedia: Ipod, grabador","Equipos de radio, minicomponentes, etc..",09,G21,esparcimiento: general,,3.319067293256922e-05
+A0911204,"Accesorios para audio: auriculares, conectividad, etc.","Equipos de radio, minicomponentes, etc..",09,G21,esparcimiento: general,,8.037586921237684e-05
+A0912101,Cámaras y accesorios (teleobjetivo),"Equipo fotográfico, videocámaras, de filmación y proyección e instrumentos ópticos",09,G21,esparcimiento: general,,7.518868777840771e-05
+A0912102,Cámara digital,"Equipo fotográfico, videocámaras, de filmación y proyección e instrumentos ópticos",09,G21,esparcimiento: general,,0.00011558301223158977
+A0912103,"Videocámara, filmadora, proyectores de películas","Equipo fotográfico, videocámaras, de filmación y proyección e instrumentos ópticos",09,G21,esparcimiento: general,,2.4548780900068563e-05
+A0912104,"Instrumentos ópticos: microscopio, telescopio, binoculares","Equipo fotográfico, videocámaras, de filmación y proyección e instrumentos ópticos",09,G21,esparcimiento: general,,1.058885918855498e-06
+A0912105,"Otros equipos fotográficos de filmación, proyección  e instrumentos ópticos","Equipo fotográfico, videocámaras, de filmación y proyección e instrumentos ópticos",09,G21,esparcimiento: general,,2.335305766533538e-05
+A0913101,"Computadora de escritorio, CPU","Equipos de computación, calculadoras, agendas electrónicas y accesorios",09,G105,informática (Dto. 493/2001; no verificado),,0.00038720779020681126
+A0913102,"Computadora personal: notebook, netbook","Equipos de computación, calculadoras, agendas electrónicas y accesorios",09,G105,informática (Dto. 493/2001; no verificado),,0.0012366864016687242
+A0913103,"Impresora, escáner, multifunción","Equipos de computación, calculadoras, agendas electrónicas y accesorios",09,G105,informática (Dto. 493/2001; no verificado),,0.00015664669557995158
+A0913104,"Mouse, teclado, cables, filtro, placas de red, webcam, parlantes, auriculares, etc.","Equipos de computación, calculadoras, agendas electrónicas y accesorios",09,G105,informática (Dto. 493/2001; no verificado),,6.0935209590912434e-05
+A0913105,Software,"Equipos de computación, calculadoras, agendas electrónicas y accesorios",09,G21,esparcimiento: general,,4.425343559768042e-06
+A0913106,"Disco rígido, grabadora, lectora, memoria, placa de sonido, router, modem, etc.","Equipos de computación, calculadoras, agendas electrónicas y accesorios",09,G105,informática (Dto. 493/2001; no verificado),,5.0884073565750045e-05
+A0913107,"Lector digital de libros, tabletas","Equipos de computación, calculadoras, agendas electrónicas y accesorios",09,G21,esparcimiento: general,,0.0001530621610823388
+A0913108,Monitor,"Equipos de computación, calculadoras, agendas electrónicas y accesorios",09,G105,informática (Dto. 493/2001; no verificado),,3.0077605107032122e-05
+A0913109,"Otros equipos de computación, calculadora y accesorios varios","Equipos de computación, calculadoras, agendas electrónicas y accesorios",09,G21,esparcimiento: general,,3.700956910092251e-05
+A0913110,disco externo,"Equipos de computación, calculadoras, agendas electrónicas y accesorios",09,G105,informática (Dto. 493/2001; no verificado),,2.4590103535640947e-05
+A0914101,"Casetes vírgenes para video, audio, películas para filmar",Elementos para grabar.,09,G21,esparcimiento: general,,8.151962188917285e-07
+A0914102,Pendrive y tarjetas de memoria,Elementos para grabar.,09,G21,esparcimiento: general,,0.0002090139261005987
+A0914103,"Cartucho, tonner, cinta para impresora",Elementos para grabar.,09,G21,esparcimiento: general,,0.0002493364372152444
+A0914104,Rollo fotográfico (excluye revelado),Elementos para grabar.,09,G21,esparcimiento: general,,4.8203423644752035e-06
+A0914105,Otros medios para grabación,Elementos para grabar.,09,G21,esparcimiento: general,,3.296539659284856e-06
+A0914201,"Casetes y discos grabados, vinilos",Elementos grabados.,09,G21,esparcimiento: general,,1.0272481073407516e-05
+A0914202,CD grabados,Elementos grabados.,09,G21,esparcimiento: general,,1.957763944248187e-05
+A0914203,DVD grabados,Elementos grabados.,09,G21,esparcimiento: general,,4.0474633616625136e-05
+A0914204,Películas grabadas,Elementos grabados.,09,G21,esparcimiento: general,,3.510556615227165e-05
+A0915101,"Reparación de equipos de TV, video casetera, etc.","Reparación de equipos audio-visuales, fotográficos y de procesamiento de información",09,G21,esparcimiento: general,,6.534537847352389e-05
+A0915102,"Reparación de equipos de radio, minicomponentes, etc.","Reparación de equipos audio-visuales, fotográficos y de procesamiento de información",09,G21,esparcimiento: general,,6.480630041906384e-06
+A0915103,"Reparación de equipos fotográficos, videocámaras, de filmación y proyección  e instrumentos ópticos","Reparación de equipos audio-visuales, fotográficos y de procesamiento de información",09,G21,esparcimiento: general,,3.866553793457738e-06
+A0915104,"Reparación de equipos de computación, calculadora, etc.","Reparación de equipos audio-visuales, fotográficos y de procesamiento de información",09,G21,esparcimiento: general,,7.573643641610641e-05
+A0921101,"Botes, lanchas, motores fuera de borda, velas, etc.",Equipos relacionados con la recreación y el deporte en exteriores,09,G21,esparcimiento: general,,9.95730313680426e-05
+A0921102,"Caballos y ponis, vehículos de tracción a sangre",Equipos relacionados con la recreación y el deporte en exteriores,09,G21,esparcimiento: general,,1.859958066562532e-05
+A0921103,"Canoas, kayac, tablas de surf a vela",Equipos relacionados con la recreación y el deporte en exteriores,09,G21,esparcimiento: general,,1.2705254547404569e-05
+A0921104,Casas rodantes y remolques,Equipos relacionados con la recreación y el deporte en exteriores,09,G21,esparcimiento: general,,8.172521992672435e-05
+A0921105,"Aeroplanos, aeronaves ligeras, planeadores, etc.",Equipos relacionados con la recreación y el deporte en exteriores,09,G21,esparcimiento: general,,0.0
+A0921201,"Máquinas de pin ball, máquinas para juegos, etc.",Equipos relacionados con la recreación y el deporte en interiores,09,G21,esparcimiento: general,,1.0847866456311432e-07
+A0921202,"Mesas de billar, mesas de ping pong",Equipos relacionados con la recreación y el deporte en interiores,09,G21,esparcimiento: general,,9.943106592311327e-06
+A0921203,Otros equipos duraderos para la recreación,Equipos relacionados con la recreación y el deporte en interiores,09,G21,esparcimiento: general,,2.424319539690482e-05
+A0922101,"Batería, tumbadora, bombo",Instrumentos musicales,09,G21,esparcimiento: general,,5.326497748184587e-05
+A0922102,"Guitarra, bajo",Instrumentos musicales,09,G21,esparcimiento: general,,7.411966536230585e-05
+A0922103,"Piano, órgano",Instrumentos musicales,09,G21,esparcimiento: general,,1.593066114065981e-05
+A0922104,"Trompeta, clarinete, flauta, flauta dulce, armónica",Instrumentos musicales,09,G21,esparcimiento: general,,8.82645739081064e-06
+A0922105,Otros instrumentos musicales,Instrumentos musicales,09,G21,esparcimiento: general,,5.950600453710051e-05
+A0923101,Reparación de equipos duraderos para la recreación,Reparación de equipos para la recreación,09,G21,esparcimiento: general,,1.4785441521865869e-05
+A0923102,Reparación de instrumentos musicales,Reparación de equipos para la recreación,09,G21,esparcimiento: general,,1.4481531642708168e-05
+A0931101,"Juegos de salón: dados, ludo, cartas, etc.","Juegos, juguetes y aficiones",09,G21,esparcimiento: general,,0.00017400156107246541
+A0931102,Consola de videojuegos,"Juegos, juguetes y aficiones",09,G21,esparcimiento: general,,0.0015396116163131199
+A0931103,"Video juegos y accesorios: CD, DVD, cartuchos para juegos electrónicos, etc.","Juegos, juguetes y aficiones",09,G21,esparcimiento: general,,0.0004844728293418456
+A0931104,"Juguetes a cuerda, a fricción, eléctricos o a pilas","Juegos, juguetes y aficiones",09,G21,esparcimiento: general,,0.0005678411670041395
+A0931105,Juguetes para armar,"Juegos, juguetes y aficiones",09,G21,esparcimiento: general,,0.000395756867962016
+A0931106,Juguetes para bebé: sonajero,"Juegos, juguetes y aficiones",09,G21,esparcimiento: general,,0.00030051549430010487
+A0931107,Muñecos/as,"Juegos, juguetes y aficiones",09,G21,esparcimiento: general,,0.0006859143289219411
+A0931108,"Bicicleta (excepto para adulto) triciclo, zapatilla, monopatín, otros rodados","Juegos, juguetes y aficiones",09,G21,esparcimiento: general,,0.00133505538963495
+A0931109,"Entretenimientos varios: artículos de colección (estampillas, etc.), figuritas y álbumes, materiales de artesaní","Juegos, juguetes y aficiones",09,G21,esparcimiento: general,,0.00015904925085062364
+A0931110,"Máscaras, disfraces, etc.","Juegos, juguetes y aficiones",09,G21,esparcimiento: general,,8.157017009418649e-05
+A0931111,"Adornos de navidad (guirnaldas, luces, etc.)","Juegos, juguetes y aficiones",09,G21,esparcimiento: general,,7.987493437403697e-05
+A0931112,Otros juegos y juguetes,"Juegos, juguetes y aficiones",09,G21,esparcimiento: general,,0.0008534712518485798
+A0931113,Reparación de juegos y juguetes,"Juegos, juguetes y aficiones",09,G21,esparcimiento: general,,5.1922820642832276e-05
+A0932101,"Calzado deporte varios: botines para fútbol, zapatos de golf, botas de esquí, calzados de patinaje, ruedas, clavos,","Equipos para el deporte, campamento y recreación al aire libre",09,G21,esparcimiento: general,,0.002346223205438275
+A0932102,"Pelota para deporte varios: fútbol, rugby","Equipos para el deporte, campamento y recreación al aire libre",09,G21,esparcimiento: general,,0.00017622810731466665
+A0932103,"Paleta, raqueta, palos de golf, : palos de hockey","Equipos para el deporte, campamento y recreación al aire libre",09,G21,esparcimiento: general,,0.00017620326850175498
+A0932104,"Tobillera, rodillera, muñequera, canillera, guantes, anteojeras, antiparras, etc","Equipos para el deporte, campamento y recreación al aire libre",09,G21,esparcimiento: general,,0.00015127926411572236
+A0932105,"Aparatos para gimnasia: pesas, discos, colchonetas, etc.","Equipos para el deporte, campamento y recreación al aire libre",09,G21,esparcimiento: general,,0.0003832386612086014
+A0932106,"Armas de fuego y municiones para caza, deporte y protección personal","Equipos para el deporte, campamento y recreación al aire libre",09,G21,esparcimiento: general,,5.100437565945765e-05
+A0932107,"Artículos de caza, pesca, náutica, esquí, buceo, paracaídas: caña, equipo de neoprene, patas de rana, cantimplora, p","Equipos para el deporte, campamento y recreación al aire libre",09,G21,esparcimiento: general,,0.0001231003472480704
+A0932108,"Carpas, bolsas de dormir, colchones inflables, mochila para campamento y andinismo","Equipos para el deporte, campamento y recreación al aire libre",09,G21,esparcimiento: general,,0.0001051290484854478
+A0932109,"Otros artículos deportivos, de campamento y recreación, etc.","Equipos para el deporte, campamento y recreación al aire libre",09,G21,esparcimiento: general,,5.623546114085939e-05
+A0932110,"Reparación de artículos para el deporte, campamento y recreación","Equipos para el deporte, campamento y recreación al aire libre",09,G21,esparcimiento: general,,2.2253256966014492e-05
+A0932111,"Equipos de protección para deportes: chalecos salvavidas, acolchados para el cuerpo, cinturones, soportes, etc.","Equipos para el deporte, campamento y recreación al aire libre",09,G21,esparcimiento: general,,5.7966448843453595e-05
+A0932112,"Equipos para juegos de playas y al aire libre, voleibol, discos, botes, balsas y piscinas inflables, arco de fútbol,","Equipos para el deporte, campamento y recreación al aire libre",09,G21,esparcimiento: general,,0.00015497120413838147
+A0933101,Flores y plantas naturales,"Plantas, flores y artículos para jardinería",09,G21,esparcimiento: general,,0.0005991950664862223
+A0933102,Tierra y fertilizantes,"Plantas, flores y artículos para jardinería",09,G21,esparcimiento: general,,0.00012185353971144066
+A0933103,Flores y plantas artificiales,"Plantas, flores y artículos para jardinería",09,G21,esparcimiento: general,,3.338446964276527e-05
+A0933104,"Otros artículos para jardinería: macetas, portamacetas, etc","Plantas, flores y artículos para jardinería",09,G21,esparcimiento: general,,0.00017820519297698763
+A0934101,Compra de mascota,"Mascota, servicios veterinarios y productos conexos.",09,G21,esparcimiento: general,,0.00021560728888746268
+A0934102,Alimento para mascota,"Mascota, servicios veterinarios y productos conexos.",09,G21,esparcimiento: general,,0.007831716940768141
+A0934103,Artículos relativos a mascotas,"Mascota, servicios veterinarios y productos conexos.",09,G21,esparcimiento: general,,0.0004583079810151352
+A0935101,"Servicios veterinarios (consultas, vacunas, internación, etc.)","Mascota, servicios veterinarios y productos conexos.",09,G21,esparcimiento: general,,0.0014969514537125307
+A0935102,"Otros servicios para mascotas (paseador de perros, peluquería, educación, alojamiento, etc.)","Mascota, servicios veterinarios y productos conexos.",09,G21,esparcimiento: general,,0.00040757866436896893
+A0941101,"Alquiler de equipos y accesorios para deportes: aeroplanos, botes, caballos, de equipo de esquí y campamento, etc.",Servicios recreativos y deportivos,09,G21,esparcimiento: general,,0.00021115268615697557
+A0941102,"Alquiler de cancha de fútbol, tenis, paddle",Servicios recreativos y deportivos,09,G21,esparcimiento: general,,0.0002239539138683092
+A0941103,Colonia de vacaciones,Servicios recreativos y deportivos,09,G21,esparcimiento: general,,0.00019558101203975806
+A0941104,"Cuota de club deportivo y sus actividades (pileta, tenis, etc.)",Servicios recreativos y deportivos,09,EX,cuotas de entidades sin fines de lucro,,0.0026077677900583486
+A0941105,Cuota de gimnasio,Servicios recreativos y deportivos,09,G21,esparcimiento: general,,0.0021554598962054373
+A0941106,"Entrada a espectáculos deportivos: fútbol, tenis, hipódromo, etc.",Servicios recreativos y deportivos,09,G21,esparcimiento: general,,0.0003762378870852588
+A0941107,Fichas y tarjetas para juegos,Servicios recreativos y deportivos,09,G21,esparcimiento: general,,8.492787484839598e-05
+A0941108,"Lecciones en grupo o individual: esquí, natación, equitación, baile (tango), etc.  Escuela de fútbol",Servicios recreativos y deportivos,09,G21,esparcimiento: general,,0.001263030047397175
+A0941109,"Otros servicios deportivos: guías, guardarropa, inscripción para competencia, pista de esquí, aerosilla, etc.",Servicios recreativos y deportivos,09,G21,esparcimiento: general,,2.6053334488993154e-05
+A0941110,"Alquiler de calzado para deportes: botas de esquí, botines de futbol, zapatos de golf, patines, etc.",Servicios recreativos y deportivos,09,G21,esparcimiento: general,,4.96262263139952e-06
+A0941111,"Enseñanza artística (danzas, guitarra, pintura, canto, etc.)",Servicios recreativos y deportivos,09,G21,esparcimiento: general,,0.0013625071383684757
+A0942101,Televisión por cable o satelital,"Cines, teatros, conciertos, variedades de espectáculos de sonidos y luces",09,G21,esparcimiento: general,,0.02007001155959105
+A0942102,"Alquiler de películas de video, DVD, video juegos","Cines, teatros, conciertos, variedades de espectáculos de sonidos y luces",09,G21,esparcimiento: general,,4.770677588529167e-06
+A0942103,Revelado y copia de películas fotográficas,"Cines, teatros, conciertos, variedades de espectáculos de sonidos y luces",09,G21,esparcimiento: general,,2.140630227525973e-05
+A0942104,"Fotografías (foto carnet, foto escolar)","Cines, teatros, conciertos, variedades de espectáculos de sonidos y luces",09,G21,esparcimiento: general,,2.999977339994153e-05
+A0942105,"Alquiler de equipos de televisión, video, etc.","Cines, teatros, conciertos, variedades de espectáculos de sonidos y luces",09,G21,esparcimiento: general,,2.7587401676208258e-05
+A0942106,"Café concert, baile","Cines, teatros, conciertos, variedades de espectáculos de sonidos y luces",09,G21,esparcimiento: general,,0.0008704183339826759
+A0942107,Cine,"Cines, teatros, conciertos, variedades de espectáculos de sonidos y luces",09,G21,esparcimiento: general,,0.0017130962138897277
+A0942108,"Parque de diversiones, circo, zoológico, centro recreativo, exposiciones","Cines, teatros, conciertos, variedades de espectáculos de sonidos y luces",09,G21,esparcimiento: general,,0.00024255992676491337
+A0942109,"Teatro, concierto","Cines, teatros, conciertos, variedades de espectáculos de sonidos y luces",09,EX,espectáculos teatrales (art. 7 h.10),,0.0010138882055120038
+A0942110,Otros servicios recreativos y culturales,"Cines, teatros, conciertos, variedades de espectáculos de sonidos y luces",09,G21,esparcimiento: general,,5.714568541520129e-05
+A0942111,"Servicios de transmisión continua de videos, música, películas por Internet (streaming)","Cines, teatros, conciertos, variedades de espectáculos de sonidos y luces",09,G21,esparcimiento: general,,0.0005544704991305294
+A0942112,"Fiesta (salón, orquesta, animación, cotillón, fotografía, filmación, comida, bebida, arreglos florales, etc.)","Cines, teatros, conciertos, variedades de espectáculos de sonidos y luces",09,G21,esparcimiento: general,,0.0010618966844385177
+A0943101,"Prode, lotería, quiniela, rifa, casino, carreras de caballos",Juegos de azar,09,EX,juegos de azar (art. 7),,0.0002180220461485208
+A0951101,"Diccionarios, enciclopedias, atlas",Libros no escolares,09,EX,"libros, diarios y revistas (art. 7 a)",,0.0001744580697985558
+A0951102,Libros infantiles,Libros no escolares,09,EX,"libros, diarios y revistas (art. 7 a)",,0.0005748838487215959
+A0951103,"Novelas, ensayos, cuentos y poesías",Libros no escolares,09,EX,"libros, diarios y revistas (art. 7 a)",,0.0009808644571121276
+A0951104,Libro digital (Ebook),Libros no escolares,09,EX,"libros, diarios y revistas (art. 7 a)",,3.413231322954286e-05
+A0951105,Otros libros (excluidos los textos educativos),Libros no escolares,09,EX,"libros, diarios y revistas (art. 7 a)",,0.00047225214524330517
+A0951201,Textos primarios,Libros escolares,09,EX,"libros, diarios y revistas (art. 7 a)",,0.0010002771785302643
+A0951202,Textos secundarios,Libros escolares,09,EX,"libros, diarios y revistas (art. 7 a)",,0.0005876257937807869
+A0951203,Textos universitarios y de formación profesional,Libros escolares,09,EX,"libros, diarios y revistas (art. 7 a)",,0.0008589457497617169
+A0951204,"Otros textos educativos (trabajos prácticos, apuntes, etc.)",Libros escolares,09,EX,"libros, diarios y revistas (art. 7 a)",,0.0004939135561335343
+A0952101,Diarios y periódicos,Diarios y periódicos,09,EX,"libros, diarios y revistas (art. 7 a)",,0.00023841530687162966
+A0952102,Revistas no profesionales,Diarios y periódicos,09,EX,"libros, diarios y revistas (art. 7 a)",,0.00012138648026074271
+A0952103,Revistas profesionales,Diarios y periódicos,09,EX,"libros, diarios y revistas (art. 7 a)",,3.78467437500285e-06
+A0952104,Suscripción a diarios y periódicos,Diarios y periódicos,09,EX,"libros, diarios y revistas (art. 7 a)",,0.0006335886254321554
+A0952105,Suscripción a revistas no profesionales,Diarios y periódicos,09,EX,"libros, diarios y revistas (art. 7 a)",,5.045247753936607e-05
+A0952106,Suscripción a revistas profesionales,Diarios y periódicos,09,EX,"libros, diarios y revistas (art. 7 a)",,4.3514006753083495e-05
+A0953101,Tarjetas y calendarios,Materiales impresos diversos,09,G21,esparcimiento: general,,2.3426460405200793e-05
+A0953102,"Mapas y planos carreteros, globos terráqueos, mapas de pared, guías turísticas y de calles",Materiales impresos diversos,09,G21,esparcimiento: general,,1.2487101215944272e-05
+A0953103,Otros materiales impresos diversos: posters,Materiales impresos diversos,09,G21,esparcimiento: general,,8.87762463866547e-05
+A0954101,Cuota de materiales,"Papel, útiles de oficina y materiales de dibujo",09,G21,esparcimiento: general,,0.0003017889760618772
+A0954102,Adhesivos escolares para actividades educativas,"Papel, útiles de oficina y materiales de dibujo",09,G21,esparcimiento: general,,6.789182914111622e-05
+A0954103,"Anotador, block, repuesto  para carpeta, resma para impresora","Papel, útiles de oficina y materiales de dibujo",09,G21,esparcimiento: general,,0.00039566291414474717
+A0954104,"Bolígrafo, lapicera, roller, lápiz mecánico, porta mina","Papel, útiles de oficina y materiales de dibujo",09,G21,esparcimiento: general,,0.00012226811392934906
+A0954105,Carpetas,"Papel, útiles de oficina y materiales de dibujo",09,G21,esparcimiento: general,,0.00011697114145581729
+A0954106,Cartucheras y canoplas,"Papel, útiles de oficina y materiales de dibujo",09,G21,esparcimiento: general,,4.612888264168952e-05
+A0954107,Compás,"Papel, útiles de oficina y materiales de dibujo",09,G21,esparcimiento: general,,3.275419253930689e-06
+A0954108,Cuaderno,"Papel, útiles de oficina y materiales de dibujo",09,G21,esparcimiento: general,,0.00029005936914773246
+A0954109,Fotocopias,"Papel, útiles de oficina y materiales de dibujo",09,G21,esparcimiento: general,,0.0008047792186241049
+A0954110,Goma de borrar,"Papel, útiles de oficina y materiales de dibujo",09,G21,esparcimiento: general,,1.0221692272751628e-05
+A0954111,"Lápiz de color, pastel, cera, temperas","Papel, útiles de oficina y materiales de dibujo",09,G21,esparcimiento: general,,0.0001062161136520553
+A0954112,Lápiz negro,"Papel, útiles de oficina y materiales de dibujo",09,G21,esparcimiento: general,,1.5861282599453122e-05
+A0954113,"Marcadores, resaltadores","Papel, útiles de oficina y materiales de dibujo",09,G21,esparcimiento: general,,9.010704095484951e-05
+A0954114,"Material de dibujo, pintura y cerámica","Papel, útiles de oficina y materiales de dibujo",09,G21,esparcimiento: general,,8.720478255862329e-05
+A0954115,Material para dibujo técnico,"Papel, útiles de oficina y materiales de dibujo",09,G21,esparcimiento: general,,2.9767327728152675e-05
+A0954116,"Papel para forrar, glacé, cartulina, etiquetas, sobres, mapas escolares","Papel, útiles de oficina y materiales de dibujo",09,G21,esparcimiento: general,,0.00016545379647738765
+A0954117,"Regla, escuadra, transportador","Papel, útiles de oficina y materiales de dibujo",09,G21,esparcimiento: general,,1.103710450225777e-05
+A0954118,Otros materiales escolares,"Papel, útiles de oficina y materiales de dibujo",09,G21,esparcimiento: general,,0.00046830257847721364
+A0954119,Impresiones,"Papel, útiles de oficina y materiales de dibujo",09,G21,esparcimiento: general,,3.243901298040662e-05
+A0961101,Paquete turístico para viajar al exterior,Paquetes turísticos todo incluido,09,EX,turismo al exterior,,0.008551829436030162
+A0961102,Paquete turístico para viajar dentro del país,Paquetes turísticos todo incluido,09,G21,esparcimiento: general,,0.0030246647078493987
+A0961103,Excursiones desde el lugar de vacaciones,Paquetes turísticos todo incluido,09,G21,esparcimiento: general,,0.00024267789924396234
+A0961104,Excursiones desde el lugar en que reside habitualmente,Paquetes turísticos todo incluido,09,G21,esparcimiento: general,,5.480755282984995e-05
+A1011101,Aranceles de jardín de infantes 3 a 4 años,"Enseñanza infantil, preescolar y primaria",10,EX,servicios educativos y textos (art. 7 h.3 y a),,0.0024116620025201115
+A1011102,Matrícula de jardín de infantes 3 a 4 años,"Enseñanza infantil, preescolar y primaria",10,EX,servicios educativos y textos (art. 7 h.3 y a),,0.0006195415712723274
+A1011103,Aranceles de preescolar,"Enseñanza infantil, preescolar y primaria",10,EX,servicios educativos y textos (art. 7 h.3 y a),,0.001090086980001059
+A1011104,Matrícula de preescolar,"Enseñanza infantil, preescolar y primaria",10,EX,servicios educativos y textos (art. 7 h.3 y a),,0.00021527403245841996
+A1011105,Aranceles de enseñanza primaria,"Enseñanza infantil, preescolar y primaria",10,EX,servicios educativos y textos (art. 7 h.3 y a),,0.008330940732839728
+A1011106,Matrícula de enseñanza primaria,"Enseñanza infantil, preescolar y primaria",10,EX,servicios educativos y textos (art. 7 h.3 y a),,0.002072582566459311
+A1021101,Aranceles de enseñanza secundaria,Enseñanza secundaria,10,EX,servicios educativos y textos (art. 7 h.3 y a),,0.005599012640265594
+A1021102,Matrícula de enseñanza secundaria,Enseñanza secundaria,10,EX,servicios educativos y textos (art. 7 h.3 y a),,0.0013418336556355241
+A1031101,Aranceles de enseñanza superior o universitaria,Enseñanza superior,10,EX,servicios educativos y textos (art. 7 h.3 y a),,0.0039035921754531394
+A1031102,Matrícula de enseñanza superior o universitaria,Enseñanza superior,10,EX,servicios educativos y textos (art. 7 h.3 y a),,0.0009429734349977394
+A1041101,Aranceles y matrícula  de enseñanza especial,Enseñanza no atribuible a ningún nivel,10,EX,servicios educativos y textos (art. 7 h.3 y a),,8.594523529636517e-05
+A1041102,Clases o cursos de apoyo,Enseñanza no atribuible a ningún nivel,10,G21,enseñanza no formal,,0.000856835992007011
+A1041103,Cursos de computación,Enseñanza no atribuible a ningún nivel,10,G21,enseñanza no formal,,0.00014628154140185572
+A1041104,"Enseñanza técnica y comercial (curso de impuestos, secretariado, electricista, electromecánico, etc.)",Enseñanza no atribuible a ningún nivel,10,G21,enseñanza no formal,,0.00043926214242032493
+A1041105,Idioma extranjero,Enseñanza no atribuible a ningún nivel,10,G21,enseñanza no formal,,0.0018871384856384192
+A1041106,"Otros cursos de educación no formal (cocina, repostería, corte y confección, peluquería, artesanías, etc.)",Enseñanza no atribuible a ningún nivel,10,G21,enseñanza no formal,,0.000947915330262983
+A1111101,"Almuerzo en restaurantes, bar",Alimentos y bebidas consumidas fuera del Hogar,11,G21,general,,0.0027002421983917664
+A1111102,"Cena en restaurantes, bar",Alimentos y bebidas consumidas fuera del Hogar,11,G21,general,,0.002944058632976733
+A1111103,"Desayuno en restaurantes, bar",Alimentos y bebidas consumidas fuera del Hogar,11,G21,general,,0.0006498586818315874
+A1111104,"Merienda en restaurantes, bar",Alimentos y bebidas consumidas fuera del Hogar,11,G21,general,,0.0005505401574774539
+A1111105,"Menú completo (Ejecutivo) en restaurantes, bar",Alimentos y bebidas consumidas fuera del Hogar,11,G21,general,,0.002454944733132993
+A1111106,"Comidas rápidas en restaurantes, bar",Alimentos y bebidas consumidas fuera del Hogar,11,G21,general,,0.0016846681054383155
+A1111107,"Sandwiches (lomitos, hamburguesas, panchos, etc.) y bebidas en restaurantes, bar",Alimentos y bebidas consumidas fuera del Hogar,11,G21,general,,0.0028205833112999856
+A1111108,"Pizza y bebidas en restaurantes, bar",Alimentos y bebidas consumidas fuera del Hogar,11,G21,general,,0.002286657425474868
+A1111109,"Postres en restaurantes, bar en restaurantes, bar",Alimentos y bebidas consumidas fuera del Hogar,11,G21,general,,0.00041232062948481083
+A1111110,"Café, té, mate cocido solo en restaurantes, bar",Alimentos y bebidas consumidas fuera del Hogar,11,G21,general,,0.0010162000253553247
+A1111111,"Café, té, mate cocido con facturas o tostadas en restaurantes, bar",Alimentos y bebidas consumidas fuera del Hogar,11,G21,general,,0.0009184554335919909
+A1111112,"Agua mineral, soda en restaurantes, bar",Alimentos y bebidas consumidas fuera del Hogar,11,G21,general,,0.00016789355055312808
+A1111113,"Gaseosas en restaurantes, bar",Alimentos y bebidas consumidas fuera del Hogar,11,G21,general,,0.0008021338010011746
+A1111114,"Cerveza en restaurantes, bar",Alimentos y bebidas consumidas fuera del Hogar,11,G21,general,,0.001537054989713935
+A1111115,"Vino en restaurantes, bar",Alimentos y bebidas consumidas fuera del Hogar,11,G21,general,,0.0002605736462911392
+A1111116,"Bebidas alcohólicas en restaurantes, bar",Alimentos y bebidas consumidas fuera del Hogar,11,G21,general,,0.00045662798862903696
+A1111117,"Otras bebidas en restaurantes, bar",Alimentos y bebidas consumidas fuera del Hogar,11,G21,general,,0.0002578304692428297
+A1111118,"Otras comidas con o sin bebidas listas para consumir en restaurantes, bar",Alimentos y bebidas consumidas fuera del Hogar,11,G21,general,,0.0011840273102355773
+A1111119,"Carne vacuna asada/spiedo en restaurantes, bar",Alimentos y bebidas consumidas fuera del Hogar,11,G21,general,,0.0014431598575457992
+A1111120,"Pollo asado/spiedo en restaurantes, bar",Alimentos y bebidas consumidas fuera del Hogar,11,G21,general,,0.0003232977294294211
+A1111121,"Empanadas y tartas en restaurantes, bar",Alimentos y bebidas consumidas fuera del Hogar,11,G21,general,,0.0005644216790116556
+A1111122,"Ensaladas varias en restaurantes, bar",Alimentos y bebidas consumidas fuera del Hogar,11,G21,general,,0.00030341002236624514
+A1111123,"Milanesa de carne, suprema en restaurantes, bar",Alimentos y bebidas consumidas fuera del Hogar,11,G21,general,,0.0008573419063848456
+A1111124,"Sandwiches de miga (simple, triple) en restaurantes, bar",Alimentos y bebidas consumidas fuera del Hogar,11,G21,general,,0.00027107511872266973
+A1111125,"Comidas en base a carnes en restaurantes, bar",Alimentos y bebidas consumidas fuera del Hogar,11,G21,general,,0.000884672170090655
+A1111126,"Comidas en base a pastas en restaurantes, bar",Alimentos y bebidas consumidas fuera del Hogar,11,G21,general,,0.0006367766526798867
+A1111127,"Comidas en base a pescado en restaurantes, bar",Alimentos y bebidas consumidas fuera del Hogar,11,G21,general,,0.0002689497692801625
+A1111128,"Comidas en base a tubérculos en restaurantes, bar",Alimentos y bebidas consumidas fuera del Hogar,11,G21,general,,0.00023406460766148827
+A1111129,"Comidas en base a verduras y legumbres en restaurantes, bar",Alimentos y bebidas consumidas fuera del Hogar,11,G21,general,,6.336258906033066e-05
+A1111130,"Combo (snaks + gaseosa) en restaurantes, bar",Alimentos y bebidas consumidas fuera del Hogar,11,G21,general,,0.00045630717552328436
+A1111201,Carne vacuna asada/spiedo,Comidas listas para llevar,11,G21,general,,0.001155760972629079
+A1111202,Pollo asado/spiedo,Comidas listas para llevar,11,G21,general,,0.001980888080920043
+A1111203,Empanadas y tartas,Comidas listas para llevar,11,G21,general,,0.004504282797489695
+A1111204,Ensaladas varias,Comidas listas para llevar,11,G21,general,,0.0007296928769345662
+A1111205,"Milanesa de carne, suprema",Comidas listas para llevar,11,G21,general,,0.0015801668160454392
+A1111206,Pizza- fainá- fugazza,Comidas listas para llevar,11,G21,general,,0.0032441801904637365
+A1111207,Postres,Comidas listas para llevar,11,G21,general,,0.00025853011069352025
+A1111208,"Sandwiches de miga (simple, triple)",Comidas listas para llevar,11,G21,general,,0.0010818307205783004
+A1111209,"Otro tipo de sandwiches (lomitos, hamburguesas, milanesas, panchos, jamón y queso, etc.)",Comidas listas para llevar,11,G21,general,,0.004129222284000505
+A1111210,Comidas en base a carnes,Comidas listas para llevar,11,G21,general,,0.0011239731296449455
+A1111211,Comidas en base a pastas,Comidas listas para llevar,11,G21,general,,0.0010041813604431925
+A1111212,Comidas en base a pescado,Comidas listas para llevar,11,G21,general,,0.0004401148591730891
+A1111213,Comidas en base tubérculos,Comidas listas para llevar,11,G21,general,,0.0005856345082699483
+A1111214,Comidas en base a verduras y legumbres,Comidas listas para llevar,11,G21,general,,0.000234975618120881
+A1111215,Desayuno o merienda para llevar,Comidas listas para llevar,11,G21,general,,0.00046591659458923037
+A1111216,Menú y/o combo para llevar,Comidas listas para llevar,11,G21,general,,0.002759647548090418
+A1111217,Otras comidas listas para consumir,Comidas listas para llevar,11,G21,general,,0.002862999347857647
+A1112101,"Almuerzo o cena en comedores escolares, universitarios o fabriles","Alimentos y bebidas comprados y consumidos en comedores escolares, universitarios o fabriles",11,G21,general,,0.0026414212754864784
+A1112102,"Desayuno y merienda en comedores escolares, universitarios o fabriles","Alimentos y bebidas comprados y consumidos en comedores escolares, universitarios o fabriles",11,G21,general,,0.00032191056240947057
+A1112103,"Café, té, mate cocido en comedores escolares, universitarios o fabriles","Alimentos y bebidas comprados y consumidos en comedores escolares, universitarios o fabriles",11,G21,general,,0.00014324710300379494
+A1112104,"Gaseosas, jugos, agua mineral en comedores escolares, universitarios o fabriles","Alimentos y bebidas comprados y consumidos en comedores escolares, universitarios o fabriles",11,G21,general,,0.0002223573739826506
+A1112105,"Bebidas alcohólicas en comedores escolares, universitarios o fabriles","Alimentos y bebidas comprados y consumidos en comedores escolares, universitarios o fabriles",11,G21,general,,1.0078178849036635e-05
+A1112106,"Sandwiches (lomitos, hamburguesas, panchos, etc.) en comedores escolares, universitarios o fabriles","Alimentos y bebidas comprados y consumidos en comedores escolares, universitarios o fabriles",11,G21,general,,0.0003188916420212267
+A1112107,"Pizza , empanadas, tartas, etc. en comedores escolares, universitarios o fabriles","Alimentos y bebidas comprados y consumidos en comedores escolares, universitarios o fabriles",11,G21,general,,0.00022117053171577292
+A1112108,"Postres varios en comedores escolares, universitarios o fabriles","Alimentos y bebidas comprados y consumidos en comedores escolares, universitarios o fabriles",11,G21,general,,7.760235827136915e-05
+A1112109,Cuota de comedor escolar,"Alimentos y bebidas comprados y consumidos en comedores escolares, universitarios o fabriles",11,G21,general,,0.0003244085174966793
+A1121101,Hotel o pensión con o sin comida,"Servicios de alojamiento en hoteles, pensiones, hostel, albergues",11,G21,general,,0.0034213752661721047
+A1121102,"Otros alojamientos (camping, etc.)","Servicios de alojamiento en hoteles, pensiones, hostel, albergues",11,G21,general,,0.0001449292691393946
+A1121103,Otros gastos relacionados con alojamiento y estadía,"Servicios de alojamiento en hoteles, pensiones, hostel, albergues",11,G21,general,,0.00021115230344650858
+A1211101,"Manicuría, pedicuría y depilación",Servicio de peluquería y cuidado personal,12,G21,bienes y servicios varios: general,,0.00113659602402304
+A1211102,Peluquería para hombre,Servicio de peluquería y cuidado personal,12,G21,bienes y servicios varios: general,,0.0021259602807017016
+A1211103,Peluquería para mujer,Servicio de peluquería y cuidado personal,12,G21,bienes y servicios varios: general,,0.004405716329436409
+A1211104,Peluquería para niño,Servicio de peluquería y cuidado personal,12,G21,bienes y servicios varios: general,,0.00043917329065842154
+A1211105,Tatuajes y piercing,Servicio de peluquería y cuidado personal,12,G21,bienes y servicios varios: general,,0.00024959855543830653
+A1211106,"Otros servicios para el cuidado personal (masajes, spa, sauna, cosmetología, etc.)",Servicio de peluquería y cuidado personal,12,G21,bienes y servicios varios: general,,0.00021187752203836343
+A1212101,"Máquinas de afeitar, cortadora de pelo, depiladoras eléctricas",Aparatos eléctricos para el cuidado personal,12,G21,bienes y servicios varios: general,,0.0005478189323744766
+A1212102,"Secadores, planchita, enrulador de cabello",Aparatos eléctricos para el cuidado personal,12,G21,bienes y servicios varios: general,,0.00030265625476113775
+A1212103,"Otros aparatos eléctricos para el cuidado personal: masajeador, etc.",Aparatos eléctricos para el cuidado personal,12,G21,bienes y servicios varios: general,,0.00016068114993652603
+A1212104,Reparación de aparatos eléctricos para el cuidado personal,Aparatos eléctricos para el cuidado personal,12,G21,bienes y servicios varios: general,,6.648635763279333e-06
+A1213101,"Cepillos dentales, hilo dental, palillos interdentales",Artículos descartables para el cuidado personal,12,G21,bienes y servicios varios: general,,0.00024100622125021256
+A1213102,"Hoja de afeitar, repuesto para máquina de afeitar, máquina de afeitar",Artículos descartables para el cuidado personal,12,G21,bienes y servicios varios: general,,0.00028555735926773257
+A1213103,Pañales descartables para adultos,Artículos descartables para el cuidado personal,12,G21,bienes y servicios varios: general,,0.0002751277057952748
+A1213104,Pañales descartables para bebés,Artículos descartables para el cuidado personal,12,G21,bienes y servicios varios: general,,0.0025251933389341115
+A1213105,Papel higiénico,Artículos descartables para el cuidado personal,12,G21,bienes y servicios varios: general,,0.0028327837334763545
+A1213106,Pañuelos de papel,Artículos descartables para el cuidado personal,12,G21,bienes y servicios varios: general,,0.00011371991501676939
+A1213107,"Toallas faciales, toallas humedecidas",Artículos descartables para el cuidado personal,12,G21,bienes y servicios varios: general,,0.000178638996041444
+A1213108,"Toallas higiénicas, tampones, protectores diarios",Artículos descartables para el cuidado personal,12,G21,bienes y servicios varios: general,,0.0008148547257809343
+A1213109,Otros artículos descartables para el cuidado personal,Artículos descartables para el cuidado personal,12,G21,bienes y servicios varios: general,,7.780504730582105e-05
+A1213201,"Colonia, loción, perfume",Artículos de tocador                    ,12,G21,bienes y servicios varios: general,,0.00047362571355962765
+A1213202,"Cosméticos: base, rubor, etc.",Artículos de tocador                    ,12,G21,bienes y servicios varios: general,,5.644787517097674e-05
+A1213203,"Crema de afeitar, espuma",Artículos de tocador                    ,12,G21,bienes y servicios varios: general,,5.717721139487599e-05
+A1213204,"Crema de belleza, de manos, de limpieza, nutritiva, demaquilladora, para el cuerpo, bronceadores, etc.",Artículos de tocador                    ,12,G21,bienes y servicios varios: general,,0.0006521648457329684
+A1213205,"Champú, crema de enjuague, acondicionador",Artículos de tocador                    ,12,G21,bienes y servicios varios: general,,0.0036919645407085646
+A1213206,"Delineador, rímel, sombra",Artículos de tocador                    ,12,G21,bienes y servicios varios: general,,2.850608675504365e-05
+A1213207,Dentífrico,Artículos de tocador                    ,12,G21,bienes y servicios varios: general,,0.0011026104010246056
+A1213208,Desodorante,Artículos de tocador                    ,12,G21,bienes y servicios varios: general,,0.0011770773004364443
+A1213209,Esmalte y quitaesmalte,Artículos de tocador                    ,12,G21,bienes y servicios varios: general,,8.419292802913155e-05
+A1213210,"Fijador para el pelo, mousse, gel",Artículos de tocador                    ,12,G21,bienes y servicios varios: general,,5.694059588937975e-05
+A1213211,Jabón de tocador,Artículos de tocador                    ,12,G21,bienes y servicios varios: general,,0.0013540244936731463
+A1213212,Lápiz labial,Artículos de tocador                    ,12,G21,bienes y servicios varios: general,,4.15854431017376e-05
+A1213213,Talco,Artículos de tocador                    ,12,G21,bienes y servicios varios: general,,0.00013066926349818934
+A1213214,"Tintura, matizador, oxidante",Artículos de tocador                    ,12,G21,bienes y servicios varios: general,,0.000344922005408027
+A1213215,Otros artículos de tocador,Artículos de tocador                    ,12,G21,bienes y servicios varios: general,,0.00020730030759905918
+A1213301,"Alicate, tijera, pinza",Artículos de belleza                    ,12,G21,bienes y servicios varios: general,,4.029499233131451e-05
+A1213302,"Peine, cepillo para el pelo, brocha de afeitar",Artículos de belleza                    ,12,G21,bienes y servicios varios: general,,3.604895949376234e-05
+A1213303,"Otros artículos no eléctricos para el cuidado personal: masajeador, bolsa de agua caliente, etc.",Artículos de belleza                    ,12,G21,bienes y servicios varios: general,,3.0357152261233838e-05
+A1231101,Alhaja,Joyería y relojes,12,G21,bienes y servicios varios: general,,0.00022749135339068701
+A1231102,Fantasía,Joyería y relojes,12,G21,bienes y servicios varios: general,,0.00025005566595627776
+A1231103,Reloj pulsera,Joyería y relojes,12,G21,bienes y servicios varios: general,,0.00018962307967116367
+A1231104,"Reloj despertador, reloj de viaje",Joyería y relojes,12,G21,bienes y servicios varios: general,,1.4667166624808517e-05
+A1231105,"Reparación de alhajas, relojes",Joyería y relojes,12,G21,bienes y servicios varios: general,,2.885408154815509e-05
+A1232101,"Billetera, portadocumentos","Artículos de marroquinería, carteras, bolsos y artículos de viaje",12,EX,servicios exentos / tasas,,0.0001675129767637331
+A1232102,"Cartera, bolso, mochila de vestir","Artículos de marroquinería, carteras, bolsos y artículos de viaje",12,G21,bienes y servicios varios: general,,0.001178562015721667
+A1232103,Otros artículos de marroquinería,"Artículos de marroquinería, carteras, bolsos y artículos de viaje",12,G21,bienes y servicios varios: general,,8.151294316542177e-05
+A1232104,Reparaciones de artículos de marroquinería,"Artículos de marroquinería, carteras, bolsos y artículos de viaje",12,G21,bienes y servicios varios: general,,2.0930641577976304e-05
+A1232105,Paraguas,"Artículos de marroquinería, carteras, bolsos y artículos de viaje",12,G21,bienes y servicios varios: general,,8.222401040323233e-05
+A1232106,Reparación de paraguas,"Artículos de marroquinería, carteras, bolsos y artículos de viaje",12,G21,bienes y servicios varios: general,,1.1699813324415492e-06
+A1232107,Encendedor - carga,"Artículos de marroquinería, carteras, bolsos y artículos de viaje",12,G21,bienes y servicios varios: general,,1.747461552143842e-05
+A1232108,"Pipa, boquilla, accesorios","Artículos de marroquinería, carteras, bolsos y artículos de viaje",12,G21,bienes y servicios varios: general,,3.4687695369004214e-05
+A1232109,"Bolso, bolsón de viaje, mochila","Artículos de marroquinería, carteras, bolsos y artículos de viaje",12,G21,bienes y servicios varios: general,,5.5252762530290394e-05
+A1232110,Mochila escolar o deportiva,"Artículos de marroquinería, carteras, bolsos y artículos de viaje",12,G21,bienes y servicios varios: general,,0.00027743877208805714
+A1232111,Mochila para transportar bebés y cambiador,"Artículos de marroquinería, carteras, bolsos y artículos de viaje",12,G21,bienes y servicios varios: general,,1.3641470911150054e-05
+A1232112,Portafolios,"Artículos de marroquinería, carteras, bolsos y artículos de viaje",12,G21,bienes y servicios varios: general,,3.5251274123978262e-06
+A1232113,Valija para viaje,"Artículos de marroquinería, carteras, bolsos y artículos de viaje",12,G21,bienes y servicios varios: general,,8.088675685639646e-05
+A1232114,Otros bienes diversos,"Artículos de marroquinería, carteras, bolsos y artículos de viaje",12,G21,bienes y servicios varios: general,,1.1906984186954269e-05
+A1232115,Mantenimiento y reparación de estos bienes,"Artículos de marroquinería, carteras, bolsos y artículos de viaje",12,G21,bienes y servicios varios: general,,4.160437170319145e-06
+A1241101,Geriátrico con alojamiento y comida,Residencias y geriátricos,12,G21,bienes y servicios varios: general,,0.0009491277598802527
+A1241102,Geriátrico de día,Residencias y geriátricos,12,G21,bienes y servicios varios: general,,2.401320829214877e-07
+A1241103,Residencias de ancianos con alojamiento y comida,Residencias y geriátricos,12,G21,bienes y servicios varios: general,,0.0004931400641915722
+A1241104,Residencias de ancianos de día,Residencias y geriátricos,12,G21,bienes y servicios varios: general,,0.0
+A1241105,Servicios de rehabilitaciones varias,Residencias y geriátricos,12,G21,bienes y servicios varios: general,,2.0883620664294407e-05
+A1241106,Otros servicios sociales,Residencias y geriátricos,12,G21,bienes y servicios varios: general,,8.02390031127739e-06
+A1241201,Aranceles de jardín maternal 0 a 2 años,Otros servicios sociales,12,EX,servicios exentos / tasas,,0.001522296643025822
+A1241202,Matrícula de jardín maternal 0 a 2 años,Otros servicios sociales,12,EX,servicios exentos / tasas,,0.0002946046501143003
+A1251101,Seguro de vida,Seguro de vida ,12,EX,seguros de vida y retiro (art. 7 h),,0.0006848990594221532
+A1252101,"Seguros relacionados con la vivienda: incendio, destrucción, etc.",Seguros relacionados con la vivienda,12,G21,bienes y servicios varios: general,,0.00019328413963954307
+A1252102,"Otros seguros: del hogar (sustracción de artículos del hogar), cajero automático, garantía extendida, protecció",Seguros relacionados con la vivienda,12,G21,bienes y servicios varios: general,,0.0001720115386461352
+A1254101,Seguro de vehículos,Seguros relacionados con el transporte,12,G21,bienes y servicios varios: general,,0.006461590317507941
+A1255101,Seguro de asistencia al viajero,Otros seguros,12,G21,bienes y servicios varios: general,,7.331401773307211e-05
+A1255102,Seguros de retiro,Otros seguros,12,EX,seguros de vida y retiro (art. 7 h),,0.00016521926558275742
+A1262101,Alquiler de caja de seguridad,Otros servicios financieros,12,G21,bienes y servicios varios: general,,7.519935574658117e-05
+A1262102,Costo de mantenimiento de caja de ahorro,Otros servicios financieros,12,G21,bienes y servicios varios: general,,0.00010195201121546378
+A1262103,"Cargo por tarjeta de crédito (costo de renovación, emisión, resumen, etc.)",Otros servicios financieros,12,G21,bienes y servicios varios: general,,0.0002661595018343869
+A1262104,Giros y transferencias,Otros servicios financieros,12,EX,servicios exentos / tasas,,4.1419245576234035e-05
+A1271101,Abonos para servicios profesionales (excluidos servicio de la salud),Otros servicios n.e.p.,12,G21,bienes y servicios varios: general,,4.5415978907118456e-05
+A1271102,"Albergue transitorio, hotel por horas",Otros servicios n.e.p.,12,G21,bienes y servicios varios: general,,1.482753515007907e-05
+A1271103,"Cuotas de afiliación a asociaciones profesionales y  otras que brindan servicios varios,  -A.C.A.-",Otros servicios n.e.p.,12,EX,servicios exentos / tasas,,0.00015752937401426056
+A1271104,Gastos por comisiones de inmobiliarias y gestores,Otros servicios n.e.p.,12,G21,bienes y servicios varios: general,,0.0006342226243740886
+A1271105,"Gastos por obtención de documentos: DNI, pasaporte, etc.",Otros servicios n.e.p.,12,EX,servicios exentos / tasas,,9.115706639305144e-05
+A1271106,"Compra o alquiler de nicho, panteón, parcela en cementerio público o privado",Otros servicios n.e.p.,12,EX,servicios exentos / tasas,,8.10525974094161e-05
+A1271107,Servicio de sepelio,Otros servicios n.e.p.,12,EX,servicios exentos / tasas,,0.00020077952340076218
+A1271108,"Otros gastos funerarios: derechos, impuestos, flores, ceremonia religiosas, etc.",Otros servicios n.e.p.,12,EX,servicios exentos / tasas,,8.044704308961691e-05
+A1271109,"Servicios profesionales: abogado, contador, escribano, arquitecto, etc., excluidos los de la salud",Otros servicios n.e.p.,12,G21,bienes y servicios varios: general,,0.001987406923841752
+A1271110,"Reproducciones de documentos (sellos, impuestos, legalizaciones, etc.)",Otros servicios n.e.p.,12,EX,servicios exentos / tasas,,7.247583154162137e-05
+A1271111,"Pago por noticias y anuncios en la prensa, avisos clasificados",Otros servicios n.e.p.,12,G21,bienes y servicios varios: general,,6.0013733064474115e-06
+A1271112,Otros servicios personales no incluidos anteriormente,Otros servicios n.e.p.,12,G21,bienes y servicios varios: general,,4.4741833735884026e-05
