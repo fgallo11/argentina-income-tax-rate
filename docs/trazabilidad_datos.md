@@ -146,7 +146,11 @@ No entran al cálculo, pero se citan. Ordenadas de menos a más confiable.
 
 ## E. Inconsistencias encontradas entre documentación y tablas
 
-Cifras de la documentación que no coinciden con `outputs/tables/` actuales:
+Cifras de la documentación que no coincidían con `outputs/tables/`. **Los puntos 1, 2 y 4
+y los de `validacion.md` §1 (cocientes simulado/recaudado de aportes, contribuciones y
+Ganancias, que eran anteriores al ajuste de aguinaldo; y el impuesto de las declaraciones
+juradas sobre lo recaudado, 53%-82% y no 70%-80%) se corrigieron el 14/11/2026.** El 3 sigue
+pendiente.
 
 1. **`validacion.md` §2**, filas del proyecto para 2010: dice "principal 22,1 / 27,4 / 29,0
    / 27,2" e "ingreso declarado 40,4 / 27,4 / 29,0 / 27,8". Son de antes de la auditoría (la
