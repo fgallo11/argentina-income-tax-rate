@@ -119,10 +119,21 @@ Pasos:
    observa en qué decil viven esas personas: entre 84% y 99,9% en el decil 10, el resto en
    el 9 y el 8. Con esas proporciones se reparten Ganancias faltante y Bienes Personales.
 3. *Escala.* Tres opciones, que delimitan el rango del decil 10:
-   - **Principal (`cobertura`)**: los montos se llevan a la escala de la encuesta con el
-     mismo factor que los impuestos indirectos (recaudación por peso de consumo privado).
-     Supone que la EPH subcapta el ingreso del decil 10 en la misma proporción en que las
-     encuestas subcaptan el consumo.
+   - **Principal (`cobertura`, corregida el 16/11/2026)**: dos partes.
+     a) A las personas del empalme se les suma el ingreso que la EPH no capta (resultado neto
+        más rentas exentas declaradas) y la Ganancias que declaran y la EPH no simula
+        (declarada − simulada sobre esas mismas personas), en pesos por habitante. Así ese
+        grupo queda con el ingreso y el impuesto de sus declaraciones juradas.
+     b) El resto de la Ganancias faltante (entre 28% y 60% según el año) lo pagan los demás
+        declarantes, cuyo ingreso la EPH sí capta: se suma como impuesto, sin ingreso, en la
+        escala de la encuesta (recaudación por peso de consumo privado), repartido según dónde
+        viven las personas de la EPH entre el puesto del empalme y el total de declaraciones.
+        Bienes Personales se divide igual, según la parte del patrimonio declarado que es de
+        las personas del empalme.
+     Antes toda la Ganancias faltante se sumaba a los de arriba sin su ingreso: el 1% de la
+     encuesta quedaba con más Ganancias sobre su ingreso que el 1% de las declaraciones juradas
+     (2016: 20,2% contra 12,4%), lo que es incoherente con un impuesto progresivo. Ahora coinciden
+     (2004: 13,3% y 13,0%; 2024: 12,0% y 11,7%).
    - **Piso (`altos_sin_corregir`)**: Ganancias sólo simulada sobre la EPH. Incluye
      Bienes Personales imputado al decil 10; sin él, ver `sin_correcciones`.
    - **Techo (`altos_registros`)**: todo lo recaudado, por habitante, y al ingreso de la
@@ -139,7 +150,7 @@ patrimonio): se grafica rayado y existe la variante `sin_bienes_personales`.
 La figura central (`fig0_dos_versiones_*`) muestra:
 
 - **A. Ingreso declarado** (variante `principal`). 2024: D1 31,4%, deciles medios ~25%,
-  D10 26,8%, promedio 25,4%. 2025: D1 28,7%, deciles medios ~23,5%, D10 26,5%, promedio 24,6%.
+  D10 25,0%, promedio 24,9%. 2025: D1 28,7%, deciles medios ~23,5%, D10 23,8%, promedio 23,8%.
 - **B. Ingreso ajustado a Cuentas Nacionales** (variante `ajuste_cn`,
   `scripts/aux_cuentas_nacionales.py`). Cada fuente de ingreso se lleva al total de la
   Cuenta de generación del ingreso del INDEC con un factor propio, aplicado a quien
@@ -156,15 +167,15 @@ La figura central (`fig0_dos_versiones_*`) muestra:
   para que la carga total sobre el ingreso total quede como en A. Llevar los impuestos a la
   escala de lo recaudado (consumo de Cuentas Nacionales) sin tener el ingreso completo de
   los hogares inflaba las tasas: el decil 1 daba 67%. El ajuste muestra cómo cambia el
-  reparto, no el nivel. 2024: D1 33,0%, D10 26,0%. 2025: D1 30,3%, D10 26,0%.
+  reparto, no el nivel. 2024: D1 32,2%, D10 25,3%. 2025: D1 29,8%, D10 24,0%.
 - **Sensibilidad de activos externos** (variante `ajuste_cn_activos_ext`): además, 3% anual
   sobre los activos externos de "otros sectores" (inversión de cartera + moneda y
   depósitos; Posición de inversión internacional, INDEC, cuadro 18; a pesos con el tipo de
   cambio A 3500 promedio) como ingreso no declarado, repartido como la Ganancias faltante
   (declaraciones juradas: casi todo al decil 10). Es una cota alta: supone que nada de eso
   se declara, que los billetes rinden como depósitos y que todo pertenece a hogares, aunque
-  el sector incluye empresas. 2024: D10 24,5%, debajo de todos los deciles medios. 2025: D10
-  24,5%, debajo de los deciles 2 y 4 a 8 pero no de los deciles 3 y 9 (24,0%).
+  el sector incluye empresas. 2024: D10 24,1%, debajo de todos los deciles medios. 2025: D10
+  22,9%, debajo de todos los deciles.
 
 Resultado: la subdeclaración de salarios y de cuentapropia está repartida en toda la
 distribución y casi no cambia el perfil. Lo que puede volver regresiva también la punta
@@ -173,7 +184,7 @@ alta es el ingreso de capital no declarado. Las rentas internas de los hogares
 del sector hogares. La EPH registra rentas por 0,4%-0,7% del PIB, una cifra inverosímil.
 
 **Contra el consumo** (variante `sobre_consumo`): impuestos ÷ (gasto + impuestos
-directos). 2024: D1 22,0%, D10 39,6%. 2025: D1 20,2%, D10 38,6%. Responde otra pregunta (qué parte de lo que se gasta
+directos). 2024: D1 22,0%, D10 33,6%. 2025: D1 20,2%, D10 31,8%. Responde otra pregunta (qué parte de lo que se gasta
 va a impuestos) y no registra que los deciles altos ahorran y subdeclaran. No se grafica.
 
 La variante `altos_registros` ("techo" del decil 10) se sigue calculando pero no se
@@ -188,9 +199,9 @@ Efecto medido en puntos porcentuales de la tasa total de 2024, salvo indicación
 |---|---|---|---|
 | Recursos = ingreso declarado (no se reemplaza por gasto) | Medida principal | `recursos_gasto` | D1: 31,4 → 22,0. D2: −1,2. Resto: 0 |
 | Consumo por ingreso relativo e interpolación de ENGHo | Método | `criterio_inicial` | Elimina escalones de 2012 y 2017 |
-| Contribuciones patronales 50% trabajador / 50% precios | Supuesto | `contrib_100_trabajador`, `contrib_100_consumidor` | D1: 20,2 a 23,7. D5: 24,6 a 25,3. D10: 25,1 a 28,3 |
+| Contribuciones patronales 50% trabajador / 50% precios | Supuesto | `contrib_100_trabajador`, `contrib_100_consumidor` | D1: 28,8 a 34,0. D5: 24,6 a 25,3. D10: 23,6 a 26,2 |
 | IVA al nivel recaudado (no al legal) | Anclado a datos | `iva_legal` | Promedio +1,6 |
-| Ingresos altos: Ganancias y Bienes Personales faltantes en escala de encuesta | Supuesto central del decil 10 | `altos_sin_corregir` (piso), `altos_registros` (techo) | D10: 23,7 a 30,5 (principal 26,8). Promedio: 24,1 a 26,7. El techo no es válido: implica que el ingreso faltante pagó más Ganancias que la alícuota máxima (`docs/auditoria.md`, 3.4) |
+| Ingresos altos: Ganancias y Bienes Personales faltantes en escala de encuesta | Supuesto central del decil 10 | `altos_sin_corregir` (piso), `altos_registros` (techo) | D10: 23,7 a 31,5 (principal 25,0). Promedio: 24,3 a 27,2. El techo no es válido: implica que el ingreso faltante pagó más Ganancias que la alícuota máxima (`docs/auditoria.md`, 3.4) |
 | Lo faltante lo pagan las personas de mayor ingreso de la EPH | Anclado a datos (anuarios ARCA) | No calculada | Reparte entre D8, D9 y D10 |
 | Bienes Personales con el mismo reparto que Ganancias faltante | Imputación | `sin_bienes_personales` | D10 −1,2 |
 | Aportes a AFJP (hasta 11/2008) cuentan como impuesto | Definición | `sin_afjp` | 2004: promedio −2,0. Desde 2009: 0 |
@@ -231,11 +242,11 @@ Papers en `papers/`. Variantes nuevas (2024, total % del ingreso):
 
 | Variante | Qué hace | D1 | D5 | D10 | Prom. |
 |---|---|---|---|---|---|
-| `principal` | ingreso declarado | 31,4 | 25,0 | 26,8 | 25,4 |
-| `iva_exentos_20` | bienes exentos cargan 20% de la alícuota por insumos (Pessino et al.) | 31,2 | 24,9 | 26,9 | 25,4 |
-| `con_cheque` | suma impuesto a créditos y débitos (Pessino et al. lo incluyen como "cascada") | 34,7 | 26,8 | 28,1 | 27,0 |
-| `ajuste_cn_rentas` | Cuentas Nacionales + rentas de la EPH × 7 (las encuestas captan 1/5 a 1/10; De Rosa et al.) | 34,8 | 26,8 | 24,5 | 25,4 |
-| `ajuste_cn_rentas_activos_ext` | lo anterior + renta de activos externos | 36,0 | 27,7 | 23,3 | 25,4 |
+| `principal` | ingreso declarado | 31,4 | 25,0 | 25,0 | 24,9 |
+| `iva_exentos_20` | bienes exentos cargan 20% de la alícuota por insumos (Pessino et al.) | 31,2 | 24,9 | 25,1 | 24,9 |
+| `con_cheque` | suma impuesto a créditos y débitos (Pessino et al. lo incluyen como "cascada") | 34,7 | 26,8 | 26,0 | 26,3 |
+| `ajuste_cn_rentas` | Cuentas Nacionales + rentas de la EPH × 7 (las encuestas captan 1/5 a 1/10; De Rosa et al.) | 33,9 | 26,1 | 24,1 | 24,9 |
+| `ajuste_cn_rentas_activos_ext` | lo anterior + renta de activos externos | 35,0 | 26,9 | 23,1 | 24,9 |
 
 El panel B de la figura 0 usa `ajuste_cn_rentas` con la marca de `ajuste_cn_rentas_activos_ext`:
 con el ingreso de capital no declarado el decil 10 queda por debajo de todos los demás.
@@ -327,18 +338,32 @@ del decil 10 mezcla a la clase media alta asalariada con los ricos.
 
 - **Ganancias faltante y Bienes Personales:** la parte del decil 10 se reparte entre los tramos
   según el tramo del hogar de las personas que empalman con las declaraciones juradas
-  (`parte_d91`, `parte_d95`, `parte_d99` en `ajuste_altos_ingresos.csv`). 2025: 4%, 37% y 59%.
+  (`parte_d91`, `parte_d95`, `parte_d99` en `ajuste_altos_ingresos.csv`; 2025: 4%, 37% y 59%),
+  y el resto de la Ganancias faltante según los demás declarantes (`resto_d91`, etc.).
 - **Consumo:** la ENGHo sólo llega al promedio del 5% más rico (su veintil más alto). Por encima,
   la medida principal deja fijo el consumo; la variante `consumo_proporcional` deja fijo el
-  cociente gasto/ingreso. Sólo cambia el 1% superior (2025: 29,0% contra 32,5%).
+  cociente gasto/ingreso. Sólo cambia el 1% superior (2025: 21,7% contra 23,6%).
 - **Rango:** principal, `consumo_proporcional`, `ajuste_cn`, `ajuste_cn_activos_ext` y
   `sin_bienes_personales`.
 
-Resultado 2025 (principal): P90-95 24,2%, P95-99 25,8%, 1% de la encuesta 29,0% (rango 23,0-32,5).
-El 10% más rico tiene 32,5% del ingreso declarado y el 1% de la encuesta 6,9% (8,2% de los
-impuestos). Pero el 1% de la encuesta declara 12,4 canastas por persona y el de las declaraciones
-juradas 35 (por declarante): no es el mismo grupo. Con las declaraciones juradas (sección 7 ter)
-paga 26,6%; con la renta de activos externos, el 1% de la encuesta baja a 23,0%.
+Resultado 2025 (principal): P90-95 24,6%, P95-99 23,7%, 1% de la encuesta 21,7% (rango 19,9-23,6).
+En la cima la tasa baja, por debajo de los deciles medios (~23,6%). El 10% más rico tiene 37,6% del
+ingreso (encuesta más el ingreso declarado al fisco que la encuesta no capta) y el 1% 10,8% (9,9%
+de los impuestos). El 1% de la encuesta, completado, tiene 20,9 canastas por persona; el de las
+declaraciones juradas, 35 por declarante. Con la renta de activos externos, el 1% de la encuesta
+paga 20,1%. El 1% de la sección 7 ter da 26,6% porque además suma la mitad del impuesto de
+sociedades (y la mitad de las utilidades al ingreso) y supone que la mitad de su ingreso es salario.
+
+(Hasta la corrección del 16/11/2026 este tramo daba 29,0%: la Ganancias faltante se le sumaba sin
+su ingreso.)
+
+**Comparación con repartos de referencia (figura 8, paneles derechos).** Misma recaudación total,
+repartida de dos formas: proporcional (todos pagan la tasa promedio, es decir, cada grupo aporta su
+parte del ingreso) y progresiva (tasa = promedio × (ingreso por persona / promedio)^0,25, reescalada
+para recaudar lo mismo; con ese exponente el decil 1 pagaría 12,7% y el 1% superior 37,0% en 2025).
+El exponente es una elección para ilustrar, no una norma (`ELAST_PROG` en `scripts/07_graficos.py`).
+Frente al proporcional los desvíos son menores a 1 punto; frente al progresivo, los deciles 1 a 9
+pagan entre 0,5 y 1,5 puntos más de su parte y el 1% superior 7 puntos menos.
 
 **Limitación:** el 1% de la encuesta tiene pocas observaciones por trimestre y es ruidoso año a
 año. Un trimestre (2011T1) de la base cruda local difiere en 0,1% de la usada para los deciles

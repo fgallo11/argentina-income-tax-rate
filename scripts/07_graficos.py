@@ -23,6 +23,7 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
+import matplotlib.ticker  # noqa: E402,F401
 import pandas as pd  # noqa: E402
 from matplotlib.patches import Patch  # noqa: E402
 
@@ -538,81 +539,123 @@ def fig_top1(largo):
     guardar(fig, "fig7_top1")
 
 
+ELAST_PROG = 0.25   # fig8: elasticidad de la tasa al ingreso en el sistema progresivo de referencia
+
+
 def fig_decil10_partido(anio):
     """El decil 10 partido en P90-95, P95-99 y el 1% superior (11_tramos_decil10.py)."""
     t = pd.read_csv(TABLES / "tasas_tramos_decil10.csv")
     top = pd.read_csv(TABLES / "top1.csv").set_index("anio").loc[anio]
     a = t[t.anio == anio]
     pr = a[a.variante == "principal"].set_index("grupo")
-    rango = a.groupby("grupo").total.agg(["min", "max"])
+    cn = a[a.variante == "ajuste_cn_activos_ext"].set_index("grupo").total * 100
     grupos = [1, 3, 5, 7, 9, 91, 95, 99]
-    etiquetas = ["D1", "D3", "D5", "D7", "D9", "P90-95", "P95-99", "1%\nencuesta", "1%\nDDJJ*"]
+    etiquetas = ["D1", "D3", "D5", "D7", "D9", "P90-95", "P95-99", "1%", "1%"]
     rojo, gris, azul, oscuro = "#e34948", "#b9b8b0", "#7fb3ea", "#0b3d7a"
     colores = [rojo, gris, gris, gris, gris, azul, azul, azul, oscuro]
     vals = [pr.total[g] * 100 for g in grupos] + [top.completo * 100]
-    bajo = [rango["min"][g] * 100 for g in grupos] + [top.completo_bajo * 100]
-    alto = [rango["max"][g] * 100 for g in grupos] + [top.completo_alto * 100]
-    fig, (ax, ax2) = plt.subplots(1, 2, figsize=(13.5, 5.8), gridspec_kw={"width_ratios": [1.25, 1]})
-    x = list(range(len(vals)))
-    ax.bar(x, vals, color=colores, width=0.66)
-    ax.errorbar(x, vals, yerr=[[v - b for v, b in zip(vals, bajo)], [h - v for v, h in zip(vals, alto)]],
-                fmt="none", color=TINTA, capsize=4, linewidth=1.1)
-    for xi, val, h in zip(x, vals, alto):
-        ax.text(xi, h + 0.5, pct(val), ha="center", fontsize=9, color=TINTA)
-    # el 1% de la encuesta con la renta de los activos externos: lo comparable con el de las DDJJ,
-    # que ya la incluye
-    ext = a[(a.variante == "ajuste_cn_activos_ext") & (a.grupo == 99)].total.iloc[0] * 100
-    ax.scatter([7], [ext], marker="D", s=46, facecolor=SUP, edgecolor=TINTA, linewidth=1.4, zorder=5)
-    ax.annotate(f"{pct(ext)}: sumando la renta\nde activos externos\n(como la de DDJJ)", (7, ext), xytext=(4.75, 7.5),
-                fontsize=8, color=TINTA, ha="left", arrowprops=dict(arrowstyle="-", color=TINTA2, linewidth=0.8))
-    ax.axhline(pr.total[0] * 100, color=TINTA2, linewidth=1, linestyle=(0, (4, 3)))
-    ax.text(8.62, pr.total[0] * 100, f"Promedio\n{pct(pr.total[0] * 100)}%", fontsize=8.3, color=TINTA2, va="center")
-    ax.axvspan(4.5, 8.5, color="#e8f1fb", zorder=0, linewidth=0)
-    ax.text(6.5, max(alto) * 1.13, "decil 10, partido", ha="center", fontsize=9, color=TINTA2, fontweight="bold")
+    x = list(range(len(grupos))) + [len(grupos) + 0.9]          # el 1% de las DDJJ, separado
+    fig, (ax, ax2, ax3) = plt.subplots(1, 3, figsize=(19, 6.2), gridspec_kw={"width_ratios": [1.25, 0.85, 0.85]})
+    ax.bar(x, vals, color=colores, width=0.66, label="Medida principal (ingreso declarado)")
+    arriba = [max(v, cn[g]) for v, g in zip(vals, grupos)] + [vals[-1]]
+    for xi, val, h in zip(x, vals, arriba):
+        ax.text(xi, h + 1.0, pct(val), ha="center", fontsize=9, color=TINTA, fontweight="bold")
+    ax.scatter(x[:-1], [cn[g] for g in grupos], marker="D", s=40, facecolor=SUP, edgecolor=TINTA, linewidth=1.3,
+               zorder=5, label="Con ingresos ajustados a Cuentas Nacionales\ny renta de activos externos")
+    ax.axhline(pr.total[0] * 100, color=TINTA2, linewidth=1, linestyle=(0, (4, 3)),
+               label=f"Promedio de la población ({pct(pr.total[0] * 100)}%)")
+    techo = max(vals + list(cn[grupos])) * 1.32
+    ax.axvspan(4.5, 7.5, color="#e8f1fb", zorder=0, linewidth=0)
+    ax.text(6, techo * 0.94, "decil 10, partido\n(encuesta)", ha="center", va="top", fontsize=8.5, color=TINTA2,
+            fontweight="bold")
+    ax.text(x[-1], techo * 0.94, "otra\nfuente:\nDDJJ*", ha="center", va="top", fontsize=8.5,
+            color=oscuro, fontweight="bold")
+    ax.axvline((7 + x[-1]) / 2, color=EJE, linewidth=1)
     ax.set_xticks(x)
-    ax.set_xticklabels(etiquetas, fontsize=8.6)
-    ax.set_xlim(-0.6, 9.5)
-    ax.set_ylim(0, max(alto) * 1.2)
+    ax.set_xticklabels(etiquetas, fontsize=8.8)
+    ax.set_xlim(-0.6, x[-1] + 0.6)
+    ax.set_ylim(0, techo)
     ax.set_ylabel("Impuestos, % del ingreso")
     ax.xaxis.grid(False)
-    ax.set_title(f"Tasa efectiva total, {anio} (barra: rango entre supuestos)", loc="left", fontsize=11,
-                 fontweight="bold")
-    # participación en el ingreso y en los impuestos
+    h, l = ax.get_legend_handles_labels()
+    h = [Patch(color=gris, label="Medida principal (ingreso declarado)") if lab.startswith("Medida") else x_
+         for x_, lab in zip(h, l)]
+    ax.legend(handles=h, loc="upper left", bbox_to_anchor=(0, -0.13), ncol=2, fontsize=8, frameon=False)
+    ax.set_title(f"Qué parte de su ingreso paga cada grupo, {anio}", loc="left", fontsize=11, fontweight="bold")
+    # paneles derechos: % de los impuestos que paga cada grupo frente a dos repartos de referencia
+    # con la misma recaudación total. Proporcional: todos la misma tasa (su parte del ingreso).
+    # Progresivo: tasa = promedio × (ingreso por persona / promedio)^ELAST_PROG, reescalada para
+    # recaudar lo mismo (ELAST_PROG = 0,25: el decil 1 pagaría ~la mitad de la tasa promedio y el
+    # 1% superior ~el doble).
     g2 = list(range(1, 10)) + [91, 95, 99]
+    pob = {g: 10 for g in range(1, 10)} | {91: 5, 95: 4, 99: 1}
     nom = [f"D{g}" for g in range(1, 10)] + ["P90-95", "P95-99", "1% encuesta"]
-    y = range(len(g2))
-    ax2.barh([i + 0.2 for i in y], [pr.part_ingreso[g] * 100 for g in g2], height=0.38, color=gris,
-             label="% del ingreso")
-    ax2.barh([i - 0.2 for i in y], [pr.part_impuestos[g] * 100 for g in g2], height=0.38, color=oscuro,
-             label="% de los impuestos")
-    for i, g in enumerate(g2):
-        ax2.text(pr.part_ingreso[g] * 100 + 0.3, i + 0.2, f"{pct(pr.canastas_por_persona[g])} canastas",
-                 va="center", fontsize=7.6, color=TINTA2)
-    ax2.set_yticks(list(y))
+    y = list(range(len(g2)))
+    yrel = pr.canastas_por_persona[g2] / pr.canastas_por_persona[0]
+    peso = pr.part_ingreso[g2] * yrel ** ELAST_PROG
+    ref_prog = peso / peso.sum()                                   # parte de los impuestos, progresivo
+    tasa_prog = pr.total[0] * yrel ** ELAST_PROG / peso.sum()
+    d_prop = [(pr.part_impuestos[g] - pr.part_ingreso[g]) * 100 for g in g2]
+    d_prog = [(pr.part_impuestos[g] - ref_prog[g]) * 100 for g in g2]
+    def panel_delta(axx, delta, titulo, xlabel):
+        lim = max(abs(d) for d in delta) * 1.45
+        axx.barh(y, delta, height=0.62, color=[oscuro if d >= 0 else rojo for d in delta])
+        axx.axvline(0, color=TINTA2, linewidth=1)
+        bt = matplotlib.transforms.blended_transform_factory(axx.transData, axx.transAxes)
+        for i, d in enumerate(delta):
+            signo = "+" if d >= 0 else "−"
+            axx.text(d + (0.03 if d >= 0 else -0.03) * lim, i, f"{signo}{pct(abs(d), 2)}", va="center",
+                     ha="left" if d >= 0 else "right", fontsize=8.2, color=TINTA)
+        axx.set_yticks(y)
+        axx.set_xlim(-lim, lim)
+        axx.set_ylim(-0.6, len(g2) - 0.1)
+        axx.xaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda v, _: pct(v)))
+        axx.set_xlabel(xlabel, fontsize=9)
+        axx.yaxis.grid(False)
+        axx.text(-0.04, 1.01, "← paga menos", transform=bt, fontsize=8, color=rojo, va="bottom", ha="right")
+        axx.text(0.04, 1.01, "paga más →", transform=bt, fontsize=8, color=oscuro, va="bottom", ha="left")
+        axx.set_title(titulo, loc="left", fontsize=10.5, fontweight="bold", pad=18)
+
+    panel_delta(ax2, d_prop, "Frente a un sistema proporcional\n(todos la misma tasa)",
+                "Puntos: % de los impuestos − % del ingreso")
     ax2.set_yticklabels(nom)
-    ax2.set_xlim(0, max(pr.part_ingreso[g2].max(), pr.part_impuestos[g2].max()) * 100 * 1.45)
-    ax2.set_xlabel("% del total")
-    ax2.yaxis.grid(False)
-    ax2.legend(loc="lower right", fontsize=8.5, frameon=False)
-    ax2.set_title("Qué parte del ingreso y de los impuestos tiene cada grupo", loc="left", fontsize=11,
-                  fontweight="bold")
+    panel_delta(ax3, d_prog, "Frente a un sistema progresivo\n(la tasa sube con el ingreso)",
+                "Puntos: % de los impuestos − % en el progresivo")
+    ax3.set_yticklabels([f"{pct(tasa_prog[g] * 100)}%" for g in g2], fontsize=8, color=TINTA2)
+    ax3.text(-0.02, len(g2) - 0.35, "tasa en el\nprogresivo", transform=matplotlib.transforms.blended_transform_factory(
+        ax3.transAxes, ax3.transData), ha="right", va="bottom", fontsize=7.4, color=MUDO)
+    tr = matplotlib.transforms.blended_transform_factory(ax3.transAxes, ax3.transData)
+    for i, g in enumerate(g2):
+        ax3.text(1.04, i, f"{pob[g]}%  ·  {pct(pr.part_ingreso[g] * 100)}%  ·  {pct(pr.canastas_por_persona[g])}",
+                 va="center", ha="left", fontsize=8, color=TINTA2, transform=tr)
+    ax3.text(1.04, len(g2) - 0.35, "pobl. · ingreso · canastas", va="bottom", ha="left", fontsize=7.6,
+             color=MUDO, transform=tr)
     p_alto = (pr.part_ingreso[[91, 95, 99]].sum()) * 100
-    fig.suptitle(f"Dentro del 10% más rico la tasa sube, pero la encuesta casi no ve al 1% más rico",
-                 x=0.01, y=1.1, ha="left", fontsize=13.5, fontweight="bold")
-    fig.text(0.01, 1.04, f"En {anio} el 10% más rico tiene {pct(p_alto, 0)}% del ingreso declarado en la encuesta. Su tasa "
-             f"sube de {pct(pr.total[91] * 100)}% (percentiles 90-95) a {pct(pr.total[99] * 100)}% (el 1% de la encuesta), "
-             f"sobre todo por Ganancias.\nDos mediciones del 1%: según la encuesta (EPH) declara "
-             f"{pct(pr.canastas_por_persona[99])} canastas por persona; según sus declaraciones juradas de Ganancias (ARCA), "
-             f"35. La encuesta casi no capta a los más ricos.\nCon la renta de activos externos, el 1% de la encuesta "
-             f"paga {pct(a[(a.variante == 'ajuste_cn_activos_ext') & (a.grupo == 99)].total.iloc[0] * 100)}%; el de las "
-             f"declaraciones juradas, sumando además utilidades de empresas, {pct(top.completo * 100)}%.", fontsize=9.6, color=TINTA2, va="top")
-    fig.subplots_adjust(wspace=0.28, top=0.86)
-    fig.text(0.01, -0.07, "Fuente: elaboración propia con EPH, ENGHo (INDEC), recaudación DNIAF y anuarios de ARCA. "
+    t91, t99 = pr.total[91] * 100, pr.total[99] * 100
+    medios = pr.total[list(range(2, 10))].median() * 100
+    if t99 < medios - 0.5:
+        titulo = "En la cima la tasa baja: el 1% más rico de la encuesta paga menos que los deciles medios"
+    elif t99 > t91 + 0.5:
+        titulo = "Dentro del 10% más rico la tasa sube hacia la cima"
+    else:
+        titulo = "Dentro del 10% más rico la tasa es pareja"
+    fig.suptitle(titulo, x=0.01, y=1.1, ha="left", fontsize=13.5, fontweight="bold")
+    fig.text(0.01, 1.04, f"En {anio} el 10% más rico tiene {pct(p_alto, 0)}% del ingreso (encuesta más el ingreso que declara al fisco y "
+             f"la encuesta no capta). Paga {pct(t91)}% en los percentiles 90-95,\n{pct(pr.total[95] * 100)}% en el 95-99 y "
+             f"{pct(t99)}% en el 1% superior; los deciles medios, alrededor de {pct(medios)}%. Dos mediciones del 1%: la encuesta "
+             f"completada con las declaraciones juradas\n({pct(pr.canastas_por_persona[99])} canastas por persona) y sólo las declaraciones "
+             f"juradas, por declarante, con utilidades de empresas y renta de activos externos ({pct(top.completo * 100)}%). "
+             f"Con esa renta, el de la encuesta paga {pct(a[(a.variante == 'ajuste_cn_activos_ext') & (a.grupo == 99)].total.iloc[0] * 100)}%.",
+             fontsize=9.6, color=TINTA2, va="top")
+    fig.subplots_adjust(wspace=0.32, top=0.84, right=0.87)
+    fig.text(0.01, -0.12, "Fuente: elaboración propia con EPH, ENGHo (INDEC), recaudación DNIAF y anuarios de ARCA. "
              "Tramos ordenados por ingreso per cápita familiar, como los deciles. Ganancias que la encuesta no capta y "
              "Bienes Personales se reparten entre los tramos con las\ndeclaraciones juradas. Por encima del 5% más rico "
-             "la ENGHo no informa consumo: la medida principal lo deja fijo y la variante lo hace proporcional al ingreso. "
-             "Rango: medida principal, consumo proporcional, ingresos\najustados a Cuentas Nacionales (con y sin renta de "
-             "activos externos) y sin Bienes Personales. * 1% DDJJ: según las declaraciones juradas de Ganancias (ARCA), ingreso por declarante, ver fig7. "
+             "la ENGHo no informa consumo: se deja fijo. Rombo: ingresos de cada fuente llevados a\nCuentas Nacionales, "
+             "más la renta de los activos externos privados. * 1% según las declaraciones juradas de Ganancias (ARCA), "
+             "con utilidades de empresas y renta de activos externos; ingreso por declarante, ver fig7.\nPaneles derechos: misma "
+             "recaudación total repartida de dos formas de referencia. Proporcional: todos pagan la tasa promedio. Progresivo: "
+             f"tasa = promedio × (ingreso por persona del grupo / promedio)^{pct(ELAST_PROG, 2)}, reescalada para recaudar lo mismo. "
              "Ver scripts/11_tramos_decil10.py.", fontsize=7.3, color=MUDO, ha="left", va="top")
     guardar(fig, "fig8_decil10_partido")
 

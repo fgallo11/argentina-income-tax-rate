@@ -143,16 +143,33 @@ def incidencia_trimestre(q: pd.DataFrame, anio: int, engho: pd.DataFrame, rec: p
 
     # ingreso antes de impuestos directos
     adic = q.ing_pre_adic - 0.5 * q.contrib + f * q.contrib + (t.ganancias - q.ganancias)
-    if v.altos_ingresos != "no":
+    if v.altos_ingresos == "registros":
         partes = np.array([rec[f"parte_d{d}"] for d in q.index])
-        if v.altos_ingresos == "registros":
-            esc = esc_pais
-            adic = adic + rec["ingreso_faltante_mill"] * esc * partes
-        else:
-            esc = consumo.sum() / rec["consumo_privado"]
-        t["ganancias"] = t.ganancias + rec["ganancias_faltante_mill"] * esc * partes
+        adic = adic + rec["ingreso_faltante_mill"] * esc_pais * partes
+        t["ganancias"] = t.ganancias + rec["ganancias_faltante_mill"] * esc_pais * partes
         if v.incluir_bp:
-            t["bienes_personales"] = rec["bienes_personales"] * esc * partes
+            t["bienes_personales"] = rec["bienes_personales"] * esc_pais * partes
+    elif v.altos_ingresos != "no":
+        # Medida principal (corregida el 16/11/2026). Dos partes:
+        #  a) Las n* personas de arriba (empalme EPH-declaraciones juradas): se les suma el ingreso
+        #     que la EPH no capta y la Ganancias que declaran y la EPH no simula, los dos de las
+        #     declaraciones juradas y en pesos reales por habitante. Así ese grupo queda con el
+        #     ingreso y el impuesto de sus declaraciones.
+        #  b) El resto de la Ganancias faltante lo pagan los demás declarantes, cuyo ingreso la
+        #     EPH sí capta: impuesto sin ingreso adicional, en la escala de la encuesta
+        #     (recaudación por peso de consumo privado), repartido según dónde viven.
+        # Antes toda la Ganancias faltante iba a las personas de arriba sin su ingreso: el 1% de la
+        # encuesta quedaba con más Ganancias sobre su ingreso que el 1% de las declaraciones.
+        partes = np.array([rec[f"parte_d{d}"] for d in q.index])
+        resto = np.array([rec[f"resto_d{d}"] for d in q.index])
+        esc_c = consumo.sum() / rec["consumo_privado"]
+        g_emp = rec["ganancias_faltante_empalme_mill"]
+        g_resto = rec["ganancias_faltante_mill"] - g_emp
+        adic = adic + rec["ingreso_faltante_completo_mill"] * esc_pais * partes   # con rentas exentas
+        t["ganancias"] = t.ganancias + g_emp * esc_pais * partes + g_resto * esc_c * resto
+        if v.incluir_bp:
+            sh = rec["patrimonio_ddjj_empalme_sobre_total"]
+            t["bienes_personales"] = rec["bienes_personales"] * (sh * esc_pais * partes + (1 - sh) * esc_c * resto)
     if v.sobre_consumo:
         base = consumo
     else:

@@ -76,10 +76,10 @@ Dondo, Hanni, Martner y Podestá (2015).
 | Decil | 1 | 2 | 3 | 5 | 9 | 10 | 1% más rico |
 |---|---|---|---|---|---|---|---|
 | Pessino et al., ~2018 (Argendata) | 35,8 | 30,8 | 27,8 | 25,6 | 24,2 | 24,9 | — |
-| Este proyecto, 2018 (principal) | 33,6 | 25,3 | 25,0 | 25,7 | 24,5 | 27,2 | — |
+| Este proyecto, 2018 (principal) | 33,6 | 25,3 | 25,0 | 25,7 | 24,5 | 24,0 | — |
 | ITO 2026, según la prensa | ~37 | | | ~29-30 | | ~25 | ~30 |
-| Este proyecto, 2024 | 31,4 | 25,0 | 24,3 | 25,0 | 24,5 | 26,8 | 28,1 (26,6 a 29,5) |
-| Este proyecto, 2025 | 28,7 | 23,3 | 23,0 | 23,7 | 23,3 | 26,5 | 26,6 (25,1 a 28,1), extrapolado |
+| Este proyecto, 2024 | 31,4 | 25,0 | 24,3 | 25,0 | 24,8 | 25,0 | 28,1 (26,6 a 29,5) |
+| Este proyecto, 2025 | 28,7 | 23,3 | 23,0 | 23,7 | 23,7 | 23,8 | 26,6 (25,1 a 28,1), extrapolado |
 
 La forma coincide: el decil 1 paga bastante más y del decil 3 al 9 la carga es pareja. Las
 diferencias: Pessino et al. incluyen más impuestos (cheque y otros en cascada, que pesan más

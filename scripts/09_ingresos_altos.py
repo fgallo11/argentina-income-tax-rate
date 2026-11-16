@@ -15,6 +15,14 @@ Para cada año:
   3. Reparto entre deciles: según el decil del hogar de las n* personas de mayor ingreso
      individual de la EPH (ponderado por su ingreso).
   4. Bienes Personales: recaudación oficial, repartida con las mismas proporciones.
+  5. Ganancias del ingreso faltante: la de las declaraciones juradas de las n* personas menos la
+     simulada sobre esas mismas personas de la EPH (ganancias_faltante_empalme_mill). Va junto
+     con el ingreso faltante completo (resultado neto más rentas exentas declaradas, como en
+     10_top1.py): impuesto e ingreso de la misma gente, de la misma fuente.
+  6. El resto de la Ganancias faltante (y de Bienes Personales, según la parte del patrimonio
+     declarado que no es de las n* personas) lo pagan los demás declarantes, cuyo ingreso la EPH
+     sí capta: se reparte según dónde viven las personas de la EPH entre el puesto n* y el total
+     de declaraciones (resto_d*).
   También se reparte la parte del decil 10 entre sus tramos (parte_d91: percentiles 90-95,
   parte_d95: 95-99, parte_d99: el 1% superior), según el tramo del hogar de esas personas.
 
@@ -39,7 +47,10 @@ GRUPOS_D10 = [91, 95, 99]   # tramos del decil 10 (04_microsimulacion_eph.py)
 
 def curva_ddjj(d: pd.DataFrame, col: str, escala: float = 1.0) -> pd.DataFrame:
     d = d.sort_values("desde", ascending=False)
+    # ingreso completo: resultado neto + rentas exentas declaradas (sin ventas exentas), como 10_top1.py
+    completo = d.resultado_neto + (d.exentos.fillna(0) - d.exentos_ventas.fillna(0))
     return pd.DataFrame({"n": d.casos.cumsum().values, "ingreso": d[col].cumsum().values * escala,
+                         "ingreso_completo": completo.cumsum().values * escala,
                          "impuesto": d.impuesto.cumsum().values * escala,
                          "patrimonio": d.patrimonio_neto.cumsum().values * escala})
 
@@ -60,12 +71,13 @@ if __name__ == "__main__":
         escala = media_eph[anio] / media_eph[fiscal]                 # 1 salvo año extrapolado
         c = curva_ddjj(ddjj[ddjj.anio_fiscal == fiscal], "resultado_neto", escala)
         ca = cola[cola.anio == anio]
-        eph_ing, eph_dec, eph_grp = [], [], []
+        eph_ing, eph_gan, eph_dec, eph_grp = [], [], [], []
         for trim, t in ca.groupby("trim"):
             f = rec.poblacion[anio] / qt.personas[(anio, trim)]      # expansión al total del país
             t = t.sort_values("ing_anual", ascending=False, kind="stable")
             n_ac, y = (t.w * f).cumsum().values, (t.w * f * t.ing_anual).values
             eph_ing.append(np.interp(c.n, n_ac, y.cumsum(), right=np.nan))
+            eph_gan.append(np.interp(c.n, n_ac, (t.w * f * t.ganancias_anual).cumsum().values, right=np.nan))
             # ingreso acumulado por decil del hogar en cada punto n
             eph_dec.append(np.column_stack([np.interp(c.n, n_ac, np.where(t.decil == d, y, 0).cumsum(), right=np.nan)
                                             for d in range(1, 11)]))
@@ -77,9 +89,19 @@ if __name__ == "__main__":
         dec = np.mean(eph_dec, axis=0)
         k = int(c.dif.idxmax()) if c.dif.notna().any() else 0
         faltante = max(float(c.dif[k]), 0.0) if c.dif.notna().any() else 0.0
+        # Ganancias de las n* personas de arriba: declarada (DDJJ) menos simulada sobre la EPH. Es
+        # el impuesto que paga el ingreso faltante; va junto con él.
+        gan_eph_emp = float(np.mean(eph_gan, axis=0)[k])
+        gan_falt_emp = max(float(c.impuesto[k]) - gan_eph_emp, 0.0) if faltante > 0 else 0.0
         partes = dec[k] / dec[k].sum()
         grp = np.mean(eph_grp, axis=0)[k]
         partes_grp = grp / grp.sum() * partes[9]          # el decil 10 repartido entre sus tramos
+        # resto de los declarantes (de n* al total de declaraciones): dónde viven en la EPH
+        dec_r = np.nan_to_num(dec[-1] - dec[k])
+        resto = dec_r / dec_r.sum() if dec_r.sum() > 0 else partes
+        grp_all = np.mean(eph_grp, axis=0)
+        grp_r = np.nan_to_num(grp_all[-1] - grp_all[k])
+        resto_grp = (grp_r / grp_r.sum() if grp_r.sum() > 0 else partes_grp / max(partes[9], 1e-12)) * resto[9]
         f_anual = rec.poblacion[anio] / qa.personas[anio]
         gan_sim = qa.ganancias[anio] * 12 * f_anual
         fila = {
@@ -87,9 +109,13 @@ if __name__ == "__main__":
             "n_empalme": c.n[k], "n_empalme_sobre_poblacion": c.n[k] / rec.poblacion[anio],
             "ingreso_ddjj_empalme_mill": c.ingreso[k] / M, "ingreso_eph_empalme_mill": c.eph[k] / M,
             "ingreso_faltante_mill": faltante / M,
+            # con las rentas exentas que declaran: el ingreso que corresponde a su Ganancias
+            "ingreso_faltante_completo_mill": max(float(c.ingreso_completo[k] - c.eph[k]), 0.0) / M if faltante > 0 else 0.0,
             "ingreso_eph_total_mill": qa.ipcf[anio] * 12 * f_anual / M,
             "ganancias_recaudada_mill": rec.ganancias_pf[anio], "ganancias_simulada_mill": gan_sim / M,
             "ganancias_faltante_mill": max(rec.ganancias_pf[anio] - gan_sim / M, 0.0),
+            "ganancias_ddjj_empalme_mill": c.impuesto[k] / M, "ganancias_eph_empalme_mill": gan_eph_emp / M,
+            "ganancias_faltante_empalme_mill": min(gan_falt_emp / M, max(rec.ganancias_pf[anio] - gan_sim / M, 0.0)),
             "impuesto_ddjj_total_mill": c.impuesto.iloc[-1] / M,
             "impuesto_ddjj_empalme_sobre_total": c.impuesto[k] / c.impuesto.iloc[-1],
             "patrimonio_ddjj_empalme_sobre_total": c.patrimonio[k] / c.patrimonio.iloc[-1],
@@ -97,6 +123,8 @@ if __name__ == "__main__":
         }
         fila |= {f"parte_d{d}": partes[d - 1] for d in range(1, 11)}
         fila |= {f"parte_d{g}": partes_grp[i] for i, g in enumerate(GRUPOS_D10)}
+        fila |= {f"resto_d{d}": resto[d - 1] for d in range(1, 11)}
+        fila |= {f"resto_d{g}": resto_grp[i] for i, g in enumerate(GRUPOS_D10)}
         filas.append(fila)
     out = pd.DataFrame(filas).set_index("anio")
     out.to_csv(PROCESSED / "ajuste_altos_ingresos.csv")
