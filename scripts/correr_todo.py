@@ -30,6 +30,7 @@ PASOS = [
     ("06", "06_validacion.py"),
     ("08", "08_poblacion_fija.py"),
     ("10", "10_top1.py"),                       # el 1% más rico
+    ("11", "11_tramos_decil10.py"),             # el decil 10 partido en P90-95, P95-99 y 1%
     ("07", "07_graficos.py"),                   # todas las figuras
 ]
 

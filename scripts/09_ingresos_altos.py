@@ -15,6 +15,8 @@ Para cada año:
   3. Reparto entre deciles: según el decil del hogar de las n* personas de mayor ingreso
      individual de la EPH (ponderado por su ingreso).
   4. Bienes Personales: recaudación oficial, repartida con las mismas proporciones.
+  También se reparte la parte del decil 10 entre sus tramos (parte_d91: percentiles 90-95,
+  parte_d95: 95-99, parte_d99: el 1% superior), según el tramo del hogar de esas personas.
 
 El año fiscal 2025 todavía no está publicado (el anuario 2025 de ARCA informa el año fiscal
 2024): se usan las declaraciones de 2024 llevadas a 2025 por la variación del ingreso medio de
@@ -32,6 +34,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from incidencia.config import PROCESSED, TABLES  # noqa: E402
 
 M = 1e6
+GRUPOS_D10 = [91, 95, 99]   # tramos del decil 10 (04_microsimulacion_eph.py)
 
 
 def curva_ddjj(d: pd.DataFrame, col: str, escala: float = 1.0) -> pd.DataFrame:
@@ -57,7 +60,7 @@ if __name__ == "__main__":
         escala = media_eph[anio] / media_eph[fiscal]                 # 1 salvo año extrapolado
         c = curva_ddjj(ddjj[ddjj.anio_fiscal == fiscal], "resultado_neto", escala)
         ca = cola[cola.anio == anio]
-        eph_ing, eph_dec = [], []
+        eph_ing, eph_dec, eph_grp = [], [], []
         for trim, t in ca.groupby("trim"):
             f = rec.poblacion[anio] / qt.personas[(anio, trim)]      # expansión al total del país
             t = t.sort_values("ing_anual", ascending=False, kind="stable")
@@ -66,12 +69,17 @@ if __name__ == "__main__":
             # ingreso acumulado por decil del hogar en cada punto n
             eph_dec.append(np.column_stack([np.interp(c.n, n_ac, np.where(t.decil == d, y, 0).cumsum(), right=np.nan)
                                             for d in range(1, 11)]))
+            # lo mismo con el decil 10 partido en tramos (91: P90-95, 95: P95-99, 99: P99-100)
+            eph_grp.append(np.column_stack([np.interp(c.n, n_ac, np.where(t.grupo == g, y, 0).cumsum(), right=np.nan)
+                                            for g in GRUPOS_D10]))
         c["eph"] = np.mean(eph_ing, axis=0)
         c["dif"] = c.ingreso - c.eph
         dec = np.mean(eph_dec, axis=0)
         k = int(c.dif.idxmax()) if c.dif.notna().any() else 0
         faltante = max(float(c.dif[k]), 0.0) if c.dif.notna().any() else 0.0
         partes = dec[k] / dec[k].sum()
+        grp = np.mean(eph_grp, axis=0)[k]
+        partes_grp = grp / grp.sum() * partes[9]          # el decil 10 repartido entre sus tramos
         f_anual = rec.poblacion[anio] / qa.personas[anio]
         gan_sim = qa.ganancias[anio] * 12 * f_anual
         fila = {
@@ -88,6 +96,7 @@ if __name__ == "__main__":
             "bienes_personales_mill": rec.bienes_personales[anio],
         }
         fila |= {f"parte_d{d}": partes[d - 1] for d in range(1, 11)}
+        fila |= {f"parte_d{g}": partes_grp[i] for i, g in enumerate(GRUPOS_D10)}
         filas.append(fila)
     out = pd.DataFrame(filas).set_index("anio")
     out.to_csv(PROCESSED / "ajuste_altos_ingresos.csv")

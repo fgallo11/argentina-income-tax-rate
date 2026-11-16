@@ -80,14 +80,18 @@ def alicuota_iva(clase: str, anio: int, exento: float = 0.0) -> float:
 
 
 def perfil_consumo(anio: int, ingreso_rel: np.ndarray, engho: pd.DataFrame,
-                   modo: str = "interpolado", exento: float = 0.0) -> pd.DataFrame:
+                   modo: str = "interpolado", exento: float = 0.0,
+                   extrapolar: str = "nivel") -> pd.DataFrame:
     """Consumo y canasta que corresponden a hogares con `ingreso_rel` en `anio`.
 
     Devuelve DataFrame (una fila por elemento de ingreso_rel) con:
       consumo_rel : consumo per cápita / ingreso per cápita medio de la población
       iva_legal   : contenido legal de IVA por peso gastado, t/(1+t) ponderado
       s_<rubro>   : participación del gasto en cada rubro gravado por Internos
-    Fuera del rango de ingresos de la ENGHo se usa el valor del extremo.
+    Fuera del rango de ingresos de la ENGHo se usa el valor del extremo. Por encima del veintil
+    más alto (el promedio del 5% más rico), extrapolar="nivel" deja fijo el consumo (el gasto
+    cae como proporción del ingreso) y extrapolar="proporcional" deja fijo el cociente
+    gasto/ingreso. Sólo importa para tramos dentro del decil 10 (el decil entero queda debajo).
     """
     r = np.asarray(ingreso_rel, dtype=float)
     out = None
@@ -102,6 +106,8 @@ def perfil_consumo(anio: int, ingreso_rel: np.ndarray, engho: pd.DataFrame,
         for rubro in RUBROS_INTERNOS:
             cols[f"s_{rubro}"] = (e[f"int_{rubro}"] / g).clip(lower=0.0).values
         p = pd.DataFrame({k: np.interp(r, x, v) for k, v in cols.items()})
+        if extrapolar == "proporcional":
+            p["consumo_rel"] = np.where(r > x[-1], r * cols["consumo_rel"][-1] / x[-1], p.consumo_rel)
         out = p * w if out is None else out + p * w
     return out
 

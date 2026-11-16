@@ -43,6 +43,12 @@ anuales por persona, contra $112 millones extrapolados). 2025: 26,6% (25,1% a 28
 prácticamente igual al decil 10 (26,5%); sólo con lo declarado, 30,2%. 2025 todavía es
 extrapolado (declaraciones de 2024 llevadas a 2025 con el ingreso del decil 10 de la EPH).
 
+**El decil 10 partido** (`outputs/figures/fig8_decil10_partido.png`, `scripts/11_tramos_decil10.py`):
+percentiles 90-95, 95-99 y el 1% superior de la encuesta, con el mismo método que los deciles.
+2025: 24,2%, 25,8% y 29,0%. Pero el 1% de la encuesta declara 12,4 canastas por persona y el de
+las declaraciones juradas 35: la encuesta casi no lo capta. Con la renta de activos externos, el
+1% de la encuesta paga 23,0%; el de las declaraciones juradas, 26,6%.
+
 **Distancia entre deciles** (`outputs/figures/fig6_distancia_entre_deciles.png`, en canastas
 básicas; `fig6b_distancia_en_pesos.png`, en pesos de hoy): el 10% más rico ingresaba por persona
 46 veces lo del 10% más pobre en 2004 y 20 veces en 2024 y 2025; después de impuestos la distancia

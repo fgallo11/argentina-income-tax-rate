@@ -67,6 +67,9 @@ class Variante:
     # la propiedad. Con ajuste_cn, multiplica las rentas declaradas en la EPH (alquileres,
     # intereses, ganancias de negocios) por este factor. 1 = sin ajuste.
     factor_rentas: float = 1.0
+    # Consumo por encima del veintil más alto de la ENGHo (sólo afecta a los tramos del decil 10):
+    # "nivel" (fijo) o "proporcional" (mismo cociente gasto/ingreso que ese veintil).
+    extrapolar_consumo: str = "nivel"
 
 
 VARIANTES = [
@@ -104,7 +107,7 @@ def incidencia_trimestre(q: pd.DataFrame, anio: int, engho: pd.DataFrame, rec: p
     q = q.set_index("decil").sort_index()
     media = q.ipcf.sum() / q.personas.sum()
     rel = (q.ipcf / q.personas / media).values
-    perfil = perfil_consumo(anio, rel, engho, v.modo_engho, v.iva_exentos)
+    perfil = perfil_consumo(anio, rel, engho, v.modo_engho, v.iva_exentos, v.extrapolar_consumo)
     perfil.index = q.index
     consumo = perfil.consumo_rel * media * q.personas
     ti = tasas_indirectas(perfil, consumo.values, rec, v.iva_nivel_legal)
@@ -131,7 +134,8 @@ def incidencia_trimestre(q: pd.DataFrame, anio: int, engho: pd.DataFrame, rec: p
     if v.incluir_bp:
         # recaudación por peso de consumo privado, aplicada al consumo total de la encuesta
         # y asignada íntegramente al decil 10 (SUPUESTO; ver docs/metodologia.md)
-        bp.loc[10] = rec["bienes_personales"] / rec["consumo_privado"] * consumo.sum()
+        arriba = 10 if 10 in q.index else 99     # con el decil 10 partido, al 1% superior
+        bp.loc[arriba] = rec["bienes_personales"] / rec["consumo_privado"] * consumo.sum()
     t["bienes_personales"] = bp
     if v.calibrar_ganancias and q.ganancias.sum() > 0:
         objetivo = rec["ganancias_pf"] / rec["consumo_privado"] * consumo.sum()
@@ -178,6 +182,9 @@ def incidencia_trimestre(q: pd.DataFrame, anio: int, engho: pd.DataFrame, rec: p
     tasas["ingreso_rel"] = np.append(rel, 1.0)
     tasas["gasto_sobre_ingreso_declarado"] = np.append((consumo / q.ipcf).values, consumo.sum() / q.ipcf.sum())
     tasas["ajuste_recursos"] = np.append((base / q.ipcf - 1).values, base.sum() / q.ipcf.sum() - 1)
+    # totales mensuales del grupo (pesos corrientes, población EPH): para participaciones
+    tasas["ingreso_total"] = np.append(den.values, den.sum())
+    tasas["personas"] = np.append(q.personas.values, q.personas.sum())
     return tasas
 
 

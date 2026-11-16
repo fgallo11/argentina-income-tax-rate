@@ -317,6 +317,33 @@ precios; combustibles se reparte como el consumo total (falta la canasta de comb
 decil de la ENGHo). 2018 con cheque: D1 37,1%, D2 27,6%, D10 28,4% (Pessino et al.: 35,8%,
 30,8%, 24,9%).
 
+## 7 quinquies. El decil 10 partido (figura 8)
+
+`scripts/11_tramos_decil10.py` (agregado el 16/11/2026). El decil 10 se parte en percentiles
+90-95, 95-99 y el 1% superior, con el mismo orden (ingreso per cápita familiar), la misma regla
+de corte y la misma microsimulación que los deciles (`src/incidencia/eph.py`, columna `grupo`;
+`data/processed/eph_trimestral_tramos.csv`). Los deciles 1-9 no cambian. Motivo: el promedio
+del decil 10 mezcla a la clase media alta asalariada con los ricos.
+
+- **Ganancias faltante y Bienes Personales:** la parte del decil 10 se reparte entre los tramos
+  según el tramo del hogar de las personas que empalman con las declaraciones juradas
+  (`parte_d91`, `parte_d95`, `parte_d99` en `ajuste_altos_ingresos.csv`). 2025: 4%, 37% y 59%.
+- **Consumo:** la ENGHo sólo llega al promedio del 5% más rico (su veintil más alto). Por encima,
+  la medida principal deja fijo el consumo; la variante `consumo_proporcional` deja fijo el
+  cociente gasto/ingreso. Sólo cambia el 1% superior (2025: 29,0% contra 32,5%).
+- **Rango:** principal, `consumo_proporcional`, `ajuste_cn`, `ajuste_cn_activos_ext` y
+  `sin_bienes_personales`.
+
+Resultado 2025 (principal): P90-95 24,2%, P95-99 25,8%, 1% de la encuesta 29,0% (rango 23,0-32,5).
+El 10% más rico tiene 32,5% del ingreso declarado y el 1% de la encuesta 6,9% (8,2% de los
+impuestos). Pero el 1% de la encuesta declara 12,4 canastas por persona y el de las declaraciones
+juradas 35 (por declarante): no es el mismo grupo. Con las declaraciones juradas (sección 7 ter)
+paga 26,6%; con la renta de activos externos, el 1% de la encuesta baja a 23,0%.
+
+**Limitación:** el 1% de la encuesta tiene pocas observaciones por trimestre y es ruidoso año a
+año. Un trimestre (2011T1) de la base cruda local difiere en 0,1% de la usada para los deciles
+publicados; los tramos se calcularon con la local.
+
 ## 8. Qué falta para cerrar los supuestos abiertos
 
 0. **Subdeclaración de ingresos en todos los deciles.** Hecho para salarios e ingreso mixto

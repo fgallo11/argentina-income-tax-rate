@@ -111,7 +111,11 @@ def cargar_trimestre(anio: int, trim: int) -> pd.DataFrame:
     # deciles de personas según IPCF del hogar (con aguinaldo devengado)
     hog = df.groupby("hid", sort=False).agg(ipcf=("IPCF", "first"), wp=("w", "sum")).reset_index()
     hog["decil"] = deciles_ponderados(hog.ipcf.values, hog.wp.values, hog.hid.values)
-    df = df.merge(hog[["hid", "decil"]], on="hid", how="left")
+    # tramos dentro del decil 10 (mismo orden y misma regla de corte, en percentiles):
+    # 91 = percentiles 90-95, 95 = 95-99, 99 = el 1% superior. Deciles 1-9 sin cambios.
+    pct = deciles_ponderados(hog.ipcf.values, hog.wp.values, hog.hid.values, n=100)
+    hog["grupo"] = np.select([hog.decil < 10, pct <= 95, pct <= 99], [hog.decil, 91, 95], 99)
+    df = df.merge(hog[["hid", "decil", "grupo"]], on="hid", how="left")
     df.attrs["ponderador"] = "PONDIH" if usa_pondih else "PONDERA"
     df.attrs["neg_p21"] = neg_p21
     return df

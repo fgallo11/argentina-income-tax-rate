@@ -230,14 +230,17 @@ def simular(df: pd.DataFrame, P: Parametros, anio: int, trim: int, iteraciones: 
     return out
 
 
-def resumir_por_decil(s: pd.DataFrame) -> pd.DataFrame:
-    """Totales expandidos mensuales por decil (impuestos, ingresos y composición)."""
+def resumir_por_decil(s: pd.DataFrame, clave: str = "decil") -> pd.DataFrame:
+    """Totales expandidos mensuales por decil (impuestos, ingresos y composición).
+
+    clave="grupo": deciles 1-9 y el decil 10 partido en 91 (P90-95), 95 (P95-99) y 99 (P99-100);
+    la columna de salida se sigue llamando "decil"."""
     w = s.w
     ocup = (s.ESTADO == 1)
     asal = ocup & (s.CAT_OCUP == 3)
     indep = ocup & s.CAT_OCUP.isin([1, 2])
     t = pd.DataFrame({
-        "decil": s.decil,
+        "decil": s[clave],
         "personas": w,
         "hogares": w * (s.CH03 == 1),
         "ipcf": w * s.IPCF,

@@ -34,6 +34,7 @@ if __name__ == "__main__":
             filas.append(p)
     ancho = pd.concat(filas, ignore_index=True)
     ancho["decil"] = ancho.decil.astype(int)
+    ancho = ancho.drop(columns=["ingreso_total", "personas"])   # sólo los usa 11_tramos_decil10.py
 
     ids = ["variante", "anio", "decil", "trimestres", "advertencia_indec"]
     ancho.melt(id_vars=ids, value_vars=MEDIDAS, var_name="impuesto", value_name="tasa").to_csv(
