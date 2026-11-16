@@ -14,7 +14,7 @@ for _p in (RAW, INTERIM, PROCESSED, FIGURES, TABLES):
     _p.mkdir(parents=True, exist_ok=True)
 
 ANIO_INI = 2003
-ANIO_FIN = 2024
+ANIO_FIN = 2025
 
 # Trimestres de la EPH continua que INDEC nunca publicó.
 # 2003 T1-T2: la EPH continua empieza en el 3er trimestre de 2003.

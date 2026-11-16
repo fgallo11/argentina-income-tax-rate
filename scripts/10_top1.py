@@ -35,8 +35,9 @@ activos externos, y todos los impuestos atribuibles; el rango refleja el consumo
 ingreso declarado al fisco sigue subdeclarado (rentas internas no declaradas): la tasa es
 un techo.
 
-2024: las declaraciones de 2023 se llevan a 2024 con la variación del ingreso del decil 10
-de la EPH (como en 09_ingresos_altos.py).
+Años sin declaraciones publicadas (hoy, 2025: el último anuario de ARCA, el de 2025, informa el
+año fiscal 2024): se usan las del último año fiscal disponible llevadas al año con la variación
+del ingreso del decil 10 de la EPH (como en 09_ingresos_altos.py).
 
 Salida: outputs/tables/top1.csv
 """
@@ -47,7 +48,7 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from incidencia.config import PARAMS, PROCESSED, TABLES  # noqa: E402
+from incidencia.config import ANIO_FIN, PARAMS, PROCESSED, TABLES  # noqa: E402
 
 FRACCION = 0.01
 PARTE_SALARIAL = 0.5
@@ -96,7 +97,7 @@ def main() -> None:
     crec = (d10.ipcf / d10.personas)
 
     filas = []
-    for anio in range(2004, 2025):
+    for anio in range(2004, ANIO_FIN + 1):
         fiscal = min(anio, int(total.index.max()))
         esc = crec[anio] / crec[fiscal]
         n = FRACCION * rec.poblacion[anio]

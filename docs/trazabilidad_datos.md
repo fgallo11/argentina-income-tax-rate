@@ -20,9 +20,9 @@ descargada. "—" = no contrastado.
 
 | Dato | Fuente / ID | Dónde se usa | Chequeo 14/11 |
 |---|---|---|---|
-| Microdatos EPH 2003T3-2024T4 | INDEC FTP, `nombre_eph()` en `01_descargar_datos.py:28` | todo | — (5 GB; no se bajó) |
+| Microdatos EPH 2003T3-2025T4 | INDEC FTP, `nombre_eph()` en `01_descargar_datos.py:28` | todo | — (5 GB; no se bajó) |
 | Microdatos ENGHo 2004/05, 2012/13, 2017/18 | INDEC FTP, `ENGHO` en `01_descargar_datos.py:47` | `02_procesar_engho.py` | — |
-| Ganancias: escalas y deducciones | DNIAF, PDF "Impuesto a las Ganancias… desde el año 2000 al 2025" | `params/ganancias.yaml` (ver B) | PDF bajado |
+| Ganancias: escalas y deducciones | DNIAF, PDF "Impuesto a las Ganancias… desde el año 2000 al 2025" (2025: tabla anual, pág. 34) | `params/ganancias.yaml` (ver B) | PDF bajado |
 | Recaudación por impuesto | DNIAF, "Recaudación nominal, clasificación internacional" (xlsx) | `03_recaudacion_macro.py` | **Sí:** los 22 índices de `FILAS` (`03_recaudacion_macro.py:24`) corresponden al concepto que dice el código (p. ej. `1.1.1` = Ganancias de Personas Físicas, `3.1.2.2` = Créditos y Débitos, `10.2.1` = generales provinciales = IIBB) |
 | Consumo privado corriente | datos.gob.ar `4.3_DGCP_2004_A_27` | escala de indirectos | **Sí:** "Consumo privado, millones de pesos corrientes, anual", INDEC base 2004 |
 | PIB corriente | `4.3_OGP_2004_A_17` | validación | **Sí:** "PIB a precios de comprador, corrientes, anual", INDEC |
@@ -34,7 +34,7 @@ descargada. "—" = no contrastado.
 | Tipo de cambio A 3500 | `168.1_T_CAMBI500_D_0_0_17`, promedio anual | activos externos | **Sí** (BCRA) |
 | Cuenta de generación del ingreso | INDEC `serie_cgi_10_26.xls`, hojas RTA, IBM, EEB | ajuste a Cuentas Nacionales | — |
 | Posición de inversión internacional | INDEC `cin_II_2026.xls`, cuadro 18 | activos externos | — |
-| Declaraciones juradas de Ganancias por tramo | Anuarios ARCA 2003-2024 | `09`, `10` | — (el script controla suma de tramos vs TOTAL < 0,2%) |
+| Declaraciones juradas de Ganancias por tramo | Anuarios ARCA 2003-2025 (años fiscales 2002-2024). Los de 2003-2008 traen las planillas dentro de `AFIP.CAB`, que `01_descargar_datos.py` extrae desde el 16/11/2026 (antes se hacía a mano) | `09`, `10` | — (el script controla suma de tramos vs TOTAL < 0,2%) |
 | Población total | **Banco Mundial** `SP.POP.TOTL` | expansión de la EPH al país | — Nota: no es la proyección del INDEC; difieren algo |
 
 Cómo verificar los IDs: `https://apis.datos.gob.ar/series/api/series/?ids=<ID>&metadata=only`.
@@ -72,6 +72,7 @@ es fuerte. Pendiente a mano: confirmar año ↔ página.
 | Contribuciones 2018 | 20,70% / 17,50%, detracción $2.400 | **no_verificado** ("el cronograma figura como imagen") | |
 | Contribuciones 2019 | 20,40% / 18,00%, detracción $7.003,68 | **no_verificado** | |
 | Contribuciones 2020-2024 | 20,40% / 18,00%, detracción $7.003,68 | verificado (Ley 27.541) | Confirmar si la detracción tuvo actualizaciones o montos distintos para empleadores chicos en 2020-2024 |
+| Contribuciones 2025 | 20,40% / 18,00%, detracción $7.003,68 | **no_verificado** | Se supone que siguió la Ley 27.541: la página de ARCA y la prensa especializada no registran cambios en 2025 (la baja de la reforma laboral es de 2026). Falta contrastar con texto primario |
 | Umbral inc. a): >40 personas | 40 | **supuesto** | La norma usa ventas, no tamaño |
 | Reparto 50/50 | 0,5 | decisión | |
 
@@ -87,6 +88,7 @@ es fuerte. Pendiente a mano: confirmar año ↔ página.
 | 2015-09 (ancla) | 48.598,08 | SICOSS v39 r2, Consejo Profesional CABA | **Fuente secundaria**: buscar la Res. ANSES |
 | 2020-03 (ancla) | 173.945,70 | "valor vigente marzo 2020 (consistente con Res. ANSES 325/2020 / 1,075 / 1,0612)" | **No es un valor leído en una norma**: se calculó hacia atrás desde el de 09/2020. Y como `REANCLAR` lo impone, no se controla |
 | Resto de anclas | Res. ANSES 130/2010, 30/2013, 325/2020, 36/2023, 979/2024, 1122/2024 | citadas | verificar cada una |
+| 2025-06, 2025-11, 2025-12 (anclas) | 3.335.458,18; 3.645.898,00; 3.731.212,01 | Res. ANSES 237/2025 (leída en el Boletín Oficial), 338/2025 y 359/2025 (estas dos, según fuentes secundarias) | La cadena de movilidad las reproduce con diferencias ≤0,0004%, lo que también respalda los dos valores secundarios |
 
 ---
 

@@ -2,12 +2,12 @@
 """Descarga todos los insumos públicos crudos a data/raw/.
 
 Fuentes (todas de acceso público, sin login):
-  - EPH continua, microdatos trimestrales 2003T3-2024T4 (INDEC).
+  - EPH continua, microdatos trimestrales 2003T3-2025T4 (INDEC).
   - ENGHo 2004/05, 2012/13 y 2017/18, microdatos (INDEC).
   - Documentos normativos y series de recaudación (ver FUENTES_VARIAS).
 
 Los archivos .rar/.zip se extraen con `bsdtar` (libarchive), que lee ambos
-formatos. Uso:  python scripts/01_descargar_datos.py [--solo eph|engho|otros|anuarios]
+formatos (si un .rar falla, se usa `unar`). Uso:  python scripts/01_descargar_datos.py [--solo eph|engho|otros|anuarios]
 """
 from __future__ import annotations
 
@@ -106,12 +106,12 @@ FUENTES_VARIAS = [
     ("macro", "cbt_gba_mensual.csv", _serie("444.1_CANASTA_batotGBA_0_0_26_47")),
     # Población total país (Banco Mundial, SP.POP.TOTL; uso auxiliar en validación)
     ("macro", "poblacion_total_wb.json",
-     "https://api.worldbank.org/v2/country/ARG/indicator/SP.POP.TOTL?format=json&date=2003:2024&per_page=100"),
+     "https://api.worldbank.org/v2/country/ARG/indicator/SP.POP.TOTL?format=json&date=2003:2025&per_page=100"),
 ] + [
     # ARCA (ex AFIP): recaudación anual por impuesto, un archivo por año
     ("recaudacion", f"arca_serie{a}.xls",
      f"https://contenidos.afip.gob.ar/institucional/estudios/archivos/serie{a}.xls")
-    for a in range(2003, 2025)
+    for a in range(2003, 2026)
 ]
 
 
@@ -138,7 +138,13 @@ def extraer(archivo: Path, carpeta: Path) -> None:
     if marca.exists():
         return
     carpeta.mkdir(parents=True, exist_ok=True)
-    subprocess.run(["bsdtar", "-xf", str(archivo), "-C", str(carpeta)], check=True)
+    r = subprocess.run(["bsdtar", "-xf", str(archivo), "-C", str(carpeta)])
+    if r.returncode and archivo.suffix == ".rar":
+        # libarchive 3.7.2 da error de CRC con algunos .rar de la EPH 2014 (el archivo está
+        # sano: coincide en tamaño con el del servidor y unar lo extrae bien).
+        subprocess.run(["unar", "-q", "-f", "-D", "-o", str(carpeta), str(archivo)], check=True)
+    elif r.returncode:
+        raise subprocess.CalledProcessError(r.returncode, r.args)
     marca.write_text(hashlib.sha256(archivo.read_bytes()).hexdigest())
 
 
@@ -174,6 +180,7 @@ ANUARIOS_ARCA = {a: f"{_ET}/estadisticasTributarias{a}.zip" for a in range(2003,
     2019: f"{_ET}/Public2019.zip", 2020: f"{_ET}/Publicacion-2020.zip",
     2021: f"{_ET}/Estadisticas-Tributarias-2021.zip", 2022: f"{_ET}/estadisticas-Tributarias-2022.zip",
     2023: f"{_ET}/Estadisticas-Tributarias-2023.zip", 2024: f"{_ET}/Estadisticas-Tributarias-2024.zip",
+    2025: f"{_ET}/Estadisticas-Tributarias-2025.zip",
 }
 
 
@@ -185,7 +192,11 @@ def bajar_anuarios() -> list[str]:
         if not descargar(url, z):
             fallas.append(z.name)
             continue
-        extraer(z, RAW / "anuarios_arca" / str(anio))
+        carpeta = RAW / "anuarios_arca" / str(anio)
+        extraer(z, carpeta)
+        # 2003-2008: el zip trae un instalador; las planillas están dentro de AFIP.CAB
+        for cab in carpeta.glob("*.CAB"):
+            extraer(cab, carpeta / "cab")
         print(f"Anuario ARCA {anio} ok")
     return fallas
 

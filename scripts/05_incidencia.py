@@ -57,7 +57,7 @@ if __name__ == "__main__":
     rango.to_csv(TABLES / "rango_por_decil_anual.csv", index=False)
 
     pd.set_option("display.width", 250)
-    for a in (2004, 2014, 2024):
+    for a in (2004, 2014, 2024, 2025):
         print(f"\n=== {a} — principal (% del ingreso) ===")
         print((princ[princ.anio == a].set_index("decil")[IMPUESTOS + ["total", "gasto_sobre_ingreso_declarado"]]
                * [100] * 9 + [1]).round(1).to_string() if False else
@@ -65,4 +65,4 @@ if __name__ == "__main__":
               .join(princ[princ.anio == a].set_index("decil").gasto_sobre_ingreso_declarado.round(2)).to_string())
     s = ancho[ancho.decil.isin([0, 1, 5, 10])].pivot_table(index=["variante", "decil"], columns="anio", values="total")
     print("\n=== Tasa total por variante ===")
-    print((s * 100).round(1)[[2004, 2007, 2011, 2012, 2015, 2017, 2019, 2021, 2024]].to_string())
+    print((s * 100).round(1)[[2004, 2007, 2011, 2012, 2015, 2017, 2019, 2021, 2024, 2025]].to_string())

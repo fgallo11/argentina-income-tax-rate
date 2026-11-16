@@ -5,7 +5,7 @@
                                 a Cuentas Nacionales (con la sensibilidad de activos externos).
   fig1_tasa_por_decil_<año>     gráfico principal: tasa efectiva por decil y por impuesto,
                                 contra el ingreso declarado.
-  fig2_serie_historica          tasa total 2004-2024: promedio, D1, D5 y D10 (con la cota de
+  fig2_serie_historica          tasa total 2004-último año: promedio, D1, D5 y D10 (con la cota de
                                 ingreso no declarado del decil 10).
   fig3_composicion_en_el_tiempo composición por impuesto en el tiempo, deciles 1, 5 y 10.
   fig4_deciles_anios_seleccionados
@@ -26,7 +26,7 @@ import pandas as pd  # noqa: E402
 from matplotlib.patches import Patch  # noqa: E402
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from incidencia.config import FIGURES, TABLES  # noqa: E402
+from incidencia.config import ANIO_FIN, FIGURES, TABLES  # noqa: E402
 
 SUP, TINTA, TINTA2, MUDO, GRILLA, EJE = "#fcfcfb", "#0b0b0b", "#52514e", "#898781", "#e1e0d9", "#c3c2b7"
 IMPUESTOS = [  # (columna, etiqueta, color) — de abajo hacia arriba en las barras
@@ -134,7 +134,7 @@ def fondo_serie(ax):
     ax.axvspan(2006.5, 2015.5, color="#f0efec", zorder=0)
     ax.text(2011, ax.get_ylim()[0] + 0.4, "2007-2015: estadísticas INDEC con reservas", ha="center", va="bottom",
             fontsize=8, color=MUDO)
-    ax.set_xticks(range(2004, 2025, 2))
+    ax.set_xticks(range(2004, ANIO_FIN + 1, 2))
     ax.xaxis.grid(False)
 
 
@@ -162,15 +162,15 @@ def fig_serie(serie):
         ax.plot(s.index, y, color=color, linewidth=2.6 if col == "total_poblacion" else 2, label=etq,
                 linestyle=(0, (5, 2)) if col == "total_poblacion" else "-")
         ax.scatter(s.index[parc], y[parc], s=42, facecolor=SUP, edgecolor=color, linewidth=1.6, zorder=3)
-        ax.text(2024.25, pos[col], f"{etq}  {pct(y.iloc[-1])}%", va="center", fontsize=9, color=TINTA)
-    ax.set_xlim(2003.5, 2024.2)
+        ax.text(ANIO_FIN + 0.25, pos[col], f"{etq}  {pct(y.iloc[-1])}%", va="center", fontsize=9, color=TINTA)
+    ax.set_xlim(2003.5, ANIO_FIN + 0.2)
     ax.set_ylabel("% del ingreso")
     d1 = s.total_D1 * 100
     otros = s[["total_D5", "total_D10", "total_poblacion"]].max(axis=1) * 100
     siempre = bool((d1 > otros).all())
     p = s.total_poblacion * 100
     pico = int(p.idxmax())
-    fig.suptitle("Tasa efectiva total por grupo de ingreso, 2004-2024", x=0.01, y=1.05, ha="left", fontsize=14,
+    fig.suptitle(f"Tasa efectiva total por grupo de ingreso, 2004-{ANIO_FIN}", x=0.01, y=1.05, ha="left", fontsize=14,
                  fontweight="bold")
     ax.set_title(("El decil más pobre paga la mayor proporción de su ingreso en todos los años" if siempre else
                   "El decil más pobre suele pagar la mayor proporción de su ingreso") +
@@ -200,15 +200,15 @@ def fig_composicion(ancho):
         ax.text(0.02, 0.97, f"{ult}: total {pct(d.loc[ult].sum())}%, de los cuales\n"
                 f"{pct(ind[ult])} son impuestos al consumo", transform=ax.transAxes, fontsize=8.6,
                 color=TINTA2, va="top")
-        ax.set_xlim(2004, 2024)
-        ax.set_xticks(range(2005, 2025, 5))
+        ax.set_xlim(2004, ANIO_FIN)
+        ax.set_xticks(range(2005, ANIO_FIN + 1, 5))
         ax.xaxis.grid(False)
     axes[0].set_ylim(0, tope * 1.18)
     axes[0].set_ylabel("% del ingreso")
     h, l = axes[0].get_legend_handles_labels()
     fig.legend(h[::-1], l[::-1], loc="center left", bbox_to_anchor=(0.905, 0.5), frameon=False, fontsize=9)
     fig.subplots_adjust(right=0.9, wspace=0.1, top=0.8)
-    fig.suptitle("Qué impuestos paga cada grupo, 2004-2024", x=0.01, y=0.98, ha="left", fontsize=14,
+    fig.suptitle(f"Qué impuestos paga cada grupo, 2004-{ANIO_FIN}", x=0.01, y=0.98, ha="left", fontsize=14,
                  fontweight="bold")
     fig.text(0.01, 0.9, "Abajo pesan los impuestos al consumo (IVA, Ingresos Brutos); arriba, los aportes y "
              "Ganancias. Los impuestos al consumo se calculan como recaudación por peso\nde consumo de Cuentas "
@@ -348,7 +348,7 @@ def fig_distancia(largo, unidad="canastas"):
     ipc = pd.read_csv(PROCESSED / "deflactor.csv", index_col=0).ipc
     nac = pd.read_csv(RAW / "macro" / "ipc_148.3_INIVELNAL_DICI_M_26.csv")
     nac = pd.Series(nac.iloc[:, 1].values, index=nac.iloc[:, 0].str[:7])
-    a_hoy = nac.iloc[-1] / nac[[f"2024-{m:02d}" for m in range(1, 13)]].mean()
+    a_hoy = nac.iloc[-1] / nac[[f"{ANIO_FIN}-{m:02d}" for m in range(1, 13)]].mean()
     meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre",
              "noviembre", "diciembre"]
     hoy = f"{meses[int(nac.index[-1][5:]) - 1]} de {nac.index[-1][:4]}"
@@ -398,7 +398,7 @@ def fig_distancia(largo, unidad="canastas"):
         lv = max(math.log10(val), ult + 0.075)
         pos[etq], ult = lv, lv
     for etq, lv in pos.items():
-        ax2.text(2024.5, 10 ** lv, etq, fontsize=8, va="center", color=TINTA)
+        ax2.text(ANIO_FIN + 0.5, 10 ** lv, etq, fontsize=8, va="center", color=TINTA)
     ax2.set_yscale("log")
     if pesos:
         marcas = [50e3, 100e3, 250e3, 500e3, 1e6, 2.5e6, 10e6, 25e6]
@@ -419,8 +419,8 @@ def fig_distancia(largo, unidad="canastas"):
                       fontsize=11, fontweight="bold")
     ax2.minorticks_off()
     for ax in (ax1, ax2):
-        ax.set_xlim(2003.5, 2024.3)
-        ax.set_xticks(range(2004, 2025, 4))
+        ax.set_xlim(2003.5, ANIO_FIN + 0.3)
+        ax.set_xticks(range(2004, ANIO_FIN + 1, 4))
         ax.xaxis.grid(False)
     a0, a1 = int(b_pre.index[0]), int(b_pre.index[-1])
     minimo = int(b_pre.idxmin())
@@ -479,23 +479,37 @@ def fig_top1(largo):
     ax.xaxis.grid(False)
     ax.set_title(f"{anio}", loc="left", fontsize=11, fontweight="bold")
     s_ = largo[(largo.variante == "principal") & (largo.impuesto == "total")]
+    finales = {}
     for dec, color, nombre in [(1, "#e34948", "Decil 1"), (10, "#2a78d6", "Decil 10")]:
         y = s_[s_.decil == dec].set_index("anio").tasa * 100
         ax2.plot(y.index, y, color=color, linewidth=2)
-        ax2.text(y.index[-1] + 0.3, y.iloc[-1], nombre, fontsize=8.8, va="center")
+        finales[nombre] = y.iloc[-1]
     ax2.fill_between(t.index, t.completo_bajo * 100, t.completo_alto * 100, color="#0b3d7a", alpha=0.15,
                      linewidth=0)
     ax2.plot(t.index, t.completo * 100, color="#0b3d7a", linewidth=2.2)
-    ax2.text(t.index[-1] + 0.3, t.completo.iloc[-1] * 100, "1% más rico", fontsize=8.8, va="center")
-    ax2.set_xlim(2003.5, 2024.3)
-    ax2.set_xticks(range(2004, 2025, 4))
+    finales["1% más rico"] = t.completo.iloc[-1] * 100
+    # etiquetas al final de cada línea, separadas si quedan encimadas
+    pos, sep = {}, 0.9
+    for nombre, val in sorted(finales.items(), key=lambda kv: kv[1]):
+        previo = max(pos.values()) if pos else -1e9
+        pos[nombre] = max(val, previo + sep)
+    for nombre, val in pos.items():
+        ax2.text(t.index[-1] + 0.3, val, nombre, fontsize=8.8, va="center")
+    ax2.set_xlim(2003.5, ANIO_FIN + 0.3)
+    ax2.set_xticks(range(2004, ANIO_FIN + 1, 4))
     ax2.xaxis.grid(False)
-    ax2.set_title("2004-2024 (franja del 1%: según cuánto consuma)", loc="left", fontsize=11, fontweight="bold")
-    c1 = "menos" if r.completo * 100 < v[1] else "más"
-    c10 = "más" if r.completo * 100 > v[10] else "menos"
-    fig.suptitle(f"En {anio} el 1% más rico pagó alrededor de {r.completo * 100:.0f}% de su ingreso: {c1} que el "
-                 f"decil más pobre y {c10} que el decil 10 de la encuesta", x=0.01, y=1.06, ha="left", fontsize=13,
-                 fontweight="bold")
+    ax2.set_title(f"2004-{ANIO_FIN} (franja del 1%: según cuánto consuma)", loc="left", fontsize=11, fontweight="bold")
+    def comparar(a, b, quien):      # a menos de medio punto se lo da por igual
+        if abs(a - b) < 0.5:
+            return f"lo mismo que {quien}"
+        return f"{'menos' if a < b else 'más'} que {quien}"
+    fig.suptitle(f"En {anio} el 1% más rico pagó alrededor de {r.completo * 100:.0f}% de su ingreso: "
+                 f"{comparar(r.completo * 100, v[1], 'el decil más pobre')} y "
+                 f"{comparar(r.completo * 100, v[10], 'el decil 10 de la encuesta')}", x=0.01, y=1.06, ha="left",
+                 fontsize=13, fontweight="bold")
+    if int(r.anio_fiscal_ddjj) != anio:
+        ax.set_title(f"{anio} (1%: declaraciones de {int(r.anio_fiscal_ddjj)} llevadas a {anio})", loc="left",
+                     fontsize=11, fontweight="bold")
     fig.text(0.01, 1.0, "La encuesta casi no capta al 1% más rico; las declaraciones juradas de Ganancias sí. A su "
              "ingreso declarado al fisco se le suman la mitad de las ganancias de las empresas\n(son sus dueños) y la "
              "renta de los activos externos privados; a sus impuestos, la mitad del impuesto de las empresas. Con lo "
@@ -528,7 +542,7 @@ if __name__ == "__main__":
     fig_principal(ancho, largo, 2004)
     fig_serie(serie)
     fig_composicion(ancho)
-    fig_anios(ancho, largo, [2004, 2009, 2014, 2019, 2024])
+    fig_anios(ancho, largo, [2004, 2009, 2014, 2019, ANIO_FIN])
     fig_sensibilidad(largo, ultimo)
     fig_distancia(largo)
     fig_distancia(largo, unidad="pesos")

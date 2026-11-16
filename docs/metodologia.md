@@ -1,7 +1,7 @@
 # Metodología
 
 Estimación de impuestos pagados como porcentaje del ingreso, por decil de ingreso per
-cápita familiar, aglomerados urbanos de la EPH, 2004-2024.
+cápita familiar, aglomerados urbanos de la EPH, 2004-2025.
 
 ## 1. Qué se mide
 
@@ -15,8 +15,16 @@ cápita familiar, aglomerados urbanos de la EPH, 2004-2024.
   sociedades, monotributo y autónomos, impuestos patrimoniales provinciales, sellos y
   tasas municipales. La obra social (3%) se descuenta del salario pero no se cuenta como
   impuesto porque no es recaudación del Estado.
-- **Período:** 2004-2024. 2003 se descarta (sólo dos trimestres de EPH continua y sin
-  Cuentas Nacionales base 2004).
+- **Período:** 2004-2025. 2003 se descarta (sólo dos trimestres de EPH continua y sin
+  Cuentas Nacionales base 2004). 2026 no se incluye: a noviembre de 2026 hay sólo dos
+  trimestres de EPH y no hay recaudación, consumo ni Cuentas Nacionales anuales.
+- **2025 (agregado el 16/11/2026):** Ganancias con la tabla anual del período fiscal 2025
+  (PDF de la DNIAF, pág. 34; desde 2025 los montos se actualizan por IPC cada semestre y el
+  modelo usa la tabla anual, como en 2024); tope de aportes con la cadena de movilidad,
+  controlada contra las Res. ANSES 237/2025, 338/2025 y 359/2025 (coincide con las tres);
+  contribuciones patronales iguales a 2020-2024 (Ley 27.541: no se encontró norma que las
+  cambie en 2025; la reducción de la reforma laboral es de 2026; continuidad no contrastada
+  con texto primario). La ENGHo sigue siendo la 2017/18.
 
 ## 2. Ingreso (denominador)
 
@@ -122,8 +130,8 @@ Pasos:
      6% del ingreso total de la EPH). Es un techo porque ese ingreso faltante es una cota
      inferior: lo declarado al fisco también está subdeclarado y no incluye rentas exentas.
 
-2024 usa las declaraciones del año fiscal 2023 (último publicado), llevadas a 2024 por el
-ingreso medio de la EPH. Bienes Personales sigue siendo una imputación (la EPH no releva
+2025 usa las declaraciones del año fiscal 2024 (último publicado: anuario 2025 de ARCA),
+llevadas a 2025 por el ingreso medio de la EPH. 2024 ya usa sus propias declaraciones. Bienes Personales sigue siendo una imputación (la EPH no releva
 patrimonio): se grafica rayado y existe la variante `sin_bienes_personales`.
 
 ## 5 bis. Ingreso declarado y ingreso ajustado a Cuentas Nacionales
@@ -131,7 +139,7 @@ patrimonio): se grafica rayado y existe la variante `sin_bienes_personales`.
 La figura central (`fig0_dos_versiones_*`) muestra:
 
 - **A. Ingreso declarado** (variante `principal`). 2024: D1 31,4%, deciles medios ~25%,
-  D10 26,8%, promedio 25,4%.
+  D10 26,8%, promedio 25,4%. 2025: D1 28,7%, deciles medios ~23,5%, D10 26,5%, promedio 24,6%.
 - **B. Ingreso ajustado a Cuentas Nacionales** (variante `ajuste_cn`,
   `scripts/aux_cuentas_nacionales.py`). Cada fuente de ingreso se lleva al total de la
   Cuenta de generación del ingreso del INDEC con un factor propio, aplicado a quien
@@ -148,14 +156,15 @@ La figura central (`fig0_dos_versiones_*`) muestra:
   para que la carga total sobre el ingreso total quede como en A. Llevar los impuestos a la
   escala de lo recaudado (consumo de Cuentas Nacionales) sin tener el ingreso completo de
   los hogares inflaba las tasas: el decil 1 daba 67%. El ajuste muestra cómo cambia el
-  reparto, no el nivel. 2024: D1 33,0%, D10 26,0%.
+  reparto, no el nivel. 2024: D1 33,0%, D10 26,0%. 2025: D1 30,3%, D10 26,0%.
 - **Sensibilidad de activos externos** (variante `ajuste_cn_activos_ext`): además, 3% anual
   sobre los activos externos de "otros sectores" (inversión de cartera + moneda y
   depósitos; Posición de inversión internacional, INDEC, cuadro 18; a pesos con el tipo de
   cambio A 3500 promedio) como ingreso no declarado, repartido como la Ganancias faltante
   (declaraciones juradas: casi todo al decil 10). Es una cota alta: supone que nada de eso
   se declara, que los billetes rinden como depósitos y que todo pertenece a hogares, aunque
-  el sector incluye empresas. 2024: D10 24,5%, debajo de todos los deciles medios.
+  el sector incluye empresas. 2024: D10 24,5%, debajo de todos los deciles medios. 2025: D10
+  24,5%, debajo de los deciles 2 y 4 a 8 pero no de los deciles 3 y 9 (24,0%).
 
 Resultado: la subdeclaración de salarios y de cuentapropia está repartida en toda la
 distribución y casi no cambia el perfil. Lo que puede volver regresiva también la punta
@@ -164,7 +173,7 @@ alta es el ingreso de capital no declarado. Las rentas internas de los hogares
 del sector hogares. La EPH registra rentas por 0,4%-0,7% del PIB, una cifra inverosímil.
 
 **Contra el consumo** (variante `sobre_consumo`): impuestos ÷ (gasto + impuestos
-directos). 2024: D1 22,0%, D10 39,6%. Responde otra pregunta (qué parte de lo que se gasta
+directos). 2024: D1 22,0%, D10 39,6%. 2025: D1 20,2%, D10 38,6%. Responde otra pregunta (qué parte de lo que se gasta
 va a impuestos) y no registra que los deciles altos ahorran y subdeclaran. No se grafica.
 
 La variante `altos_registros` ("techo" del decil 10) se sigue calculando pero no se
@@ -232,7 +241,7 @@ El panel B de la figura 0 usa `ajuste_cn_rentas` con la marca de `ajuste_cn_rent
 con el ingreso de capital no declarado el decil 10 queda por debajo de todos los demás.
 
 **No vale para todos los años.** Con rentas ×7 y activos externos, el decil 10 queda por
-debajo de todos los deciles medios sólo en 2004, 2007, 2008, 2018, 2019 y 2024. En 2009-2017 y
+debajo de todos los deciles medios sólo en 2004, 2007, 2008, 2018, 2019, 2024 y 2025. En 2009-2017 y
 2020-2023 baja pero sigue por encima del promedio (Ganancias pesaba más en esos años). La
 figura 0 para cada año está en `outputs/figures/por_anio/` y su texto se adapta al resultado.
 
@@ -278,7 +287,7 @@ con el informe "Evolución de la distribución del ingreso (EPH)" del INDEC (cua
 ## 7 ter. El 1% más rico (figura 7)
 
 `scripts/10_top1.py`, con las declaraciones juradas de Ganancias por tramo (anuarios de ARCA,
-2002-2023; 2024 extrapolado), como Alvaredo (2010). Grupo: el 1% de la población con mayores
+años fiscales 2002-2024; 2025 extrapolado), como Alvaredo (2010). Grupo: el 1% de la población con mayores
 ingresos declarados (todo el grupo está dentro de las declaraciones). Ingreso, Ganancias y
 patrimonio se acumulan de los tramos más altos hacia abajo, interpolando en el corte.
 
@@ -290,8 +299,11 @@ Ganancias de sociedades + aportes y contribuciones (la mitad del ingreso es sala
 con tope) + impuestos al consumo (entre la mitad y el total del cociente gasto/ingreso del 5%
 más rico de la ENGHo).
 
-2024: 30,1% (28,5-31,7 según el consumo). Sólo con lo declarado al fisco: 35,8%; sin los
-activos externos: 33,7%. Sigue siendo un techo: las rentas internas no declaradas no figuran
+2024: 28,1% (26,6-29,5 según el consumo). Sólo con lo declarado al fisco: 33,0%; sin los
+activos externos: 31,8%. (Hasta el 16/11/2026, con las declaraciones de 2023 extrapoladas,
+daba 30,1%, 35,8% y 33,7%: la Ganancias determinada real del grupo es 11,7% de su ingreso,
+contra 15,8% extrapolado.) 2025 (extrapolado): 26,6% (25,1-28,1); sólo con lo declarado,
+30,2%; sin los activos externos, 30,1%. Sigue siendo un techo: las rentas internas no declaradas no figuran
 en ninguna fuente. Pesa el supuesto de que la mitad del ingreso es salario (aportes y
 contribuciones: 8,2% del ingreso declarado).
 

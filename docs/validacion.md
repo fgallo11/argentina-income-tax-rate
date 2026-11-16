@@ -7,7 +7,7 @@ como salen.
 
 Cociente simulado / recaudado, con la simulación expandida a la población total del país.
 
-| Impuesto | 2004-2008 | 2009-2024 | Lectura |
+| Impuesto | 2004-2008 | 2009-2025 | Lectura |
 |---|---|---|---|
 | Aportes personales | 2,54 a 3,09 | 1,09 a 1,42 | Hasta 2008 la recaudación no incluía los aportes a AFJP. Sin ellos, 2008 da 1,27 |
 | Contribuciones patronales | 0,94 a 1,05 | 0,65 a 0,94 | La simulación sólo cubre empleadores privados |
@@ -20,8 +20,8 @@ Cociente simulado / recaudado, con la simulación expandida a la población tota
   proporción de los impuestos indirectos; el resto corresponde a consumo que las encuestas
   no captan.
 - **Ingresos altos:** el impuesto determinado en las declaraciones juradas es entre 53% y
-  82% de lo recaudado por Ganancias de personas humanas en el mismo año (2004-2023; 2024 usa
-  las declaraciones de 2023 extrapoladas) (el resto son
+  82% de lo recaudado por Ganancias de personas humanas en el mismo año (2004-2024; 2025 usa
+  las declaraciones de 2024 extrapoladas) (el resto son
   retenciones a asalariados que no presentan declaración). En el punto de empalme, lo
   declarado al fisco es entre 1,2 y 1,8 veces lo que la EPH muestra para el mismo número
   de personas. Detalle por año en `outputs/tables/ajuste_altos_ingresos.csv`.
@@ -78,11 +78,13 @@ Dondo, Hanni, Martner y Podestá (2015).
 | Pessino et al., ~2018 (Argendata) | 35,8 | 30,8 | 27,8 | 25,6 | 24,2 | 24,9 | — |
 | Este proyecto, 2018 (principal) | 33,6 | 25,3 | 25,0 | 25,7 | 24,5 | 27,2 | — |
 | ITO 2026, según la prensa | ~37 | | | ~29-30 | | ~25 | ~30 |
-| Este proyecto, 2024 | 31,4 | 25,0 | 24,3 | 25,0 | 24,5 | 26,8 | 30,1 (28,5 a 31,7) |
+| Este proyecto, 2024 | 31,4 | 25,0 | 24,3 | 25,0 | 24,5 | 26,8 | 28,1 (26,6 a 29,5) |
+| Este proyecto, 2025 | 28,7 | 23,3 | 23,0 | 23,7 | 23,3 | 26,5 | 26,6 (25,1 a 28,1), extrapolado |
 
 La forma coincide: el decil 1 paga bastante más y del decil 3 al 9 la carga es pareja. Las
 diferencias: Pessino et al. incluyen más impuestos (cheque y otros en cascada, que pesan más
 abajo), lo que explica su decil 2 más alto; en el decil 10 este proyecto suma la Ganancias
 y los Bienes Personales que la encuesta no capta (declaraciones juradas), lo que lo sube.
-Para el 1% más rico el rango de este proyecto contiene el ~30% citado del ITO.
+Para el 1% más rico, con las declaraciones de 2024 el rango de este proyecto (26,6% a 29,5%)
+queda algo por debajo del ~30% citado del ITO (con la extrapolación anterior lo contenía).
 

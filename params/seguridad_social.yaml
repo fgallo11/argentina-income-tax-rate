@@ -38,6 +38,9 @@ contribuciones_patronales:
        norma: "Ley 27.430 art. 173 (cronograma)", estado: no_verificado}
     - {desde: "2020-01", hasta: "2024-12", inc_a: 0.2040, inc_b: 0.1800, detraccion: 7003.68,
        norma: "Ley 27.541 arts. 19 y 22", estado: verificado}
+    - {desde: "2025-01", hasta: "2025-12", inc_a: 0.2040, inc_b: 0.1800, detraccion: 7003.68,
+       norma: "Ley 27.541 arts. 19 y 22", estado: no_verificado,
+       nota: "Sin norma que las modifique en 2025 según ARCA (página de aportes y contribuciones) y prensa especializada; la reforma laboral que las reduce es de 2026. Continuidad no contrastada con texto primario."}
   # SUPUESTO de asignación (la EPH no informa ventas ni CUIT del empleador): inc_a para
   # asalariados registrados privados en establecimientos de más de 40 personas; inc_b resto.
   umbral_tamano_inc_a: 40

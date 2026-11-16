@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """Extrae de los anuarios de ARCA las declaraciones juradas de Ganancias de personas
-humanas por tramo de ingresos gravados (presentaciones con ingresos gravados), años fiscales 2002-2023.
+humanas por tramo de ingresos gravados (presentaciones con ingresos gravados), años fiscales 2002-2024.
 
 Salida: data/processed/ddjj_ganancias_tramos.csv, una fila por (año fiscal, tramo), en
 pesos corrientes:
@@ -100,7 +100,7 @@ def extraer(anuario: int) -> pd.DataFrame:
 
 
 if __name__ == "__main__":
-    todo = pd.concat([extraer(a) for a in range(2003, 2025)], ignore_index=True)
+    todo = pd.concat([extraer(a) for a in range(2003, 2026)], ignore_index=True)
     # control: la suma de tramos reproduce la fila TOTAL
     cols = ["casos", "gnsi", "impuesto", "resultado_neto", "patrimonio_neto"]
     s = todo[~todo.es_total].groupby("anio_fiscal")[cols].sum()

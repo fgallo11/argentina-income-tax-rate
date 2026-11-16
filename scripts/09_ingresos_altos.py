@@ -16,8 +16,9 @@ Para cada año:
      individual de la EPH (ponderado por su ingreso).
   4. Bienes Personales: recaudación oficial, repartida con las mismas proporciones.
 
-El año fiscal 2024 todavía no está publicado: se usan las declaraciones de 2023 llevadas
-a 2024 por la variación del ingreso medio de la EPH (marcado como extrapolado).
+El año fiscal 2025 todavía no está publicado (el anuario 2025 de ARCA informa el año fiscal
+2024): se usan las declaraciones de 2024 llevadas a 2025 por la variación del ingreso medio de
+la EPH (marcado como extrapolado).
 
 Salida: data/processed/ajuste_altos_ingresos.csv (millones de pesos anuales, total país).
 """
@@ -59,7 +60,7 @@ if __name__ == "__main__":
         eph_ing, eph_dec = [], []
         for trim, t in ca.groupby("trim"):
             f = rec.poblacion[anio] / qt.personas[(anio, trim)]      # expansión al total del país
-            t = t.sort_values("ing_anual", ascending=False)
+            t = t.sort_values("ing_anual", ascending=False, kind="stable")
             n_ac, y = (t.w * f).cumsum().values, (t.w * f * t.ing_anual).values
             eph_ing.append(np.interp(c.n, n_ac, y.cumsum(), right=np.nan))
             # ingreso acumulado por decil del hogar en cada punto n

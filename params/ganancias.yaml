@@ -2,7 +2,7 @@
 #
 # FUENTE ÚNICA de montos: DNIAF (Min. Economía), "Impuesto a las Ganancias. Evolución
 # de las tasas, tramos de escalas y deducciones personales desde el año 2000"
-# (data/raw/normativa/ganancias_2000_2025_dniaf.pdf, págs. 4-31). Transcripción manual
+# (data/raw/normativa/ganancias_2000_2025_dniaf.pdf, págs. 4-34). Transcripción manual
 # desde el PDF, una página por período fiscal. Estado: VERIFICADO contra esa fuente.
 # Lo que NO sale de esa fuente está marcado con "no_verificado".
 #
@@ -36,6 +36,11 @@ escalas:
     alicuotas: [0.05, 0.09, 0.12, 0.15, 0.19, 0.23, 0.27, 0.31, 0.35]
   "2024":      # Ley 27.743 (pág. 31)
     limites: [1360200, 2720400, 4080600, 6120900, 12241800, 18362700, 27544050, 41316075]
+    alicuotas: [0.05, 0.09, 0.12, 0.15, 0.19, 0.23, 0.27, 0.31, 0.35]
+  "2025":      # Ley 27.743, "Período Anual" (pág. 34). Desde 2025 los montos se ajustan por IPC
+               # cada semestre (págs. 32-33, tablas acumuladas ene-jun y jul-dic); el modelo usa
+               # la tabla anual, igual que en 2024.
+    limites: [1749901.45, 3499802.89, 5249704.34, 7874556.52, 15749113.04, 23623669.56, 35435504.34, 53153256.52]
     alicuotas: [0.05, 0.09, 0.12, 0.15, 0.19, 0.23, 0.27, 0.31, 0.35]
   cedular_oct2023_mensual:
     # "Impuesto cedular" Dto. 473/2023 y Ley 27.725: tabla MENSUAL del primer mes
@@ -82,10 +87,11 @@ deducciones:
   "2022": {escala: "2022", gni: 252564.84, conyuge: 235457.25, hijo: 118741.97, de_dep: 1212311.24,  hijo_edad_max: 18, norma: "Leyes 27.346 y 27.617"}
   "2023": {escala: "2023", gni: 451683.19, conyuge: 421088.24, hijo: 212356.37, de_dep: 2168079.35,  hijo_edad_max: 18, norma: "Leyes 27.346, 27.617 y 27.743"}
   "2024": {escala: "2024", gni: 3503688.17, conyuge: 3299771.52, hijo: 1664086.82, de_dep: 16817703.23, hijo_edad_max: 18, norma: "Ley 27.743"}
+  "2025": {escala: "2025", gni: 4507505.52, conyuge: 4245166.13, hijo: 2140852.77, de_dep: 18030022.08, hijo_edad_max: 18, norma: "Ley 27.743 (período anual, pág. 34)"}
 
 # Deducción específica de jubilados (Ley 27.346, desde 2017): reemplaza gni + de_dep por
 # N veces la suma anual de haberes mínimos, si resulta mayor.
-jubilados_veces_haber_minimo: {"2017": 6, "2018": 6, "2019": 6, "2020": 6, "2021": 8, "2022": 8, "2023": 8, "2024": 8}
+jubilados_veces_haber_minimo: {"2017": 6, "2018": 6, "2019": 6, "2020": 6, "2021": 8, "2022": 8, "2023": 8, "2024": 8, "2025": 8}
 
 # Decreto 1242/2013 (vigente 09/2013-12/2015): según la mayor remuneración bruta mensual
 # de enero-agosto 2013. Hasta $15.000: sin impuesto. Tramos intermedios: deducciones

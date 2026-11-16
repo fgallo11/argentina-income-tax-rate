@@ -39,6 +39,7 @@ def test_alicuotas_iva_por_anio():
 def test_pesos_ediciones_engho():
     assert pesos_ediciones(2004) == {"2004": 1.0}
     assert pesos_ediciones(2024) == {"2017": 1.0}
+    assert pesos_ediciones(2025) == {"2017": 1.0}
     p = pesos_ediciones(2015)
     assert sum(p.values()) == pytest.approx(1.0) and p["2017"] == pytest.approx(0.5)
 
@@ -47,6 +48,7 @@ def test_lmi_anclas():
     lmi = pd.read_csv(PARAMS / "lmi.csv").set_index("mes").tope_jubilacion
     assert lmi["2004-06"] == 4800 and lmi["2010-03"] == 10119.08
     assert lmi["2013-03"] == 24473.92 and lmi["2024-12"] == 2841525.42
+    assert lmi["2025-06"] == 3335458.18 and lmi["2025-12"] == 3731212.01
     assert lmi.is_monotonic_increasing or (lmi.diff().dropna() > -10).all()
 
 
@@ -75,3 +77,19 @@ def test_ajuste_altos_ingresos():
     assert (a.ingreso_faltante_mill >= 0).all() and (a.ganancias_faltante_mill > 0).all()
     # rango de sanidad; en base devengada (con aguinaldo) el máximo es 2016, ~0,40
     assert a.ganancias_simulada_mill.div(a.ganancias_recaudada_mill).between(0.1, 0.45).all()
+
+
+def test_ganancias_2025_tabla_anual():
+    """Período fiscal 2025, tabla anual del PDF de la DNIAF (pág. 34): el impuesto fijo de
+    cada tramo debe coincidir con la escala acumulada."""
+    import yaml
+    g = yaml.safe_load(open(PARAMS / "ganancias.yaml", encoding="utf-8"))
+    e = g["escalas"]["2025"]
+    fijos, piso, acc = [], 0.0, 0.0
+    for lim, t in zip(e["limites"], e["alicuotas"]):
+        acc += (lim - piso) * t
+        fijos.append(acc)
+        piso = lim
+    publicados = [87495.07, 244986.20, 454974.38, 848702.20, 2344867.94, 4156015.94, 7345211.33, 12837714.51]
+    assert fijos == pytest.approx(publicados, abs=0.02)
+    assert g["deducciones"]["2025"]["escala"] == "2025"

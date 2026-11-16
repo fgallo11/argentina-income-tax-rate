@@ -25,7 +25,7 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from incidencia.config import TABLES  # noqa: E402
+from incidencia.config import ANIO_FIN, TABLES  # noqa: E402
 from incidencia.directos import MESES_TRIM, Parametros, resumir_por_decil, simular  # noqa: E402
 from incidencia.eph import cargar_trimestre  # noqa: E402
 from incidencia.incidencia import IMPUESTOS, Variante, incidencia_trimestre  # noqa: E402
@@ -45,7 +45,7 @@ if __name__ == "__main__":
     for anio_base, edicion in BASES.items():
         base = {t: cargar_trimestre(anio_base, t) for t in (1, 2, 3, 4)}
         v = Variante("poblacion_fija", modo_engho=edicion)
-        for anio in range(2004, 2025):
+        for anio in range(2004, ANIO_FIN + 1):
             trims = []
             for t, df0 in base.items():
                 k = ripte_trim(P, anio, t) / ripte_trim(P, anio_base, t)

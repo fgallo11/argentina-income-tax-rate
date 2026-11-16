@@ -32,7 +32,7 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from incidencia.config import PROCESSED, RAW  # noqa: E402
+from incidencia.config import ANIO_FIN, PROCESSED, RAW  # noqa: E402
 
 CGI = RAW / "macro" / "serie_cgi_10_26.xls"
 CIN = RAW / "macro" / "cin_II_2026.xls"
@@ -98,7 +98,7 @@ def main() -> None:
     pii = pii_fin_de_anio()
     tc = pd.read_csv(TC)
     tc = pd.Series(tc.iloc[:, 1].values, index=tc.iloc[:, 0].str[:4].astype(int), name="tc")
-    out = pd.concat([cn, pii, tc], axis=1).sort_index().loc[2004:2024]
+    out = pd.concat([cn, pii, tc], axis=1).sort_index().loc[2004:ANIO_FIN]
     out.index.name = "anio"
     out[["pii_cartera_musd", "pii_mondep_musd", "pii_ied_musd"]] = out[
         ["pii_cartera_musd", "pii_mondep_musd", "pii_ied_musd"]].bfill()

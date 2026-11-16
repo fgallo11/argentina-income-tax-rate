@@ -38,6 +38,9 @@ ANCLAS = {
     "2023-03": (642142.18, "Res. ANSES 36/2023"),
     "2024-11": (2767090.68, "Res. ANSES 979/2024"),
     "2024-12": (2841525.42, "Res. ANSES 1122/2024"),
+    "2025-06": (3335458.18, "Res. ANSES 237/2025 (B.O. 30/05/2025)"),
+    "2025-11": (3645898.00, "Res. ANSES 338/2025 (B.O. 05/11/2025; valor según Blog del Contador, sin centavos)"),
+    "2025-12": (3731212.01, "Res. ANSES 359/2025 (valor según fuentes secundarias)"),
 }
 # Meses en los que NO se encadena con el haber mínimo sino que se fija el valor.
 REANCLAR = {"2020-03"}
@@ -49,7 +52,7 @@ def main() -> None:
     hm = pd.read_csv(RAW / "macro" / "haber_minimo_mensual.csv")
     hm.columns = ["mes", "haber_minimo"]
     hm["mes"] = hm["mes"].str[:7]
-    hm = hm[(hm.mes >= "2003-01") & (hm.mes <= "2024-12")].reset_index(drop=True)
+    hm = hm[(hm.mes >= "2003-01") & (hm.mes <= "2025-12")].reset_index(drop=True)
 
     filas = []
     jub = otros = 4800.0

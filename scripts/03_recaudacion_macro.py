@@ -19,7 +19,7 @@ from pathlib import Path
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from incidencia.config import PROCESSED, RAW  # noqa: E402
+from incidencia.config import ANIO_FIN, PROCESSED, RAW  # noqa: E402
 
 # índice DNIAF -> nombre de columna
 FILAS = {
@@ -78,7 +78,7 @@ if __name__ == "__main__":
     # analcohólicas, vehículos y telefonía celular.
     rub = ["sel_tabaco", "sel_alcohol", "sel_cerveza", "sel_analcoholicas", "sel_vehiculos", "sel_telefonia"]
     t["internos_modelados"] = t[rub].sum(axis=1)
-    t = t.loc[2003:2024]
+    t = t.loc[2003:ANIO_FIN]
     t.to_csv(PROCESSED / "recaudacion_macro.csv")
     pd.set_option("display.width", 250)
     v = t.copy()

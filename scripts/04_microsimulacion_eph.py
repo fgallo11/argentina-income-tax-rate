@@ -34,7 +34,7 @@ def cola_alta(s: pd.DataFrame, anio: int, trim: int) -> pd.DataFrame:
     d = pd.DataFrame({"anio": anio, "trim": trim, "decil": s.decil.values, "w": s.w.values,
                       "ing_anual": (12 * mensual).values,
                       "ganancias_anual": (12 * s.ganancias).values})
-    d = d.sort_values("ing_anual", ascending=False)
+    d = d.sort_values("ing_anual", ascending=False, kind="stable")   # estable: hay empates en el corte
     return d[d.w.cumsum() <= FRACCION_COLA * s.w.sum()].round(1)
 
 
