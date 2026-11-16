@@ -365,6 +365,12 @@ El exponente es una elección para ilustrar, no una norma (`ELAST_PROG` en `scri
 Frente al proporcional los desvíos son menores a 1 punto; frente al progresivo, los deciles 1 a 9
 pagan entre 0,5 y 1,5 puntos más de su parte y el 1% superior 7 puntos menos.
 
+**Serie (figura 9) y figura 8 por año** (`outputs/figures/por_anio/fig8_decil10_partido_<año>.png`).
+El 1% de la encuesta paga más que los percentiles 90-95 en 14 de 22 años y menos en 2016-2019, 2024
+y 2025. Lo que mueve su tasa es Ganancias y Bienes Personales; el consumo pesa poco arriba. El salto
+de 2006 (31%, contra 24-26% en 2005 y 2007) y los vaivenes de 2016-2019 reflejan en parte el ruido
+del tramo (pocas observaciones).
+
 **Limitación:** el 1% de la encuesta tiene pocas observaciones por trimestre y es ruidoso año a
 año. Un trimestre (2011T1) de la base cruda local difiere en 0,1% de la usada para los deciles
 publicados; los tramos se calcularon con la local.

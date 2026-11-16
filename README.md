@@ -59,6 +59,11 @@ persona; con la renta de activos externos paga 20,1%. El 1% medido sólo con las
 juradas (figura 7) da 26,6% porque además suma la mitad del impuesto de sociedades y supone que
 la mitad de su ingreso es salario.
 
+**El decil 10 a lo largo del tiempo** (`outputs/figures/fig9_decil10_serie.png`; la figura 8 de cada
+año en `outputs/figures/por_anio/`): el 1% de la encuesta paga más que los percentiles 90-95 en 14
+de 22 años y menos en 6 (2016-2019, 2024 y 2025). Lo que mueve su tasa es Ganancias y Bienes
+Personales: en 2012-2013 llegó a 34-35%; en 2016, 2018 y 2019, a 22%.
+
 **Distancia entre deciles** (`outputs/figures/fig6_distancia_entre_deciles.png`, en canastas
 básicas; `fig6b_distancia_en_pesos.png`, en pesos de hoy): el 10% más rico ingresaba por persona
 46 veces lo del 10% más pobre en 2004 y 20 veces en 2024 y 2025; después de impuestos la distancia

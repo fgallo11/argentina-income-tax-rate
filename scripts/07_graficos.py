@@ -14,7 +14,9 @@
                                 decil en canastas básicas (línea de pobreza).
   fig6b_distancia_en_pesos      la misma, con el ingreso en pesos constantes de hoy.
   fig7_top1                     el 1% más rico (declaraciones juradas) frente a los deciles 1, 5 y 10.
-  fig8_decil10_partido          el decil 10 partido en percentiles 90-95, 95-99 y el 1% superior.
+  fig8_decil10_partido          el decil 10 partido en percentiles 90-95, 95-99 y el 1% superior
+                                (también uno por año en por_anio/).
+  fig9_decil10_serie            la serie 2004-último año de esos tramos, y qué explica la del 1%.
 """
 import sys
 from pathlib import Path
@@ -542,7 +544,7 @@ def fig_top1(largo):
 ELAST_PROG = 0.25   # fig8: elasticidad de la tasa al ingreso en el sistema progresivo de referencia
 
 
-def fig_decil10_partido(anio):
+def fig_decil10_partido(anio, carpeta=None, formatos=("png", "svg")):
     """El decil 10 partido en P90-95, P95-99 y el 1% superior (11_tramos_decil10.py)."""
     t = pd.read_csv(TABLES / "tasas_tramos_decil10.csv")
     top = pd.read_csv(TABLES / "top1.csv").set_index("anio").loc[anio]
@@ -657,7 +659,72 @@ def fig_decil10_partido(anio):
              "recaudación total repartida de dos formas de referencia. Proporcional: todos pagan la tasa promedio. Progresivo: "
              f"tasa = promedio × (ingreso por persona del grupo / promedio)^{pct(ELAST_PROG, 2)}, reescalada para recaudar lo mismo. "
              "Ver scripts/11_tramos_decil10.py.", fontsize=7.3, color=MUDO, ha="left", va="top")
-    guardar(fig, "fig8_decil10_partido")
+    guardar(fig, "fig8_decil10_partido" if carpeta is None else f"fig8_decil10_partido_{anio}", carpeta, formatos)
+
+
+def fig_decil10_serie():
+    """Serie de los tramos del decil 10 (11_tramos_decil10.py) y composición de la tasa del 1%."""
+    t = pd.read_csv(TABLES / "tasas_tramos_decil10.csv")
+    pr = t[t.variante == "principal"]
+    tasa = pr.pivot(index="anio", columns="grupo", values="total") * 100
+    top = pd.read_csv(TABLES / "top1.csv").set_index("anio")
+    medios = tasa[list(range(2, 10))].median(axis=1)
+    fig, (ax, ax2) = plt.subplots(1, 2, figsize=(14, 5.8), gridspec_kw={"width_ratios": [1.15, 1]})
+    series = [(tasa[1], "Decil 1", "#e34948", "-", 2.2), (medios, "D2-D9", "#9a998f", "-", 2.2),
+              (tasa[91], "P90-95", "#a9cdf2", "-", 2.0), (tasa[95], "P95-99", "#4f93dc", "-", 2.0),
+              (tasa[99], "1% encuesta", "#0b3d7a", "-", 2.8),
+              (top.completo * 100, "1% DDJJ*", "#0b3d7a", (0, (4, 2)), 1.8)]
+    finales = {}
+    for y, nombre, color, estilo, lw in series:
+        ax.plot(y.index, y, color=color, linestyle=estilo, linewidth=lw, label=nombre)
+        finales[nombre] = (y.iloc[-1], color)
+    pos, ult = {}, -1e9
+    for nombre, (val, color) in sorted(finales.items(), key=lambda kv: kv[1][0]):
+        pos[nombre] = max(val, ult + 1.05)
+        ult = pos[nombre]
+    for nombre, v in pos.items():
+        ax.text(ANIO_FIN + 0.4, v, f"{nombre}  {pct(finales[nombre][0])}", fontsize=8.3, va="center",
+                color=finales[nombre][1], fontweight="bold")
+    ax.set_xlim(2003.5, ANIO_FIN + 0.3)
+    ax.set_xticks(range(2004, ANIO_FIN + 1, 3))
+    ax.xaxis.grid(False)
+    ax.set_ylabel("Impuestos, % del ingreso")
+    ax.set_title(f"Tasa efectiva total, 2004-{ANIO_FIN}", loc="left", fontsize=11, fontweight="bold")
+    bajo, alto = min(s_[0].min() for s_ in series), max(s_[0].max() for s_ in series)
+    ax.set_ylim(bajo - 1.5, alto + 1)
+    # composición de la tasa del 1% de la encuesta
+    c = pr[pr.grupo == 99].set_index("anio")
+    partes = [("Ganancias", c.ganancias, "#2a78d6"), ("Bienes Personales", c.bienes_personales, "#eb6834"),
+              ("Aportes y contribuciones", c.aportes + c.contrib_trabajador, "#1baf7a"),
+              ("Impuestos al consumo", c.indirectos, "#9a998f")]
+    base = pd.Series(0.0, index=c.index)
+    for nombre, v, color in partes:
+        ax2.bar(c.index, v * 100, bottom=base, color=color, width=0.72, label=nombre)
+        base = base + v * 100
+    for a_, tot in base.items():
+        ax2.text(a_, tot + 0.4, pct(tot, 0), ha="center", fontsize=7.2, color=TINTA2)
+    ax2.set_xticks(range(2004, ANIO_FIN + 1, 3))
+    ax2.xaxis.grid(False)
+    ax2.set_ylim(0, base.max() * 1.25)
+    ax2.legend(loc="upper left", ncol=2, fontsize=8, frameon=False)
+    ax2.set_title("Qué paga el 1% de la encuesta (% de su ingreso)", loc="left", fontsize=11, fontweight="bold")
+    sube = [int(a_) for a_ in tasa.index if tasa.loc[a_, 99] > tasa.loc[a_, 91] + 0.5]
+    baja = [int(a_) for a_ in tasa.index if tasa.loc[a_, 99] < tasa.loc[a_, 91] - 0.5]
+    fig.suptitle("Dentro del 10% más rico, la carga del 1% sube y baja con Ganancias y Bienes Personales",
+                 x=0.01, y=1.06, ha="left", fontsize=13.5, fontweight="bold")
+    fig.text(0.01, 1.0, f"El 1% de la encuesta paga más que los percentiles 90-95 en {len(sube)} de {len(tasa)} años y menos "
+             f"en {len(baja)} ({', '.join(str(a_) for a_ in baja)}). Lo que mueve su tasa es Ganancias y Bienes Personales; "
+             "los impuestos al consumo\npesan poco arriba porque consumen una parte chica de su ingreso. Encuesta completada "
+             "con el ingreso y la Ganancias que declaran al fisco y la encuesta no capta.", fontsize=9.6, color=TINTA2,
+             va="top")
+    fig.subplots_adjust(wspace=0.42, top=0.86, right=0.97)
+    fig.text(0.01, -0.06, "Fuente: elaboración propia con EPH, ENGHo (INDEC), recaudación DNIAF y anuarios de ARCA. "
+             "Tramos ordenados por ingreso per cápita familiar, como los deciles; medida principal. D2-D9: mediana de las "
+             "tasas de los deciles 2 a 9.\n* 1% según las "
+             "declaraciones juradas de Ganancias (ARCA), por declarante, con utilidades de empresas y renta de activos "
+             f"externos (figura 7). {ANIO_FIN}: declaraciones del año anterior actualizadas. Ver scripts/11_tramos_decil10.py.",
+             fontsize=7.3, color=MUDO, ha="left", va="top")
+    guardar(fig, "fig9_decil10_serie")
 
 
 if __name__ == "__main__":
@@ -683,4 +750,7 @@ if __name__ == "__main__":
         fig_top1(largo)
     if (TABLES / "tasas_tramos_decil10.csv").exists():
         fig_decil10_partido(ultimo)
+        for a in sorted(largo.anio.unique()):      # un archivo por año
+            fig_decil10_partido(int(a), FIGURES / "por_anio", formatos=("png",))
+        fig_decil10_serie()
     print("Gráficos en", FIGURES)
