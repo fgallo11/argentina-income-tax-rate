@@ -7,6 +7,9 @@ ingreso per cápita familiar, aglomerados EPH, con serie anual 2004-2025.
 de población fija y documentación. Quedan supuestos abiertos (ver `docs/metodologia.md`,
 secciones 6 y 8): el más importante es la cola alta de ingresos.
 
+**Informe de resultados:** [`docs/informe.md`](docs/informe.md), con la evolución 2004-2025 en
+gráficos (`outputs/figures/informe/`, generados por `scripts/12_informe_graficos.py`).
+
 **Resultado 2025 (estimación principal, impuestos ÷ ingreso declarado):** tasa promedio
 23,8%; decil 1, 28,7%; deciles 2 a 9 entre 23,0% y 23,8%; decil 10, 23,8%. En 2024: promedio
 24,9%; decil 1, 31,4%; deciles 2 a 9 entre 23,7% y 25,1%; decil 10, 25,0%. El sistema no
@@ -135,6 +138,7 @@ adelante. No corras `07_graficos.py` solo: las figuras quedarían con tablas vie
 - El consumo de encuesta es 37-55% del de Cuentas Nacionales.
 - El decil 1 declara gastar más de lo que gana: 31,4% contra el ingreso declarado y 22,0%
   si se reemplaza su ingreso por el gasto (2024).
-- La encuesta casi no capta al 1% más rico: su carga no se estima por separado y queda
-  incluida, de forma incompleta, en el decil 10.
+- La encuesta casi no capta al 1% más rico: se completa con las declaraciones juradas de ARCA
+  (figuras 8 y 9) y se estima aparte sólo con ellas (figura 7). El 1% de la encuesta tiene pocas
+  observaciones y es ruidoso de un año a otro.
 - 2007-2015 con reservas (INDEC). 2007, 2015 y 2016 con trimestres faltantes.

@@ -399,5 +399,13 @@ publicados; los tramos se calcularon con la local.
    separar qué parte de IVA e Ingresos Brutos recae en consumo de hogares.
 4. **Ingreso del decil 1.** Comparar la distribución de ingresos ENGHo y EPH en años
    cercanos, y evaluar excluir hogares con ingreso cero.
-5. **Verificaciones de norma pendientes:** alícuotas patronales 2003-2019, INSSJP y obra
+5. **Ganancias de sociedades** (2,4% a 3,1% del PIB). No se reparte por deciles: su incidencia es
+   incierta (capital, trabajo o precios), sumarlo bien exige sumar también las utilidades al
+   ingreso de los dueños (si no, se infla la cima, como pasaba con la Ganancias de personas antes
+   de la corrección del 16/11/2026) y no hay datos de propiedad de empresas. Plan: variante con dos
+   escenarios (100% capital; 50% capital y 50% trabajo); la parte del capital, con las utilidades
+   (impuesto ÷ alícuota), repartida arriba con las declaraciones juradas como la Ganancias
+   faltante; la parte del trabajo, según los sueldos registrados. Hoy sólo entra en el 1% de las
+   declaraciones juradas (sección 7 ter). Detalle en `docs/informe.md`, "Pendientes".
+6. **Verificaciones de norma pendientes:** alícuotas patronales 2003-2019, INSSJP y obra
    social, y varias reglas de IVA marcadas "no verificado" en el clasificador.

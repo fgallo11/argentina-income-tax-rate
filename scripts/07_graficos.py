@@ -56,9 +56,9 @@ NOTA = ("Fuente: elaboración propia con EPH y ENGHo (INDEC), recaudación DNIAF
         "Ingreso: el declarado en la EPH, antes de impuestos directos. Los ingresos no declarados (rentas, "
         "cuentapropia, evasión) se concentran arriba: la tasa real de los deciles altos es menor. Ganancias:\nsimulada "
         "para asalariados registrados y jubilados; "
-        "lo recaudado que la simulación no capta y Bienes Personales se asignan a los ingresos más altos (anuarios "
-        "de ARCA), en la misma escala que los impuestos indirectos. La encuesta casi no capta al 1% más rico: su\n"
-        "carga no se estima por separado y queda incluida, de forma incompleta, en el decil 10. "
+        "lo recaudado que la simulación no capta y Bienes Personales se asignan a los ingresos más altos con las "
+        "declaraciones juradas de ARCA,\njunto con el ingreso que la encuesta no capta. El 1% más rico se ve aparte en "
+        "las figuras 7 a 9. "
         "Excluye retenciones, combustibles, Ganancias de sociedades, monotributo e impuestos patrimoniales provinciales.")
 
 
