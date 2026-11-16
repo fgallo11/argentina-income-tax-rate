@@ -204,12 +204,48 @@ medida principal por tres razones:
 3. **No hay datos de quién es dueño de qué.** Ni la EPH ni las declaraciones juradas publicadas dicen
    cuántas acciones o participaciones tiene cada persona.
 
-**Cómo se agregaría:** como variante, con los dos escenarios. La parte del capital, junto con las
-utilidades (impuesto ÷ alícuota), se repartiría arriba con las declaraciones juradas, igual que la
-Ganancias que la encuesta no capta. La parte del trabajo, según los sueldos registrados de cada
-decil. Lo esperable: en el escenario de capital, el 1% de la encuesta (21,7% en 2025) sube algunos
-puntos, porque esa parte paga más que su promedio; en el de trabajo, suma alrededor de 1,5 puntos
-repartidos entre los deciles con empleo registrado.
+**Cómo se agregaría.** Como variantes, con una sola perilla: quién paga cada peso del impuesto. A
+quien lo paga se le suman a la vez el impuesto y el ingreso que tendría sin el impuesto, como en la
+corrección de la Ganancias de personas. Cuatro escenarios:
+
+| Escenario | Capital | Trabajo | Consumidores |
+|---|---|---|---|
+| Todo al capital | 100% | | |
+| Mitad capital, mitad trabajo | 50% | 50% | |
+| Todo al trabajo | | 100% | |
+| Todo a precios | | | 100% |
+
+- **Parte del capital (los dueños).** Impuesto: su parte de la recaudación, menos la que corresponde
+  a dueños del exterior (aproximada con la inversión extranjera directa de la Posición de inversión
+  internacional del INDEC). Ingreso: las utilidades antes del impuesto (impuesto ÷ alícuota), que
+  son ingreso de los dueños aunque la empresa no las reparta. La alícuota va año por año en
+  `params/`: 35% hasta 2017, 30% en 2018-2020, escala de 25/30/35% desde 2021 (Ley 27.630). A quién:
+  primero con las proporciones del empalme con las declaraciones juradas (como la Ganancias que la
+  encuesta no capta); mejor, con las rentas de negocios por tramo de los anuarios de ARCA, si vienen
+  separadas; las ganancias de negocios de la EPH pueden dar la forma en los deciles medios.
+- **Parte del trabajo (salarios más bajos).** Se trata como un impuesto al salario: tasa = su parte
+  de la recaudación ÷ la masa salarial privada registrada del país; a cada decil, esa tasa × su masa
+  salarial privada registrada, como impuesto y también como ingreso (es salario que habría cobrado).
+  No alcanza a informales, empleados públicos ni jubilados.
+- **Parte de los consumidores (precios más altos).** Como la mitad de las contribuciones patronales
+  que pasa a precios: recaudación por peso de consumo privado × el consumo de cada decil.
+
+**Qué se espera.** El nivel sube unos 3 puntos en cualquier escenario (2,4% a 3,1% del PIB).
+
+- Todo al capital: sube la cima; el 1% de la encuesta (21,7% en 2025) se acerca al 30%, porque esa
+  parte paga más que su promedio, y su parte del ingreso crece mucho (las utilidades son del orden
+  de 8% del PIB). Los deciles 1 a 8 casi no cambian.
+- Todo al trabajo: recae en los deciles con empleo privado registrado (4 a 10) y sube varios puntos
+  a los del medio; el decil 1 casi no cambia. El perfil queda con una joroba en el medio.
+- Todo a precios: regresivo, como el IVA.
+- Mitad y mitad: entre los dos primeros.
+
+**Dónde se toca el código.** `params/` (alícuota por año); `src/incidencia/incidencia.py` (un campo
+de `Variante` con el reparto entre capital, trabajo y precios; un impuesto `sociedades`; el cálculo
+de cada parte); `scripts/09_ingresos_altos.py` (el reparto de la parte del capital si se usan las
+rentas de negocios); `scripts/05_incidencia.py` y `scripts/11_tramos_decil10.py` (las cuatro
+variantes); el informe (una subsección como la del cheque). No hace falta volver a correr la
+microsimulación de la EPH.
 
 **Otros impuestos que quedan afuera:**
 

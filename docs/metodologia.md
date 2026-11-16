@@ -402,10 +402,14 @@ publicados; los tramos se calcularon con la local.
 5. **Ganancias de sociedades** (2,4% a 3,1% del PIB). No se reparte por deciles: su incidencia es
    incierta (capital, trabajo o precios), sumarlo bien exige sumar también las utilidades al
    ingreso de los dueños (si no, se infla la cima, como pasaba con la Ganancias de personas antes
-   de la corrección del 16/11/2026) y no hay datos de propiedad de empresas. Plan: variante con dos
-   escenarios (100% capital; 50% capital y 50% trabajo); la parte del capital, con las utilidades
-   (impuesto ÷ alícuota), repartida arriba con las declaraciones juradas como la Ganancias
-   faltante; la parte del trabajo, según los sueldos registrados. Hoy sólo entra en el 1% de las
-   declaraciones juradas (sección 7 ter). Detalle en `docs/informe.md`, "Pendientes".
+   de la corrección del 16/11/2026) y no hay datos de propiedad de empresas. Hoy sólo entra en el
+   1% de las declaraciones juradas (sección 7 ter). Plan: cuatro variantes (100% capital; 50%
+   capital y 50% trabajo; 100% trabajo; 100% precios). Capital: impuesto menos la parte de dueños
+   del exterior (inversión extranjera directa, PII del INDEC), más las utilidades (impuesto ÷
+   alícuota del año, en `params/`) como ingreso, repartido con el empalme de declaraciones juradas o
+   con las rentas de negocios de los anuarios. Trabajo: tasa = recaudación ÷ masa salarial privada
+   registrada del país, aplicada a la masa de cada decil como impuesto e ingreso. Precios: por peso
+   de consumo privado, como las contribuciones trasladadas. Detalle en `docs/informe.md`,
+   "Pendientes".
 6. **Verificaciones de norma pendientes:** alícuotas patronales 2003-2019, INSSJP y obra
    social, y varias reglas de IVA marcadas "no verificado" en el clasificador.
