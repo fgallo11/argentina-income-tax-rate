@@ -54,6 +54,12 @@ class Variante:
     # ingreso de los deciles altos con el reparto de las declaraciones juradas. Cota alta:
     # supone que nada de eso se declara y que los billetes rinden como depósitos.
     renta_activos_ext: float = 0.0
+    # Base y reparto de esa renta. "todo": inversión de cartera + moneda y depósitos (incluye los
+    # billetes fuera del sistema, muy repartidos: cota alta), repartido como la Ganancias faltante.
+    # "cartera": sólo inversión de cartera (acciones, fondos y bonos), asignada entera a la cima
+    # (1% superior; decil 10 en la medida por deciles): quienes declaran bienes en el exterior en
+    # Bienes Personales son ~87.000 personas (anuario ARCA, cuadro 2.5.1.2.3), dentro del 1%.
+    base_activos_ext: str = "todo"
     # Impuestos que la medida principal excluye y que Pessino et al. (2023) incluyen: el
     # impuesto a los créditos y débitos bancarios ("cheque") y el de combustibles. Se
     # trasladan a precios y se reparten según el consumo de cada decil (supuesto: el
@@ -100,6 +106,8 @@ VARIANTES = [
     Variante("iva_exentos_20", iva_exentos=0.2),
     Variante("ajuste_cn_rentas", ajuste_cn=True, factor_rentas=7.0),
     Variante("ajuste_cn_rentas_activos_ext", ajuste_cn=True, factor_rentas=7.0, renta_activos_ext=0.03),
+    Variante("ajuste_cn_rentas_cartera_ext", ajuste_cn=True, factor_rentas=7.0, renta_activos_ext=0.04,
+             base_activos_ext="cartera"),
     Variante("criterio_inicial", corregir_recursos=False, modo_engho="escalonado", altos_ingresos="no"),
 ]
 
@@ -189,7 +197,11 @@ def incidencia_trimestre(q: pd.DataFrame, anio: int, engho: pd.DataFrame, rec: p
         adic = adic + (1 / rec["cob_asal"] - 1) * (q.masa_bruta_reg + q.ing_lab_asal_no_reg)
         adic = adic + (1 / rec["cob_imb"] - 1) * (q.ing_lab_independiente + q.ing_otras_ocup)
         adic = adic + (v.factor_rentas - 1) * q.rentas
-        if v.renta_activos_ext:
+        if v.renta_activos_ext and v.base_activos_ext == "cartera":
+            cima = 99 if 99 in q.index else 10
+            partes_c = np.array([1.0 if d == cima else 0.0 for d in q.index])
+            adic = adic + v.renta_activos_ext * rec["pii_cartera_musd"] * rec["tc"] * esc_pais * partes_c
+        elif v.renta_activos_ext:
             partes = np.array([rec[f"parte_d{d}"] for d in q.index])
             activos = (rec["pii_cartera_musd"] + rec["pii_mondep_musd"]) * rec["tc"]   # millones de pesos
             adic = adic + v.renta_activos_ext * activos * esc_pais * partes

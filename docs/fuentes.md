@@ -119,6 +119,8 @@ combinan, en los [diagramas](diagramas.md); el método completo, en la [metodolo
   - Repartir el resto de la Ganancias no simulada y Bienes Personales (este último según el
     patrimonio declarado en Ganancias).
   - Estimar el 1% más rico sólo con declaraciones juradas (figura 7).
+  - Saber quién tiene bienes en el exterior: los declaran en Bienes Personales unas 87.000 personas
+    (cuadro 2.5.1.2.3), lo que justifica atribuir la renta de la cartera externa al 1% más rico.
   - 2025 usa las declaraciones de 2024 actualizadas (las de 2025 todavía no se publicaron).
 - **Dónde.** `data/raw/anuarios_arca/`, `scripts/aux_anuarios_arca.py`,
   `scripts/09_ingresos_altos.py`, `scripts/10_top1.py`.
@@ -182,12 +184,13 @@ combinan, en los [diagramas](diagramas.md); el método completo, en la [metodolo
 ### Posición de inversión internacional (PII)
 
 - **Qué es.** El cuadro del INDEC con los activos y pasivos externos del país (cuadro 18, "otros
-  sectores").
-- **Qué aporta.** Cuántos activos en el exterior tiene el sector privado: inversión de cartera,
-  moneda y depósitos.
-- **Cómo se usó.** Sólo en las variantes con activos externos: se les supone una renta del 3%
-  anual no declarada y se reparte como la Ganancias faltante (casi todo arriba). Es una cota
-  alta.
+  sectores", es decir, el sector privado no financiero).
+- **Qué aporta.** Cuántos activos tiene afuera el sector privado: inversión de cartera (acciones,
+  fondos, bonos) y moneda y depósitos (sobre todo billetes fuera del sistema).
+- **Cómo se usó.** En el panel B de la figura 0 (ingreso completado, estimado): una renta de 4% anual
+  sobre la inversión de cartera, atribuida al 1% más rico. La moneda y depósitos no se usa en la
+  versión central (no rinde y está repartida); sí en la cota alta, 3% sobre todo el stock
+  ([metodología](metodologia.md), sección 6).
 - **Dónde.** `data/raw/macro/cin_II_2026.xls`, `scripts/aux_cuentas_nacionales.py`.
 
 ### Tipo de cambio (Comunicación A 3500)

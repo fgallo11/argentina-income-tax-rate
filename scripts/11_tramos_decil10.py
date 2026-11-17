@@ -41,6 +41,8 @@ VARIANTES = [
 VARIANTES_FIG0 = [
     Variante("ajuste_cn_rentas", ajuste_cn=True, factor_rentas=7.0),
     Variante("ajuste_cn_rentas_activos_ext", ajuste_cn=True, factor_rentas=7.0, renta_activos_ext=0.03),
+    Variante("ajuste_cn_rentas_cartera_ext", ajuste_cn=True, factor_rentas=7.0, renta_activos_ext=0.04,
+             base_activos_ext="cartera"),
 ]
 NOMBRES = {0: "Población", 91: "P90-95", 95: "P95-99", 99: "1% (EPH)"} | {d: f"D{d}" for d in range(1, 10)}
 

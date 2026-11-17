@@ -22,8 +22,10 @@ los grupos salvo los asalariados registrados, y mucho más arriba (rentas, cuent
 evasión, activos no declarados en el exterior). Ajustar salarios e ingreso de cuentapropistas a
 Cuentas Nacionales (INDEC) casi no cambia el perfil (decil 10: 25,3% en 2024 y 24,0% en 2025):
 esa subdeclaración se reparte en toda la distribución. Lo que puede moverlo es el ingreso de
-capital que la encuesta no capta (sin dato oficial; se estima con supuestos): si se suma la renta de los activos externos privados (cota alta), el
-decil 10 baja a 24,1% (2024) y 22,9% (2025), debajo de todos los deciles medios. Las rentas
+capital que la encuesta no capta (sin dato oficial; se estima con supuestos): con rentas ×7 y una
+renta de 4% sobre la cartera externa atribuida al 1% más rico, el decil 10 baja a 23,7% (2024) y
+22,4% (2025), debajo de todos los deciles; el 1%, a 18,5% en 2025 ([metodología](docs/metodologia.md),
+sección 6). Las rentas
 internas de los hogares no tienen dato oficial.
 
 **Corrección del 16/11/2026 (ingresos altos).** Hasta esta versión, la Ganancias que la encuesta
@@ -90,7 +92,7 @@ informe; sus datos están en `data/externos/`. El "patrimonio" del ITO incluye e
 
 La figura central de cada año 2004-2025 está en `outputs/figures/por_anio/`. Completando (con una estimación) el
 ingreso que la encuesta no capta, el decil 10 queda por debajo de todos los deciles en 2004-2005, 2007-2008,
-2016-2019, 2024 y 2025; en 2010-2015 y 2020-2022 baja pero sigue por encima del promedio.
+2016, 2018-2019, 2024 y 2025; en 2006, 2009-2015 y 2020-2023 baja pero sigue por encima del promedio.
 
 Los ingresos por decil de la EPH coinciden con los que publica el INDEC (validado contra el
 cuarto trimestre de 2024, los diez deciles).
@@ -142,8 +144,8 @@ adelante. No corras `07_graficos.py` solo: las figuras quedarían con tablas vie
 
 ## Limitaciones principales
 
-- El decil 10 depende de supuestos: entre 21,8% y 25,1% en 2025 según la variante (con el ingreso
-  completado, el piso), porque su ingreso real no se observa.
+- El decil 10 depende de supuestos: entre 21,8% y 25,1% en 2025 según la variante (el piso es el
+  ingreso completado con la cota alta de activos externos), porque su ingreso real no se observa.
 - El consumo de encuesta es 37-55% del de Cuentas Nacionales.
 - El decil 1 declara gastar más de lo que gana: 31,4% contra el ingreso declarado y 22,0%
   si se reemplaza su ingreso por el gasto (2024).

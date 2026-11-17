@@ -294,16 +294,32 @@ reparte (ver "Pendientes").
 |---|---|---|
 | Sueldos e ingreso de cuentapropistas que faltan en la encuesta | Las Cuentas Nacionales del INDEC miden el total del país; la diferencia con la encuesta es un dato | El total es un dato; repartirlo en proporción a lo que cada uno ya declara es un supuesto |
 | Rentas del capital (alquileres, intereses, utilidades) | Las rentas declaradas se multiplican por 7: las encuestas latinoamericanas captan entre un quinto y un décimo (De Rosa, Flores y Morgan, 2024) | Supuesto: el INDEC no publica el total de rentas de los hogares |
-| Renta de los activos privados en el exterior (sólo las marcas negras) | 3% anual sobre el stock que publica el INDEC (Posición de inversión internacional), repartido arriba con las declaraciones juradas | Cota alta: supone que nada de esa renta se declara |
+| Renta de los activos privados en el exterior (marcas negras) | 4% anual sobre las acciones y bonos que el sector privado tiene afuera según el INDEC (Posición de inversión internacional), atribuido al 1% más rico | Supuesto: que esa cartera es de la cima y que su renta no se declara |
+
+**Por qué la renta externa va sólo a la cima, y sólo sobre acciones y bonos.** De los US$378.000
+millones que el sector privado tiene afuera según el INDEC (2025), US$260.000 millones son "moneda y
+depósitos", sobre todo dólares fuera del sistema: el colchón de buena parte de la clase media, que
+no rinde nada. Esos se dejan afuera. Las acciones y bonos (US$118.000 millones) sí rinden, y es
+plausible que sean de los de arriba: en Bienes Personales declaran tener bienes en el exterior unas
+87.000 personas (ARCA, año fiscal 2023), alrededor del 0,2% de la población. El 4% combina
+dividendos (~2%), cupones de bonos (~3-4%) y la gestión activa de las carteras grandes; con 3% o 5%
+el resultado casi no cambia. Las marcas grises son la versión anterior, más extrema (3% sobre todo
+el stock, billetes incluidos): se dejan como cota alta.
 
 **Detalle técnico.** Sueldos e ingreso mixto se ajustan con la cuenta de generación del ingreso del
 INDEC, cada fuente con su propio factor y sólo a quien declara esa fuente. La carga total de la
 población se mantiene igual que en A, para que la comparación muestre **quién** soporta los
-impuestos y no cuánto se recauda.
+impuestos y no cuánto se recauda. Justificación completa, fuentes y limitaciones:
+[metodología](metodologia.md), sección 6.
 
-**Resultado en 2025.** Con el ingreso así completado, el decil 10 baja de 23,8% a 22,7% (21,8% con los
-activos externos) y queda debajo de todos los deciles; el 1% más rico, de 21,7% a 20,0% (18,1%). El
-decil 1 sube de 28,7% a 31,2%: la carga total es la misma que en A, y su ingreso crece menos que el
+**Limitaciones.** Es una estimación, no una medición. Lo que se declara en Bienes Personales es
+alrededor del 5% de lo que el INDEC estima que hay afuera, así que el reparto de la cartera entre las
+personas es un supuesto. El ×7 viene de estudios de otros países. Y la posición de inversión
+internacional incluye también a empresas, no sólo a hogares.
+
+**Resultado en 2025.** Con el ingreso así completado, el decil 10 baja de 23,8% a 22,7% (22,4% con la
+renta externa) y queda debajo de todos los deciles; el 1% más rico, de 21,7% a 20,0% (18,5%). El
+decil 1 sube de 28,7% a 31,2% (31,6%): la carga total es la misma que en A, y su ingreso crece menos que el
 del resto, así que le toca una parte mayor. Lo que se puede afirmar: si el ingreso que falta en la
 encuesta está tan concentrado arriba como sugieren estos datos, el sistema es regresivo de punta a
 punta, y no sólo abajo.
@@ -376,7 +392,7 @@ promedio todos los años; los deciles 6 a 8 son los que más seguido pagan menos
 de lo que pagaría en un sistema progresivo.
 
 En 2025, a la izquierda: los percentiles 90-95 pagan 24,6%, los 95-99, 23,7%, y el 1%, 21,7% (con el
-ingreso completado, los rombos, 20,1%). A la derecha, los mismos dos repartos de referencia de la
+ingreso completado, los rombos, 18,5%). A la derecha, los mismos dos repartos de referencia de la
 sección 4, para ese año:
 
 - **Proporcional:** los percentiles 90-95 pagan 0,5 puntos de la recaudación más de lo que les
@@ -440,14 +456,14 @@ legal en vez del recaudado, sin corregir los ingresos altos, sin Bienes Personal
 con el impuesto al cheque (triángulos); completando el ingreso que la encuesta no capta (rombos,
 estimado como en la sección 3).
 
-- El decil 1 paga más que los deciles 2 a 9 en todas las variantes y todos los años (418 de 418
+- El decil 1 paga más que los deciles 2 a 9 en todas las variantes y todos los años (440 de 440
   combinaciones).
 - Su nivel es lo más incierto: la franja va de 26% a 33% en 2025.
 - Si en el decil 1 se usa el gasto en vez del ingreso declarado, paga entre 3 y 7 puntos menos que el
   promedio. Mide otra cosa, pero muestra cuánto depende el resultado de abajo de cómo se mide el
   ingreso.
-- Con el ingreso completado, el decil 10 queda debajo de todos los deciles en 10 de los 22
-  años (entre ellos 2004, 2016-2019, 2024 y 2025).
+- Con el ingreso completado, el decil 10 queda debajo de todos los deciles en 9 de los 22 años
+  (2004-2005, 2007-2008, 2016, 2018-2019, 2024 y 2025).
 
 **El impuesto al cheque.** La medida principal no lo incluye; la variante lo suma suponiendo que se
 traslada entero a precios y repartiéndolo según el consumo, como Ingresos Brutos (lo recaudado es

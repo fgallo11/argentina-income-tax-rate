@@ -154,43 +154,100 @@ Pasos:
 llevadas a 2025 por el ingreso medio de la EPH. 2024 ya usa sus propias declaraciones. Bienes Personales sigue siendo una imputación (la EPH no releva
 patrimonio): se grafica rayado y existe la variante `sin_bienes_personales`.
 
-## 6. Ingreso declarado y ingreso ajustado a Cuentas Nacionales
+## 6. Completar el ingreso que la encuesta no capta (panel B de la figura 0)
 
-La figura central (`fig0_dos_versiones_*`) muestra:
+La figura central (`fig0_dos_versiones_*`) muestra dos cuentas:
 
-- **A. Ingreso declarado** (variante `principal`). 2024: D1 31,4%, deciles medios ~25%,
-  D10 25,0%, promedio 24,9%. 2025: D1 28,7%, deciles medios ~23,5%, D10 23,8%, promedio 23,8%.
-- **B. Ingreso ajustado a Cuentas Nacionales** (variante `ajuste_cn`,
-  `scripts/aux_cuentas_nacionales.py`). Cada fuente de ingreso se lleva al total de la
-  Cuenta de generación del ingreso del INDEC con un factor propio, aplicado a quien
-  declara esa fuente:
-  - salarios (bruto de registrados + no registrados) a la remuneración al trabajo
-    asalariado. La EPH capta 68%-78%. Para comparar se suman a la EPH las contribuciones
-    patronales simuladas, 18% del bruto de los registrados públicos y 6% de obra social
-    patronal, que la remuneración incluye;
-  - ingreso de cuentapropistas y patrones (más otras ocupaciones) al ingreso mixto bruto.
-    La EPH capta 50%-72%, menos en los últimos años.
+- **A. Ingreso declarado** (variante `principal`, la medida de todo el proyecto). 2024: D1 31,4%,
+  deciles medios ~25%, D10 25,0%, promedio 24,9%. 2025: D1 28,7%, deciles medios ~23,5%, D10 23,8%,
+  promedio 23,8%.
+- **B. Completando el ingreso que la encuesta no capta (estimado)** (variante
+  `ajuste_cn_rentas_cartera_ext`). No es el ingreso oculto real, que no se conoce: es una
+  estimación con totales oficiales y supuestos, para ver cómo cambiaría el reparto.
 
-  Para 2004-2015 no hay Cuenta de generación del ingreso en base 2004: se usa la cobertura
-  promedio 2016-2018. **Nivel neutro:** todos los impuestos se escalan por el mismo factor
-  para que la carga total sobre el ingreso total quede como en A. Llevar los impuestos a la
-  escala de lo recaudado (consumo de Cuentas Nacionales) sin tener el ingreso completo de
-  los hogares inflaba las tasas: el decil 1 daba 67%. El ajuste muestra cómo cambia el
-  reparto, no el nivel. 2024: D1 32,2%, D10 25,3%. 2025: D1 29,8%, D10 24,0%.
-- **Sensibilidad de activos externos** (variante `ajuste_cn_activos_ext`): además, 3% anual
-  sobre los activos externos de "otros sectores" (inversión de cartera + moneda y
-  depósitos; Posición de inversión internacional, INDEC, cuadro 18; a pesos con el tipo de
-  cambio A 3500 promedio) como ingreso que no figura en la encuesta, repartido como la Ganancias faltante
-  (declaraciones juradas: casi todo al decil 10). Es una cota alta: supone que nada de eso
-  se declara, que los billetes rinden como depósitos y que todo pertenece a hogares, aunque
-  el sector incluye empresas. 2024: D10 24,1%, debajo de todos los deciles medios. 2025: D10
-  22,9%, debajo de todos los deciles.
+### Por qué
 
-Resultado: la subdeclaración de salarios y de cuentapropia está repartida en toda la
-distribución y casi no cambia el perfil. Lo que puede volver regresiva también la punta
-alta es el ingreso de capital que la encuesta no capta. Las rentas internas de los hogares
-(intereses, alquileres, dividendos) no tienen dato oficial: el INDEC no publica la cuenta
-del sector hogares. La EPH registra rentas por 0,4%-0,7% del PIB, una cifra inverosímil.
+La EPH subestima el ingreso, y más arriba. Tres evidencias propias:
+
+- Los sueldos que suma la encuesta son entre 71% y 82% de la remuneración al trabajo asalariado de
+  las Cuentas Nacionales (INDEC, cuenta de generación del ingreso, 2016-2025); el ingreso de
+  cuentapropistas y patrones, entre 50% y 72% del ingreso mixto bruto.
+- Las rentas de la propiedad que declaran los hogares en la EPH (alquileres, intereses,
+  ganancias de negocios) suman 0,4% a 0,7% del PIB, una cifra inverosímil, y se concentran en el
+  decil 10 (3,6% de su ingreso en 2025, contra 0,2% a 0,6% en los deciles 1 a 8).
+- En el punto de empalme con las declaraciones juradas de Ganancias, lo declarado al fisco es
+  entre 1,2 y 1,8 veces lo que la encuesta muestra para el mismo número de personas (sección 5).
+
+En toda América Latina las encuestas captan mal el ingreso de arriba y sobre todo las rentas
+(De Rosa, Flores y Morgan, "More unequal or not as rich? Revisiting the Latin American exception",
+*World Development* 184, 106737, 2024). Medir la carga sólo contra el ingreso declarado
+sobreestima la tasa de los de arriba.
+
+### Cómo: tres pasos, cada uno con su grado de certeza
+
+1. **Sueldos e ingreso mixto: al total de Cuentas Nacionales** (`scripts/aux_cuentas_nacionales.py`).
+   Cada fuente se multiplica por su propio factor (total de Cuentas Nacionales ÷ total de la
+   encuesta) y sólo a quien la declara. Para comparar, a los sueldos de la EPH se les suman las
+   contribuciones patronales simuladas, 18% del bruto de los registrados públicos y 6% de obra social
+   patronal, que la remuneración de Cuentas Nacionales incluye. Para 2004-2015 no hay cuenta de
+   generación del ingreso en base 2004: se usa la cobertura promedio de 2016-2018.
+   *Dato:* el faltante total. *Supuesto:* que se reparte en proporción a lo que cada uno declara.
+2. **Rentas del capital: las declaradas × 7** (`factor_rentas`). No hay total oficial con qué
+   comparar: el INDEC no publica la cuenta del sector hogares. De Rosa, Flores y Morgan (2024)
+   encuentran que las encuestas latinoamericanas captan entre un quinto y un décimo de las rentas de
+   la propiedad de las Cuentas Nacionales; se toma el punto medio, 7.
+   *Supuesto*, el más débil: el factor viene de otros países y sólo multiplica a quien ya declara
+   alguna renta (el que declara cero sigue en cero).
+3. **Renta de los activos privados en el exterior** (marcas negras; `base_activos_ext = "cartera"`).
+   Posición de inversión internacional del INDEC (cuadro 18, "otros sectores"), a pesos con el tipo
+   de cambio Comunicación A 3500 promedio del año:
+   - **Base: sólo la inversión de cartera** (acciones, fondos y bonos; US$118.000 millones en 2025).
+     Se deja afuera "moneda y depósitos" (US$260.000 millones), que son sobre todo billetes fuera del
+     sistema: restando los depósitos en dólares en bancos locales quedan unos US$220.000 millones,
+     cifra que suele citarse como "dólares del colchón". Los billetes no generan renta y están
+     repartidos en toda la distribución, no sólo arriba.
+   - **Rendimiento: 4% anual.** Dividendos (~2%) y cupones de bonos (~3-4%), con margen por la gestión
+     activa de las carteras grandes. Con 3% o 5% el 1% más rico pasa de 18,5% a 18,8% o 18,1% en 2025:
+     la tasa pesa poco.
+   - **A quién: al 1% superior** (al decil 10 en la medida por deciles). En las declaraciones juradas
+     de Bienes Personales, los bienes en el exterior los declaran 87.009 personas (año fiscal 2023;
+     anuario 2024 de ARCA, cuadro 2.5.1.2.3), alrededor del 0,2% de la población: todas dentro del
+     1%. Esos bienes suman $14,7 billones (unos US$18.000 millones): 47% títulos y acciones, 39% dinero
+     y depósitos.
+   *Supuestos:* que la cartera es de la cima y que nada de su renta se declara.
+
+**Nivel neutro.** Los impuestos no cambian: se dividen por un ingreso mayor. Para que la comparación
+muestre quién soporta la carga y no cuánto se recauda, todos los impuestos se escalan por el mismo
+factor y la carga total sobre el ingreso total queda como en A. (Llevar los impuestos a la escala de
+lo recaudado sin el ingreso completo de los hogares inflaba las tasas: el decil 1 daba 67%.)
+
+**Cota alta** (marcas grises, variante `ajuste_cn_rentas_activos_ext`): 3% sobre todo el stock,
+billetes incluidos, repartido como la Ganancias faltante (casi todo al decil 10). Supone que los
+billetes rinden como depósitos y que todos son de los de arriba. Fue la versión central hasta el
+17/11/2026.
+
+### Limitaciones
+
+- Lo declarado en Bienes Personales es alrededor del 5% de lo que el INDEC estima que el sector
+  privado tiene afuera; el resto no está declarado y no se sabe de quién es. El blanqueo de 2024-2025
+  sacó a la luz más de US$31.000 millones no declarados (International Tax Observatory, nota sobre
+  Argentina, 2026), lo que confirma que el stock es real, no su reparto.
+- El ×7 es un supuesto importado; la renta interna no declarada podría ser mayor (operaciones
+  financieras locales de alto rendimiento) o menor.
+- La posición de inversión internacional de "otros sectores" incluye empresas, no sólo hogares.
+- El reparto de los faltantes de sueldos y cuentapropia en proporción a lo declarado no corrige que
+  algunos declaran mucho menos que otros.
+
+### Resultado
+
+2024: D1 34,3%, D5 26,4%, D10 23,7%; percentiles 90-95 24,7%, 95-99 24,0%, 1% 21,3%. 2025: D1 31,6%,
+D5 25,6%, D10 22,4%; percentiles 90-95 24,0%, 95-99 23,4%, 1% 18,5%. Con el ingreso así completado
+el decil 10 queda por debajo de todos los deciles en 2004-2005, 2007-2008, 2016, 2018-2019, 2024 y
+2025; en 2006, 2009-2015 y 2020-2023 sigue por encima del promedio (Ganancias pesaba más). Sin la
+renta externa (variante `ajuste_cn_rentas`), el decil 10 da 24,1% en 2024 y 22,7% en 2025.
+
+Variantes intermedias, para aislar cada paso: `ajuste_cn` (sólo el paso 1), `ajuste_cn_rentas`
+(pasos 1 y 2), `ajuste_cn_activos_ext` (paso 1 con la cota alta de activos).
 
 **Contra el consumo** (variante `sobre_consumo`): impuestos ÷ (gasto + impuestos
 directos). 2024: D1 22,0%, D10 33,6%. 2025: D1 20,2%, D10 31,8%. Responde otra pregunta (qué parte de lo que se gasta
@@ -258,16 +315,12 @@ Pessino, Rasteletti, Artana y Lustig, *Distributional effects of taxation in Lat
 | `iva_exentos_20` | bienes exentos cargan 20% de la alícuota por insumos (Pessino et al.) | 31,2 | 24,9 | 25,1 | 24,9 |
 | `con_cheque` | suma impuesto a créditos y débitos (Pessino et al. lo incluyen como "cascada") | 34,7 | 26,8 | 26,0 | 26,3 |
 | `ajuste_cn_rentas` | Cuentas Nacionales + rentas de la EPH × 7 (las encuestas captan 1/5 a 1/10; De Rosa et al.) | 33,9 | 26,1 | 24,1 | 24,9 |
-| `ajuste_cn_rentas_activos_ext` | lo anterior + renta de activos externos | 35,0 | 26,9 | 23,1 | 24,9 |
+| `ajuste_cn_rentas_cartera_ext` | lo anterior + 4% sobre la cartera externa, al 1% (panel B, sección 6) | 34,3 | 26,4 | 23,7 | 24,9 |
+| `ajuste_cn_rentas_activos_ext` | cota alta: 3% sobre todos los activos externos | 35,0 | 26,9 | 23,1 | 24,9 |
 
-El panel B de la figura 0 usa `ajuste_cn_rentas` con la marca de `ajuste_cn_rentas_activos_ext`:
-completando el ingreso de capital que la encuesta no capta (estimado), el decil 10 queda por debajo de todos los demás.
-
-**No vale para todos los años.** Con rentas ×7 y activos externos, el decil 10 queda por
-debajo de todos los deciles medios en 2004-2005, 2007-2008, 2016-2019, 2024 y 2025. En 2010-2015 y
-2020-2022 baja pero sigue por encima del promedio, y en 2006, 2009 y 2023 queda entre el promedio
-y el decil medio más bajo (Ganancias pesaba más en esos años). La
-figura 0 para cada año está en `outputs/figures/por_anio/` y su texto se adapta al resultado.
+El panel B de la figura 0 usa `ajuste_cn_rentas` con las marcas de `ajuste_cn_rentas_cartera_ext`
+(negras) y `ajuste_cn_rentas_activos_ext` (grises). Detalle, justificación y limitaciones en la
+sección 6; la figura 0 de cada año está en `outputs/figures/por_anio/`.
 
 Pendiente de Pessino et al. (no implementado):
 - **Compras informales:** el IVA y Ingresos Brutos de lo que se compra en comercios informales

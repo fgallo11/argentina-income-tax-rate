@@ -276,8 +276,9 @@ def fig_dos_versiones(largo, anio, carpeta=None, formatos=("png", "svg")):
          "  (INDEC). El faltante es un dato; repartirlo según lo declarado, supuesto.\n"
          "• Rentas del capital: las declaradas × 7 (las encuestas captan 1/5 a 1/10;\n"
          "  De Rosa, Flores y Morgan 2024). Supuesto: no hay dato oficial.\n"
-         "• Marcas negras: + 3% anual sobre los activos privados en el exterior,\n"
-         "  suponiendo que nada se declara. Cota alta.\n"
+         "• Marcas: renta de los activos privados en el exterior (INDEC). Negras:\n"
+         "  4% sobre acciones y bonos, atribuido al 1% (en BP declaran bienes afuera\n"
+         "  ~87.000 personas). Grises, cota alta: 3% sobre todo, billetes incluidos.\n"
          "No agrega impuestos: la carga total es la de A; cambia quién la soporta."),
     ]
     con_tramos = tabla_tramos("principal") is not None and tabla_tramos("ajuste_cn_rentas") is not None
@@ -307,19 +308,34 @@ def fig_dos_versiones(largo, anio, carpeta=None, formatos=("png", "svg")):
         ax.set_title(titulo, loc="left", fontsize=11.5, fontweight="bold", pad=8)
         ax.text(0.0, -0.15, nota, transform=ax.transAxes, fontsize=8.3, color=TINTA2, ha="left", va="top",
                 linespacing=1.3)
-    ext = tabla("ajuste_cn_rentas_activos_ext").total
+    # Renta de los activos externos privados. Negras (central): 4% sobre la inversión de cartera,
+    # asignada a la cima. Grises (cota alta): 3% sobre todo el stock, billetes incluidos.
+    central = "ajuste_cn_rentas_cartera_ext"
+    hay_central = (largo.variante == central).any()
+    alta = tabla("ajuste_cn_rentas_activos_ext").total
+    ext = tabla(central).total if hay_central else alta
     res["ext"] = ext
-    marcas = [(9, ext[10])]
-    if con_tramos:
-        ext_tr = tabla_tramos("ajuste_cn_rentas_activos_ext").total * 100
-        marcas += list(zip([10.9, 11.9, 12.9], ext_tr.values))
-    for xm, ym in marcas:
-        axes[1].plot([xm - 0.36, xm + 0.36], [ym] * 2, color=TINTA, linewidth=2.4, zorder=6)
-    axes[1].text(9 + 0.42, ext[10], pct(ext[10]), va="center", fontsize=8.5, color=TINTA, zorder=7,
+    xs = [9] + ([10.9, 11.9, 12.9] if con_tramos else [])
+    def valores(variante, serie):
+        v = [serie[10]]
+        if con_tramos:
+            v += list(tabla_tramos(variante).total * 100)
+        return v
+    v_central = valores(central if hay_central else "ajuste_cn_rentas_activos_ext", ext)
+    v_alta = valores("ajuste_cn_rentas_activos_ext", alta) if hay_central else None
+    for i, xm in enumerate(xs):
+        if v_alta is not None:
+            axes[1].plot([xm - 0.36, xm + 0.36], [v_alta[i]] * 2, color="#8c8b84", linewidth=1.6,
+                         linestyle=(0, (2, 1.5)), zorder=6)
+        axes[1].plot([xm - 0.36, xm + 0.36], [v_central[i]] * 2, color=TINTA, linewidth=2.4, zorder=7)
+    axes[1].text(9 + 0.42, v_central[0], pct(v_central[0]), va="center", fontsize=8.5, color=TINTA, zorder=8,
                  bbox=dict(boxstyle="square,pad=0.05", facecolor=SUP, edgecolor="none", alpha=0.85))
     if con_tramos:      # los valores de las marcas de los tramos, juntos (al lado se pisarían con los totales)
-        axes[1].text(11.9, 0.8, "marcas negras:\n" + "  ".join(pct(v) for v in ext_tr.values),
-                     transform=axes[1].get_xaxis_transform(), ha="center", va="top", fontsize=8.2, color=TINTA)
+        txt = "negras: " + "  ".join(pct(v) for v in v_central[1:])
+        if v_alta is not None:
+            txt += "\ngrises: " + "  ".join(pct(v) for v in v_alta[1:])
+        axes[1].text(11.9, 0.8, txt, transform=axes[1].get_xaxis_transform(), ha="center", va="top",
+                     fontsize=8.2, color=TINTA)
     tope = max(max(res["principal"].loc[1:10]), max(res["ajuste_cn_rentas"].loc[1:10]))
     axes[0].set_ylim(0, max(40, (int(tope / 5) + 2) * 5))
     axes[0].set_ylabel("% del ingreso")
@@ -369,8 +385,8 @@ def fig_sensibilidad(largo, anio):
     dif = (v["recursos_gasto"] - v["principal"]).abs() > 0.3
     ax.scatter([xi for xi in x if dif[xi]], v["recursos_gasto"][dif], s=70, facecolor=SUP, edgecolor="#e34948", linewidth=1.8, zorder=3,
                label="Si el ingreso de los deciles donde el gasto lo supera se reemplaza por el gasto")
-    ax.scatter(x, v["ajuste_cn_rentas_activos_ext"], s=60, marker="D", color="#2a78d6", zorder=3,
-               label="Con el ingreso completado (estimado): Cuentas Nacionales, rentas ×7 y activos externos (cota alta)")
+    ax.scatter(x, v["ajuste_cn_rentas_cartera_ext"], s=60, marker="D", color="#2a78d6", zorder=3,
+               label="Con el ingreso completado (estimado): Cuentas Nacionales, rentas ×7 y renta de la cartera externa")
     for xi in x:
         ax.text(xi + 0.32, v["principal"][xi], pct(v["principal"][xi]), va="center", fontsize=8.5, color=TINTA)
     ax.set_xticks(x)
@@ -596,7 +612,13 @@ def fig_decil10_partido(anio, carpeta=None, formatos=("png", "svg"), nombre=None
     top = pd.read_csv(TABLES / "top1.csv").set_index("anio").loc[anio]
     a = t[t.anio == anio]
     pr = a[a.variante == "principal"].set_index("grupo")
-    cn = a[a.variante == "ajuste_cn_activos_ext"].set_index("grupo").total * 100
+    # rombos: el ingreso completado de la figura 0 (panel B, marcas negras), si está calculado
+    f0 = TABLES / "tasas_tramos_decil10_fig0.csv"
+    if f0.exists():
+        b = pd.read_csv(f0)
+        cn = b[(b.anio == anio) & (b.variante == "ajuste_cn_rentas_cartera_ext")].set_index("grupo").total * 100
+    else:
+        cn = a[a.variante == "ajuste_cn_activos_ext"].set_index("grupo").total * 100
     grupos = [1, 3, 5, 7, 9, 91, 95, 99]
     etiquetas = ["D1", "D3", "D5", "D7", "D9", "P90-95", "P95-99", "1%", "1%"]
     rojo, gris, azul, oscuro = "#e34948", "#b9b8b0", "#7fb3ea", "#0b3d7a"
@@ -609,7 +631,7 @@ def fig_decil10_partido(anio, carpeta=None, formatos=("png", "svg"), nombre=None
     for xi, val, h in zip(x, vals, arriba):
         ax.text(xi, h + 1.0, pct(val), ha="center", fontsize=9, color=TINTA, fontweight="bold")
     ax.scatter(x[:-1], [cn[g] for g in grupos], marker="D", s=40, facecolor=SUP, edgecolor=TINTA, linewidth=1.3,
-               zorder=5, label="Con ingresos ajustados a Cuentas Nacionales\ny renta de activos externos")
+               zorder=5, label="Completando el ingreso que la encuesta no capta\n(estimado, como el panel B de la figura 0)")
     ax.axhline(pr.total[0] * 100, color=TINTA2, linewidth=1, linestyle=(0, (4, 3)),
                label=f"Promedio de la población ({pct(pr.total[0] * 100)}%)")
     techo = max(vals + list(cn[grupos])) * 1.32
@@ -693,14 +715,14 @@ def fig_decil10_partido(anio, carpeta=None, formatos=("png", "svg"), nombre=None
              f"{pct(t99)}% en el 1% superior; los deciles medios, alrededor de {pct(medios)}%. Dos mediciones del 1%: la encuesta "
              f"completada con las declaraciones juradas\n({pct(pr.canastas_por_adulto_eq[99])} canastas por adulto equivalente) y sólo las declaraciones "
              f"juradas, por declarante, con utilidades de empresas y renta de activos externos ({pct(top.completo * 100)}%). "
-             f"Con esa renta, el de la encuesta paga {pct(a[(a.variante == 'ajuste_cn_activos_ext') & (a.grupo == 99)].total.iloc[0] * 100)}%.",
+             f"Completando el ingreso que la encuesta no capta (estimado), el de la encuesta paga {pct(cn[99])}%.",
              fontsize=9.6, color=TINTA2, va="top")
     fig.subplots_adjust(wspace=0.32, top=0.84, right=0.87)
     fig.text(0.01, -0.12, "Fuente: elaboración propia con EPH, ENGHo (INDEC), recaudación DNIAF y anuarios de ARCA. "
              "Tramos ordenados por ingreso per cápita familiar, como los deciles. Ganancias que la encuesta no capta y "
              "Bienes Personales se reparten entre los tramos con las\ndeclaraciones juradas. Por encima del 5% más rico "
-             "la ENGHo no informa consumo: se deja fijo. Rombo: ingresos de cada fuente llevados a\nCuentas Nacionales, "
-             "más la renta de los activos externos privados. * 1% según las declaraciones juradas de Ganancias (ARCA), "
+             "la ENGHo no informa consumo: se deja fijo. Rombo: ingreso completado como en el panel B\nde la figura 0 (sueldos y cuentapropia a "
+             "Cuentas Nacionales, rentas ×7, 4% sobre la cartera externa atribuido al 1%). * 1% según las declaraciones juradas de Ganancias (ARCA), "
              "con utilidades de empresas y renta de activos externos; ingreso por declarante, ver fig7.\nPaneles derechos: misma "
              "recaudación total repartida de dos formas de referencia. Proporcional: todos pagan la tasa promedio. Progresivo: "
              f"tasa = promedio × (ingreso por persona del grupo / promedio)^{pct(ELAST_PROG, 2)}, reescalada para recaudar lo mismo. "

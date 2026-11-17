@@ -50,7 +50,7 @@ if __name__ == "__main__":
     # El rango cubre supuestos sobre la misma medida de recursos. Se excluyen la lectura
     # contra consumo y las ajustadas a Cuentas Nacionales (otras medidas de ingreso) y el "techo" de ingresos altos, que implica
     # una alícuota de Ganancias imposible sobre el ingreso faltante (docs/auditoria.md, 3.4).
-    fuera = {"sobre_consumo", "altos_registros", "ajuste_cn", "ajuste_cn_activos_ext", "ajuste_cn_rentas",
+    fuera = {"sobre_consumo", "altos_registros", "ajuste_cn", "ajuste_cn_activos_ext", "ajuste_cn_rentas", "ajuste_cn_rentas_cartera_ext",
              "ajuste_cn_rentas_activos_ext", "con_cheque", "con_cheque_y_combustibles"}
     rango = ancho[~ancho.variante.isin(fuera)].groupby(["anio", "decil"]).total.agg(["min", "max"]).reset_index()
     rango = rango.merge(princ[["anio", "decil", "total"]], on=["anio", "decil"]).rename(

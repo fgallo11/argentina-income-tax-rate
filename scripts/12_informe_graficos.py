@@ -319,8 +319,8 @@ def i5_supuestos(largo):
                      "sin corregir los ingresos altos, sin Bienes Personales)")
         ax.scatter(x, v["con_cheque"], s=46, marker="^", facecolor=g.SUP, edgecolor="#6f6e66", linewidth=1.5, zorder=3,
                    label="Con el impuesto al cheque (trasladado a precios)")
-        ax.scatter(x, v["ajuste_cn_rentas_activos_ext"], s=40, marker="D", color=AZUL, zorder=3,
-                   label="Con el ingreso completado (estimado): Cuentas Nacionales, rentas ×7 y activos externos")
+        ax.scatter(x, v["ajuste_cn_rentas_cartera_ext"], s=40, marker="D", color=AZUL, zorder=3,
+                   label="Con el ingreso completado (estimado): Cuentas Nacionales, rentas ×7 y renta de la cartera externa")
         ax.scatter(x, v["principal"], s=56, color=g.TINTA, zorder=4, label="Medida principal")
         ax.text(1.42, v["principal"][1], g.pct(v["principal"][1]), va="center", ha="left", fontsize=8.4,
                 color=g.TINTA, fontweight="bold")
