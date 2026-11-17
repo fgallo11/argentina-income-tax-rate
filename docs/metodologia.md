@@ -2,7 +2,7 @@
 
 Estimación de impuestos pagados como porcentaje del ingreso, por decil de ingreso per
 cápita familiar, aglomerados urbanos de la EPH, 2004-2025. Qué es cada fuente, qué aporta y
-cómo se usa: `docs/fuentes.md`.
+cómo se usa: `docs/fuentes.md`. Diagramas del método y del flujo de datos: `docs/diagramas.md`.
 
 ## 1. Qué se mide
 

@@ -96,7 +96,7 @@ declarado y con el ingreso ajustado a Cuentas Nacionales, con la sensibilidad de
 externos. La lectura contra el consumo queda como variante (`sobre_consumo`): responde otra
 pregunta y no registra la capacidad de ahorro de los deciles altos.
 
-Documentación: [metodología](docs/metodologia.md) · [fuentes](docs/fuentes.md) · [validación](docs/validacion.md) ·
+Documentación: [metodología](docs/metodologia.md) · [fuentes](docs/fuentes.md) · [diagramas](docs/diagramas.md) · [validación](docs/validacion.md) ·
 [respuestas a preguntas abiertas](docs/respuestas_preguntas_abiertas.md) ·
 [estudios previos](docs/literatura_previa.md)
 

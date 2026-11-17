@@ -3,7 +3,7 @@
 Glosario de todas las fuentes del proyecto. Para cada una se indica **qué es**, **qué
 información aporta**, **cómo se usó** y **dónde** está en el repositorio. Las descargas las
 hace `scripts/01_descargar_datos.py` (las URL exactas están ahí); lo transcrito a mano está en
-`params/`; el control de cada número contra su fuente, en `docs/trazabilidad_datos.md`.
+`params/`; el control de cada número contra su fuente, en `docs/trazabilidad_datos.md`. Cómo se combinan, en diagramas: `docs/diagramas.md`.
 
 ## Resumen
 
