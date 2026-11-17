@@ -71,20 +71,35 @@ sólo donde el gasto del decil supera a su ingreso. Aplicada a todos, el decil 1
 Sin verificar: Gómez Sabaini y Rossignolo (OIT 2009), Fernández Felices et al. (2016),
 Dondo, Hanni, Martner y Podestá (2015).
 
-## 3. Contra Pessino et al. (~2018) y el International Tax Observatory (2026)
+## 3. Contra Pessino et al. (Argendata, 2018) y el International Tax Observatory (2026)
 
-| Decil | 1 | 2 | 3 | 5 | 9 | 10 | 1% más rico |
-|---|---|---|---|---|---|---|---|
-| Pessino et al., ~2018 (Argendata) | 35,8 | 30,8 | 27,8 | 25,6 | 24,2 | 24,9 | — |
-| Este proyecto, 2018 (principal) | 33,6 | 25,3 | 25,0 | 25,7 | 24,5 | 24,0 | — |
-| ITO 2026, según la prensa | ~37 | | | ~29-30 | | ~25 | ~30 |
-| Este proyecto, 2024 | 31,4 | 25,0 | 24,3 | 25,0 | 24,8 | 25,0 | 28,1 (26,6 a 29,5) |
-| Este proyecto, 2025 | 28,7 | 23,3 | 23,0 | 23,7 | 23,7 | 23,8 | 26,6 (25,1 a 28,1), extrapolado |
+Datos y fuentes en `data/externos/`; gráfico en `outputs/figures/informe/c1_comparacion.png`.
 
-La forma coincide: el decil 1 paga bastante más y del decil 3 al 9 la carga es pareja. Las
-diferencias: Pessino et al. incluyen más impuestos (cheque y otros en cascada, que pesan más
-abajo), lo que explica su decil 2 más alto; en el decil 10 este proyecto suma la Ganancias
-y los Bienes Personales que la encuesta no capta (declaraciones juradas), lo que lo sube.
-Para el 1% más rico, con las declaraciones de 2024 el rango de este proyecto (26,6% a 29,5%)
-queda algo por debajo del ~30% citado del ITO (con la extrapolación anterior lo contenía).
+**Pessino, Rasteletti, Artana y Lustig** (*Distributional effects of taxation in Latin America*,
+Oxford Open Economics, vol. 4), publicado por Fundar en Argendata, 2018, % del ingreso:
 
+| Decil | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Argendata | 35,8 | 30,8 | 27,8 | 27,0 | 25,6 | 25,1 | 24,7 | 24,6 | 24,2 | 24,9 |
+| Este proyecto (principal) | 33,6 | 25,3 | 25,0 | 25,4 | 25,7 | 23,6 | 24,4 | 24,5 | 24,5 | 24,0 |
+| Este proyecto, con cheque | 37,1 | 27,6 | 27,0 | | 27,5 | | | | 25,9 | 25,0 |
+
+Por tipo de impuesto: el IVA coincide casi decil por decil (D1 16,7 contra 16,5; D5 8,8 contra 8,8);
+su "en cascada" (8,3 en D1) es del orden de nuestro Ingresos Brutos; su Ganancias incluye sociedades
+(0,8 a 3,0 puntos en D1-D9); sus "otros indirectos" son mayores (5,0 en D1 contra 2,1); nuestras
+contribuciones pesan más en los deciles medios.
+
+**International Tax Observatory**, informe n.° 10 (abril 2026, figura 5) y nota sobre Argentina.
+No da deciles sino cuatro grupos, por hogar, con ingreso de Cuentas Nacionales; no informa el año
+(sus fuentes llegan a 2019):
+
+| Grupo | 50% inferior | 40% medio | 10% superior | 1% superior |
+|---|---|---|---|---|
+| ITO | 37 | 29 | 25 | ~30 |
+| Este proyecto, 2019 | 25,3 | 23,6 | 23,3 | 21,8 |
+| Este proyecto, 2025 | 23,9 | 23,6 | 23,4 | 21,7 |
+
+La forma de abajo coincide. Su 1% llega a ~30% porque suma Ganancias de sociedades (~8 puntos) y
+patrimonio (~9). Su 50% inferior tiene ~30 puntos de impuestos al consumo contra ~18 aquí; no se
+pudo verificar la causa. Nota: la cifra de "~25% del decil 10" citada antes en esta tabla era la del
+10% superior del ITO, no un decil.

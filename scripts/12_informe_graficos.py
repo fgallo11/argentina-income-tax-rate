@@ -198,14 +198,10 @@ def i3_mapa(tramos):
     guardar(fig, "i4_mapa_calor")
 
 
-def i6_composicion(ancho, tramos):
-    """Qué impuestos paga cada grupo a lo largo de los años, uno por uno (colores de 07_graficos.py)."""
-    pr = ancho.set_index(["anio", "decil"])
-    top = tramos[(tramos.variante == "principal") & (tramos.grupo == 99)].set_index("anio")
-    paneles = [("Decil 1 (más pobre)", pr.xs(1, level="decil")), ("Decil 5", pr.xs(5, level="decil")),
-               ("Decil 10 (más rico)", pr.xs(10, level="decil")), ("1% más rico", top)]
-    fig, axs = plt.subplots(1, 4, figsize=(19, 5.6), sharey=True)
-    for ax, (titulo, d) in zip(axs, paneles):
+def composicion(paneles, nombre, titulo, sub, ymax=48):
+    """Stackplot impuesto por impuesto de varios grupos a lo largo de los años (colores de 07_graficos.py)."""
+    fig, axs = plt.subplots(1, len(paneles), figsize=(4.75 * len(paneles), 5.6), sharey=True)
+    for ax, (tit, d) in zip(axs, paneles):
         ejes_tiempo(ax, paso=7, indec=False)
         ax.set_xticks([2005, 2010, 2015, 2020, 2025])
         ys = [d[c] * 100 for c in g.COLS]
@@ -215,25 +211,46 @@ def i6_composicion(ancho, tramos):
         f = d.loc[ANIO_FIN] * 100
         consumo = f[["contrib_consumidor", "iva", "internos", "iibb"]].sum()
         directo = f[["ganancias", "bienes_personales"]].sum()
-        ax.set_title(f"{titulo}\n{g.pct(total.iloc[0])}% en 2004 → {g.pct(total.iloc[-1])}% en {ANIO_FIN}", loc="left",
+        ax.set_title(f"{tit}\n{g.pct(total.iloc[0])}% en 2004 → {g.pct(total.iloc[-1])}% en {ANIO_FIN}", loc="left",
                      fontsize=10.5, fontweight="bold")
         ax.text(0.02, 0.98, f"En {ANIO_FIN}, puntos de: consumo {g.pct(consumo)}; aportes y contrib. "
                 f"{g.pct(f[['aportes', 'contrib_trabajador']].sum())};\nGanancias y Bienes Personales {g.pct(directo)}",
                 transform=ax.transAxes, fontsize=7.8, color=g.TINTA2, va="top")
     axs[0].set_ylabel("% del ingreso")
-    axs[0].set_ylim(0, 48)
+    axs[0].set_ylim(0, ymax)
     handles = [g.Patch(facecolor=c, label=n.replace(" (imputado a ingresos altos)", ""))
                for col, n, c in g.IMPUESTOS][::-1]
     fig.legend(handles=handles, loc="lower center", ncol=8, fontsize=8.6, frameon=False, bbox_to_anchor=(0.5, -0.04))
-    fig.suptitle("Qué impuestos paga cada grupo, año por año", x=0.01, y=1.04, ha="left", fontsize=14, fontweight="bold")
-    fig.text(0.01, 0.985, "Al decil 1 casi todo le llega por el consumo: IVA, Ingresos Brutos, Internos y la mitad de las "
-             "contribuciones patronales que pasa a precios. Al decil 5, además, aportes y contribuciones de su salario. "
-             "Al decil 10 y al 1%,\nGanancias y Bienes Personales. Por eso la carga de abajo sube y baja con lo que se "
-             "recauda por peso de consumo, y la de arriba con Ganancias y Bienes Personales.",
-             fontsize=9.3, color=g.TINTA2, va="top")
+    fig.suptitle(titulo, x=0.01, y=1.04, ha="left", fontsize=14, fontweight="bold")
+    fig.text(0.01, 0.985, sub, fontsize=9.3, color=g.TINTA2, va="top")
     fig.subplots_adjust(wspace=0.07, top=0.8, bottom=0.14)
     fig.text(0.01, -0.07, NOTA, fontsize=7.2, color=g.MUDO, ha="left", va="top")
-    guardar(fig, "i6_composicion")
+    guardar(fig, nombre)
+
+
+def i6_composicion(ancho, tramos):
+    pr = ancho.set_index(["anio", "decil"])
+    top = tramos[(tramos.variante == "principal") & (tramos.grupo == 99)].set_index("anio")
+    paneles = [("Decil 1 (más pobre)", pr.xs(1, level="decil")), ("Decil 5", pr.xs(5, level="decil")),
+               ("Decil 10 (más rico)", pr.xs(10, level="decil")), ("1% más rico", top)]
+    composicion(paneles, "i6_composicion", "Qué impuestos paga cada grupo, año por año",
+                "Al decil 1 casi todo le llega por el consumo: IVA, Ingresos Brutos, Internos y la mitad de las "
+                "contribuciones patronales que pasa a precios. Al decil 5, además, aportes y contribuciones de su salario. "
+                "Al decil 10 y al 1%,\nGanancias y Bienes Personales. Por eso la carga de abajo sube y baja con lo que se "
+                "recauda por peso de consumo, y la de arriba con Ganancias y Bienes Personales.")
+
+
+def c3_composicion_tramos(ancho, tramos):
+    """Lo mismo adentro del decil 10: el decil 9 de referencia y los tres tramos."""
+    pr = ancho.set_index(["anio", "decil"])
+    t = tramos[tramos.variante == "principal"].set_index(["anio", "grupo"])
+    paneles = [("Decil 9 (referencia)", pr.xs(9, level="decil")), ("Percentiles 90-95", t.xs(91, level="grupo")),
+               ("Percentiles 95-99", t.xs(95, level="grupo")), ("1% más rico", t.xs(99, level="grupo"))]
+    composicion(paneles, "c3_composicion_tramos", "Adentro del 10% más rico, cada tramo paga con impuestos distintos",
+                "Los percentiles 90-95 pagan como el decil 9: aportes, contribuciones y consumo, con algo de Ganancias. "
+                "Cuanto más arriba, más pesa Ganancias y menos el resto. En el 1%, Ganancias y Bienes Personales son\n"
+                "más de la mitad de lo que paga: por eso su tasa sube y baja con esos dos impuestos, mientras la de los "
+                "percentiles 90-95 se mueve menos.")
 
 
 ANIOS = [2004, 2013, 2019, ANIO_FIN]      # inicio, máximo del promedio, mínimo de 2019 y último año
@@ -241,15 +258,16 @@ ANIOS = [2004, 2013, 2019, ANIO_FIN]      # inicio, máximo del promedio, mínim
 
 def i2_anios(largo, tramos):
     """Barras por impuesto de cada decil y del 1% más rico, en cuatro años, como el panel A de fig0."""
-    fig, axs = plt.subplots(1, len(ANIOS), figsize=(22, 6.4), sharey=True)
+    fig, axs = plt.subplots(1, len(ANIOS), figsize=(24, 6.6), sharey=True)
     prom = {}
     for ax, a in zip(axs, ANIOS):
         v = largo[(largo.anio == a) & (largo.variante == "principal")].pivot(index="decil", columns="impuesto",
                                                                             values="tasa") * 100
         d = v.loc[1:10, g.COLS].copy()
-        t1 = tramos[(tramos.variante == "principal") & (tramos.anio == a) & (tramos.grupo == 99)][g.COLS].iloc[0] * 100
-        d.loc[11] = t1                                   # el 1%, separado por un hueco
-        x = list(range(10)) + [10.9]
+        tr = tramos[(tramos.variante == "principal") & (tramos.anio == a)].set_index("grupo")
+        for k, gr in zip((11, 12, 13), (91, 95, 99)):    # el decil 10 partido, separado por un hueco
+            d.loc[k] = tr.loc[gr, g.COLS] * 100
+        x = list(range(10)) + [10.9, 11.9, 12.9]
         base = pd.Series(0.0, index=d.index)
         for col, etq, color in g.IMPUESTOS:
             ax.bar(x, d[col], bottom=base, color=color, width=0.74, label=etq, edgecolor=g.SUP, linewidth=1,
@@ -257,13 +275,13 @@ def i2_anios(largo, tramos):
             base = base + d[col]
         for xi, b in zip(x, base):
             ax.text(xi, b + 0.5, g.pct(b), ha="center", va="bottom", fontsize=8.6,
-                    fontweight="bold" if xi in (0, 9, 10.9) else None, color=g.TINTA)
-        ax.axvspan(10.35, 11.5, color="#e8f0fb", zorder=0, linewidth=0)
+                    fontweight="bold" if xi in (0, 9, 12.9) else None, color=g.TINTA)
+        ax.axvspan(10.35, 13.5, color="#e8f0fb", zorder=0, linewidth=0)
         prom[a] = v.loc[0, "total"]
         ax.axhline(prom[a], color=g.TINTA2, linewidth=1, linestyle=(0, (4, 3)))
         ax.set_xticks(x)
-        ax.set_xticklabels([f"D{i}" for i in range(1, 11)] + ["1%"], fontsize=8.6)
-        ax.set_xlim(-0.6, 11.5)
+        ax.set_xticklabels([f"D{i}" for i in range(1, 11)] + ["P90-\n95", "P95-\n99", "1%"], fontsize=8.2)
+        ax.set_xlim(-0.6, 13.5)
         ax.xaxis.grid(False)
         ax.set_title(str(a), loc="left", fontsize=13, fontweight="bold")
         ax.set_title(f"promedio {g.pct(prom[a])}% (línea punteada)", loc="right", fontsize=9, color=g.TINTA2)
@@ -278,7 +296,7 @@ def i2_anios(largo, tramos):
              f"punto bajo antes de la pandemia; {ANIOS[3]}, el último. En los cuatro el decil 1 paga más que todos, sobre "
              "todo por el consumo (rojo, violeta y verde),\ny del decil 2 al 10 la carga es pareja. Lo que cambia arriba "
              "es Ganancias y Bienes Personales (azul y naranja), que en 2013 pesaban mucho más que en 2019. A la derecha "
-             "de cada año, el 1% más rico.", fontsize=9.3, color=g.TINTA2, va="top")
+             "de cada año, el decil 10 partido: percentiles 90-95, 95-99 y el 1% más rico.", fontsize=9.3, color=g.TINTA2, va="top")
     fig.subplots_adjust(wspace=0.05, top=0.83, bottom=0.12)
     fig.text(0.01, -0.07, NOTA + " Ingreso declarado en la encuesta (medida principal); el gráfico de supuestos muestra "
              "cuánto cambia con el ingreso no declarado.", fontsize=7.2, color=g.MUDO, ha="left", va="top")
@@ -345,13 +363,17 @@ def deltas_referencia(tramos):
     return pd.DataFrame(filas)
 
 
+PERIODOS_CIMA = [(2009, 2013, "la cima paga más", OSCURO), (2016, 2019, "la cima paga menos", "#8c1716"),
+                 (2020, 2022, "paga más", OSCURO), (2024, 2025, "paga menos", "#8c1716")]
+
+
 def i9_matriz_deltas(tramos):
     dl = deltas_referencia(tramos)
     dl.round(3).to_csv(TABLES / "deltas_proporcional_progresivo.csv", index=False)
     orden = [99, 95, 91] + list(range(9, 0, -1))
     nombres = {99: "1% superior", 95: "P95-99", 91: "P90-95"} | {k: f"Decil {k}" for k in range(1, 10)}
     cmap = MAPA_DIV
-    fig, axs = plt.subplots(2, 1, figsize=(15, 11))
+    fig, axs = plt.subplots(2, 1, figsize=(15, 11.8))
     paneles = [("delta_proporcional", (-1.0, 1.0), "Frente a un sistema proporcional (todos pagan la tasa promedio)",
                 "Cada celda: % de los impuestos que paga el grupo − % del ingreso que tiene, en puntos."),
                ("delta_progresivo", (-10.0, 5.0), "Frente a un sistema progresivo (la tasa sube con el ingreso, misma recaudación)",
@@ -378,14 +400,23 @@ def i9_matriz_deltas(tramos):
         ax.grid(False)
         for s_ in ax.spines.values():
             s_.set_visible(False)
+        if col == "delta_proporcional":            # períodos en que la cima se aleja de lo proporcional
+            c0 = int(m.columns[0])
+            for a0, a1, txt, color in PERIODOS_CIMA:
+                ax.plot([a0 - c0 - 0.42, a1 - c0 + 0.42], [-0.85, -0.85], color=color, linewidth=3,
+                        solid_capstyle="butt", clip_on=False)
+                ax.text((a0 + a1) / 2 - c0, -1.05, txt, ha="center", va="bottom", fontsize=8.2, color=color,
+                        fontweight="bold", clip_on=False)
+            ax.set_ylim(m.shape[0] - 0.5, -0.5)
         cb = fig.colorbar(im, ax=ax, fraction=0.025, pad=0.01)
         cb.set_ticks(np.linspace(vmin, vmax, 5) if vmax == -vmin else [vmin, vmin / 2, 0, vmax / 2, vmax])
         cb.ax.yaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(
             lambda v, _: (f"{v:+.{dec}f}".replace(".", ",").replace("-", "−")) if v else "0"))
         cb.set_label("Puntos de la recaudación", fontsize=8.5, color=g.TINTA2)
         cb.outline.set_visible(False)
-        ax.set_title(f"{titulo}\n", loc="left", fontsize=11.5, fontweight="bold")
-        ax.text(0, 1.015, sub, transform=ax.transAxes, fontsize=8.8, color=g.TINTA2, va="bottom")
+        ax.set_title(f"{titulo}\n\n" if col == "delta_proporcional" else f"{titulo}\n", loc="left", fontsize=11.5,
+                     fontweight="bold")
+        ax.text(0, 1.015 if col != "delta_proporcional" else 1.075, sub, transform=ax.transAxes, fontsize=8.8, color=g.TINTA2, va="bottom")
     fig.suptitle("Cuánto más o menos de los impuestos paga cada grupo que en un sistema proporcional o progresivo",
                  x=0.01, y=1.0, ha="left", fontsize=14, fontweight="bold")
     fig.text(0.01, 0.975, "Azul: paga una parte mayor de la recaudación que en el sistema de referencia; rojo: menor. "
@@ -393,11 +424,150 @@ def i9_matriz_deltas(tramos):
              "frente al progresivo, de varios puntos: los deciles 1 a 8 pagan más de lo que les tocaría y la cima, sobre "
              "todo el 1%, bastante menos. Arriba de la línea, el decil 10 partido en tres.",
              fontsize=9.3, color=g.TINTA2, va="top")
-    fig.subplots_adjust(top=0.9, hspace=0.32)
+    fig.subplots_adjust(top=0.86, hspace=0.34)
     fig.text(0.01, 0.05, NOTA + " Tramos del decil 10 con pocas observaciones: el 1% superior es ruidoso de un año a "
              "otro. Tabla: outputs/tables/deltas_proporcional_progresivo.csv.",
              fontsize=7.2, color=g.MUDO, ha="left", va="top")
     guardar(fig, "i9_matriz_deltas")
+
+
+# ---------- comparación con otros estudios (sección 1) y canastas (sección 2) ----------
+EXT = RAIZ / "data" / "externos"
+CATS = [("ganancias", "Ganancias de personas", AZUL), ("sociedades", "Ganancias de sociedades", OSCURO),
+        ("patrimonio", "Bienes Personales y patrimonio", "#eb6834"), ("ss", "Aportes y contribuciones", "#1baf7a"),
+        ("consumo", "Impuestos al consumo", "#d9a441")]
+
+
+def a_categorias(d):
+    """Tasas por impuesto del proyecto (en %) a las cinco categorías comunes de la comparación."""
+    return pd.DataFrame({"ganancias": d.ganancias, "sociedades": 0.0, "patrimonio": d.bienes_personales,
+                         "ss": d.aportes + d.contrib_trabajador + d.contrib_consumidor,
+                         "consumo": d.iva + d.internos + d.iibb + d.cheque + d.combustibles}) * 100
+
+
+def apilar(ax, x, d, ancho=0.72, etiquetas=True, alfa=1.0):
+    base = np.zeros(len(d))
+    for col, etq, color in CATS:
+        v = d[col].values
+        ax.bar(x, v, bottom=base, color=color, width=ancho, label=etq, edgecolor=g.SUP, linewidth=0.8, alpha=alfa)
+        base = base + v
+    if etiquetas:
+        for xi, b in zip(x, base):
+            ax.text(xi, b + 0.5, g.pct(b), ha="center", va="bottom", fontsize=8.4, color=g.TINTA)
+    return base
+
+
+def c1_comparacion(largo, tramos):
+    arg = pd.read_csv(EXT / "argendata_presion_por_decil_2018.csv").pivot(index="decil", columns="categoria",
+                                                                           values="valor")
+    arg = pd.DataFrame({"ganancias": arg["Ganancias personales y corporativas"], "sociedades": 0.0, "patrimonio": 0.0,
+                        "ss": arg["Aportes y contribuciones a la seguridad social"],
+                        "consumo": arg["IVA"] + arg["En cascada"] + arg["Otros impuestos indirectos"]})
+    ito = pd.read_csv(EXT / "ito_2026_argentina.csv").set_index("grupo")
+    ito = ito.rename(columns={"ganancias_personas": "ganancias", "seguridad_social": "ss", "indirectos": "consumo"})
+    def nuestro(anio, variante="principal"):
+        v = largo[(largo.anio == anio) & (largo.variante == variante) & (largo.decil > 0)]
+        return a_categorias(v.pivot(index="decil", columns="impuesto", values="tasa"))
+    t = tramos[(tramos.variante == "principal") & (tramos.anio == 2019)].set_index("grupo")
+    grupos = {"bottom50": [1, 2, 3, 4, 5], "middle40": [6, 7, 8, 9], "top10": [91, 95, 99], "top1": [99]}
+    filas = {}
+    for k, gr in grupos.items():
+        w = t.part_ingreso[gr]
+        filas[k] = (t.loc[gr, g.COLS + ["cheque", "combustibles"]].mul(w, axis=0).sum() / w.sum())
+    nos_g = a_categorias(pd.DataFrame(filas).T)
+    cheque18 = largo[(largo.anio == 2018) & (largo.variante == "con_cheque") & (largo.decil > 0) &
+                     (largo.impuesto == "total")].set_index("decil").tasa * 100
+
+    fig, axs = plt.subplots(1, 3, figsize=(22, 6.6), gridspec_kw={"width_ratios": [1, 1, 0.95]}, sharey=True)
+    x = np.arange(10)
+    apilar(axs[0], x, arg)
+    axs[0].set_title("A. Argendata / Fundar (Pessino et al.), 2018", loc="left", fontsize=11.5, fontweight="bold")
+    apilar(axs[1], x, nuestro(2018), etiquetas=False)
+    tot18 = nuestro(2018).sum(axis=1)
+    for xi, (b, c) in enumerate(zip(tot18, cheque18)):
+        axs[1].text(xi, max(b, c) + 0.6, g.pct(b), ha="center", va="bottom", fontsize=8.4, color=g.TINTA)
+    axs[1].scatter(x, cheque18, marker="_", s=260, color=g.TINTA, linewidth=2.2, zorder=5,
+                   label="Con el impuesto al cheque")
+    axs[1].set_title("B. Este estudio, 2018", loc="left", fontsize=11.5, fontweight="bold")
+    for ax in axs[:2]:
+        ax.set_xticks(x)
+        ax.set_xticklabels([f"D{i}" for i in range(1, 11)], fontsize=9)
+        ax.set_xlabel("Deciles de ingreso (del 10% más pobre al 10% más rico)", fontsize=8.8)
+    orden = ["bottom50", "middle40", "top10", "top1"]
+    xg = np.arange(4) * 1.0
+    apilar(axs[2], xg - 0.2, ito.loc[orden], ancho=0.38)
+    apilar(axs[2], xg + 0.2, nos_g.loc[orden], ancho=0.38, alfa=0.55)
+    for xi in xg:
+        axs[2].text(xi - 0.2, -1.2, "ITO", ha="center", va="top", fontsize=7.6, color=g.TINTA2)
+        axs[2].text(xi + 0.2, -1.2, "este", ha="center", va="top", fontsize=7.6, color=g.TINTA2)
+    axs[2].set_xticks(xg)
+    axs[2].set_xticklabels(["50% más\npobre", "40%\nmedio", "10% más\nrico", "1% más\nrico"], fontsize=9)
+    axs[2].tick_params(axis="x", pad=22)
+    axs[2].set_title("C. Tax Observatory (~2019) y este estudio (2019)", loc="left", fontsize=11.5,
+                     fontweight="bold")
+    for ax in axs:
+        ax.xaxis.grid(False)
+    axs[0].set_ylim(0, 45)
+    axs[0].set_ylabel("Impuestos, % del ingreso")
+    h, l = axs[1].get_legend_handles_labels()
+    fig.legend(h[::-1], l[::-1], loc="lower center", ncol=6, frameon=False, fontsize=9.2, bbox_to_anchor=(0.5, -0.05))
+    fig.suptitle("El gráfico de siempre: qué parte de su ingreso paga cada grupo en impuestos, según tres estudios",
+                 x=0.01, y=1.04, ha="left", fontsize=14, fontweight="bold")
+    fig.text(0.01, 0.985, "Los tres muestran lo mismo: el 10% más pobre paga la proporción más alta y de ahí para arriba "
+             "la carga es pareja o baja. Las diferencias de nivel vienen de qué impuestos suma cada uno: Argendata\nincluye "
+             "el cheque y otros impuestos al consumo (con el cheque, la raya negra en B, los dos quedan casi iguales); el "
+             "Tax Observatory suma Ganancias de sociedades y más impuestos al patrimonio arriba, y usa el ingreso de "
+             "Cuentas Nacionales.", fontsize=9.3, color=g.TINTA2, va="top")
+    fig.subplots_adjust(wspace=0.06, top=0.84, bottom=0.17)
+    fig.text(0.01, -0.08, "Fuentes: A, Argendata (Fundar), CSV del tópico Sistema tributario, con datos de Pessino, "
+             "Rasteletti, Artana y Lustig (Oxford Open Economics, vol. 4); su categoría de Ganancias incluye sociedades. "
+             "C, International Tax Observatory, informe n.° 10 (abril 2026),\nfigura 5, y nota sobre Argentina: totales del "
+             "texto, composición leída del gráfico (aproximada); hogares, ingreso de Cuentas Nacionales, año no informado "
+             "(sus fuentes llegan a 2019). Este estudio: personas, ingreso declarado en la EPH completado con las "
+             "declaraciones juradas;\nen C, sus deciles agrupados con el decil 10 partido. Datos en data/externos/.",
+             fontsize=7.2, color=g.MUDO, ha="left", va="top")
+    guardar(fig, "c1_comparacion")
+
+
+def c2_canastas(tramos):
+    t = tramos[tramos.variante == "principal"].set_index(["anio", "grupo"]).canastas_por_persona
+    orden = list(range(1, 10)) + [91, 95, 99]
+    etq = [f"D{k}" for k in range(1, 10)] + ["P90-95", "P95-99", "1%"]
+    fig, axs = plt.subplots(1, 2, figsize=(16, 6), sharey=True)
+    for ax, a in zip(axs, (2004, ANIO_FIN)):
+        v = t.loc[a].loc[orden]
+        x = list(range(9)) + [9.6, 10.6, 11.6]
+        col = [ROJO if y < 1 else ("#b9b8b0" if k < 10 else MEDIO) for k, y in zip(orden, v)]
+        ax.bar(x, v, color=col, width=0.72)
+        for xi, y in zip(x, v):
+            ax.text(xi, y + 0.3, g.pct(y, 2 if y < 1 else 1), ha="center", va="bottom", fontsize=8.6, color=g.TINTA)
+        ax.axhline(1, color=g.TINTA, linewidth=1.1, linestyle=(0, (4, 3)))
+        ax.axvspan(9.1, 12.1, color="#e8f0fb", zorder=0, linewidth=0)
+        ax.text(10.6, 0.97, "el decil 10,\npartido", transform=ax.get_xaxis_transform(), ha="center", va="top",
+                fontsize=8.6, color=g.TINTA2, fontweight="bold")
+        ax.set_xticks(x)
+        ax.set_xticklabels(etq, fontsize=8.6)
+        ax.xaxis.grid(False)
+        ax.set_xlim(-0.6, 12.2)
+        pobres = int((v.loc[list(range(1, 10))] < 1).sum())
+        ax.set_title(f"{a}: {pobres} de los 9 primeros deciles, debajo de una canasta", loc="left", fontsize=11.5,
+                     fontweight="bold")
+    axs[0].set_ylabel("Ingreso por persona, en canastas básicas por mes")
+    v = t.loc[ANIO_FIN]
+    fig.suptitle("Los deciles muestran sobre todo a la mitad de abajo; los ricos están todos en la última barra",
+                 x=0.01, y=1.04, ha="left", fontsize=14, fontweight="bold")
+    fig.text(0.01, 0.985, f"Ingreso por persona de cada grupo, medido en canastas básicas (lo que necesita un adulto para "
+             f"no ser pobre; línea punteada). En {ANIO_FIN} el decil 5 tiene {g.pct(v[5], 2)} canastas y el decil 9, {g.pct(v[9], 1)}; el 1% "
+             f"más rico, {g.pct(v[99], 1)}.\nUn gráfico por deciles pone nueve barras para la mitad de abajo y la clase media, "
+             "y mete en una sola a asalariados de clase media alta y a los ricos: por eso aquí el decil 10 se parte en tres.",
+             fontsize=9.3, color=g.TINTA2, va="top")
+    fig.subplots_adjust(wspace=0.05, top=0.83)
+    fig.text(0.01, -0.03, "Fuente: elaboración propia con EPH (INDEC) y anuarios de ARCA. Ingreso per cápita familiar "
+             "(antes de impuestos directos; en la cima, completado con el ingreso declarado a ARCA que la encuesta no "
+             "capta) dividido por la canasta básica\ntotal por adulto equivalente del Gran Buenos Aires (INDEC; antes de "
+             "2017, llevada hacia atrás con el IPC). Rojo: por debajo de una canasta. Aglomerados urbanos de la EPH.",
+             fontsize=7.2, color=g.MUDO, ha="left", va="top")
+    guardar(fig, "c2_canastas")
 
 
 def gini_agrupado(pob, part):
@@ -496,6 +666,9 @@ if __name__ == "__main__":
     g.fig_distancia(largo, carpeta=OUT, nombre="i7_ricos_pobres")
     g.fig_decil10_partido(ANIO_FIN, OUT, nombre="i8_decil10_partido")
     i9_matriz_deltas(tramos)
+    c1_comparacion(largo, tramos)
+    c2_canastas(tramos)
+    c3_composicion_tramos(ancho, tramos)
     k = a1_progresividad(tramos)
     a2_recaudado_consumo()
     a3_cobertura()
