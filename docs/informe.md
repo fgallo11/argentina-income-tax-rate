@@ -197,17 +197,20 @@ año, los tres tramos.
   y menos que cualquier decil.
 - Lo que cambia es el tamaño del azul y el naranja: Ganancias y Bienes Personales.
 
+![El 1% con declaraciones juradas](../outputs/figures/fig7_top1.png)
+
 **Dos medidas del 1% más rico.** La de este informe es el 1% de la encuesta, completado. Otra forma
 de medirlo es tomar sólo las declaraciones juradas, por contribuyente, y sumar la mitad de las
-utilidades de las empresas y del impuesto de sociedades: da 26,6% en 2025 (figura 7 del repo,
-`outputs/figures/fig7_top1.png`). No es el mismo grupo ni la misma cuenta: esa medida queda por
+utilidades de las empresas y del impuesto de sociedades: da 26,6% en 2025 (gráfico de arriba). No es el mismo grupo ni la misma cuenta: esa medida queda por
 encima del promedio, sobre todo porque suma el impuesto de sociedades, que este informe todavía no
 reparte (ver "Pendientes").
+
+![Con el ingreso no declarado](../outputs/figures/fig0_dos_versiones_2025.png)
 
 **Y aun así está subestimado.** Hay ingreso que no se declara ni en la encuesta ni al fisco: rentas
 del capital, activos en el exterior. Si se lo suma (salarios llevados a Cuentas Nacionales, rentas
 multiplicadas por 7, renta de los activos externos), el decil 10 baja de 23,8% a 21,8% en 2025 y queda
-debajo de todos los deciles (figura 0 del repo, panel B: `outputs/figures/fig0_dos_versiones_2025.png`).
+debajo de todos los deciles (panel B del gráfico de arriba; el panel A es la medida principal).
 
 ## 4. ¿Proporcional o progresivo?
 
