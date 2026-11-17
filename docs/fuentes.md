@@ -98,6 +98,7 @@ combinan, en los [diagramas](diagramas.md); el método completo, en la [metodolo
     la alícuota de la ley.
   - La Ganancias que la simulación no capta (recaudado menos simulado) y Bienes Personales.
   - La cobertura del estudio (qué parte de todo lo recaudado entra) y la validación.
+  - El nivel del monotributo en la variante `con_monotributo` (línea del régimen simplificado).
 - **Dónde.** `data/raw/recaudacion/dniaf_recaudacion_nominal_clasif_internacional.xlsx`,
   `scripts/03_recaudacion_macro.py` → `data/processed/recaudacion_macro.csv`.
 - **Nota.** El pipeline baja también otras planillas de la DNIAF y de ARCA (presión tributaria,

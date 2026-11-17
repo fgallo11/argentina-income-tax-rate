@@ -12,6 +12,7 @@ Cociente simulado / recaudado, con la simulación expandida a la población tota
 | Aportes personales | 2,54 a 3,09 | 1,09 a 1,42 | Hasta 2008 la recaudación no incluía los aportes a AFJP. Sin ellos, 2008 da 1,27 |
 | Contribuciones patronales | 0,94 a 1,05 | 0,65 a 0,94 | La simulación sólo cubre empleadores privados |
 | Ganancias personas físicas | 0,17 a 0,21 | 0,13 a 0,40 | Subdeclaración, ingresos altos ausentes de la EPH, independientes y rentas de capital no simulados |
+| Monotributo, impuesto integrado (antes de calibrar) | 0,69 a 1,19 | 0,31 a 0,94 | Quién paga y en qué categoría según la EPH; la variante `con_monotributo` lo escala a lo recaudado |
 
 - **IVA:** lo recaudado por peso de consumo privado es entre 73% y 87% del contenido legal
   de la canasta de la ENGHo. La brecha combina evasión y exenciones no captadas.

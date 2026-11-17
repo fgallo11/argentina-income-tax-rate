@@ -93,3 +93,33 @@ def test_ganancias_2025_tabla_anual():
     publicados = [87495.07, 244986.20, 454974.38, 848702.20, 2344867.94, 4156015.94, 7345211.33, 12837714.51]
     assert fijos == pytest.approx(publicados, abs=0.02)
     assert g["deducciones"]["2025"]["escala"] == "2025"
+
+
+def test_adulto_equivalente_hogar_tipo():
+    """Hogar tipo 2 del INDEC: varón de 35, mujer de 31, hijos de 6 y 8 años = 3,09."""
+    from incidencia.eph import adulto_equivalente
+    assert adulto_equivalente([1, 2, 1, 2], [35, 31, 6, 8]).sum() == pytest.approx(3.09)
+    assert adulto_equivalente([1, 2], [-1, 80]).tolist() == pytest.approx([0.35, 0.63])
+
+
+def test_monotributo_tablas_continuas():
+    import yaml
+    per = yaml.safe_load(open(PARAMS / "monotributo.yaml", encoding="utf-8"))["periodos"]
+    assert per[0]["desde"] == "2004-01"
+    for a, b in zip(per, per[1:]):
+        y, m = map(int, a["hasta"].split("-"))
+        assert b["desde"] == f"{y + (m == 12)}-{1 if m == 12 else m + 1:02d}"
+    for p in per:
+        topes = [c["tope_anual"] for c in p["categorias"] if c.get("actividad", "bienes") == "bienes"]
+        assert topes == sorted(topes) and all(c["sipa"] > 0 for c in p["categorias"])
+
+
+@pytest.mark.skipif(not hay_datos, reason="requiere data/raw (correr scripts/01_descargar_datos.py)")
+def test_monotributo_categorias():
+    from incidencia.directos import Parametros, monotributo_mes
+    P = Parametros()
+    imp, sipa = monotributo_mes(P, 2025, 5, np.array([1e6, 20e6, 90e6]), np.array([False, True, False]))
+    assert imp.tolist() == pytest.approx([3633.98, 28829.60, 0.0])      # A; E bienes; fuera del régimen
+    assert sipa.tolist() == pytest.approx([11871.01, 17380.35, 0.0])
+    imp, sipa = monotributo_mes(P, 2006, 5, np.array([10000.0, 100000.0]), np.array([False, True]))
+    assert imp.tolist() == [33, 405] and sipa.tolist() == [35, 35]   # Ley 25.865: A servicios, L bienes

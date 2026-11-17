@@ -165,7 +165,9 @@ menos confiables.
   ingreso que se declara a ARCA y la encuesta no capta (sección 3).
 - **Impuestos:** Ganancias y Bienes Personales, aportes personales, contribuciones patronales
   (mitad las paga el trabajador con menos salario y mitad el consumidor con precios más altos), IVA,
-  Internos e Ingresos Brutos. Son entre 56% y 71% de todo lo recaudado (anexo, A3).
+  Internos e Ingresos Brutos. Son entre 56% y 71% de todo lo recaudado (anexo, A3). El cheque, los
+  combustibles y el monotributo se suman como variantes (secciones 7 y 8); Ganancias de sociedades,
+  retenciones e impuestos provinciales distintos de Ingresos Brutos quedan afuera ("Pendientes").
 - **Impuestos directos persona por persona:** aportes, contribuciones y Ganancias se calculan para
   cada asalariado registrado y jubilado de la encuesta con la ley de cada mes. Cómo, con ejemplos:
   [el simulador](microsimulacion.md).

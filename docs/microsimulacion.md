@@ -175,6 +175,7 @@ Se compara lo simulado, llevado de la encuesta a todo el país, con lo que efect
 | Aportes personales | 1,09 a 1,42 | Algo de más; una explicación posible es que la simulación supone que todos los registrados aportan sobre todo su sueldo declarado (no verificado). Hasta 2008 da 2,5 a 3,1 porque la recaudación no incluía lo que iba a las AFJP |
 | Contribuciones patronales | 0,65 a 0,94 | De menos: sólo se simulan las de empleadores privados (no las del sector público) |
 | Ganancias de personas | 0,13 a 0,40 | Muy de menos: la encuesta no capta a los de más ingresos ni las rentas, y sólo se simulan asalariados y jubilados |
+| Monotributo, impuesto integrado (sección 8) | 0,31 a 0,94 (2004: 1,19) | De menos salvo en 2004: la encuesta subestima quién paga o en qué categoría. La variante lo escala a lo recaudado |
 
 Por eso la Ganancias que falta (entre 60% y 87% de lo recaudado) se agrega aparte, con las
 declaraciones juradas de ARCA ([metodología](metodologia.md), sección 5). Lo simulado describe bien
@@ -225,8 +226,8 @@ seguridad social (jubilación y obra social). El cociente entre las dos fue 0,59
 (facturación mucho mayor que el ingreso declarado) los independientes caerían en categorías altas y
 el impuesto pesaría mucho más que la jubilación. Los monotributistas declaran facturaciones bajas.
 
-**Calibración.** Lo simulado hubo que multiplicarlo por entre 0,8 (2004) y 2,9 (2013) para llegar a
-lo recaudado, y en 2025 por 1,1. La jubilación que resulta es entre 11% y 65% de la línea
+**Calibración.** Lo simulado hubo que multiplicarlo por entre 0,8 (2004) y 3,2 (2020, año de pandemia)
+para llegar a lo recaudado, y en 2025 por 1,1. La jubilación que resulta es entre 11% y 65% de la línea
 "autónomos" de la DNIAF, que incluye además la obra social y los aportes de autónomos del régimen
 general: la variante es una cota baja.
 

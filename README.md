@@ -127,7 +127,8 @@ adelante. No corras `07_graficos.py` solo: las figuras quedarían con tablas vie
 ## Método en breve
 
 - **Directos:** microsimulación legal sobre la EPH (aportes, contribuciones patronales,
-  Ganancias 4ta categoría), sólo asalariados registrados y jubilados.
+  Ganancias 4ta categoría), sólo asalariados registrados y jubilados
+  ([cómo funciona](docs/microsimulacion.md)). El monotributo de los independientes, como variante.
 - **Indirectos:** recaudación oficial por peso de consumo privado, repartida según el
   consumo y la canasta que la ENGHo muestra para hogares del mismo ingreso relativo;
   ediciones de la ENGHo interpoladas en el tiempo.

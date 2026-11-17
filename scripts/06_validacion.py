@@ -2,7 +2,8 @@
 """Validación contra agregados oficiales. Reporta las discrepancias tal como salen.
 
 Tablas (outputs/tables/):
-  validacion_directos.csv    impuestos directos simulados vs recaudación DNIAF.
+  validacion_directos.csv    impuestos directos simulados vs recaudación DNIAF (incluido el
+                             impuesto integrado del monotributo antes de calibrar).
   validacion_iva.csv         IVA legal teórico sobre el consumo vs IVA recaudado.
   validacion_cobertura.csv   consumo e ingreso de encuesta vs Cuentas Nacionales, y qué
                              parte de la recaudación total cubren los impuestos incluidos.
@@ -39,6 +40,9 @@ if __name__ == "__main__":
         ("aportes", (a.ap_jub + a.ap_inssjp) * 12 / M, "ss_empleados"),
         ("contribuciones", a.contrib * 12 / M, "ss_empleadores"),
         ("ganancias", a.ganancias * 12 / M, "ganancias_pf"),
+        # monotributo antes de calibrar (sólo el impuesto integrado; la variante con_monotributo lo
+        # escala a lo recaudado, así que este cociente es la inversa de ese factor)
+        ("monotributo_impositivo", a.mono_imp * 12 / M, "monotributo"),
     ):
         d[f"{nombre}_sim_eph_mill"] = sim
         d[f"{nombre}_recaudado_mill"] = rec[col]

@@ -216,7 +216,8 @@ Efecto medido en puntos porcentuales de la tasa total de 2024, salvo indicación
 | Aportes a AFJP (hasta 11/2008) cuentan como impuesto | Definición | `sin_afjp` | 2004: promedio −2,0. Desde 2009: 0 |
 | 7% de aporte para todo el sector privado hasta 2007 | Supuesto (EPH no informa régimen) | No calculada | Menor |
 | Alícuota patronal mayor si el establecimiento tiene más de 40 personas | Supuesto | No calculada | Menor |
-| Informales e independientes con tasa cero en directos | Decisión del proyecto | No calculada | Subestima D7-D10 |
+| Informales e independientes con tasa cero en directos | Decisión del proyecto | `con_monotributo` (cuota por categoría, calibrada a lo recaudado) | +0,1 a +0,7 por decil; promedio +0,15 a +0,5 |
+| Monotributo: facturación = ingreso de la EPH (margen 1) | Supuesto, contrastado con el cociente impuesto/seguridad social de ARCA | No calculada (el nivel se calibra) | Sólo cambia la categoría de cada uno |
 | Traslado pleno de IVA, Internos e Ingresos Brutos al consumidor | Supuesto estándar | No calculada | Desconocido |
 | Todo el IVA e Ingresos Brutos recae en consumo de hogares | Supuesto | No calculada | Sobreestima indirectos |
 | Tramo de transición Ley 27.617 interpolado; cedular 2024 reescalado por SMVM | Aproximación | No calculada | Sólo D10, 2021-2024 |

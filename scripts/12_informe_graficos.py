@@ -649,7 +649,7 @@ def a3_cobertura():
                  fontweight="bold")
     ax.set_title(f"Entre {g.pct(y.min(), 0)}% y {g.pct(y.max(), 0)}%. Quedan afuera retenciones a la exportación, "
                  "Ganancias de sociedades, cheque, combustibles, monotributo e impuestos provinciales\ny municipales "
-                 "distintos de Ingresos Brutos. Hasta 2015 los impuestos incluidos ganaron peso en la recaudación.",
+                 "distintos de Ingresos Brutos (cheque, combustibles y monotributo están como variantes). Hasta 2015 los impuestos incluidos ganaron peso en la recaudación.",
                  loc="left", fontsize=9, color=g.TINTA2, pad=10)
     fig.text(0.01, -0.02, "Fuente: recaudación DNIAF; outputs/tables/validacion_cobertura.csv.", fontsize=7.2,
              color=g.MUDO, ha="left", va="top")

@@ -59,7 +59,8 @@ NOTA = ("Fuente: elaboración propia con EPH y ENGHo (INDEC), recaudación DNIAF
         "lo recaudado que la simulación no capta y Bienes Personales se asignan a los ingresos más altos con las "
         "declaraciones juradas de ARCA,\njunto con el ingreso que la encuesta no capta. El 1% más rico se ve aparte en "
         "las figuras 7 a 9. "
-        "Excluye retenciones, combustibles, Ganancias de sociedades, monotributo e impuestos patrimoniales provinciales.")
+        "Excluye retenciones, cheque, combustibles, Ganancias de sociedades, monotributo e impuestos patrimoniales "
+        "provinciales (cheque, combustibles y monotributo, como variantes).")
 
 
 def plata(x):
@@ -301,8 +302,8 @@ def fig_dos_versiones(largo, anio, carpeta=None, formatos=("png", "svg")):
     fig.text(0.01, -0.2, "Fuente: elaboración propia con EPH y ENGHo (INDEC), recaudación DNIAF (Min. de Economía), "
              "anuarios estadísticos de ARCA y normativa. Aglomerados urbanos de la EPH. Deciles de personas por "
              "ingreso per cápita familiar.\nIncluye Ganancias de personas, Bienes Personales, aportes, contribuciones "
-             "patronales, IVA, Internos e Ingresos Brutos. Excluye retenciones, combustibles, Ganancias de sociedades, "
-             "monotributo e impuestos patrimoniales provinciales.\nLa encuesta casi no capta al 1% más rico: su carga no se "
+             "patronales, IVA, Internos e Ingresos Brutos. Excluye retenciones, cheque, combustibles, Ganancias de "
+             "sociedades, monotributo e impuestos patrimoniales provinciales (cheque, combustibles y monotributo, como variantes).\nLa encuesta casi no capta al 1% más rico: su carga no se "
              "estima por separado y queda incluida, de forma incompleta, en el decil 10 (ver figura 7).", fontsize=7.3,
              color=MUDO, ha="left", va="top")
     guardar(fig, f"fig0_dos_versiones_{anio}", carpeta, formatos)
