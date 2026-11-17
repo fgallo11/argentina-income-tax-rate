@@ -40,6 +40,7 @@ class Parametros:
         self.haber_min = leer_serie_mensual(RAW / "macro" / "haber_minimo_mensual.csv")
         self.smvm = leer_serie_mensual(RAW / "macro" / "smvm_mensual.csv")
         # Referencia Dto. 1242/2013: mayor RIPTE de enero-agosto 2013
+        self.mono = yaml.safe_load(open(PARAMS / "monotributo.yaml", encoding="utf-8"))
         self.ripte_ref_2013 = max(self.ripte[f"2013-{m:02d}"] for m in range(1, 9))
 
     @staticmethod
@@ -146,6 +147,32 @@ def ganancias_mes(P: Parametros, anio: int, m: int, salario: np.ndarray, jubilac
     return imp
 
 
+# ------------------------------------------------------------------------ monotributo
+def monotributo_mes(P: Parametros, anio: int, m: int, facturacion_anual: np.ndarray, bienes: np.ndarray):
+    """Cuota mensual del monotributo (impuesto integrado, aporte jubilatorio) de la categoría que
+    corresponde a la facturación anual. La obra social no se cuenta como impuesto. Quien supera la
+    última categoría admitida para su actividad queda fuera del régimen (0: régimen general, no
+    simulado)."""
+    mes = P.mes(anio, m)
+    per = next(p for p in P.mono["periodos"] if p["desde"] <= mes <= p["hasta"])
+    imp = np.zeros_like(facturacion_anual)
+    sipa = np.zeros_like(facturacion_anual)
+    hecho = np.zeros(facturacion_anual.shape, dtype=bool)
+    for c in per["categorias"]:
+        if "actividad" in c:                       # 2004-2009: escalas separadas por actividad
+            permitido = bienes if c["actividad"] == "bienes" else ~bienes
+            monto = c["impuesto"]
+        else:                                      # 2010 en adelante: una escala, dos columnas
+            mb, ms = c["impuesto_bienes"], c["impuesto_servicios"]
+            permitido = np.where(bienes, mb is not None, ms is not None)
+            monto = np.where(bienes, mb or 0.0, ms or 0.0)
+        cae = permitido & ~hecho & (facturacion_anual <= c["tope_anual"])
+        imp = np.where(cae, monto, imp)
+        sipa = np.where(cae, c["sipa"], sipa)
+        hecho |= cae
+    return imp, sipa
+
+
 # ----------------------------------------------------------------- cargas de familia
 def cargas_familia(df: pd.DataFrame, P: Parametros, anio: int) -> tuple[np.ndarray, np.ndarray]:
     """Indicador de cónyuge a cargo y cantidad de hijos a cargo por persona.
@@ -217,9 +244,30 @@ def simular(df: pd.DataFrame, P: Parametros, anio: int, trim: int, iteraciones: 
                      ("ganancias", gan), ("contrib", contrib)):
             acc[k][idx] += v * SAC / 3.0
 
+    # Monotributo de los independientes (cuentapropistas y patrones). Quién paga: desde 2023T4 la
+    # EPH lo pregunta (PP05I = 1); antes, la proporción de cada decil en 2023T4-2025T4 (valor
+    # esperado). Se calcula sin calibrar; la variante con_monotributo lo lleva a lo recaudado.
+    indep = ((df.ESTADO == 1) & df.CAT_OCUP.isin([1, 2]) & (df.P21 > 0)).values
+    margen = P.mono["margen_ganancia"]
+    fact = np.where(indep, df.P21.values * 12.0 / margen, 0.0)
+    bienes = df.vende_bienes.values.astype(bool) if "vende_bienes" in df else np.zeros(len(df), dtype=bool)
+    if "PP05I" in df and df.PP05I[indep].notna().any():
+        paga = (df.PP05I.values == 1).astype(float)
+    else:
+        perfil = P.mono["inscripcion_por_decil"]["decil"]
+        paga = df.decil.map(perfil).fillna(0.0).values if "decil" in df else np.zeros(len(df))
+    paga = paga * indep
+    mono_imp, mono_sipa = np.zeros(len(df)), np.zeros(len(df))
+    for m in MESES_TRIM[trim]:
+        i_, s_ = monotributo_mes(P, anio, m, fact, bienes)
+        mono_imp += paga * i_ / 3.0
+        mono_sipa += paga * s_ / 3.0
+
     out = df.copy()
     for k, v in acc.items():
         out[k] = v
+    out["mono_imp"] = mono_imp
+    out["mono_sipa"] = mono_sipa
     out["registrado"] = registrado
     out["privado_reg"] = privado
     out["contrib_trab"] = out.contrib * frac_trab
@@ -252,6 +300,8 @@ def resumir_por_decil(s: pd.DataFrame, clave: str = "decil") -> pd.DataFrame:
         "ap_os": w * s.ap_os,
         "ganancias": w * s.ganancias,
         "contrib": w * s.contrib,
+        "mono_imp": w * s.mono_imp,
+        "mono_sipa": w * s.mono_sipa,
         "masa_bruta_reg": w * s.bruto,
         "masa_bruta_reg_priv": w * s.bruto * s.privado_reg,
         "jubilaciones": w * s.V2_M,

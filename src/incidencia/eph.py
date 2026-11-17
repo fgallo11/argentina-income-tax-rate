@@ -12,6 +12,8 @@ COLS = [
     "CH03", "CH04", "CH06", "ESTADO", "CAT_OCUP", "PP04A", "PP04B1", "PP04C", "PP04C99",
     "PP07H", "P21", "V2_M", "V21_M", "PP08J1", "P47T", "ITF", "IPCF",
     "TOT_P12", "V8_M", "V9_M", "V10_M",   # otras ocupaciones; alquileres, ganancias de negocios, intereses
+    "PP04B_COD",   # rama de actividad (CAES; se llama PP04B_CAES en 2012-2015)
+    "PP05I",       # independientes: aportó como monotributista (1), m. social (2), autónomo (3), ninguno (4); desde 2023T4
 ]
 NUMERICAS = [c for c in COLS if c != "CODUSU"]
 
@@ -73,6 +75,16 @@ def adulto_equivalente(sexo, edad) -> np.ndarray:
     return ae
 
 
+def vende_bienes(cod, anio: int) -> np.ndarray:
+    """Industria o comercio según la rama de actividad (para la escala de "venta de cosas muebles"
+    del monotributo). Hasta 2011 la EPH codifica con el CAES basado en la CIIU rev. 3 (industria
+    15-37, comercio 50); desde 2012, con el CAES-MERCOSUR (industria 10-33, comercio 45 y 48)."""
+    div = np.floor(pd.to_numeric(pd.Series(cod), errors="coerce").values / 100)
+    if anio <= 2011:
+        return ((div >= 15) & (div <= 37)) | (div == 50)
+    return ((div >= 10) & (div <= 33)) | np.isin(div, [45, 48])
+
+
 def _archivo_individual(anio: int, trim: int):
     carpeta = RAW / "eph" / f"{anio}T{trim}"
     cand = [p for p in carpeta.rglob("*") if p.is_file() and ("ndividual" in p.name or "personas" in p.name.lower())
@@ -112,6 +124,8 @@ def cargar_trimestre(anio: int, trim: int) -> pd.DataFrame:
         if partes:
             v = df[partes].apply(pd.to_numeric, errors="coerce")
             df["V21_M"] = v.where(v > 0, 0).sum(axis=1)
+    if "PP04B_COD" not in df.columns and "PP04B_CAES" in df.columns:
+        df = df.rename(columns={"PP04B_CAES": "PP04B_COD"})
     for c in COLS:
         if c not in df.columns:
             df[c] = np.nan
@@ -129,6 +143,7 @@ def cargar_trimestre(anio: int, trim: int) -> pd.DataFrame:
         df[c] = df[c].where(df[c] > 0, 0.0).fillna(0.0)
     df["anio"], df["trim"] = anio, trim
     df["ae"] = adulto_equivalente(df.CH04, df.CH06)
+    df["vende_bienes"] = vende_bienes(df.PP04B_COD, anio)
     df = _aguinaldo_devengado(df)
 
     # deciles de personas según IPCF del hogar (con aguinaldo devengado)

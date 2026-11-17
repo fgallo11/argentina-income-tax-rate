@@ -1,0 +1,1670 @@
+margen_ganancia: 1.0   # facturación anual = ingreso mensual de la EPH × 12 / margen
+margen_nota: >-
+  La EPH releva lo que gana el cuentapropista; el monotributo se categoriza por ingresos brutos (facturación).
+  Valor central 1: la facturación que se declara al fisco es del orden del ingreso que se declara en la encuesta.
+  Evidencia (17/11/2026): en ARCA el impuesto integrado es 0,59 (2019) y 0,37 (2024) de los recursos de
+  seguridad social del monotributo (jubilación + obra social); la simulación reproduce esos cocientes con un
+  margen de ~0,7 (2019) y ~1,4 (2024). Con márgenes bajos (facturación mucho mayor que el ingreso) la gente cae
+  en categorías altas y el cociente se dispara: los monotributistas declaran facturaciones bajas. El nivel total
+  se calibra a lo recaudado, así que el margen sólo cambia en qué categoría cae cada uno.
+inscripcion_por_decil:
+  nota: >-
+    Parte de los independientes (cuentapropistas y patrones con ingreso) que en la EPH declaran haber hecho aportes
+    como monotributistas en los últimos 3 meses (PP05I = 1), 2023T4-2025T4, ponderada (32.567 observaciones).
+    Se usa para los trimestres sin la pregunta (hasta 2023T3); desde 2023T4 se usa la respuesta de cada persona.
+  decil: {1: 0.097, 2: 0.093, 3: 0.166, 4: 0.199, 5: 0.228, 6: 0.316, 7: 0.396, 8: 0.418, 9: 0.533, 10: 0.58}
+periodos:
+- desde: 2004-01
+  hasta: 2009-12
+  fuente: Ley 25.865 (BO 19/01/2004), arts. 8, 11 y 40, texto original (argentina.gob.ar/normativa/nacional/norma-91903)
+  estado: texto original; no se buscaron actualizaciones 2004-2009
+  nota: 'Servicios (A-E, hasta $72.000) y resto de actividades (F-M, hasta $144.000) tienen categorías separadas.
+    Cotizaciones fijas iguales para todas: $35 jubilación, $22 obra social.'
+  categorias:
+  - cat: A
+    actividad: servicios
+    tope_anual: 12000
+    impuesto: 33
+    sipa: 35
+    obra_social: 22
+  - cat: B
+    actividad: servicios
+    tope_anual: 24000
+    impuesto: 39
+    sipa: 35
+    obra_social: 22
+  - cat: C
+    actividad: servicios
+    tope_anual: 36000
+    impuesto: 75
+    sipa: 35
+    obra_social: 22
+  - cat: D
+    actividad: servicios
+    tope_anual: 48000
+    impuesto: 128
+    sipa: 35
+    obra_social: 22
+  - cat: E
+    actividad: servicios
+    tope_anual: 72000
+    impuesto: 210
+    sipa: 35
+    obra_social: 22
+  - cat: F
+    actividad: bienes
+    tope_anual: 12000
+    impuesto: 33
+    sipa: 35
+    obra_social: 22
+  - cat: G
+    actividad: bienes
+    tope_anual: 24000
+    impuesto: 39
+    sipa: 35
+    obra_social: 22
+  - cat: H
+    actividad: bienes
+    tope_anual: 36000
+    impuesto: 75
+    sipa: 35
+    obra_social: 22
+  - cat: I
+    actividad: bienes
+    tope_anual: 48000
+    impuesto: 118
+    sipa: 35
+    obra_social: 22
+  - cat: J
+    actividad: bienes
+    tope_anual: 72000
+    impuesto: 194
+    sipa: 35
+    obra_social: 22
+  - cat: K
+    actividad: bienes
+    tope_anual: 96000
+    impuesto: 310
+    sipa: 35
+    obra_social: 22
+  - cat: L
+    actividad: bienes
+    tope_anual: 120000
+    impuesto: 405
+    sipa: 35
+    obra_social: 22
+  - cat: M
+    actividad: bienes
+    tope_anual: 144000
+    impuesto: 505
+    sipa: 35
+    obra_social: 22
+- desde: 2010-01
+  hasta: 2012-06
+  fuente: 'ARCA, Montos y categorías anteriores: https://www.arca.gob.ar/monotributo/documentos/categorias/monotributo-categorias-enero-2010-junio-2012.pdf'
+  estado: transcrito automáticamente de la tabla de ARCA; componentes controlados contra el total
+  categorias:
+  - cat: B
+    tope_anual: 24000.0
+    impuesto_servicios: 39.0
+    impuesto_bienes: 39.0
+    sipa: 110.0
+    obra_social: 70.0
+  - cat: C
+    tope_anual: 36000.0
+    impuesto_servicios: 75.0
+    impuesto_bienes: 75.0
+    sipa: 110.0
+    obra_social: 70.0
+  - cat: D
+    tope_anual: 48000.0
+    impuesto_servicios: 128.0
+    impuesto_bienes: 118.0
+    sipa: 110.0
+    obra_social: 70.0
+  - cat: E
+    tope_anual: 72000.0
+    impuesto_servicios: 210.0
+    impuesto_bienes: 194.0
+    sipa: 110.0
+    obra_social: 70.0
+  - cat: F
+    tope_anual: 96000.0
+    impuesto_servicios: 400.0
+    impuesto_bienes: 310.0
+    sipa: 110.0
+    obra_social: 70.0
+  - cat: G
+    tope_anual: 120000.0
+    impuesto_servicios: 550.0
+    impuesto_bienes: 405.0
+    sipa: 110.0
+    obra_social: 70.0
+  - cat: H
+    tope_anual: 144000.0
+    impuesto_servicios: 700.0
+    impuesto_bienes: 505.0
+    sipa: 110.0
+    obra_social: 70.0
+  - cat: I
+    tope_anual: 200000.0
+    impuesto_servicios: 1600.0
+    impuesto_bienes: 1240.0
+    sipa: 110.0
+    obra_social: 70.0
+  - cat: J
+    tope_anual: 235000.0
+    impuesto_servicios: null
+    impuesto_bienes: 2000.0
+    sipa: 110.0
+    obra_social: 70.0
+  - cat: K
+    tope_anual: 270000.0
+    impuesto_servicios: null
+    impuesto_bienes: 2350.0
+    sipa: 110.0
+    obra_social: 70.0
+  - cat: L
+    tope_anual: 300000.0
+    impuesto_servicios: null
+    impuesto_bienes: 2700.0
+    sipa: 110.0
+    obra_social: 70.0
+- desde: 2012-07
+  hasta: 2013-08
+  fuente: 'ARCA, Montos y categorías anteriores: https://www.arca.gob.ar/monotributo/documentos/categorias/monotributo-categorias-julio-2012-agosto-2013.pdf'
+  estado: transcrito automáticamente de la tabla de ARCA; componentes controlados contra el total
+  categorias:
+  - cat: B
+    tope_anual: 48000.0
+    impuesto_servicios: 39.0
+    impuesto_bienes: 39.0
+    sipa: 157.0
+    obra_social: 100.0
+  - cat: C
+    tope_anual: 72000.0
+    impuesto_servicios: 75.0
+    impuesto_bienes: 75.0
+    sipa: 157.0
+    obra_social: 100.0
+  - cat: D
+    tope_anual: 96000.0
+    impuesto_servicios: 128.0
+    impuesto_bienes: 118.0
+    sipa: 157.0
+    obra_social: 100.0
+  - cat: E
+    tope_anual: 144000.0
+    impuesto_servicios: 210.0
+    impuesto_bienes: 194.0
+    sipa: 157.0
+    obra_social: 100.0
+  - cat: F
+    tope_anual: 192000.0
+    impuesto_servicios: 400.0
+    impuesto_bienes: 310.0
+    sipa: 157.0
+    obra_social: 100.0
+  - cat: G
+    tope_anual: 240000.0
+    impuesto_servicios: 550.0
+    impuesto_bienes: 405.0
+    sipa: 157.0
+    obra_social: 100.0
+  - cat: H
+    tope_anual: 288000.0
+    impuesto_servicios: 700.0
+    impuesto_bienes: 505.0
+    sipa: 157.0
+    obra_social: 100.0
+  - cat: I
+    tope_anual: 400000.0
+    impuesto_servicios: 1600.0
+    impuesto_bienes: 1240.0
+    sipa: 157.0
+    obra_social: 100.0
+  - cat: J
+    tope_anual: 470000.0
+    impuesto_servicios: null
+    impuesto_bienes: 2000.0
+    sipa: 157.0
+    obra_social: 100.0
+  - cat: K
+    tope_anual: 540000.0
+    impuesto_servicios: null
+    impuesto_bienes: 2350.0
+    sipa: 157.0
+    obra_social: 100.0
+  - cat: L
+    tope_anual: 600000.0
+    impuesto_servicios: null
+    impuesto_bienes: 2700.0
+    sipa: 157.0
+    obra_social: 100.0
+  nota: El PDF dice "al 31/08/2012"; por el nombre del archivo y el período siguiente rige hasta 08/2013.
+- desde: 2013-09
+  hasta: 2013-10
+  fuente: 'ARCA, Montos y categorías anteriores: https://www.arca.gob.ar/monotributo/documentos/categorias/monotributo-categorias-septiembre-octubre-2013.pdf'
+  estado: transcrito automáticamente de la tabla de ARCA; componentes controlados contra el total
+  categorias:
+  - cat: B
+    tope_anual: 48000.0
+    impuesto_servicios: 39.0
+    impuesto_bienes: 39.0
+    sipa: 157.0
+    obra_social: 100.0
+  - cat: C
+    tope_anual: 72000.0
+    impuesto_servicios: 75.0
+    impuesto_bienes: 75.0
+    sipa: 157.0
+    obra_social: 100.0
+  - cat: D
+    tope_anual: 96000.0
+    impuesto_servicios: 128.0
+    impuesto_bienes: 118.0
+    sipa: 157.0
+    obra_social: 100.0
+  - cat: E
+    tope_anual: 144000.0
+    impuesto_servicios: 210.0
+    impuesto_bienes: 194.0
+    sipa: 157.0
+    obra_social: 100.0
+  - cat: F
+    tope_anual: 192000.0
+    impuesto_servicios: 400.0
+    impuesto_bienes: 310.0
+    sipa: 157.0
+    obra_social: 100.0
+  - cat: G
+    tope_anual: 240000.0
+    impuesto_servicios: 550.0
+    impuesto_bienes: 405.0
+    sipa: 157.0
+    obra_social: 100.0
+  - cat: H
+    tope_anual: 288000.0
+    impuesto_servicios: 700.0
+    impuesto_bienes: 505.0
+    sipa: 157.0
+    obra_social: 100.0
+  - cat: I
+    tope_anual: 400000.0
+    impuesto_servicios: 1600.0
+    impuesto_bienes: 1240.0
+    sipa: 157.0
+    obra_social: 100.0
+  - cat: J
+    tope_anual: 470000.0
+    impuesto_servicios: null
+    impuesto_bienes: 2000.0
+    sipa: 157.0
+    obra_social: 100.0
+  - cat: K
+    tope_anual: 540000.0
+    impuesto_servicios: null
+    impuesto_bienes: 2350.0
+    sipa: 157.0
+    obra_social: 100.0
+  - cat: L
+    tope_anual: 600000.0
+    impuesto_servicios: null
+    impuesto_bienes: 2700.0
+    sipa: 157.0
+    obra_social: 100.0
+- desde: 2013-11
+  hasta: 2014-08
+  fuente: 'ARCA, Montos y categorías anteriores: https://www.arca.gob.ar/monotributo/documentos/categorias/monotributo-categorias-noviembre-2013-agosto-2014.pdf'
+  estado: transcrito automáticamente de la tabla de ARCA; componentes controlados contra el total
+  categorias:
+  - cat: B
+    tope_anual: 48000.0
+    impuesto_servicios: 39.0
+    impuesto_bienes: 39.0
+    sipa: 157.0
+    obra_social: 146.0
+  - cat: C
+    tope_anual: 72000.0
+    impuesto_servicios: 75.0
+    impuesto_bienes: 75.0
+    sipa: 157.0
+    obra_social: 146.0
+  - cat: D
+    tope_anual: 96000.0
+    impuesto_servicios: 128.0
+    impuesto_bienes: 118.0
+    sipa: 157.0
+    obra_social: 146.0
+  - cat: E
+    tope_anual: 144000.0
+    impuesto_servicios: 210.0
+    impuesto_bienes: 194.0
+    sipa: 157.0
+    obra_social: 146.0
+  - cat: F
+    tope_anual: 192000.0
+    impuesto_servicios: 400.0
+    impuesto_bienes: 310.0
+    sipa: 157.0
+    obra_social: 146.0
+  - cat: G
+    tope_anual: 240000.0
+    impuesto_servicios: 550.0
+    impuesto_bienes: 405.0
+    sipa: 157.0
+    obra_social: 146.0
+  - cat: H
+    tope_anual: 288000.0
+    impuesto_servicios: 700.0
+    impuesto_bienes: 505.0
+    sipa: 157.0
+    obra_social: 146.0
+  - cat: I
+    tope_anual: 400000.0
+    impuesto_servicios: 1600.0
+    impuesto_bienes: 1240.0
+    sipa: 157.0
+    obra_social: 146.0
+  - cat: J
+    tope_anual: 470000.0
+    impuesto_servicios: null
+    impuesto_bienes: 2000.0
+    sipa: 157.0
+    obra_social: 146.0
+  - cat: K
+    tope_anual: 540000.0
+    impuesto_servicios: null
+    impuesto_bienes: 2350.0
+    sipa: 157.0
+    obra_social: 146.0
+  - cat: L
+    tope_anual: 600000.0
+    impuesto_servicios: null
+    impuesto_bienes: 2700.0
+    sipa: 157.0
+    obra_social: 146.0
+- desde: 2014-09
+  hasta: 2015-06
+  fuente: 'ARCA, Montos y categorías anteriores: https://www.arca.gob.ar/monotributo/documentos/categorias/monotributo-categorias-septiembre-2014-junio-2015.pdf'
+  estado: transcrito automáticamente de la tabla de ARCA; componentes controlados contra el total
+  categorias:
+  - cat: B
+    tope_anual: 48000.0
+    impuesto_servicios: 39.0
+    impuesto_bienes: 39.0
+    sipa: 157.0
+    obra_social: 233.0
+  - cat: C
+    tope_anual: 72000.0
+    impuesto_servicios: 75.0
+    impuesto_bienes: 75.0
+    sipa: 157.0
+    obra_social: 233.0
+  - cat: D
+    tope_anual: 96000.0
+    impuesto_servicios: 128.0
+    impuesto_bienes: 118.0
+    sipa: 157.0
+    obra_social: 233.0
+  - cat: E
+    tope_anual: 144000.0
+    impuesto_servicios: 210.0
+    impuesto_bienes: 194.0
+    sipa: 157.0
+    obra_social: 233.0
+  - cat: F
+    tope_anual: 192000.0
+    impuesto_servicios: 400.0
+    impuesto_bienes: 310.0
+    sipa: 157.0
+    obra_social: 233.0
+  - cat: G
+    tope_anual: 240000.0
+    impuesto_servicios: 550.0
+    impuesto_bienes: 405.0
+    sipa: 157.0
+    obra_social: 233.0
+  - cat: H
+    tope_anual: 288000.0
+    impuesto_servicios: 700.0
+    impuesto_bienes: 505.0
+    sipa: 157.0
+    obra_social: 233.0
+  - cat: I
+    tope_anual: 400000.0
+    impuesto_servicios: 1600.0
+    impuesto_bienes: 1240.0
+    sipa: 157.0
+    obra_social: 233.0
+  - cat: J
+    tope_anual: 470000.0
+    impuesto_servicios: null
+    impuesto_bienes: 2000.0
+    sipa: 157.0
+    obra_social: 233.0
+  - cat: K
+    tope_anual: 540000.0
+    impuesto_servicios: null
+    impuesto_bienes: 2350.0
+    sipa: 157.0
+    obra_social: 233.0
+  - cat: L
+    tope_anual: 600000.0
+    impuesto_servicios: null
+    impuesto_bienes: 2700.0
+    sipa: 157.0
+    obra_social: 233.0
+- desde: 2015-07
+  hasta: 2016-05
+  fuente: 'ARCA, Montos y categorías anteriores: https://www.arca.gob.ar/monotributo/documentos/categorias/monotributo-categorias-julio-2015-mayo-2016.pdf'
+  estado: transcrito automáticamente de la tabla de ARCA; componentes controlados contra el total
+  categorias:
+  - cat: B
+    tope_anual: 48000.0
+    impuesto_servicios: 39.0
+    impuesto_bienes: 39.0
+    sipa: 157.0
+    obra_social: 323.0
+  - cat: C
+    tope_anual: 72000.0
+    impuesto_servicios: 75.0
+    impuesto_bienes: 75.0
+    sipa: 157.0
+    obra_social: 323.0
+  - cat: D
+    tope_anual: 96000.0
+    impuesto_servicios: 128.0
+    impuesto_bienes: 118.0
+    sipa: 157.0
+    obra_social: 323.0
+  - cat: E
+    tope_anual: 144000.0
+    impuesto_servicios: 210.0
+    impuesto_bienes: 194.0
+    sipa: 157.0
+    obra_social: 323.0
+  - cat: F
+    tope_anual: 192000.0
+    impuesto_servicios: 400.0
+    impuesto_bienes: 310.0
+    sipa: 157.0
+    obra_social: 323.0
+  - cat: G
+    tope_anual: 240000.0
+    impuesto_servicios: 550.0
+    impuesto_bienes: 405.0
+    sipa: 157.0
+    obra_social: 323.0
+  - cat: H
+    tope_anual: 288000.0
+    impuesto_servicios: 700.0
+    impuesto_bienes: 505.0
+    sipa: 157.0
+    obra_social: 323.0
+  - cat: I
+    tope_anual: 400000.0
+    impuesto_servicios: 1600.0
+    impuesto_bienes: 1240.0
+    sipa: 157.0
+    obra_social: 323.0
+  - cat: J
+    tope_anual: 470000.0
+    impuesto_servicios: null
+    impuesto_bienes: 2000.0
+    sipa: 157.0
+    obra_social: 323.0
+  - cat: K
+    tope_anual: 540000.0
+    impuesto_servicios: null
+    impuesto_bienes: 2350.0
+    sipa: 157.0
+    obra_social: 323.0
+  - cat: L
+    tope_anual: 600000.0
+    impuesto_servicios: null
+    impuesto_bienes: 2700.0
+    sipa: 157.0
+    obra_social: 323.0
+- desde: 2016-06
+  hasta: 2016-12
+  fuente: 'ARCA, Montos y categorías anteriores: https://www.arca.gob.ar/monotributo/documentos/categorias/monotributo-categorias-junio-diciembre-2016.pdf'
+  estado: transcrito automáticamente de la tabla de ARCA; componentes controlados contra el total
+  categorias:
+  - cat: B
+    tope_anual: 48000.0
+    impuesto_servicios: 39.0
+    impuesto_bienes: 39.0
+    sipa: 157.0
+    obra_social: 323.0
+  - cat: C
+    tope_anual: 72000.0
+    impuesto_servicios: 75.0
+    impuesto_bienes: 75.0
+    sipa: 157.0
+    obra_social: 323.0
+  - cat: D
+    tope_anual: 96000.0
+    impuesto_servicios: 128.0
+    impuesto_bienes: 118.0
+    sipa: 157.0
+    obra_social: 323.0
+  - cat: E
+    tope_anual: 144000.0
+    impuesto_servicios: 210.0
+    impuesto_bienes: 194.0
+    sipa: 157.0
+    obra_social: 323.0
+  - cat: F
+    tope_anual: 192000.0
+    impuesto_servicios: 400.0
+    impuesto_bienes: 310.0
+    sipa: 157.0
+    obra_social: 323.0
+  - cat: G
+    tope_anual: 240000.0
+    impuesto_servicios: 550.0
+    impuesto_bienes: 405.0
+    sipa: 157.0
+    obra_social: 323.0
+  - cat: H
+    tope_anual: 288000.0
+    impuesto_servicios: 700.0
+    impuesto_bienes: 505.0
+    sipa: 157.0
+    obra_social: 323.0
+  - cat: I
+    tope_anual: 400000.0
+    impuesto_servicios: 1600.0
+    impuesto_bienes: 1240.0
+    sipa: 157.0
+    obra_social: 323.0
+  - cat: J
+    tope_anual: 470000.0
+    impuesto_servicios: null
+    impuesto_bienes: 2000.0
+    sipa: 157.0
+    obra_social: 323.0
+  - cat: K
+    tope_anual: 540000.0
+    impuesto_servicios: null
+    impuesto_bienes: 2350.0
+    sipa: 157.0
+    obra_social: 323.0
+  - cat: L
+    tope_anual: 600000.0
+    impuesto_servicios: null
+    impuesto_bienes: 2700.0
+    sipa: 157.0
+    obra_social: 323.0
+- desde: 2017-01
+  hasta: 2017-12
+  fuente: 'ARCA, Montos y categorías anteriores: https://www.arca.gob.ar/monotributo/documentos/categorias/monotributo-categorias-enero-diciembre-2017.pdf'
+  estado: transcrito automáticamente de la tabla de ARCA; componentes controlados contra el total
+  categorias:
+  - cat: A
+    tope_anual: 84000.0
+    impuesto_servicios: 68.0
+    impuesto_bienes: 68.0
+    sipa: 300.0
+    obra_social: 419.0
+  - cat: B
+    tope_anual: 126000.0
+    impuesto_servicios: 131.0
+    impuesto_bienes: 131.0
+    sipa: 330.0
+    obra_social: 419.0
+  - cat: C
+    tope_anual: 168000.0
+    impuesto_servicios: 224.0
+    impuesto_bienes: 207.0
+    sipa: 363.0
+    obra_social: 419.0
+  - cat: D
+    tope_anual: 252000.0
+    impuesto_servicios: 368.0
+    impuesto_bienes: 340.0
+    sipa: 399.3
+    obra_social: 419.0
+  - cat: E
+    tope_anual: 336000.0
+    impuesto_servicios: 700.0
+    impuesto_bienes: 543.0
+    sipa: 439.23
+    obra_social: 419.0
+  - cat: F
+    tope_anual: 420000.0
+    impuesto_servicios: 963.0
+    impuesto_bienes: 709.0
+    sipa: 483.15
+    obra_social: 419.0
+  - cat: G
+    tope_anual: 504000.0
+    impuesto_servicios: 1225.0
+    impuesto_bienes: 884.0
+    sipa: 531.47
+    obra_social: 419.0
+  - cat: H
+    tope_anual: 700000.0
+    impuesto_servicios: 2800.0
+    impuesto_bienes: 2170.0
+    sipa: 584.61
+    obra_social: 419.0
+  - cat: I
+    tope_anual: 822500.0
+    impuesto_servicios: null
+    impuesto_bienes: 3500.0
+    sipa: 643.08
+    obra_social: 419.0
+  - cat: J
+    tope_anual: 945000.0
+    impuesto_servicios: null
+    impuesto_bienes: 4113.0
+    sipa: 707.38
+    obra_social: 419.0
+  - cat: K
+    tope_anual: 1050000.0
+    impuesto_servicios: null
+    impuesto_bienes: 4725.0
+    sipa: 778.12
+    obra_social: 419.0
+  nota: 'Corregido: K, tope 1.050.000 (cortado en dos líneas en el PDF).'
+- desde: 2018-01
+  hasta: 2018-12
+  fuente: 'ARCA, Montos y categorías anteriores: https://www.arca.gob.ar/monotributo/documentos/categorias/monotributo-categorias-enero-diciembre-2018.pdf'
+  estado: transcrito automáticamente de la tabla de ARCA; componentes controlados contra el total
+  categorias:
+  - cat: A
+    tope_anual: 107525.27
+    impuesto_servicios: 87.04
+    impuesto_bienes: 87.04
+    sipa: 384.02
+    obra_social: 536.35
+  - cat: B
+    tope_anual: 161287.9
+    impuesto_servicios: 167.69
+    impuesto_bienes: 167.69
+    sipa: 422.42
+    obra_social: 536.35
+  - cat: C
+    tope_anual: 215050.54
+    impuesto_servicios: 286.73
+    impuesto_bienes: 264.97
+    sipa: 464.66
+    obra_social: 536.35
+  - cat: D
+    tope_anual: 322575.81
+    impuesto_servicios: 471.06
+    impuesto_bienes: 435.22
+    sipa: 511.13
+    obra_social: 536.35
+  - cat: E
+    tope_anual: 430101.07
+    impuesto_servicios: 896.04
+    impuesto_bienes: 695.07
+    sipa: 562.24
+    obra_social: 536.35
+  - cat: F
+    tope_anual: 537626.34
+    impuesto_servicios: 1232.7
+    impuesto_bienes: 907.56
+    sipa: 618.46
+    obra_social: 536.35
+  - cat: G
+    tope_anual: 645151.61
+    impuesto_servicios: 1568.08
+    impuesto_bienes: 1131.57
+    sipa: 680.31
+    obra_social: 536.35
+  - cat: H
+    tope_anual: 896043.9
+    impuesto_servicios: 3584.17
+    impuesto_bienes: 2777.74
+    sipa: 748.34
+    obra_social: 536.35
+  - cat: I
+    tope_anual: 1052851.59
+    impuesto_servicios: null
+    impuesto_bienes: 4480.22
+    sipa: 823.18
+    obra_social: 536.35
+  - cat: J
+    tope_anual: 1209659.27
+    impuesto_servicios: null
+    impuesto_bienes: 5264.9
+    sipa: 905.5
+    obra_social: 536.35
+  - cat: K
+    tope_anual: 1344065.86
+    impuesto_servicios: null
+    impuesto_bienes: 6048.3
+    sipa: 996.04
+    obra_social: 536.35
+  nota: 'J: componentes suman 6.706,75 y el total de la tabla dice 6.711,75 (se usan los componentes).'
+- desde: 2019-01
+  hasta: 2019-12
+  fuente: 'ARCA, Montos y categorías anteriores: https://www.arca.gob.ar/monotributo/documentos/categorias/monotributo-categorias-enero-diciembre-2019.pdf'
+  estado: transcrito automáticamente de la tabla de ARCA; componentes controlados contra el total
+  categorias:
+  - cat: A
+    tope_anual: 138127.99
+    impuesto_servicios: 111.81
+    impuesto_bienes: 111.81
+    sipa: 493.31
+    obra_social: 689.0
+  - cat: B
+    tope_anual: 207191.98
+    impuesto_servicios: 215.42
+    impuesto_bienes: 215.42
+    sipa: 542.64
+    obra_social: 689.0
+  - cat: C
+    tope_anual: 276255.98
+    impuesto_servicios: 368.34
+    impuesto_bienes: 340.38
+    sipa: 596.91
+    obra_social: 689.0
+  - cat: D
+    tope_anual: 414383.98
+    impuesto_servicios: 605.13
+    impuesto_bienes: 559.09
+    sipa: 656.6
+    obra_social: 689.0
+  - cat: E
+    tope_anual: 552511.95
+    impuesto_servicios: 1151.06
+    impuesto_bienes: 892.89
+    sipa: 722.26
+    obra_social: 689.0
+  - cat: F
+    tope_anual: 690639.95
+    impuesto_servicios: 1583.54
+    impuesto_bienes: 1165.86
+    sipa: 794.48
+    obra_social: 689.0
+  - cat: G
+    tope_anual: 828767.94
+    impuesto_servicios: 2014.37
+    impuesto_bienes: 1453.62
+    sipa: 873.93
+    obra_social: 689.0
+  - cat: H
+    tope_anual: 1151066.58
+    impuesto_servicios: 4604.26
+    impuesto_bienes: 3568.31
+    sipa: 961.32
+    obra_social: 689.0
+  - cat: I
+    tope_anual: 1352503.24
+    impuesto_servicios: null
+    impuesto_bienes: 5755.33
+    sipa: 1057.46
+    obra_social: 689.0
+  - cat: J
+    tope_anual: 1553939.89
+    impuesto_servicios: null
+    impuesto_bienes: 6763.34
+    sipa: 1163.21
+    obra_social: 689.0
+  - cat: K
+    tope_anual: 1726599.88
+    impuesto_servicios: null
+    impuesto_bienes: 7769.7
+    sipa: 1279.52
+    obra_social: 689.0
+- desde: 2020-01
+  hasta: 2020-12
+  fuente: 'ARCA, Montos y categorías anteriores: https://www.arca.gob.ar/monotributo/documentos/categorias/monotributo-categorias-enero-diciembre-2020.pdf'
+  estado: transcrito automáticamente de la tabla de ARCA; componentes controlados contra el total
+  categorias:
+  - cat: A
+    tope_anual: 208739.25
+    impuesto_servicios: 168.97
+    impuesto_bienes: 168.97
+    sipa: 745.49
+    obra_social: 1041.22
+  - cat: B
+    tope_anual: 313108.87
+    impuesto_servicios: 325.54
+    impuesto_bienes: 325.54
+    sipa: 820.04
+    obra_social: 1041.22
+  - cat: C
+    tope_anual: 417478.51
+    impuesto_servicios: 556.64
+    impuesto_bienes: 514.38
+    sipa: 902.05
+    obra_social: 1041.22
+  - cat: D
+    tope_anual: 626217.78
+    impuesto_servicios: 914.47
+    impuesto_bienes: 844.9
+    sipa: 992.25
+    obra_social: 1041.22
+  - cat: E
+    tope_anual: 834957.0
+    impuesto_servicios: 1739.48
+    impuesto_bienes: 1349.34
+    sipa: 1091.48
+    obra_social: 1041.22
+  - cat: F
+    tope_anual: 1043696.27
+    impuesto_servicios: 2393.05
+    impuesto_bienes: 1761.85
+    sipa: 1200.62
+    obra_social: 1041.22
+  - cat: G
+    tope_anual: 1252435.53
+    impuesto_servicios: 3044.12
+    impuesto_bienes: 2196.71
+    sipa: 1320.68
+    obra_social: 1041.22
+  - cat: H
+    tope_anual: 1739493.79
+    impuesto_servicios: 6957.96
+    impuesto_bienes: 5392.44
+    sipa: 1452.75
+    obra_social: 1041.22
+  - cat: I
+    tope_anual: 2043905.21
+    impuesto_servicios: null
+    impuesto_bienes: 8697.46
+    sipa: 1598.03
+    obra_social: 1041.22
+  - cat: J
+    tope_anual: 2348316.62
+    impuesto_servicios: null
+    impuesto_bienes: 10220.77
+    sipa: 1757.84
+    obra_social: 1041.22
+  - cat: K
+    tope_anual: 2609240.69
+    impuesto_servicios: null
+    impuesto_bienes: 11741.58
+    sipa: 1933.61
+    obra_social: 1041.22
+- desde: 2021-01
+  hasta: 2021-06
+  fuente: 'ARCA, Montos y categorías anteriores: https://www.arca.gob.ar/monotributo/documentos/categorias/monotributo-categorias-enero-junio-2021.pdf'
+  estado: transcrito automáticamente de la tabla de ARCA; componentes controlados contra el total
+  categorias:
+  - cat: A
+    tope_anual: 282444.69
+    impuesto_servicios: 168.97
+    impuesto_bienes: 168.97
+    sipa: 745.49
+    obra_social: 1041.22
+  - cat: B
+    tope_anual: 423667.03
+    impuesto_servicios: 325.54
+    impuesto_bienes: 325.54
+    sipa: 820.04
+    obra_social: 1041.22
+  - cat: C
+    tope_anual: 564889.4
+    impuesto_servicios: 556.64
+    impuesto_bienes: 514.38
+    sipa: 902.05
+    obra_social: 1041.22
+  - cat: D
+    tope_anual: 847334.12
+    impuesto_servicios: 914.47
+    impuesto_bienes: 844.9
+    sipa: 992.25
+    obra_social: 1041.22
+  - cat: E
+    tope_anual: 1129778.77
+    impuesto_servicios: 1739.48
+    impuesto_bienes: 1349.34
+    sipa: 1091.48
+    obra_social: 1041.22
+  - cat: F
+    tope_anual: 1412223.49
+    impuesto_servicios: 2393.05
+    impuesto_bienes: 1761.85
+    sipa: 1200.62
+    obra_social: 1041.22
+  - cat: G
+    tope_anual: 1694668.19
+    impuesto_servicios: 3044.12
+    impuesto_bienes: 2196.71
+    sipa: 1320.68
+    obra_social: 1041.22
+  - cat: H
+    tope_anual: 2353705.82
+    impuesto_servicios: 6957.96
+    impuesto_bienes: 5392.44
+    sipa: 1452.75
+    obra_social: 1041.22
+  - cat: I
+    tope_anual: 2765604.35
+    impuesto_servicios: null
+    impuesto_bienes: 8697.46
+    sipa: 1598.03
+    obra_social: 1041.22
+  - cat: J
+    tope_anual: 3177502.86
+    impuesto_servicios: null
+    impuesto_bienes: 10220.77
+    sipa: 1757.84
+    obra_social: 1041.22
+  - cat: K
+    tope_anual: 3530558.74
+    impuesto_servicios: null
+    impuesto_bienes: 11741.58
+    sipa: 1933.61
+    obra_social: 1041.22
+- desde: 2021-07
+  hasta: 2021-12
+  fuente: 'ARCA, Montos y categorías anteriores: https://www.arca.gob.ar/monotributo/documentos/categorias/monotributo-categorias-julio-diciembre-2021.pdf'
+  estado: transcrito automáticamente de la tabla de ARCA; componentes controlados contra el total
+  categorias:
+  - cat: A
+    tope_anual: 370000.0
+    impuesto_servicios: 228.63
+    impuesto_bienes: 228.63
+    sipa: 1008.72
+    obra_social: 1408.87
+  - cat: B
+    tope_anual: 550000.0
+    impuesto_servicios: 440.49
+    impuesto_bienes: 440.49
+    sipa: 1109.59
+    obra_social: 1408.87
+  - cat: C
+    tope_anual: 770000.0
+    impuesto_servicios: 753.19
+    impuesto_bienes: 696.01
+    sipa: 1220.56
+    obra_social: 1408.87
+  - cat: D
+    tope_anual: 1060000.0
+    impuesto_servicios: 1237.37
+    impuesto_bienes: 1143.23
+    sipa: 1342.61
+    obra_social: 1408.87
+  - cat: E
+    tope_anual: 1400000.0
+    impuesto_servicios: 2353.69
+    impuesto_bienes: 1825.79
+    sipa: 1476.88
+    obra_social: 1408.87
+  - cat: F
+    tope_anual: 1750000.0
+    impuesto_servicios: 3238.03
+    impuesto_bienes: 2383.95
+    sipa: 1624.56
+    obra_social: 1408.87
+  - cat: G
+    tope_anual: 2100000.0
+    impuesto_servicios: 4118.99
+    impuesto_bienes: 2972.36
+    sipa: 1787.01
+    obra_social: 1408.87
+  - cat: H
+    tope_anual: 2600000.0
+    impuesto_servicios: 9414.8
+    impuesto_bienes: 7296.5
+    sipa: 1965.71
+    obra_social: 1408.87
+  - cat: I
+    tope_anual: 2910000.0
+    impuesto_servicios: null
+    impuesto_bienes: 11768.52
+    sipa: 2162.29
+    obra_social: 1408.87
+  - cat: J
+    tope_anual: 3335000.0
+    impuesto_servicios: null
+    impuesto_bienes: 13829.7
+    sipa: 2378.53
+    obra_social: 1408.87
+  - cat: K
+    tope_anual: 3700000.0
+    impuesto_servicios: null
+    impuesto_bienes: 15887.51
+    sipa: 2616.36
+    obra_social: 1408.87
+  nota: La columna de totales de servicios no coincide con los componentes en A-H (parece de otro período); se usan
+    los componentes, que cierran con el total de bienes.
+- desde: 2022-01
+  hasta: 2022-06
+  fuente: 'ARCA, Montos y categorías anteriores: https://www.arca.gob.ar/monotributo/documentos/categorias/monotributo-categorias-enero-junio-2022.pdf'
+  estado: transcrito automáticamente de la tabla de ARCA; componentes controlados contra el total
+  categorias:
+  - cat: A
+    tope_anual: 466201.59
+    impuesto_servicios: 288.07
+    impuesto_bienes: 288.07
+    sipa: 1270.99
+    obra_social: 1775.18
+  - cat: B
+    tope_anual: 693002.36
+    impuesto_servicios: 555.02
+    impuesto_bienes: 555.02
+    sipa: 1398.09
+    obra_social: 1775.18
+  - cat: C
+    tope_anual: 970203.3
+    impuesto_servicios: 949.02
+    impuesto_bienes: 876.97
+    sipa: 1537.91
+    obra_social: 1775.18
+  - cat: D
+    tope_anual: 1335604.55
+    impuesto_servicios: 1559.09
+    impuesto_bienes: 1440.47
+    sipa: 1691.69
+    obra_social: 1775.18
+  - cat: E
+    tope_anual: 1764006.01
+    impuesto_servicios: 2965.66
+    impuesto_bienes: 2300.5
+    sipa: 1860.87
+    obra_social: 1775.18
+  - cat: F
+    tope_anual: 2205007.51
+    impuesto_servicios: 4079.93
+    impuesto_bienes: 3003.79
+    sipa: 2046.95
+    obra_social: 1775.18
+  - cat: G
+    tope_anual: 2646009.01
+    impuesto_servicios: 5189.94
+    impuesto_bienes: 3745.19
+    sipa: 2251.64
+    obra_social: 1775.18
+  - cat: H
+    tope_anual: 3276011.15
+    impuesto_servicios: 11862.69
+    impuesto_bienes: 9193.62
+    sipa: 2476.8
+    obra_social: 1775.18
+  - cat: I
+    tope_anual: 3666612.48
+    impuesto_servicios: null
+    impuesto_bienes: 14828.38
+    sipa: 2724.49
+    obra_social: 1775.18
+  - cat: J
+    tope_anual: 4202114.31
+    impuesto_servicios: null
+    impuesto_bienes: 17425.48
+    sipa: 2996.96
+    obra_social: 1775.18
+  - cat: K
+    tope_anual: 4662015.87
+    impuesto_servicios: null
+    impuesto_bienes: 20018.33
+    sipa: 3296.62
+    obra_social: 1775.18
+- desde: 2022-07
+  hasta: 2022-12
+  fuente: 'ARCA, Montos y categorías anteriores: https://www.arca.gob.ar/monotributo/documentos/categorias/monotributo-categorias-julio-diciembre-2022.pdf'
+  estado: transcrito automáticamente de la tabla de ARCA; componentes controlados contra el total
+  categorias:
+  - cat: A
+    tope_anual: 748382.07
+    impuesto_servicios: 288.07
+    impuesto_bienes: 288.07
+    sipa: 1270.99
+    obra_social: 1775.18
+  - cat: B
+    tope_anual: 1112459.83
+    impuesto_servicios: 555.02
+    impuesto_bienes: 555.02
+    sipa: 1398.09
+    obra_social: 1775.18
+  - cat: C
+    tope_anual: 1557443.75
+    impuesto_servicios: 949.02
+    impuesto_bienes: 876.97
+    sipa: 1537.91
+    obra_social: 1775.18
+  - cat: D
+    tope_anual: 1934273.04
+    impuesto_servicios: 1559.09
+    impuesto_bienes: 1440.47
+    sipa: 1691.69
+    obra_social: 1775.18
+  - cat: E
+    tope_anual: 2277684.56
+    impuesto_servicios: 2965.66
+    impuesto_bienes: 2300.5
+    sipa: 1860.87
+    obra_social: 1775.18
+  - cat: F
+    tope_anual: 2847105.7
+    impuesto_servicios: 4079.93
+    impuesto_bienes: 3003.79
+    sipa: 2046.95
+    obra_social: 1775.18
+  - cat: G
+    tope_anual: 3416526.83
+    impuesto_servicios: 5189.94
+    impuesto_bienes: 3745.19
+    sipa: 2251.64
+    obra_social: 1775.18
+  - cat: H
+    tope_anual: 4229985.6
+    impuesto_servicios: 11862.69
+    impuesto_bienes: 9193.62
+    sipa: 2476.8
+    obra_social: 1775.18
+  - cat: I
+    tope_anual: 4734330.03
+    impuesto_servicios: null
+    impuesto_bienes: 14828.38
+    sipa: 2724.49
+    obra_social: 1775.18
+  - cat: J
+    tope_anual: 5425770.0
+    impuesto_servicios: null
+    impuesto_bienes: 17425.48
+    sipa: 2996.96
+    obra_social: 1775.18
+  - cat: K
+    tope_anual: 6019594.89
+    impuesto_servicios: null
+    impuesto_bienes: 20018.33
+    sipa: 3296.62
+    obra_social: 1775.18
+- desde: 2023-01
+  hasta: 2023-06
+  fuente: 'ARCA, Montos y categorías anteriores: https://www.arca.gob.ar/monotributo/documentos/categorias/monotributo-categorias-enero-junio-2023.pdf'
+  estado: transcrito automáticamente de la tabla de ARCA; componentes controlados contra el total
+  categorias:
+  - cat: A
+    tope_anual: 999657.23
+    impuesto_servicios: 496.85
+    impuesto_bienes: 496.85
+    sipa: 2192.15
+    obra_social: 3061.75
+  - cat: B
+    tope_anual: 1485976.96
+    impuesto_servicios: 957.27
+    impuesto_bienes: 957.27
+    sipa: 2411.36
+    obra_social: 3061.75
+  - cat: C
+    tope_anual: 2080367.73
+    impuesto_servicios: 1636.83
+    impuesto_bienes: 1512.56
+    sipa: 2652.52
+    obra_social: 3061.75
+  - cat: D
+    tope_anual: 2583720.42
+    impuesto_servicios: 2689.05
+    impuesto_bienes: 2484.46
+    sipa: 2917.75
+    obra_social: 3638.26
+  - cat: E
+    tope_anual: 3042435.05
+    impuesto_servicios: 5115.04
+    impuesto_bienes: 3967.8
+    sipa: 3209.55
+    obra_social: 4452.02
+  - cat: F
+    tope_anual: 3803043.82
+    impuesto_servicios: 7036.89
+    impuesto_bienes: 5180.81
+    sipa: 3530.49
+    obra_social: 5145.02
+  - cat: G
+    tope_anual: 4563652.57
+    impuesto_servicios: 8951.39
+    impuesto_bienes: 6459.54
+    sipa: 3883.53
+    obra_social: 5512.52
+  - cat: H
+    tope_anual: 5650236.51
+    impuesto_servicios: 20460.26
+    impuesto_bienes: 15856.76
+    sipa: 4271.88
+    obra_social: 6615.02
+  - cat: I
+    tope_anual: 6323918.55
+    impuesto_servicios: null
+    impuesto_bienes: 25575.36
+    sipa: 4699.08
+    obra_social: 8190.03
+  - cat: J
+    tope_anual: 7247514.92
+    impuesto_servicios: null
+    impuesto_bienes: 30054.72
+    sipa: 5169.03
+    obra_social: 9166.53
+  - cat: K
+    tope_anual: 8040721.19
+    impuesto_servicios: null
+    impuesto_bienes: 34526.76
+    sipa: 5685.87
+    obra_social: 10505.29
+- desde: 2023-07
+  hasta: 2023-12
+  fuente: 'ARCA, Montos y categorías anteriores: https://www.arca.gob.ar/monotributo/documentos/categorias/monotributo-categorias-julio-diciembre-2023.pdf'
+  estado: transcrito automáticamente de la tabla de ARCA; componentes controlados contra el total
+  categorias:
+  - cat: A
+    tope_anual: 1414762.58
+    impuesto_servicios: 496.85
+    impuesto_bienes: 496.85
+    sipa: 2192.15
+    obra_social: 3061.75
+  - cat: B
+    tope_anual: 2103025.45
+    impuesto_servicios: 957.27
+    impuesto_bienes: 957.27
+    sipa: 2411.36
+    obra_social: 3061.75
+  - cat: C
+    tope_anual: 2944235.6
+    impuesto_servicios: 1636.83
+    impuesto_bienes: 1512.56
+    sipa: 2652.52
+    obra_social: 3061.75
+  - cat: D
+    tope_anual: 3656604.33
+    impuesto_servicios: 2689.05
+    impuesto_bienes: 2484.46
+    sipa: 2917.75
+    obra_social: 3638.26
+  - cat: E
+    tope_anual: 4305799.15
+    impuesto_servicios: 5115.04
+    impuesto_bienes: 3967.8
+    sipa: 3209.55
+    obra_social: 4452.02
+  - cat: F
+    tope_anual: 5382248.94
+    impuesto_servicios: 7036.89
+    impuesto_bienes: 5180.81
+    sipa: 3530.49
+    obra_social: 5145.02
+  - cat: G
+    tope_anual: 6458698.71
+    impuesto_servicios: 8951.39
+    impuesto_bienes: 6459.54
+    sipa: 3883.53
+    obra_social: 5512.52
+  - cat: H
+    tope_anual: 7996484.12
+    impuesto_servicios: 20460.26
+    impuesto_bienes: 15856.76
+    sipa: 4271.88
+    obra_social: 6615.02
+  - cat: I
+    tope_anual: 8949911.06
+    impuesto_servicios: null
+    impuesto_bienes: 25575.36
+    sipa: 4699.08
+    obra_social: 8190.03
+  - cat: J
+    tope_anual: 10257028.68
+    impuesto_servicios: null
+    impuesto_bienes: 30054.72
+    sipa: 5169.03
+    obra_social: 9166.53
+  - cat: K
+    tope_anual: 11379612.01
+    impuesto_servicios: null
+    impuesto_bienes: 34526.76
+    sipa: 5685.87
+    obra_social: 10505.29
+- desde: 2024-01
+  hasta: 2024-07
+  fuente: 'ARCA, Montos y categorías anteriores: https://www.arca.gob.ar/monotributo/documentos/categorias/monotributo-categorias-enero-julio-2024.pdf'
+  estado: transcrito automáticamente de la tabla de ARCA; componentes controlados contra el total
+  categorias:
+  - cat: A
+    tope_anual: 6450000.0
+    impuesto_servicios: 1047.86
+    impuesto_bienes: 1047.86
+    sipa: 4623.27
+    obra_social: 6457.26
+  - cat: B
+    tope_anual: 9450000.0
+    impuesto_servicios: 2018.89
+    impuesto_bienes: 2018.89
+    sipa: 5085.6
+    obra_social: 6457.26
+  - cat: C
+    tope_anual: 13250000.0
+    impuesto_servicios: 3452.09
+    impuesto_bienes: 3190.0
+    sipa: 5594.16
+    obra_social: 6457.26
+  - cat: D
+    tope_anual: 16450000.0
+    impuesto_servicios: 5671.23
+    impuesto_bienes: 5239.75
+    sipa: 6153.58
+    obra_social: 7673.13
+  - cat: E
+    tope_anual: 19350000.0
+    impuesto_servicios: 10787.67
+    impuesto_bienes: 8368.13
+    sipa: 6768.94
+    obra_social: 9389.36
+  - cat: F
+    tope_anual: 24250000.0
+    impuesto_servicios: 14840.88
+    impuesto_bienes: 10926.38
+    sipa: 7445.83
+    obra_social: 10850.9
+  - cat: G
+    tope_anual: 29000000.0
+    impuesto_servicios: 18878.58
+    impuesto_bienes: 13623.24
+    sipa: 8190.41
+    obra_social: 11625.96
+  - cat: H
+    tope_anual: 44000000.0
+    impuesto_servicios: 43150.91
+    impuesto_bienes: 33442.08
+    sipa: 9009.45
+    obra_social: 13951.15
+  - cat: I
+    tope_anual: 49250000.0
+    impuesto_servicios: null
+    impuesto_bienes: 53938.71
+    sipa: 9910.39
+    obra_social: 17272.86
+  - cat: J
+    tope_anual: 56400000.0
+    impuesto_servicios: null
+    impuesto_bienes: 63385.73
+    sipa: 10901.43
+    obra_social: 19332.31
+  - cat: K
+    tope_anual: 68000000.0
+    impuesto_servicios: null
+    impuesto_bienes: 72817.31
+    sipa: 11991.57
+    obra_social: 22155.77
+- desde: 2024-08
+  hasta: 2025-01
+  fuente: 'ARCA, Montos y categorías anteriores: https://www.arca.gob.ar/monotributo/documentos/categorias/monotributo-categorias-agosto-2024-enero-2025-1.pdf'
+  estado: transcrito automáticamente de la tabla de ARCA; componentes controlados contra el total
+  categorias:
+  - cat: A
+    tope_anual: 6450000.0
+    impuesto_servicios: 3000.0
+    impuesto_bienes: 3000.0
+    sipa: 9800.0
+    obra_social: 13800.0
+  - cat: B
+    tope_anual: 9450000.0
+    impuesto_servicios: 5700.0
+    impuesto_bienes: 5700.0
+    sipa: 10780.0
+    obra_social: 13800.0
+  - cat: C
+    tope_anual: 13250000.0
+    impuesto_servicios: 9800.0
+    impuesto_bienes: 9000.0
+    sipa: 11858.0
+    obra_social: 13800.0
+  - cat: D
+    tope_anual: 16450000.0
+    impuesto_servicios: 16000.0
+    impuesto_bienes: 14900.0
+    sipa: 13043.8
+    obra_social: 16400.0
+  - cat: E
+    tope_anual: 19350000.0
+    impuesto_servicios: 30000.0
+    impuesto_bienes: 23800.0
+    sipa: 14348.18
+    obra_social: 20000.0
+  - cat: F
+    tope_anual: 24250000.0
+    impuesto_servicios: 42200.0
+    impuesto_bienes: 31000.0
+    sipa: 15783.0
+    obra_social: 23000.0
+  - cat: G
+    tope_anual: 29000000.0
+    impuesto_servicios: 76800.0
+    impuesto_bienes: 38400.0
+    sipa: 22096.2
+    obra_social: 24800.0
+  - cat: H
+    tope_anual: 44000000.0
+    impuesto_servicios: 220000.0
+    impuesto_bienes: 110000.0
+    sipa: 30934.68
+    obra_social: 29800.0
+  - cat: I
+    tope_anual: 49250000.0
+    impuesto_servicios: 437500.0
+    impuesto_bienes: 175000.0
+    sipa: 43308.55
+    obra_social: 36800.0
+  - cat: J
+    tope_anual: 56400000.0
+    impuesto_servicios: 525000.0
+    impuesto_bienes: 210000.0
+    sipa: 60631.97
+    obra_social: 41300.0
+  - cat: K
+    tope_anual: 68000000.0
+    impuesto_servicios: 735000.0
+    impuesto_bienes: 245000.0
+    sipa: 84884.76
+    obra_social: 47200.0
+  nota: 'Corregido: C bienes 9.000 (la tabla repite 9.800; el total 34.658 implica 9.000); H SIPA 30.934,68 (escrito
+    "30.934.68").'
+- desde: 2025-02
+  hasta: 2025-07
+  fuente: 'ARCA, Montos y categorías anteriores: https://www.arca.gob.ar/monotributo/documentos/categorias/monotributo-categorias-febrero-julio-2025.pdf'
+  estado: transcrito automáticamente de la tabla de ARCA; componentes controlados contra el total
+  categorias:
+  - cat: A
+    tope_anual: 7813063.45
+    impuesto_servicios: 3633.98
+    impuesto_bienes: 3633.98
+    sipa: 11871.01
+    obra_social: 16716.32
+  - cat: B
+    tope_anual: 11447046.44
+    impuesto_servicios: 6904.57
+    impuesto_bienes: 6904.57
+    sipa: 13058.11
+    obra_social: 16716.32
+  - cat: C
+    tope_anual: 16050091.57
+    impuesto_servicios: 11871.01
+    impuesto_bienes: 10901.95
+    sipa: 14363.92
+    obra_social: 16716.32
+  - cat: D
+    tope_anual: 19926340.1
+    impuesto_servicios: 19381.24
+    impuesto_bienes: 18048.78
+    sipa: 15800.32
+    obra_social: 19865.77
+  - cat: E
+    tope_anual: 23439190.34
+    impuesto_servicios: 36339.83
+    impuesto_bienes: 28829.6
+    sipa: 17380.35
+    obra_social: 24226.55
+  - cat: F
+    tope_anual: 29374695.9
+    impuesto_servicios: 51118.03
+    impuesto_bienes: 37551.16
+    sipa: 19118.38
+    obra_social: 27860.54
+  - cat: G
+    tope_anual: 35128502.31
+    impuesto_servicios: 93029.96
+    impuesto_bienes: 46514.98
+    sipa: 26765.73
+    obra_social: 30040.93
+  - cat: H
+    tope_anual: 53298417.3
+    impuesto_servicios: 266492.09
+    impuesto_bienes: 133246.04
+    sipa: 37472.03
+    obra_social: 36097.56
+  - cat: I
+    tope_anual: 59657887.55
+    impuesto_servicios: 529955.85
+    impuesto_bienes: 211982.34
+    sipa: 52460.84
+    obra_social: 44576.86
+  - cat: J
+    tope_anual: 68318880.36
+    impuesto_servicios: 635947.02
+    impuesto_bienes: 254378.81
+    sipa: 73445.18
+    obra_social: 50027.83
+  - cat: K
+    tope_anual: 82370281.28
+    impuesto_servicios: 890325.83
+    impuesto_bienes: 296775.28
+    sipa: 102823.25
+    obra_social: 57174.67
+- desde: 2025-08
+  hasta: 2026-01
+  fuente: 'ARCA, Montos y categorías anteriores: https://www.arca.gob.ar/monotributo/documentos/categorias/monotributo-categorias-agosto-2025-enero-2026.pdf'
+  estado: transcrito automáticamente de la tabla de ARCA; componentes controlados contra el total
+  categorias:
+  - cat: A
+    tope_anual: 8992597.87
+    impuesto_servicios: 4182.6
+    impuesto_bienes: 4182.6
+    sipa: 13663.17
+    obra_social: 19239.97
+  - cat: B
+    tope_anual: 13175201.52
+    impuesto_servicios: 7946.95
+    impuesto_bienes: 7946.95
+    sipa: 15029.49
+    obra_social: 19239.97
+  - cat: C
+    tope_anual: 18473166.15
+    impuesto_servicios: 13663.17
+    impuesto_bienes: 12547.81
+    sipa: 16532.44
+    obra_social: 19239.97
+  - cat: D
+    tope_anual: 22934610.05
+    impuesto_servicios: 22307.22
+    impuesto_bienes: 20773.6
+    sipa: 18185.68
+    obra_social: 22864.9
+  - cat: E
+    tope_anual: 26977793.6
+    impuesto_servicios: 41826.04
+    impuesto_bienes: 33181.99
+    sipa: 20004.25
+    obra_social: 27884.02
+  - cat: F
+    tope_anual: 33809379.57
+    impuesto_servicios: 58835.29
+    impuesto_bienes: 43220.24
+    sipa: 22004.67
+    obra_social: 32066.63
+  - cat: G
+    tope_anual: 40431835.35
+    impuesto_servicios: 107074.65
+    impuesto_bienes: 53537.32
+    sipa: 30806.54
+    obra_social: 34576.19
+  - cat: H
+    tope_anual: 61344853.64
+    impuesto_servicios: 306724.27
+    impuesto_bienes: 153362.13
+    sipa: 43129.16
+    obra_social: 41547.19
+  - cat: I
+    tope_anual: 68664410.05
+    impuesto_servicios: 609963.03
+    impuesto_bienes: 243985.21
+    sipa: 60380.82
+    obra_social: 51306.61
+  - cat: J
+    tope_anual: 78632948.76
+    impuesto_servicios: 731955.63
+    impuesto_bienes: 292782.26
+    sipa: 84533.15
+    obra_social: 57580.51
+  - cat: K
+    tope_anual: 94805682.9
+    impuesto_servicios: 1024737.89
+    impuesto_bienes: 341579.3
+    sipa: 118346.41
+    obra_social: 65806.3
+- desde: 2026-02
+  hasta: 2026-07
+  fuente: 'ARCA, Montos y categorías anteriores: https://www.arca.gob.ar/monotributo/documentos/categorias/monotributo-categorias-febrero-julio-2026.pdf'
+  estado: transcrito automáticamente de la tabla de ARCA; componentes controlados contra el total
+  categorias:
+  - cat: A
+    tope_anual: 10277988.13
+    impuesto_servicios: 4780.46
+    impuesto_bienes: 4780.46
+    sipa: 15616.17
+    obra_social: 21990.11
+  - cat: B
+    tope_anual: 15058447.71
+    impuesto_servicios: 9082.88
+    impuesto_bienes: 9082.88
+    sipa: 17177.79
+    obra_social: 21990.11
+  - cat: C
+    tope_anual: 21113696.52
+    impuesto_servicios: 15616.17
+    impuesto_bienes: 14341.38
+    sipa: 18895.57
+    obra_social: 21990.11
+  - cat: D
+    tope_anual: 26212853.42
+    impuesto_servicios: 25495.79
+    impuesto_bienes: 23742.95
+    sipa: 20785.13
+    obra_social: 26133.18
+  - cat: E
+    tope_anual: 30833964.37
+    impuesto_servicios: 47804.6
+    impuesto_bienes: 37924.98
+    sipa: 22863.64
+    obra_social: 31869.73
+  - cat: F
+    tope_anual: 38642048.36
+    impuesto_servicios: 67245.13
+    impuesto_bienes: 49398.08
+    sipa: 25150.0
+    obra_social: 36650.19
+  - cat: G
+    tope_anual: 46211109.37
+    impuesto_servicios: 122379.76
+    impuesto_bienes: 61189.87
+    sipa: 35210.0
+    obra_social: 39518.47
+  - cat: H
+    tope_anual: 70113407.33
+    impuesto_servicios: 350567.04
+    impuesto_bienes: 175283.51
+    sipa: 49294.0
+    obra_social: 47485.89
+  - cat: I
+    tope_anual: 78479211.62
+    impuesto_servicios: 697150.35
+    impuesto_bienes: 278860.14
+    sipa: 69011.6
+    obra_social: 58640.31
+  - cat: J
+    tope_anual: 89872640.3
+    impuesto_servicios: 836580.42
+    impuesto_bienes: 334632.18
+    sipa: 96616.24
+    obra_social: 65810.99
+  - cat: K
+    tope_anual: 108357084.05
+    impuesto_servicios: 1171212.59
+    impuesto_bienes: 390404.2
+    sipa: 135262.74
+    obra_social: 75212.57

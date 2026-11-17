@@ -15,6 +15,7 @@ combinan, en los [diagramas](diagramas.md); el método completo, en la [metodolo
 | [Recaudación por impuesto](#recaudación-por-impuesto-dniaf) | DNIAF (Min. de Economía) | Cuánto se cobró de cada impuesto | Sí |
 | [Anuarios de estadísticas tributarias](#anuarios-de-estadísticas-tributarias-arca) | ARCA (ex AFIP) | Ingreso, Ganancias y patrimonio declarados por tramo | Sí |
 | [Normativa de Ganancias](#normativa-de-ganancias-dniaf) | DNIAF | Escalas y deducciones de cada año | Sí (`params/`) |
+| [Tablas del monotributo](#tablas-del-monotributo) | ARCA; Ley 25.865 | Cuota de cada categoría | Variante |
 | [Normativa de seguridad social](#normativa-de-seguridad-social) | Leyes, decretos, Res. ANSES | Aportes, contribuciones y su tope | Sí (`params/`) |
 | [Consumo privado y PIB](#consumo-privado-y-pib-cuentas-nacionales) | INDEC | Escala de los impuestos al consumo; validación | Sí |
 | [Cuenta de generación del ingreso](#cuenta-de-generación-del-ingreso-cgi) | INDEC | Total de salarios e ingreso mixto del país | Variante |
@@ -51,12 +52,14 @@ combinan, en los [diagramas](diagramas.md); el método completo, en la [metodolo
   hogar y el ingreso per cápita familiar. Es la población del estudio.
 - **Cómo se usó.**
   - Ordenar a las personas por ingreso per cápita familiar y armar deciles y percentiles.
+  - Saber qué independientes pagan monotributo (pregunta PP05I, desde 2023T4) y su rama de
+    actividad (variante `con_monotributo`).
   - Simular persona por persona aportes, contribuciones y Ganancias (de neto a bruto), con las
     reglas de cada mes.
   - Corregir el aguinaldo a base devengada.
   - Promediar los trimestres disponibles de cada año (faltan 2007T3, 2015T3-T4 y 2016T1).
 - **Dónde.** `data/raw/eph/`, `src/incidencia/eph.py`, `src/incidencia/directos.py`,
-  `scripts/04_microsimulacion_eph.py`.
+  `scripts/04_microsimulacion_eph.py`. Cómo funciona el simulador: [microsimulación](microsimulacion.md).
 - **Limitaciones.** Sólo aglomerados urbanos; los de más ingresos declaran menos de lo que
   ganan o no responden; 2007-2015 con el INDEC intervenido.
 
@@ -129,6 +132,16 @@ combinan, en los [diagramas](diagramas.md); el método completo, en la [metodolo
 - **Cómo se usó.** Transcrita a `params/ganancias.yaml` y aplicada en la microsimulación. Cada
   número fue buscado en el PDF (`docs/trazabilidad_datos.md`, B).
 - **Dónde.** `data/raw/normativa/`, `params/ganancias.yaml`, `src/incidencia/directos.py`.
+
+### Tablas del monotributo
+
+- **Qué es.** Las categorías del Régimen Simplificado de cada período: Ley 25.865 (2004-2009, texto
+  original) y las 22 tablas de "Montos y categorías anteriores" de ARCA (2010 a 2026).
+- **Qué aporta.** El tope de facturación de cada categoría y la cuota mensual separada en impuesto
+  integrado (servicios y venta de bienes), aporte jubilatorio y obra social.
+- **Cómo se usó.** Para la variante `con_monotributo`: a cada independiente que paga se le asigna la
+  cuota de su categoría. Cada fila se controló contra su total; las correcciones están anotadas.
+- **Dónde.** `params/monotributo.yaml`, `monotributo_mes` en `src/incidencia/directos.py`.
 
 ### Normativa de seguridad social
 

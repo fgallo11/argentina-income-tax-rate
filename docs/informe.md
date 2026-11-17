@@ -166,6 +166,9 @@ menos confiables.
 - **Impuestos:** Ganancias y Bienes Personales, aportes personales, contribuciones patronales
   (mitad las paga el trabajador con menos salario y mitad el consumidor con precios más altos), IVA,
   Internos e Ingresos Brutos. Son entre 56% y 71% de todo lo recaudado (anexo, A3).
+- **Impuestos directos persona por persona:** aportes, contribuciones y Ganancias se calculan para
+  cada asalariado registrado y jubilado de la encuesta con la ley de cada mes. Cómo, con ejemplos:
+  [el simulador](microsimulacion.md).
 - **Anclado a lo recaudado:** los impuestos al consumo se reparten según lo que efectivamente se
   cobró por cada peso consumido (anexo, A2), no según la alícuota legal. Así no se cuenta como pagado
   el impuesto que se evade o que está exento. La forma entre deciles sale del IVA legal de la canasta
@@ -408,7 +411,7 @@ Cada resultado se recalculó con otros supuestos: a quién se le carga la contri
 legal en vez del recaudado, sin corregir los ingresos altos, sin Bienes Personales (franja celeste);
 con el impuesto al cheque (triángulos); con el ingreso que nadie declara (rombos).
 
-- El decil 1 paga más que los deciles 2 a 9 en todas las variantes y todos los años (396 de 396
+- El decil 1 paga más que los deciles 2 a 9 en todas las variantes y todos los años (418 de 418
   combinaciones).
 - Su nivel es lo más incierto: la franja va de 26% a 33% en 2025.
 - Si en el decil 1 se usa el gasto en vez del ingreso declarado, paga entre 3 y 7 puntos menos que el
@@ -555,8 +558,11 @@ donde el Estado no cobra IVA. Si es así, su carga real es menor que la medida.
 - **Tasas municipales:** no hay una serie nacional de recaudación.
 - **Retenciones a la exportación:** no está claro si las pagan los productores o los consumidores
   internos, con precios de alimentos más bajos.
-- **Monotributo (0,04% a 0,15% del PIB):** suma menos de medio punto en el decil 1 y una décima en el
-  resto.
+- **Monotributo:** está como variante (`con_monotributo`): cuota por categoría, quién paga según la
+  propia encuesta y nivel ajustado a lo recaudado. Sube la tasa total entre 0,1 y 0,7 puntos por decil y no
+  cambia la forma ([el simulador](microsimulacion.md), sección 8). Faltan los aportes de autónomos del
+  régimen general y los asalariados que aportan por su cuenta (monotributistas que facturan a un solo
+  empleador: de 2,2% de los ocupados en 2016 a 4,4% en 2025), que el modelo trata como no registrados.
 
 ## Anexo
 

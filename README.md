@@ -74,6 +74,10 @@ es mayor (22 veces en 2024 y en 2025; mayor en los 22 años). En canastas básic
 adulto equivalente (como mide el INDEC la pobreza), el decil 1 pasó de 0,13 en 2004 a 0,36 en 2017,
 0,28 en 2024 y 0,35 en 2025; el decil 10, de 4,8 a 6,4, 4,8 y 6,0.
 
+**Monotributo** (variante `con_monotributo`, [cómo se simula](docs/microsimulacion.md)): cuota por
+categoría con las tablas de cada período, quién paga según la EPH y nivel ajustado a lo recaudado.
+Sube la tasa total entre 0,1 y 0,7 puntos por decil; no cambia la forma.
+
 **Impuesto al cheque y combustibles** (variantes `con_cheque`, `con_cheque_y_combustibles`): la
 medida principal no los incluye; Pessino et al. sí. Con el cheque, 2025: D1 32,0%, D10 24,8%,
 promedio 25,2% (2024: 34,7%, 26,0% y 26,3%); con ambos, 2025: D1 33,1%, D10 25,1%, promedio
@@ -96,7 +100,7 @@ declarado y con el ingreso ajustado a Cuentas Nacionales, con la sensibilidad de
 externos. La lectura contra el consumo queda como variante (`sobre_consumo`): responde otra
 pregunta y no registra la capacidad de ahorro de los deciles altos.
 
-Documentación: [metodología](docs/metodologia.md) · [glosario de fuentes](docs/fuentes.md) · [diagramas](docs/diagramas.md) · [glosario de términos](docs/informe.md#cómo-leer-este-informe) · [validación](docs/validacion.md) ·
+Documentación: [metodología](docs/metodologia.md) · [glosario de fuentes](docs/fuentes.md) · [diagramas](docs/diagramas.md) · [simulador de impuestos directos](docs/microsimulacion.md) · [glosario de términos](docs/informe.md#cómo-leer-este-informe) · [validación](docs/validacion.md) ·
 [respuestas a preguntas abiertas](docs/respuestas_preguntas_abiertas.md) ·
 [estudios previos](docs/literatura_previa.md)
 

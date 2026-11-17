@@ -8,7 +8,9 @@ proyecto se pueda verificar a mano contra su fuente.
 
 > **Agregados después del inventario:** anuarios de ARCA del año fiscal 2024 (anuario 2025); datos de
 > terceros sólo para comparar en `data/externos/` (Argendata, ITO; categoría D, con su README); la
-> serie de impuestos a la propiedad de la OCDE citada en `docs/metodologia.md`, sección 15 (categoría D). Cuatro categorías:
+> serie de impuestos a la propiedad de la OCDE citada en `docs/metodologia.md`, sección 15 (categoría D);
+> `params/monotributo.yaml` (categoría B: tablas de ARCA 2010-2026 leídas con un programa y controladas
+> fila por fila contra su total; Ley 25.865 para 2004-2009, texto original sin actualizaciones verificadas). Cuatro categorías:
 
 - **A. Descargado por el pipeline** (`scripts/01_descargar_datos.py`): el número no lo tipeó
   nadie; se verifica revisando que la URL/ID sea la serie correcta.

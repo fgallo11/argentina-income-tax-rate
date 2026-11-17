@@ -8,9 +8,9 @@ import pandas as pd
 
 from .indirectos import perfil_consumo, tasas_indirectas
 
-IMPUESTOS = ["ganancias", "bienes_personales", "aportes", "contrib_trabajador",
+IMPUESTOS = ["ganancias", "bienes_personales", "aportes", "contrib_trabajador", "monotributo",
              "contrib_consumidor", "iva", "internos", "iibb", "cheque", "combustibles"]
-DIRECTOS = ["ganancias", "bienes_personales", "aportes", "contrib_trabajador"]
+DIRECTOS = ["ganancias", "bienes_personales", "aportes", "contrib_trabajador", "monotributo"]
 INDIRECTOS = ["contrib_consumidor", "iva", "internos", "iibb", "cheque", "combustibles"]
 
 
@@ -70,6 +70,11 @@ class Variante:
     # Consumo por encima del veintil más alto de la ENGHo (sólo afecta a los tramos del decil 10):
     # "nivel" (fijo) o "proporcional" (mismo cociente gasto/ingreso que ese veintil).
     extrapolar_consumo: str = "nivel"
+    # Monotributo de los independientes (directos.monotributo_mes): cuota de su categoría
+    # (impuesto integrado + aporte jubilatorio, sin obra social), escalada para que el impuesto
+    # integrado sume lo recaudado (DNIAF 5.2) por habitante. Se suma también al ingreso antes
+    # de impuestos (el ingreso de la EPH de los independientes se supone neto de la cuota).
+    incluir_monotributo: bool = False
 
 
 VARIANTES = [
@@ -91,6 +96,7 @@ VARIANTES = [
     Variante("ajuste_cn_activos_ext", ajuste_cn=True, renta_activos_ext=0.03),
     Variante("con_cheque", incluir_cheque=True),
     Variante("con_cheque_y_combustibles", incluir_cheque=True, incluir_combustibles=True),
+    Variante("con_monotributo", incluir_monotributo=True),
     Variante("iva_exentos_20", iva_exentos=0.2),
     Variante("ajuste_cn_rentas", ajuste_cn=True, factor_rentas=7.0),
     Variante("ajuste_cn_rentas_activos_ext", ajuste_cn=True, factor_rentas=7.0, renta_activos_ext=0.03),
@@ -130,6 +136,10 @@ def incidencia_trimestre(q: pd.DataFrame, anio: int, engho: pd.DataFrame, rec: p
     t["combustibles"] = ((rec["sel_combustibles"] / rec["consumo_privado"] * consumo) if v.incluir_combustibles
                          else 0.0 * consumo)
     esc_pais = 1e6 / 12 * q.personas.sum() / rec["poblacion"]   # millones anuales país -> pesos mensuales EPH
+    t["monotributo"] = 0.0
+    if v.incluir_monotributo and "mono_imp" in q and q.mono_imp.sum() > 0:
+        k_mono = rec["monotributo"] * esc_pais / q.mono_imp.sum()
+        t["monotributo"] = k_mono * (q.mono_imp + q.mono_sipa)
     bp = pd.Series(0.0, index=q.index)
     if v.incluir_bp:
         # recaudación por peso de consumo privado, aplicada al consumo total de la encuesta
@@ -142,7 +152,7 @@ def incidencia_trimestre(q: pd.DataFrame, anio: int, engho: pd.DataFrame, rec: p
         t["ganancias"] = q.ganancias * objetivo / q.ganancias.sum()
 
     # ingreso antes de impuestos directos
-    adic = q.ing_pre_adic - 0.5 * q.contrib + f * q.contrib + (t.ganancias - q.ganancias)
+    adic = q.ing_pre_adic - 0.5 * q.contrib + f * q.contrib + (t.ganancias - q.ganancias) + t.monotributo
     if v.altos_ingresos == "registros":
         partes = np.array([rec[f"parte_d{d}"] for d in q.index])
         adic = adic + rec["ingreso_faltante_mill"] * esc_pais * partes

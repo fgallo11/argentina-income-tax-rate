@@ -57,7 +57,7 @@ flowchart LR
 
 - **Impuestos directos (paso 2):** a cada asalariado registrado y jubilado de la encuesta se le
   calculan los aportes, las contribuciones patronales y la Ganancias que le corresponden según la
-  ley de ese año.
+  ley de ese año. Paso a paso, con ejemplos: [microsimulación](microsimulacion.md).
 - **La cima (paso 3):** la encuesta casi no ve a los de más ingresos. Con las declaraciones
   juradas se les suma el ingreso que declaran al fisco y la Ganancias que pagan por él, y se
   reparte lo que falta de Ganancias y Bienes Personales.

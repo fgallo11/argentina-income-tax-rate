@@ -3,7 +3,8 @@
 Estimación de impuestos pagados como porcentaje del ingreso, por decil de ingreso per
 cápita familiar, aglomerados urbanos de la EPH, 2004-2025. Qué es cada fuente, qué aporta y
 cómo se usa: [glosario de fuentes](fuentes.md). Diagramas del método y del flujo de datos:
-[diagramas](diagramas.md). Resultados: [informe](informe.md).
+[diagramas](diagramas.md). El simulador de impuestos directos, paso a paso y con ejemplos:
+[microsimulación](microsimulacion.md). Resultados: [informe](informe.md).
 
 ## 1. Qué se mide
 
@@ -16,7 +17,8 @@ cómo se usa: [glosario de fuentes](fuentes.md). Diagramas del método y del flu
 - **Excluidos de la medida principal:** derechos de exportación, combustibles, impuesto al
   cheque, Ganancias de sociedades, monotributo y autónomos, impuestos patrimoniales
   provinciales, sellos y tasas municipales. Cheque y combustibles están como variantes
-  (sección 12); Ganancias de sociedades sólo entra en el 1% de las declaraciones juradas
+  (sección 12) y el monotributo también (`con_monotributo`, [microsimulación](microsimulacion.md),
+  sección 8); Ganancias de sociedades sólo entra en el 1% de las declaraciones juradas
   (sección 11). La obra social (3%) se descuenta del salario pero no se cuenta como
   impuesto porque no es recaudación del Estado.
 - **Período:** 2004-2025. 2003 se descarta (sólo dos trimestres de EPH continua y sin
@@ -63,6 +65,9 @@ aplanaba el perfil (`docs/auditoria.md`, 2.3). Opera en el decil 1 y, algunos a�
 2 y el 3.
 
 ## 3. Impuestos directos: microsimulación sobre la EPH
+
+Explicación detallada, con ejemplos calculados y la tabla de reglas por período:
+[microsimulación](microsimulacion.md).
 
 Persona por persona, con las reglas vigentes en cada mes del trimestre.
 
@@ -408,9 +413,11 @@ publicados; los tramos se calcularon con la local.
    decil 10 que no dependa de la encuesta ni de lo declarado al fisco (Argentina no
    publica cuentas del sector hogares), las rentas exentas (los anuarios las informan de
    forma irregular) y repartir Bienes Personales con las declaraciones de ese impuesto.
-2. **Monotributo y autónomos.** La EPH no identifica la condición fiscal de los
-   independientes. Se puede imputar la recaudación de monotributo entre cuentapropistas
-   en proporción a su ingreso laboral, declarándolo como imputación.
+2. **Monotributo y autónomos.** Monotributo hecho como variante (`con_monotributo`, 17/11/2026):
+   cuota por categoría con las tablas de cada período, quién paga según la EPH (PP05I desde
+   2023T4) y nivel calibrado a lo recaudado ([microsimulación](microsimulacion.md), sección 8).
+   Falta: los aportes de autónomos del régimen general y separar la jubilación de la obra social
+   en la recaudación (hoy la jubilación simulada es una cota baja).
 3. **Base de los impuestos indirectos.** Con las matrices de insumo-producto se puede
    separar qué parte de IVA e Ingresos Brutos recae en consumo de hogares.
 4. **Ingreso del decil 1.** Comparar la distribución de ingresos ENGHo y EPH en años
