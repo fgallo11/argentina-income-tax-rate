@@ -485,7 +485,8 @@ def c1_comparacion(largo, tramos):
     apilar(axs[1], x, nuestro(2018), etiquetas=False)
     tot18 = nuestro(2018).sum(axis=1)
     for xi, (b, c) in enumerate(zip(tot18, cheque18)):
-        axs[1].text(xi, max(b, c) + 0.6, g.pct(b), ha="center", va="bottom", fontsize=8.4, color=g.TINTA)
+        axs[1].text(xi, b - 0.3, g.pct(b), ha="center", va="top", fontsize=8.4, color=g.TINTA)   # dentro de la barra
+        axs[1].text(xi, c + 0.35, g.pct(c), ha="center", va="bottom", fontsize=7.4, color=g.MUDO)    # el de la raya
     axs[1].scatter(x, cheque18, marker="_", s=260, color=g.TINTA, linewidth=2.2, zorder=5,
                    label="Con el impuesto al cheque")
     axs[1].set_title("B. Este estudio, 2018", loc="left", fontsize=11.5, fontweight="bold")
