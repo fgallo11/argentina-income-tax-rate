@@ -55,9 +55,11 @@ if __name__ == "__main__":
     t["part_ingreso"] = t.ingreso_total / t.set_index(["variante", "anio"]).index.map(tot.ingreso_total)
     t["part_impuestos"] = imp / t.set_index(["variante", "anio"]).index.map(tot.total * tot.ingreso_total)
     t["canastas_por_persona"] = t.ingreso_total / t.personas / t.anio.map(cbt)
+    # en la misma unidad que la canasta (por adulto equivalente, como mide el INDEC la pobreza)
+    t["canastas_por_adulto_eq"] = t.ingreso_total / t.adulto_eq / t.anio.map(cbt)
     t["nombre"] = t.grupo.map(NOMBRES)
     cols = ["variante", "anio", "grupo", "nombre"] + IMPUESTOS + ["total", "directos", "indirectos", "part_ingreso",
-                                                                   "part_impuestos", "canastas_por_persona",
+                                                                   "part_impuestos", "canastas_por_persona", "canastas_por_adulto_eq",
                                                                    "gasto_sobre_ingreso_declarado", "trimestres"]
     t[cols].to_csv(TABLES / "tasas_tramos_decil10.csv", index=False)
 

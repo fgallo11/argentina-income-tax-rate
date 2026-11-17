@@ -2,7 +2,8 @@
 
 Estimación de impuestos pagados como porcentaje del ingreso, por decil de ingreso per
 cápita familiar, aglomerados urbanos de la EPH, 2004-2025. Qué es cada fuente, qué aporta y
-cómo se usa: `docs/fuentes.md`. Diagramas del método y del flujo de datos: `docs/diagramas.md`.
+cómo se usa: [glosario de fuentes](fuentes.md). Diagramas del método y del flujo de datos:
+[diagramas](diagramas.md). Resultados: [informe](informe.md).
 
 ## 1. Qué se mide
 
@@ -282,12 +283,17 @@ todos los impuestos estimados con la medida principal.
 Panel derecho: ingreso de bolsillo por persona de los diez deciles y, punteado, el ingreso
 declarado a ARCA por declarante del 1% más rico (no estrictamente comparable: es por persona
 que declara, no por miembro del hogar, y no incluye utilidades ni activos externos).
-- **Figura 6, en canastas básicas:** ingreso por persona / canasta básica total del Gran Buenos
-  Aires por adulto equivalente (INDEC). No depende de la inflación ni del tipo de cambio y,
+- **Figura 6, en canastas básicas:** ingreso del grupo / sus adultos equivalentes / canasta básica
+  total del Gran Buenos Aires por adulto equivalente (INDEC). Los adultos equivalentes salen de la
+  edad y el sexo de cada persona de la EPH con la tabla del INDEC ("La medición de la pobreza y la
+  indigencia en la Argentina", 2016, anexo 7.1; `adulto_equivalente` en `src/incidencia/eph.py`;
+  menores de un año, 0,35). Así ingreso y canasta están en la misma unidad, como en la medición
+  oficial de la pobreza (entre 0,78 y 0,83 adultos equivalentes por persona según el decil). No depende de la inflación ni del tipo de cambio y,
   a diferencia de una medida relativa (veces el promedio), muestra si el ingreso real crece.
   La serie oficial empieza en 04/2016; antes de 2017 se usa la de 2017 llevada hacia atrás con
-  el IPC empalmado (las canastas oficiales de 2007-2015 están intervenidas). La canasta es por
-  adulto equivalente: el umbral de pobreza por persona es algo menor que 1.
+  el IPC empalmado (las canastas oficiales de 2007-2015 están intervenidas). Hasta el 17/11/2026 se
+  dividía el ingreso por persona y no por adulto equivalente, lo que exageraba cuántos deciles
+  quedaban debajo de la línea (cuatro en 2025, contra tres ahora).
 - **Figura 6b, en pesos de hoy:** pesos constantes del último mes publicado del IPC. Deflactor
   (`scripts/aux_deflactor.py`): IPC-GBA del INDEC hasta 12/2006, IPC de San Luis 2007-2016 e
   IPC Nacional del INDEC desde 2017.
@@ -355,8 +361,9 @@ del decil 10 mezcla a la clase media alta asalariada con los ricos.
 Resultado 2025 (principal): P90-95 24,6%, P95-99 23,7%, 1% de la encuesta 21,7% (rango 19,9-23,6).
 En la cima la tasa baja, por debajo de los deciles medios (~23,6%). El 10% más rico tiene 37,6% del
 ingreso (encuesta más el ingreso declarado al fisco que la encuesta no capta) y el 1% 10,8% (9,9%
-de los impuestos). El 1% de la encuesta, completado, tiene 20,9 canastas por persona; el de las
-declaraciones juradas, 35 por declarante. Con la renta de activos externos, el 1% de la encuesta
+de los impuestos). El 1% de la encuesta, completado, tiene 24,5 canastas por adulto equivalente
+(`canastas_por_adulto_eq` en `tasas_tramos_decil10.csv`); el de las declaraciones juradas, 35 por
+declarante. Con la renta de activos externos, el 1% de la encuesta
 paga 20,1%. El 1% de la sección 11 da 26,6% porque además suma la mitad del impuesto de
 sociedades (y la mitad de las utilidades al ingreso) y supone que la mitad de su ingreso es salario.
 

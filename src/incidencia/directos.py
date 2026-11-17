@@ -242,6 +242,7 @@ def resumir_por_decil(s: pd.DataFrame, clave: str = "decil") -> pd.DataFrame:
     t = pd.DataFrame({
         "decil": s[clave],
         "personas": w,
+        "adulto_eq": w * s.ae,          # adultos equivalentes (tabla del INDEC), para medir en canastas
         "hogares": w * (s.CH03 == 1),
         "ipcf": w * s.IPCF,
         "ing_pre_adic": w * s.ing_pre,

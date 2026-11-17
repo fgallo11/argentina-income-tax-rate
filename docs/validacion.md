@@ -1,7 +1,7 @@
 # Validación
 
 Tablas completas en `outputs/tables/validacion_*.csv`. Se reportan las discrepancias tal
-como salen.
+como salen. Qué es cada fuente que se compara: [glosario de fuentes](fuentes.md).
 
 ## 1. Contra la recaudación oficial (DNIAF)
 

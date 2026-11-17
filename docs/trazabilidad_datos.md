@@ -1,5 +1,8 @@
 # Trazabilidad de los datos: de dónde sale cada número
 
+Para una descripción de cada fuente (qué es, qué aporta, cómo se usa) ver el
+[glosario de fuentes](fuentes.md); para el flujo entre scripts, los [diagramas](diagramas.md).
+
 Inventario hecho el 14/11/2026 sobre el commit `63c1d49`. Objetivo: que cada dato del
 proyecto se pueda verificar a mano contra su fuente.
 

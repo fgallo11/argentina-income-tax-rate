@@ -531,7 +531,7 @@ def c1_comparacion(largo, tramos):
 
 
 def c2_canastas(tramos):
-    t = tramos[tramos.variante == "principal"].set_index(["anio", "grupo"]).canastas_por_persona
+    t = tramos[tramos.variante == "principal"].set_index(["anio", "grupo"]).canastas_por_adulto_eq
     orden = list(range(1, 10)) + [91, 95, 99]
     etq = [f"D{k}" for k in range(1, 10)] + ["P90-95", "P95-99", "1%"]
     fig, axs = plt.subplots(1, 2, figsize=(16, 6), sharey=True)
@@ -544,29 +544,31 @@ def c2_canastas(tramos):
             ax.text(xi, y + 0.3, g.pct(y, 2 if y < 1 else 1), ha="center", va="bottom", fontsize=8.6, color=g.TINTA)
         ax.axhline(1, color=g.TINTA, linewidth=1.1, linestyle=(0, (4, 3)))
         ax.axvspan(9.1, 12.1, color="#e8f0fb", zorder=0, linewidth=0)
-        ax.text(10.6, 0.97, "el decil 10,\npartido", transform=ax.get_xaxis_transform(), ha="center", va="top",
+        ax.text(9.25, 0.97, "el decil 10,\npartido", transform=ax.get_xaxis_transform(), ha="left", va="top",
                 fontsize=8.6, color=g.TINTA2, fontweight="bold")
         ax.set_xticks(x)
         ax.set_xticklabels(etq, fontsize=8.6)
         ax.xaxis.grid(False)
         ax.set_xlim(-0.6, 12.2)
         pobres = int((v.loc[list(range(1, 10))] < 1).sum())
-        ax.set_title(f"{a}: {pobres} de los 9 primeros deciles, debajo de una canasta", loc="left", fontsize=11.5,
+        ax.set_title(f"{a}: {pobres} de los 9 primeros deciles, debajo de la línea de pobreza", loc="left", fontsize=11.5,
                      fontweight="bold")
-    axs[0].set_ylabel("Ingreso por persona, en canastas básicas por mes")
+    axs[0].set_ylabel("Ingreso por adulto equivalente, en canastas básicas por mes")
     v = t.loc[ANIO_FIN]
     fig.suptitle("Los deciles muestran sobre todo a la mitad de abajo; los ricos están todos en la última barra",
                  x=0.01, y=1.04, ha="left", fontsize=14, fontweight="bold")
-    fig.text(0.01, 0.985, f"Ingreso por persona de cada grupo, medido en canastas básicas (lo que necesita un adulto para "
-             f"no ser pobre; línea punteada). En {ANIO_FIN} el decil 5 tiene {g.pct(v[5], 2)} canastas y el decil 9, {g.pct(v[9], 1)}; el 1% "
-             f"más rico, {g.pct(v[99], 1)}.\nUn gráfico por deciles pone nueve barras para la mitad de abajo y la clase media, "
-             "y mete en una sola a asalariados de clase media alta y a los ricos: por eso aquí el decil 10 se parte en tres.",
+    fig.text(0.01, 0.985, f"Ingreso de cada grupo medido en canastas básicas por adulto equivalente, como mide el INDEC la "
+             f"pobreza: debajo de 1 (línea punteada), el grupo promedio es pobre. En {ANIO_FIN} el decil 5 tiene "
+             f"{g.pct(v[5], 2)} canastas y el decil 9, {g.pct(v[9], 1)}; el 1% más rico, {g.pct(v[99], 1)}.\nUn gráfico por "
+             "deciles pone nueve barras para la mitad de abajo y la clase media, y mete en una sola a asalariados de clase "
+             "media alta y a los ricos: por eso aquí el decil 10 se parte en tres.",
              fontsize=9.3, color=g.TINTA2, va="top")
     fig.subplots_adjust(wspace=0.05, top=0.83)
-    fig.text(0.01, -0.03, "Fuente: elaboración propia con EPH (INDEC) y anuarios de ARCA. Ingreso per cápita familiar "
-             "(antes de impuestos directos; en la cima, completado con el ingreso declarado a ARCA que la encuesta no "
-             "capta) dividido por la canasta básica\ntotal por adulto equivalente del Gran Buenos Aires (INDEC; antes de "
-             "2017, llevada hacia atrás con el IPC). Rojo: por debajo de una canasta. Aglomerados urbanos de la EPH.",
+    fig.text(0.01, -0.03, "Fuente: elaboración propia con EPH (INDEC) y anuarios de ARCA. Ingreso del grupo antes de "
+             "impuestos directos (en la cima, completado con el ingreso declarado a ARCA que la encuesta no capta), dividido "
+             "por sus adultos\nequivalentes (tabla del INDEC por edad y sexo: un chico o un mayor cuenta menos que un adulto) y "
+             "por la canasta básica total por adulto equivalente del Gran Buenos Aires (INDEC; antes de 2017,\nllevada hacia "
+             "atrás con el IPC). Rojo: por debajo de la línea de pobreza. Aglomerados urbanos de la EPH.",
              fontsize=7.2, color=g.MUDO, ha="left", va="top")
     guardar(fig, "c2_canastas")
 

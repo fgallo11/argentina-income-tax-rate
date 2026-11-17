@@ -369,7 +369,7 @@ def fig_distancia(largo, unidad="canastas", carpeta=None, nombre=None):
         rel = (a.ipcf / a.personas).unstack().div(ipc.reindex(media.index), axis=0) * a_hoy
     else:
         cbt = pd.read_csv(PROCESSED / "deflactor.csv", index_col=0).cbt
-        rel = (a.ipcf / a.personas).unstack().div(cbt.reindex(media.index), axis=0)   # canastas
+        rel = (a.ipcf / a.adulto_eq).unstack().div(cbt.reindex(media.index), axis=0)   # canastas por adulto equivalente
     fmt = (lambda v: plata(v)) if pesos else (lambda v: pct(v, 2))
 
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(13.5, 5.8))
@@ -418,10 +418,10 @@ def fig_distancia(largo, unidad="canastas", carpeta=None, nombre=None):
         ax2.set_yticks(marcas)
         ax2.set_yticklabels([pct(m, 2 if m < 1 else 0) for m in marcas])
         ax2.axhline(1, color=TINTA2, linewidth=1, linestyle=(0, (4, 3)))
-        ax2.text(2004, 1.05, "1 canasta básica: línea de pobreza de un adulto", fontsize=8, color=TINTA2,
+        ax2.text(2004, 1.05, "1 canasta por adulto equivalente: línea de pobreza", fontsize=8, color=TINTA2,
                  va="bottom")
-        ax2.set_ylabel("Canastas básicas totales por persona, por mes (escala log.)")
-        ax2.set_title("Ingreso por persona de cada decil y del 1% más rico,\nen canastas básicas", loc="left",
+        ax2.set_ylabel("Canastas básicas por adulto equivalente, por mes (escala log.)")
+        ax2.set_title("Ingreso de cada decil y del 1% más rico,\nen canastas básicas (por adulto equivalente)", loc="left",
                       fontsize=11, fontweight="bold")
     ax2.minorticks_off()
     for ax in (ax1, ax2):
@@ -444,10 +444,10 @@ def fig_distancia(largo, unidad="canastas", carpeta=None, nombre=None):
              "Fuente: elaboración propia con EPH (INDEC) y anuarios de ARCA. Ingreso per cápita familiar (ingreso del hogar "
              "dividido por sus miembros), con el aguinaldo en base devengada. Brecha: antes de impuestos directos, y "
              "después de restar\ntodos los impuestos estimados (medida principal). " + ("Panel derecho: pesos constantes (IPC-GBA del INDEC hasta 2006, IPC de San Luis 2007-2016, IPC Nacional "
-             "desde 2017)." if pesos else "Panel derecho: ingreso de bolsillo por persona dividido por la canasta básica "
-             "total del Gran Buenos Aires por adulto equivalente (INDEC; antes de 2017, la de 2017 llevada hacia "
-             "atrás con el IPC\nempalmado). La canasta es por adulto: un hogar con chicos necesita menos por "
-             "persona, así que el umbral de pobreza por persona es algo menor que 1.") + " Aglomerados urbanos de la EPH.",
+             "desde 2017)." if pesos else "Panel derecho: ingreso de bolsillo del grupo dividido por sus adultos "
+             "equivalentes (tabla del INDEC por edad y sexo) y por la canasta básica total del Gran Buenos Aires\npor adulto "
+             "equivalente (INDEC; antes de 2017, la de 2017 llevada hacia atrás con el IPC empalmado). Así se compara como "
+             "el INDEC mide la pobreza: debajo de 1, el grupo promedio es pobre. 1% más rico: por declarante.") + " Aglomerados urbanos de la EPH.",
              fontsize=7.3, color=MUDO, ha="left", va="top")
     guardar(fig, nombre or ("fig6b_distancia_en_pesos" if pesos else "fig6_distancia_entre_deciles"), carpeta)
 
@@ -628,7 +628,7 @@ def fig_decil10_partido(anio, carpeta=None, formatos=("png", "svg"), nombre=None
         ax3.transAxes, ax3.transData), ha="right", va="bottom", fontsize=7.4, color=MUDO)
     tr = matplotlib.transforms.blended_transform_factory(ax3.transAxes, ax3.transData)
     for i, g in enumerate(g2):
-        ax3.text(1.04, i, f"{pob[g]}%  ·  {pct(pr.part_ingreso[g] * 100)}%  ·  {pct(pr.canastas_por_persona[g])}",
+        ax3.text(1.04, i, f"{pob[g]}%  ·  {pct(pr.part_ingreso[g] * 100)}%  ·  {pct(pr.canastas_por_adulto_eq[g])}",
                  va="center", ha="left", fontsize=8, color=TINTA2, transform=tr)
     ax3.text(1.04, len(g2) - 0.35, "pobl. · ingreso · canastas", va="bottom", ha="left", fontsize=7.6,
              color=MUDO, transform=tr)
@@ -645,7 +645,7 @@ def fig_decil10_partido(anio, carpeta=None, formatos=("png", "svg"), nombre=None
     fig.text(0.01, 1.04, f"En {anio} el 10% más rico tiene {pct(p_alto, 0)}% del ingreso (encuesta más el ingreso que declara al fisco y "
              f"la encuesta no capta). Paga {pct(t91)}% en los percentiles 90-95,\n{pct(pr.total[95] * 100)}% en el 95-99 y "
              f"{pct(t99)}% en el 1% superior; los deciles medios, alrededor de {pct(medios)}%. Dos mediciones del 1%: la encuesta "
-             f"completada con las declaraciones juradas\n({pct(pr.canastas_por_persona[99])} canastas por persona) y sólo las declaraciones "
+             f"completada con las declaraciones juradas\n({pct(pr.canastas_por_adulto_eq[99])} canastas por adulto equivalente) y sólo las declaraciones "
              f"juradas, por declarante, con utilidades de empresas y renta de activos externos ({pct(top.completo * 100)}%). "
              f"Con esa renta, el de la encuesta paga {pct(a[(a.variante == 'ajuste_cn_activos_ext') & (a.grupo == 99)].total.iloc[0] * 100)}%.",
              fontsize=9.6, color=TINTA2, va="top")

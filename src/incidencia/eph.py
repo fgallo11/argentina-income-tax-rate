@@ -51,6 +51,28 @@ def _aguinaldo_devengado(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
+# Tabla de equivalencias del INDEC ("La medición de la pobreza y la indigencia en la Argentina",
+# diciembre de 2016, anexo 7.1): unidades consumidoras por edad y sexo; 1 = varón de 30 a 45 años.
+# Menores de un año: 0,35 (la tabla da 0,28 de 6 a 9 meses y 0,35 de 9 a 12; la EPH no informa meses).
+_AE_NINOS = [0.35, 0.37, 0.46, 0.51, 0.55, 0.60, 0.64, 0.66, 0.68, 0.69]          # 0 a 9 años, ambos sexos
+_AE_VARON_10_17 = [0.79, 0.82, 0.85, 0.90, 0.96, 1.00, 1.03, 1.04]
+_AE_MUJER_10_17 = [0.70, 0.72, 0.74, 0.76, 0.76, 0.77, 0.77, 0.77]
+
+
+def adulto_equivalente(sexo, edad) -> np.ndarray:
+    """Unidades de adulto equivalente de cada persona (CH04: 1 varón, 2 mujer; CH06: edad, -1 = menos de un año)."""
+    edad = np.clip(np.nan_to_num(np.asarray(edad, dtype=float), nan=35.0), 0, 120).astype(int)
+    varon = np.asarray(sexo) != 2
+    ae = np.where(varon,
+                  np.select([edad <= 29, edad <= 60, edad <= 75], [1.02, 1.00, 0.83], 0.74),
+                  np.select([edad <= 29, edad <= 45, edad <= 60, edad <= 75], [0.76, 0.77, 0.76, 0.67], 0.63))
+    ae = np.where(edad < 10, np.take(_AE_NINOS, np.minimum(edad, 9)), ae)
+    adol = (edad >= 10) & (edad <= 17)
+    ae = np.where(adol & varon, np.take(_AE_VARON_10_17, np.clip(edad - 10, 0, 7)), ae)
+    ae = np.where(adol & ~varon, np.take(_AE_MUJER_10_17, np.clip(edad - 10, 0, 7)), ae)
+    return ae
+
+
 def _archivo_individual(anio: int, trim: int):
     carpeta = RAW / "eph" / f"{anio}T{trim}"
     cand = [p for p in carpeta.rglob("*") if p.is_file() and ("ndividual" in p.name or "personas" in p.name.lower())
@@ -106,6 +128,7 @@ def cargar_trimestre(anio: int, trim: int) -> pd.DataFrame:
     for c in ("P21", "V2_M", "P47T", "TOT_P12", "V8_M", "V9_M", "V10_M"):
         df[c] = df[c].where(df[c] > 0, 0.0).fillna(0.0)
     df["anio"], df["trim"] = anio, trim
+    df["ae"] = adulto_equivalente(df.CH04, df.CH06)
     df = _aguinaldo_devengado(df)
 
     # deciles de personas según IPCF del hogar (con aguinaldo devengado)

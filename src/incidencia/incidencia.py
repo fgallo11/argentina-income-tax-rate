@@ -202,6 +202,8 @@ def incidencia_trimestre(q: pd.DataFrame, anio: int, engho: pd.DataFrame, rec: p
     # totales mensuales del grupo (pesos corrientes, población EPH): para participaciones
     tasas["ingreso_total"] = np.append(den.values, den.sum())
     tasas["personas"] = np.append(q.personas.values, q.personas.sum())
+    if "adulto_eq" in q:
+        tasas["adulto_eq"] = np.append(q.adulto_eq.values, q.adulto_eq.sum())
     return tasas
 
 

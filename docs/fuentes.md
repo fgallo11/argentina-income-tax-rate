@@ -3,7 +3,8 @@
 Glosario de todas las fuentes del proyecto. Para cada una se indica **qué es**, **qué
 información aporta**, **cómo se usó** y **dónde** está en el repositorio. Las descargas las
 hace `scripts/01_descargar_datos.py` (las URL exactas están ahí); lo transcrito a mano está en
-`params/`; el control de cada número contra su fuente, en `docs/trazabilidad_datos.md`. Cómo se combinan, en diagramas: `docs/diagramas.md`.
+`params/`; el control de cada número contra su fuente, en la [trazabilidad](trazabilidad_datos.md). Cómo se
+combinan, en los [diagramas](diagramas.md); el método completo, en la [metodología](metodologia.md).
 
 ## Resumen
 
@@ -25,6 +26,7 @@ hace `scripts/01_descargar_datos.py` (las URL exactas están ahí); lo transcrit
 | [Salario mínimo (SMVM)](#salario-mínimo-vital-y-móvil-smvm) | Secretaría de Trabajo | Régimen cedular de Ganancias 2024 | Sí |
 | [Índices de precios (IPC)](#índices-de-precios-al-consumidor-ipc) | INDEC y San Luis | Pesos constantes (figura 6b) | Sólo gráficos |
 | [Canasta básica total](#canasta-básica-total-cbt) | INDEC | Ingreso medido en canastas | Sólo gráficos |
+| [Tabla de equivalencias](#tabla-de-equivalencias-adulto-equivalente) | INDEC | Pasar personas a adultos equivalentes | Sólo gráficos |
 | [Distribución del ingreso (informe)](#evolución-de-la-distribución-del-ingreso-indec) | INDEC | Validar los deciles | Sólo validación |
 | [Argendata / Pessino et al.](#argendata-fundar--pessino-rasteletti-artana-y-lustig) | Fundar; Oxford Open Economics | Comparar; dos supuestos tomados | Comparación |
 | [International Tax Observatory](#international-tax-observatory-ito) | Paris School of Economics | Comparar | Comparación |
@@ -225,12 +227,25 @@ hace `scripts/01_descargar_datos.py` (las URL exactas están ahí); lo transcrit
 
 ### Canasta básica total (CBT)
 
-- **Qué es.** El costo mensual de la canasta básica total por adulto equivalente en el Gran
-  Buenos Aires (INDEC; serie oficial desde 04/2016). Define la línea de pobreza.
+- **Qué es.** El costo mensual de la canasta básica total por adulto equivalente (un varón de 30 a
+  60 años) en el Gran Buenos Aires (INDEC; serie oficial desde 04/2016). Define la línea de pobreza.
 - **Qué aporta.** Un umbral de "lo necesario para no ser pobre" que se actualiza solo con los
   precios.
 - **Cómo se usó.** Para medir el ingreso de cada grupo en canastas (figura 6, gráfico de
-  canastas del informe). Antes de 2017 se usa la de 2017 llevada hacia atrás con el IPC.
+  canastas del informe). Antes de 2017 se usa la de 2017 llevada hacia atrás con el IPC. El ingreso
+  se divide por los adultos equivalentes del grupo, no por sus personas, para que esté en la misma
+  unidad que la canasta (ver la tabla de equivalencias, abajo).
+
+### Tabla de equivalencias (adulto equivalente)
+
+- **Qué es.** La tabla del INDEC de unidades consumidoras por edad y sexo ("La medición de la
+  pobreza y la indigencia en la Argentina", diciembre de 2016, anexo 7.1). Un varón de 30 a 45 años
+  vale 1; una mujer de esa edad, 0,77; un chico de 6 años, 0,64.
+- **Qué aporta.** Cuánto necesita cada persona respecto de un adulto de referencia.
+- **Cómo se usó.** Con la edad y el sexo de cada persona de la EPH se suman los adultos equivalentes
+  de cada grupo, y el ingreso se mide por adulto equivalente al compararlo con la canasta, como en la
+  medición oficial de la pobreza.
+- **Dónde.** `adulto_equivalente` en `src/incidencia/eph.py`.
 
 ---
 

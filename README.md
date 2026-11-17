@@ -57,8 +57,8 @@ extrapolado (declaraciones de 2024 llevadas a 2025 con el ingreso del decil 10 d
 **El decil 10 partido** (`outputs/figures/fig8_decil10_partido.png`, `scripts/11_tramos_decil10.py`):
 percentiles 90-95, 95-99 y el 1% superior de la encuesta, con el mismo método que los deciles.
 2025: 24,6%, 23,7% y 21,7%: en la cima la tasa baja, por debajo de los deciles medios. El 1% de
-la encuesta, completado con el ingreso de las declaraciones juradas, tiene 20,9 canastas por
-persona; con la renta de activos externos paga 20,1%. El 1% medido sólo con las declaraciones
+la encuesta, completado con el ingreso de las declaraciones juradas, tiene 24,5 canastas por
+adulto equivalente; con la renta de activos externos paga 20,1%. El 1% medido sólo con las declaraciones
 juradas (figura 7) da 26,6% porque además suma la mitad del impuesto de sociedades y supone que
 la mitad de su ingreso es salario.
 
@@ -71,8 +71,8 @@ Personales: en 2012-2013 llegó a 34-35%; en 2016, 2018 y 2019, a 22%.
 básicas; `fig6b_distancia_en_pesos.png`, en pesos de hoy): el 10% más rico ingresaba por persona
 46 veces lo del 10% más pobre en 2004 y 20 veces en 2024 y 2025; después de impuestos la distancia
 es mayor (22 veces en 2024 y en 2025; mayor en los 22 años). En canastas básicas por
-persona, el decil 1 pasó de 0,10 en 2004 a 0,28 en 2017, 0,22 en 2024 y 0,28 en 2025; el decil
-10, de 4,0 a 5,3, 4,1 y 5,0.
+adulto equivalente (como mide el INDEC la pobreza), el decil 1 pasó de 0,13 en 2004 a 0,36 en 2017,
+0,28 en 2024 y 0,35 en 2025; el decil 10, de 4,8 a 6,4, 4,8 y 6,0.
 
 **Impuesto al cheque y combustibles** (variantes `con_cheque`, `con_cheque_y_combustibles`): la
 medida principal no los incluye; Pessino et al. sí. Con el cheque, 2025: D1 32,0%, D10 24,8%,
@@ -96,7 +96,7 @@ declarado y con el ingreso ajustado a Cuentas Nacionales, con la sensibilidad de
 externos. La lectura contra el consumo queda como variante (`sobre_consumo`): responde otra
 pregunta y no registra la capacidad de ahorro de los deciles altos.
 
-Documentación: [metodología](docs/metodologia.md) · [fuentes](docs/fuentes.md) · [diagramas](docs/diagramas.md) · [validación](docs/validacion.md) ·
+Documentación: [metodología](docs/metodologia.md) · [glosario de fuentes](docs/fuentes.md) · [diagramas](docs/diagramas.md) · [glosario de términos](docs/informe.md#cómo-leer-este-informe) · [validación](docs/validacion.md) ·
 [respuestas a preguntas abiertas](docs/respuestas_preguntas_abiertas.md) ·
 [estudios previos](docs/literatura_previa.md)
 

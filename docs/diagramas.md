@@ -2,8 +2,8 @@
 
 Dos diagramas: el primero explica **qué se calcula** (para cualquier lector); el segundo, **cómo
 fluyen los datos** por los scripts del repositorio (para quien quiera reproducirlo o
-modificarlo). GitHub los dibuja directamente. Qué es cada fuente: `docs/fuentes.md`; el método
-completo: `docs/metodologia.md`.
+modificarlo). GitHub los dibuja directamente. Qué es cada fuente: [glosario de fuentes](fuentes.md); el
+método completo: [metodología](metodologia.md); los resultados: [informe](informe.md).
 
 ## 1. Cómo se calcula la tasa efectiva
 

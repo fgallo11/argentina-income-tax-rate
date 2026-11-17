@@ -4,7 +4,8 @@
 año por año, y cómo fue cambiando. Está escrito para que lo pueda leer cualquiera; los párrafos
 marcados **Detalle técnico** son para quien quiera saber exactamente cómo se calculó. Los gráficos
 se generan con `scripts/12_informe_graficos.py` y están en `outputs/figures/informe/`. El método
-completo está en `docs/metodologia.md` y qué es cada fuente y cómo se usó, en `docs/fuentes.md`.
+completo está en la [metodología](metodologia.md); qué es cada fuente y cómo se usó, en el
+[glosario de fuentes](fuentes.md); y el proceso dibujado, en los [diagramas](diagramas.md).
 
 ## Cómo leer este informe
 
@@ -16,20 +17,72 @@ completo está en `docs/metodologia.md` y qué es cada fuente y cómo se usó, e
   mayores ingresos.
 - **Percentil:** lo mismo, cortando en cien grupos. "Percentiles 90-95" es el 5% que está justo
   arriba del decil 9; "el 1% más rico" es el percentil 100.
-- **Canasta básica total:** lo que el INDEC calcula que necesita un adulto por mes para no ser pobre.
-  Medir el ingreso en canastas permite comparar años sin que la inflación lo distorsione.
+- **Canasta básica total:** lo que el INDEC calcula que necesita por mes un adulto (un varón de 30 a
+  60 años) para no ser pobre. Medir el ingreso en canastas permite comparar años sin que la inflación
+  lo distorsione.
+- **Adulto equivalente:** cuánto "pesa" cada persona en las necesidades del hogar, según su edad y
+  sexo (tabla del INDEC). Un varón de 35 años cuenta 1; una mujer de 31, 0,77; un chico de 6, 0,64. Un
+  hogar de dos adultos y dos chicos suma unos 3,1 adultos equivalentes, y es pobre si su ingreso no
+  alcanza para 3,1 canastas. Por eso el ingreso se compara con la canasta **por adulto equivalente**,
+  no por persona.
 - **Proporcional, progresivo, regresivo:** un sistema es *proporcional* si todos pagan la misma
   tasa; *progresivo*, si la tasa sube con el ingreso; *regresivo*, si baja.
 - **Puntos:** la diferencia entre dos porcentajes. Pasar de 24% a 28% es subir 4 puntos.
+
+**El proceso en un dibujo.** De dónde sale cada parte de la cuenta (más detalle en los
+[diagramas](diagramas.md) y en el [glosario de fuentes](fuentes.md)):
+
+```mermaid
+flowchart LR
+    subgraph FUENTES["Fuentes"]
+        direction TB
+        EPH["EPH (INDEC)<br/>ingreso de cada persona"]
+        NORMA["Normativa<br/>escalas, alícuotas y topes de cada año"]
+        ARCA["Declaraciones juradas (ARCA)<br/>ingreso y Ganancias de los de más arriba"]
+        DNIAF["Recaudación (DNIAF)<br/>cuánto se cobró de cada impuesto"]
+        CN["Cuentas Nacionales (INDEC)<br/>consumo privado del país"]
+        ENGHO["ENGHo (INDEC)<br/>qué y cuánto consume cada nivel de ingreso"]
+    end
+
+    EPH --> ORD["1. Ordenar a las personas<br/>por ingreso per cápita familiar:<br/>deciles y el decil 10 en tres tramos"]
+    EPH --> SIM["2. Simular persona por persona<br/>aportes, contribuciones y Ganancias"]
+    NORMA --> SIM
+    ARCA --> CIMA["3. Completar la cima:<br/>ingreso y Ganancias que la encuesta no ve,<br/>resto de Ganancias y Bienes Personales"]
+    DNIAF --> CIMA
+    ENGHO --> CONS["4. Consumo de cada grupo<br/>según su ingreso relativo"]
+    DNIAF --> PESO["5. Recaudado por cada peso<br/>de consumo (IVA, Internos, Ingresos Brutos,<br/>contribuciones trasladadas a precios)"]
+    CN --> PESO
+    CONS --> IND["6. Impuestos al consumo del grupo<br/>= su consumo × recaudado por peso"]
+    PESO --> IND
+
+    SIM --> IMP["IMPUESTOS DEL GRUPO"]
+    CIMA --> IMP
+    IND --> IMP
+    ORD --> ING["INGRESO DEL GRUPO<br/>declarado en la EPH, antes de impuestos directos,<br/>más lo que la cima declara al fisco"]
+    CIMA --> ING
+
+    IMP --> TASA(["TASA EFECTIVA<br/>= impuestos ÷ ingreso"])
+    ING --> TASA
+
+    TASA --> RES["Resultados 2004-2025:<br/>por decil y tramo, por impuesto,<br/>contra un sistema proporcional y uno progresivo"]
+    TASA --> VAR["Variantes de supuestos:<br/>quién paga las contribuciones, IVA legal,<br/>ingreso no declarado, cheque, etc."]
+
+    classDef fuente fill:#eef3fb,stroke:#2a78d6,color:#0b0b0b
+    classDef paso fill:#fbfaf6,stroke:#9a998f,color:#0b0b0b
+    classDef clave fill:#0b3d7a,stroke:#0b3d7a,color:#ffffff
+    class EPH,NORMA,ARCA,DNIAF,CN,ENGHO fuente
+    class ORD,SIM,CIMA,CONS,PESO,IND,RES,VAR paso
+    class IMP,ING,TASA clave
+```
 
 ## Resumen
 
 - **El gráfico de siempre muestra un sistema regresivo abajo y plano arriba.** El 10% más pobre
   paga la proporción más alta de su ingreso (28,7% en 2025) y del decil 2 al 10 la carga es pareja
   (entre 23,0% y 23,8%). Lo encuentran también Argendata y el International Tax Observatory.
-- **Pero en Argentina los deciles esconden a los ricos.** En 2025 cuatro deciles están por debajo de
-  la línea de pobreza de un adulto, y el decil 10 junta a quien tiene 4 canastas por persona con
-  quien tiene 21. Hay que partirlo.
+- **Pero en Argentina los deciles esconden a los ricos.** En 2025 tres deciles están por debajo de
+  la línea de pobreza (en 2004, cinco), y el decil 10 junta a quien tiene 5 canastas por adulto
+  equivalente con quien tiene 25. Hay que partirlo.
 - **Partido, la cima paga menos.** En 2025 los percentiles 90-95 pagan 24,6%, los 95-99, 23,7%, y el
   1% más rico, 21,7%: menos que cualquier decil.
 - **El sistema es casi proporcional, y el 1% es lo que más se mueve.** Comparado con un sistema
@@ -127,17 +180,19 @@ menos confiables.
 **En una frase:** los deciles reparten a la población en partes iguales, pero en Argentina la
 mitad de esas partes son pobres o casi, y todos los ricos quedan apretados en la última barra.
 
-El gráfico mide el ingreso de cada grupo en canastas básicas: cuántas veces le alcanza para cubrir
-lo que necesita un adulto para no ser pobre.
+El gráfico mide el ingreso de cada grupo en canastas básicas por adulto equivalente, como mide el
+INDEC la pobreza: cuántas veces le alcanza para cubrir lo que necesitan sus miembros para no ser
+pobres. Debajo de 1 (línea punteada), el grupo promedio es pobre.
 
-- En 2025, los deciles 1 a 4 están **por debajo de una canasta** por persona (de 0,29 a 0,96). En
-  2004 eran seis deciles.
-- El decil 5 tiene 1,16 canastas y el decil 9, 3,0. Es clase media, no ricos.
-- El decil 10 junta realidades muy distintas: los percentiles 90-95 tienen 4,3 canastas; los 95-99,
-  7,6; el 1% más rico, **20,9**.
+- En 2025, los deciles 1 a 3 están **debajo de la línea de pobreza** (0,36, 0,69 y 0,93). En 2004
+  eran cinco deciles. Coincide con la pobreza que mide el INDEC: alrededor de 30% de las personas
+  en 2025 y cerca de la mitad en 2004.
+- El decil 5 tiene 1,45 canastas y el decil 9, 3,6. Es clase media, no ricos.
+- El decil 10 junta realidades muy distintas: los percentiles 90-95 tienen 5,2 canastas; los 95-99,
+  9,1; el 1% más rico, **24,5**.
 
 Por eso, cuando un gráfico por deciles muestra que "el decil 10 paga 24%", está promediando a un
-asalariado de clase media alta con quien tiene cinco veces su ingreso. Nueve de las diez barras
+asalariado de clase media alta con quien tiene casi cinco veces su ingreso. Nueve de las diez barras
 hablan de la mitad de abajo y de la clase media; lo que pasa con los ricos queda escondido en una
 sola. La solución de este estudio es partir el decil 10 en tres (sección 3).
 
@@ -325,7 +380,8 @@ sistema tributario no la reduce: la agranda un poco.
 A la izquierda: en 2004 el 10% más rico ingresaba por persona 46 veces lo del 10% más pobre; en 2015,
 20 veces; en 2025, 20. Después de pagar impuestos la distancia es mayor los 22 años (22 veces en
 2025), porque el decil 1 paga una proporción más alta de su ingreso que el decil 10. A la derecha,
-el ingreso de cada decil y del 1% en canastas básicas, año por año. Es ingreso declarado: arriba
+el ingreso de cada decil y del 1% en canastas básicas por adulto equivalente, año por año: en 2025
+el decil 1 tiene 0,35 y el decil 10, 6,0. Es ingreso declarado: arriba
 está subdeclarado, así que la distancia real es mayor.
 
 Juntando todo:
