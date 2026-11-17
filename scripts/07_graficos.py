@@ -341,7 +341,7 @@ def fig_sensibilidad(largo, anio):
     guardar(fig, "fig5_sensibilidad")
 
 
-def fig_distancia(largo, unidad="canastas"):
+def fig_distancia(largo, unidad="canastas", carpeta=None, nombre=None):
     """Brecha decil 10 / decil 1 antes y después de impuestos, e ingreso de cada decil.
 
     unidad="canastas": en canastas básicas totales (línea de pobreza de un adulto, INDEC) de ese
@@ -449,7 +449,7 @@ def fig_distancia(largo, unidad="canastas"):
              "atrás con el IPC\nempalmado). La canasta es por adulto: un hogar con chicos necesita menos por "
              "persona, así que el umbral de pobreza por persona es algo menor que 1.") + " Aglomerados urbanos de la EPH.",
              fontsize=7.3, color=MUDO, ha="left", va="top")
-    guardar(fig, "fig6b_distancia_en_pesos" if pesos else "fig6_distancia_entre_deciles")
+    guardar(fig, nombre or ("fig6b_distancia_en_pesos" if pesos else "fig6_distancia_entre_deciles"), carpeta)
 
 
 def fig_top1(largo):
@@ -544,7 +544,7 @@ def fig_top1(largo):
 ELAST_PROG = 0.25   # fig8: elasticidad de la tasa al ingreso en el sistema progresivo de referencia
 
 
-def fig_decil10_partido(anio, carpeta=None, formatos=("png", "svg")):
+def fig_decil10_partido(anio, carpeta=None, formatos=("png", "svg"), nombre=None):
     """El decil 10 partido en P90-95, P95-99 y el 1% superior (11_tramos_decil10.py)."""
     t = pd.read_csv(TABLES / "tasas_tramos_decil10.csv")
     top = pd.read_csv(TABLES / "top1.csv").set_index("anio").loc[anio]
@@ -659,7 +659,8 @@ def fig_decil10_partido(anio, carpeta=None, formatos=("png", "svg")):
              "recaudación total repartida de dos formas de referencia. Proporcional: todos pagan la tasa promedio. Progresivo: "
              f"tasa = promedio × (ingreso por persona del grupo / promedio)^{pct(ELAST_PROG, 2)}, reescalada para recaudar lo mismo. "
              "Ver scripts/11_tramos_decil10.py.", fontsize=7.3, color=MUDO, ha="left", va="top")
-    guardar(fig, "fig8_decil10_partido" if carpeta is None else f"fig8_decil10_partido_{anio}", carpeta, formatos)
+    nombre = nombre or ("fig8_decil10_partido" if carpeta is None else f"fig8_decil10_partido_{anio}")
+    guardar(fig, nombre, carpeta, formatos)
 
 
 def fig_decil10_serie():

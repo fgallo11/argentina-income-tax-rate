@@ -4,14 +4,15 @@
 Salida: outputs/figures/informe/ (PNG y SVG). Todo sale de las tablas de outputs/tables/ (no
 corre la microsimulación). Usa el estilo de 07_graficos.py.
 
-  i1_serie                 decil 1, decil 10 y promedio; franja con los deciles 2 a 9.
-  i2_distancia_promedio    decil 1 y decil 10 menos el promedio, en puntos, con banda de variantes.
-  i3_mapa_calor            año × grupo (D1-D9, P90-95, P95-99, 1%): desvío contra el promedio del año.
-  i4_composicion           qué impuestos paga el decil 1, el 5, el 10 y el 1% de la encuesta.
-  i5_poblacion_fija        tasa observada contra la de una población fija (2004 y 2017).
-  i6_cima                  el 1% menos los percentiles 90-95, en puntos.
-  i7_robustez              decil 1, 5 y 10 con la banda de supuestos.
-  i8_cheque                variante con el impuesto a los débitos y créditos bancarios.
+  i1_serie                 deciles 1 y 10, promedio y 1% más rico; franja con los deciles 2 a 9.
+  i2_anios                 barras por impuesto de cada decil y del 1% en 2004, 2013, 2019 y el último año.
+  i3_distancia_promedio    decil 1 y decil 10 menos el promedio, en puntos, con banda de variantes.
+  i4_mapa_calor            año × grupo (D1-D9, P90-95, P95-99, 1%): desvío contra el promedio del año.
+  i5_supuestos             como fig5, en los mismos cuatro años, con el cheque y el ingreso no declarado.
+  i6_composicion           impuesto por impuesto del decil 1, el 5, el 10 y el 1%, año por año.
+  i7_ricos_pobres          fig6 de 07_graficos.py: distancia de ingresos antes y después de impuestos.
+  i8_decil10_partido       fig8 de 07_graficos.py para el último año.
+  i9_matriz_deltas         año × grupo: parte de los impuestos menos la de un reparto proporcional y uno progresivo.
   a1_progresividad         índice de Kakwani por año (anexo).
   a2_recaudado_consumo     IVA, Ingresos Brutos e Internos recaudados por peso de consumo (anexo).
   a3_cobertura             qué parte de la recaudación total cubre el estudio (anexo).
@@ -33,6 +34,8 @@ from incidencia.config import ANIO_FIN, PROCESSED, TABLES  # noqa: E402
 OUT = g.FIGURES / "informe"
 ROJO, AZUL, OSCURO, GRIS = "#e34948", "#2a78d6", "#0b3d7a", "#9a998f"
 CELESTE, MEDIO = "#a9cdf2", "#4f93dc"
+# matrices (mapa de calor y deltas): azul = paga más, rojo = paga menos; extremos igual de oscuros
+MAPA_DIV = matplotlib.colors.LinearSegmentedColormap.from_list("div", ["#8c1716", ROJO, "#f4f3ef", MEDIO, OSCURO])
 ENGHO = [2005, 2012, 2018]           # anclas de las ediciones de la ENGHo (2004/05, 2012/13, 2017/18)
 # variantes que miden otra cosa o no son válidas: fuera de las bandas (docs/metodologia.md)
 OTRA_MEDIDA = {"sobre_consumo", "recursos_gasto", "altos_registros", "sobre_ipcf"}
@@ -79,8 +82,9 @@ def cargar():
     return largo, tot, ancho, tramos, trimestres
 
 
-def i1_serie(tot, trimestres):
+def i1_serie(tot, trimestres, tramos):
     p = tot.loc["principal"]
+    top = tramos[(tramos.variante == "principal") & (tramos.grupo == 99)].set_index("anio").total * 100
     fig, ax = plt.subplots(figsize=(11, 5.8))
     ejes_tiempo(ax, engho=True)
     medios_min, medios_max = p[list(range(2, 10))].min(axis=1), p[list(range(2, 10))].max(axis=1)
@@ -91,7 +95,9 @@ def i1_serie(tot, trimestres):
     for y, nombre, color, lw in series:
         ax.plot(y.index, y, color=color, linewidth=lw, linestyle=(0, (5, 2)) if nombre == "Promedio" else "-")
         ax.scatter(y.index[parc.values], y[parc.values], s=40, facecolor=g.SUP, edgecolor=color, linewidth=1.5, zorder=3)
+    ax.plot(top.index, top, color=OSCURO, linewidth=1.8, linestyle=(0, (1, 1.2)))
     fin = {n: (y.iloc[-1], c) for y, n, c, _ in series}
+    fin["1% más rico"] = (top.iloc[-1], OSCURO)
     fin["Deciles 2 a 9"] = ((medios_min.iloc[-1] + medios_max.iloc[-1]) / 2, "#6f6e66")
     etiquetas_finales(ax, fin, 1.3)
     ax.set_ylim(15, 45)
@@ -103,7 +109,9 @@ def i1_serie(tot, trimestres):
     ax.set_title(f"La carga promedio subió de {g.pct(pr.iloc[0])}% en 2004 a {g.pct(pr.max())}% en {int(pr.idxmax())} y "
                  f"bajó a {g.pct(pr.iloc[-1])}% en {ANIO_FIN}. El decil 1 pagó más que todos en "
                  f"{int((d1 > p[list(range(2, 11))].max(axis=1)).sum())} de {len(p)} años;\nlos deciles 2 a 9 (franja gris) "
-                 "pagan casi lo mismo entre sí. Círculos huecos: años con trimestres faltantes. Punteado vertical: "
+                 f"pagan casi lo mismo entre sí. El 1% más rico (punteado) pagó entre {g.pct(top.min())}% y "
+                 f"{g.pct(top.max())}%: más que el decil 10 en {int((top > p[10]).sum())} años y menos en "
+                 f"{int((top < p[10]).sum())}.\nCírculos huecos: años con trimestres faltantes. Punteado vertical: "
                  "ediciones de la ENGHo.", loc="left", fontsize=9.3, color=g.TINTA2, pad=10)
     fig.subplots_adjust(right=0.8)
     fig.text(0.01, -0.02, NOTA, fontsize=7.2, color=g.MUDO, ha="left", va="top")
@@ -137,14 +145,14 @@ def i2_distancia(tot):
     fig.suptitle("La distancia del decil más pobre al promedio se achicó; la del más rico oscila alrededor de cero",
                  x=0.01, y=1.04, ha="left", fontsize=13.5, fontweight="bold")
     ax.set_title(f"El decil 1 pagaba {g.pct(y1.iloc[0])} puntos más que el promedio en 2004 y {g.pct(y1.iloc[-1])} en "
-                 f"{ANIO_FIN}. Franjas: rango entre supuestos (ver robustez). El valor de 2009 depende de cómo se\n"
+                 f"{ANIO_FIN}. Franjas: rango entre supuestos. El valor de 2009 depende de cómo se\n"
                  "combinan las ediciones de la ENGHo (punteado vertical): con otra forma de combinarlas el decil 1 da 4,9 "
                  "puntos en vez de 12,9. Lo firme es la tendencia.", loc="left", fontsize=9.3, color=g.TINTA2, pad=10)
     fig.subplots_adjust(right=0.85)
     fig.text(0.01, -0.02, NOTA + "\nFranjas: mínimo y máximo entre las variantes de supuestos que miden lo mismo "
              "(excluye la lectura contra el consumo y la que usa el gasto como ingreso del decil 1).",
              fontsize=7.2, color=g.MUDO, ha="left", va="top")
-    guardar(fig, "i2_distancia_promedio")
+    guardar(fig, "i3_distancia_promedio")
 
 
 def i3_mapa(tramos):
@@ -155,15 +163,15 @@ def i3_mapa(tramos):
     d = d.loc[orden]
     nombres = {99: "1% superior", 95: "P95-99", 91: "P90-95"} | {k: f"Decil {k}" for k in range(1, 10)}
     fig, ax = plt.subplots(figsize=(13.5, 5.6))
-    lim = 8
-    cmap = matplotlib.colors.LinearSegmentedColormap.from_list("div", ["#2a78d6", "#f4f3ef", "#e34948"])
-    im = ax.imshow(d.values, cmap=cmap, vmin=-lim, vmax=lim, aspect="auto")
+    vmin, vmax = -5, 10                  # como la matriz de deltas: escala al rango de los datos, blanco en 0
+    im = ax.imshow(d.values, cmap=MAPA_DIV, norm=matplotlib.colors.TwoSlopeNorm(vmin=vmin, vcenter=0, vmax=vmax),
+                   aspect="auto")
     for i in range(d.shape[0]):
         for j in range(d.shape[1]):
             v = d.values[i, j]
             r = int(round(v))
             ax.text(j, i, "0" if r == 0 else f"{r:+d}".replace("-", "−"), ha="center", va="center", fontsize=7.6,
-                    color="white" if abs(v) > 5.5 else g.TINTA)
+                    color="white" if (v < vmin * 0.6 or v > vmax * 0.6) else g.TINTA)
     ax.set_xticks(range(d.shape[1]))
     ax.set_xticklabels([str(a) for a in d.columns], fontsize=8.2)
     ax.set_yticks(range(d.shape[0]))
@@ -173,175 +181,223 @@ def i3_mapa(tramos):
     for s_ in ax.spines.values():
         s_.set_visible(False)
     cb = fig.colorbar(im, ax=ax, fraction=0.025, pad=0.01)
+    cb.set_ticks([vmin, vmin / 2, 0, vmax / 2, vmax])
+    cb.ax.yaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(
+        lambda v, _: f"{v:+.1f}".replace(".0", "").replace(".", ",").replace("-", "−") if v else "0"))
     cb.set_label("Puntos respecto del promedio del año", fontsize=8.5, color=g.TINTA2)
     cb.outline.set_visible(False)
     fig.suptitle("Quién paga más que el promedio, año por año", x=0.01, y=1.03, ha="left", fontsize=14,
                  fontweight="bold")
-    fig.text(0.01, 0.975, "Cada celda: tasa del grupo menos la tasa promedio de ese año, en puntos. Rojo: paga más que "
-             "el promedio; azul: menos. Arriba de la línea, el decil 10 partido en tres.\nEl decil 1 paga más que "
+    fig.text(0.01, 0.975, "Cada celda: tasa del grupo menos la tasa promedio de ese año, en puntos. Azul: paga más que "
+             "el promedio; rojo: menos. Arriba de la línea, el decil 10 partido en tres.\nEl decil 1 paga más que "
              "todos casi siempre; la cima alterna entre pagar más (2009-2015, 2020-2022) y menos (2016-2019, 2024-2025).",
              fontsize=9.3, color=g.TINTA2, va="top")
     fig.text(0.01, 0.02, NOTA + " Tramos del decil 10 con pocas observaciones: el 1% superior es ruidoso de un año a otro.",
              fontsize=7.2, color=g.MUDO, ha="left", va="top")
     fig.subplots_adjust(top=0.86, bottom=0.1)
-    guardar(fig, "i3_mapa_calor")
+    guardar(fig, "i4_mapa_calor")
 
 
-def i4_composicion(ancho, tramos):
-    grupos = [("Consumo (IVA, IIBB, Internos, contrib. a precios)", ["contrib_consumidor", "iva", "internos", "iibb"],
-               "#9a998f"), ("Aportes personales", ["aportes"], "#1baf7a"),
-              ("Contrib. patronales (mitad trabajador)", ["contrib_trabajador"], "#eda100"),
-              ("Ganancias", ["ganancias"], AZUL), ("Bienes Personales", ["bienes_personales"], "#eb6834")]
+def i6_composicion(ancho, tramos):
+    """Qué impuestos paga cada grupo a lo largo de los años, uno por uno (colores de 07_graficos.py)."""
     pr = ancho.set_index(["anio", "decil"])
     top = tramos[(tramos.variante == "principal") & (tramos.grupo == 99)].set_index("anio")
     paneles = [("Decil 1 (más pobre)", pr.xs(1, level="decil")), ("Decil 5", pr.xs(5, level="decil")),
-               ("Decil 10 (más rico)", pr.xs(10, level="decil")), ("1% superior (encuesta completada)", top)]
-    fig, axs = plt.subplots(1, 4, figsize=(15, 4.8), sharey=True)
+               ("Decil 10 (más rico)", pr.xs(10, level="decil")), ("1% más rico", top)]
+    fig, axs = plt.subplots(1, 4, figsize=(19, 5.6), sharey=True)
     for ax, (titulo, d) in zip(axs, paneles):
         ejes_tiempo(ax, paso=7, indec=False)
-        ax.set_xticks([2005, 2015, 2025])
-        ys = [d[cols].sum(axis=1) * 100 for _, cols, _ in grupos]
-        ax.stackplot(d.index, ys, colors=[c for _, _, c in grupos], linewidth=0)
+        ax.set_xticks([2005, 2010, 2015, 2020, 2025])
+        ys = [d[c] * 100 for c in g.COLS]
+        ax.stackplot(d.index, ys, colors=[c for _, _, c in g.IMPUESTOS], linewidth=0.4, edgecolor=g.SUP)
         total = sum(ys)
         ax.plot(d.index, total, color=g.TINTA, linewidth=1)
+        f = d.loc[ANIO_FIN] * 100
+        consumo = f[["contrib_consumidor", "iva", "internos", "iibb"]].sum()
+        directo = f[["ganancias", "bienes_personales"]].sum()
         ax.set_title(f"{titulo}\n{g.pct(total.iloc[0])}% en 2004 → {g.pct(total.iloc[-1])}% en {ANIO_FIN}", loc="left",
-                     fontsize=10, fontweight="bold")
+                     fontsize=10.5, fontweight="bold")
+        ax.text(0.02, 0.98, f"En {ANIO_FIN}, puntos de: consumo {g.pct(consumo)}; aportes y contrib. "
+                f"{g.pct(f[['aportes', 'contrib_trabajador']].sum())};\nGanancias y Bienes Personales {g.pct(directo)}",
+                transform=ax.transAxes, fontsize=7.8, color=g.TINTA2, va="top")
+    axs[0].set_ylabel("% del ingreso")
+    axs[0].set_ylim(0, 48)
+    handles = [g.Patch(facecolor=c, label=n.replace(" (imputado a ingresos altos)", ""))
+               for col, n, c in g.IMPUESTOS][::-1]
+    fig.legend(handles=handles, loc="lower center", ncol=8, fontsize=8.6, frameon=False, bbox_to_anchor=(0.5, -0.04))
+    fig.suptitle("Qué impuestos paga cada grupo, año por año", x=0.01, y=1.04, ha="left", fontsize=14, fontweight="bold")
+    fig.text(0.01, 0.985, "Al decil 1 casi todo le llega por el consumo: IVA, Ingresos Brutos, Internos y la mitad de las "
+             "contribuciones patronales que pasa a precios. Al decil 5, además, aportes y contribuciones de su salario. "
+             "Al decil 10 y al 1%,\nGanancias y Bienes Personales. Por eso la carga de abajo sube y baja con lo que se "
+             "recauda por peso de consumo, y la de arriba con Ganancias y Bienes Personales.",
+             fontsize=9.3, color=g.TINTA2, va="top")
+    fig.subplots_adjust(wspace=0.07, top=0.8, bottom=0.14)
+    fig.text(0.01, -0.07, NOTA, fontsize=7.2, color=g.MUDO, ha="left", va="top")
+    guardar(fig, "i6_composicion")
+
+
+ANIOS = [2004, 2013, 2019, ANIO_FIN]      # inicio, máximo del promedio, mínimo de 2019 y último año
+
+
+def i2_anios(largo, tramos):
+    """Barras por impuesto de cada decil y del 1% más rico, en cuatro años, como el panel A de fig0."""
+    fig, axs = plt.subplots(1, len(ANIOS), figsize=(22, 6.4), sharey=True)
+    prom = {}
+    for ax, a in zip(axs, ANIOS):
+        v = largo[(largo.anio == a) & (largo.variante == "principal")].pivot(index="decil", columns="impuesto",
+                                                                            values="tasa") * 100
+        d = v.loc[1:10, g.COLS].copy()
+        t1 = tramos[(tramos.variante == "principal") & (tramos.anio == a) & (tramos.grupo == 99)][g.COLS].iloc[0] * 100
+        d.loc[11] = t1                                   # el 1%, separado por un hueco
+        x = list(range(10)) + [10.9]
+        base = pd.Series(0.0, index=d.index)
+        for col, etq, color in g.IMPUESTOS:
+            ax.bar(x, d[col], bottom=base, color=color, width=0.74, label=etq, edgecolor=g.SUP, linewidth=1,
+                   hatch="////" if col == "bienes_personales" else None)
+            base = base + d[col]
+        for xi, b in zip(x, base):
+            ax.text(xi, b + 0.5, g.pct(b), ha="center", va="bottom", fontsize=8.6,
+                    fontweight="bold" if xi in (0, 9, 10.9) else None, color=g.TINTA)
+        ax.axvspan(10.35, 11.5, color="#e8f0fb", zorder=0, linewidth=0)
+        prom[a] = v.loc[0, "total"]
+        ax.axhline(prom[a], color=g.TINTA2, linewidth=1, linestyle=(0, (4, 3)))
+        ax.set_xticks(x)
+        ax.set_xticklabels([f"D{i}" for i in range(1, 11)] + ["1%"], fontsize=8.6)
+        ax.set_xlim(-0.6, 11.5)
+        ax.xaxis.grid(False)
+        ax.set_title(str(a), loc="left", fontsize=13, fontweight="bold")
+        ax.set_title(f"promedio {g.pct(prom[a])}% (línea punteada)", loc="right", fontsize=9, color=g.TINTA2)
     axs[0].set_ylabel("% del ingreso")
     axs[0].set_ylim(0, 45)
-    handles = [g.Patch(color=c, label=n) for n, _, c in grupos]
-    fig.legend(handles=handles, loc="lower center", ncol=5, fontsize=8.5, frameon=False, bbox_to_anchor=(0.5, -0.06))
-    fig.suptitle("Qué impuestos paga cada grupo: abajo, consumo; arriba, Ganancias y Bienes Personales",
-                 x=0.01, y=1.06, ha="left", fontsize=14, fontweight="bold")
-    fig.text(0.01, 0.99, "Lo que mueve la tasa del decil 1 es el consumo (IVA e Ingresos Brutos); lo que mueve la del 1% es "
-             "Ganancias y Bienes Personales. El decil 5 y el 10 pagan una tasa parecida, pero con impuestos distintos.",
-             fontsize=9.3, color=g.TINTA2, va="top")
-    fig.subplots_adjust(wspace=0.08, top=0.8, bottom=0.12)
-    fig.text(0.01, -0.1, NOTA, fontsize=7.2, color=g.MUDO, ha="left", va="top")
-    guardar(fig, "i4_composicion")
+    h, l = axs[0].get_legend_handles_labels()
+    fig.legend(h[::-1], [x.replace(" (imputado a ingresos altos)", "") for x in l[::-1]], loc="lower center", ncol=8,
+               frameon=False, fontsize=9, bbox_to_anchor=(0.5, -0.04))
+    fig.suptitle("Qué parte de su ingreso pagó cada decil en impuestos, en cuatro años", x=0.01, y=1.04, ha="left",
+                 fontsize=14, fontweight="bold")
+    fig.text(0.01, 0.985, f"{ANIOS[0]}, el comienzo; {ANIOS[1]}, el año de carga promedio más alta; {ANIOS[2]}, el "
+             f"punto bajo antes de la pandemia; {ANIOS[3]}, el último. En los cuatro el decil 1 paga más que todos, sobre "
+             "todo por el consumo (rojo, violeta y verde),\ny del decil 2 al 10 la carga es pareja. Lo que cambia arriba "
+             "es Ganancias y Bienes Personales (azul y naranja), que en 2013 pesaban mucho más que en 2019. A la derecha "
+             "de cada año, el 1% más rico.", fontsize=9.3, color=g.TINTA2, va="top")
+    fig.subplots_adjust(wspace=0.05, top=0.83, bottom=0.12)
+    fig.text(0.01, -0.07, NOTA + " Ingreso declarado en la encuesta (medida principal); el gráfico de supuestos muestra "
+             "cuánto cambia con el ingreso no declarado.", fontsize=7.2, color=g.MUDO, ha="left", va="top")
+    guardar(fig, "i2_anios")
 
 
-def i5_poblacion_fija(tot):
-    pf = pd.read_csv(TABLES / "serie_poblacion_fija.csv")
-    p = tot.loc["principal"]
-    fig, axs = plt.subplots(1, 2, figsize=(13, 5.2), sharey=True)
-    for ax, dec, nombre, color in [(axs[0], 1, "Decil 1 (más pobre)", ROJO), (axs[1], 10, "Decil 10 (más rico)", AZUL)]:
-        ejes_tiempo(ax, paso=4)
-        ax.plot(p.index, p[dec], color=color, linewidth=2.8, label="Observada")
-        for base, estilo in [(2004, (0, (5, 2))), (2017, (0, (1, 1.5)))]:
-            s = pf[(pf.anio_base == base) & (pf.decil == dec)].set_index("anio").total * 100
-            ax.plot(s.index, s, color=color, linewidth=1.8, linestyle=estilo, alpha=0.8,
-                    label=f"Con la población de {base}")
-        ax.set_title(nombre, loc="left", fontsize=11, fontweight="bold")
-        ax.legend(loc="lower center", fontsize=8.3, frameon=False)
+def i5_supuestos(largo):
+    """Como fig5, en los cuatro años: rango por supuestos, medida principal, con cheque e ingreso no declarado."""
+    incid = ["principal", "iva_legal", "contrib_100_trabajador", "contrib_100_consumidor", "altos_sin_corregir",
+             "sin_bienes_personales"]
+    fig, axs = plt.subplots(1, len(ANIOS), figsize=(22, 5.6), sharey=True)
+    x = list(range(1, 11))
+    for ax, a in zip(axs, ANIOS):
+        v = largo[(largo.anio == a) & (largo.impuesto == "total") & (largo.decil > 0)]
+        v = v.pivot(index="decil", columns="variante", values="tasa") * 100
+        lo, hi = v[incid].min(axis=1), v[incid].max(axis=1)
+        ax.bar(x, hi - lo, bottom=lo, width=0.56, color="#b9d4f4", edgecolor="none",
+               label="Rango por supuestos de incidencia (traslado de contribuciones, IVA legal o recaudado,\n"
+                     "sin corregir los ingresos altos, sin Bienes Personales)")
+        ax.scatter(x, v["con_cheque"], s=46, marker="^", facecolor=g.SUP, edgecolor="#6f6e66", linewidth=1.5, zorder=3,
+                   label="Con el impuesto al cheque (trasladado a precios)")
+        ax.scatter(x, v["ajuste_cn_rentas_activos_ext"], s=40, marker="D", color=AZUL, zorder=3,
+                   label="Con el ingreso no declarado: Cuentas Nacionales, rentas ×7 y activos externos")
+        ax.scatter(x, v["principal"], s=56, color=g.TINTA, zorder=4, label="Medida principal")
+        ax.text(1.42, v["principal"][1], g.pct(v["principal"][1]), va="center", ha="left", fontsize=8.4,
+                color=g.TINTA, fontweight="bold")
+        ax.text(10, hi[10] + 0.5, g.pct(v["principal"][10]), va="bottom", ha="center", fontsize=8.4, color=g.TINTA,
+                fontweight="bold")
+        ax.set_xticks(x)
+        ax.set_xticklabels([f"D{i}" for i in x], fontsize=8.6)
+        ax.xaxis.grid(False)
+        ax.set_title(str(a), loc="left", fontsize=13, fontweight="bold")
+    axs[0].set_ylim(15, 47)
     axs[0].set_ylabel("Impuestos, % del ingreso")
-    axs[0].set_ylim(15, 48)
-    s04 = pf[(pf.anio_base == 2004) & (pf.decil == 1)].set_index("anio").total * 100
-    fig.suptitle("La baja del decil más pobre no vino de los impuestos: vino de cambios en su ingreso y su gasto",
-                 x=0.01, y=1.06, ha="left", fontsize=13.5, fontweight="bold")
-    fig.text(0.01, 1.0, f"Línea llena: la tasa observada. Punteadas: la que habría pagado la misma población del año base "
-             f"(sus ingresos actualizados por salarios, su canasta fija) con los impuestos de cada año.\nCon la población "
-             f"de 2004, el decil 1 habría pagado {g.pct(s04.loc[ANIO_FIN])}% en {ANIO_FIN}; pagó {g.pct(p[1].iloc[-1])}%. "
-             "La diferencia es composición: quién está en el decil, cuánto gana respecto de los demás y cuánto gasta.",
+    h, l = axs[0].get_legend_handles_labels()
+    orden = [3, 0, 1, 2]
+    fig.legend([h[i] for i in orden], [l[i] for i in orden], loc="lower center", ncol=4, frameon=False, fontsize=8.8,
+               bbox_to_anchor=(0.5, -0.07))
+    fig.suptitle("Cuánto depende el resultado de los supuestos", x=0.01, y=1.04, ha="left", fontsize=14,
+                 fontweight="bold")
+    fig.text(0.01, 0.985, "En los cuatro años y con cualquier supuesto, el decil 1 paga más que los demás. El cheque "
+             "(triángulos) suma más abajo que arriba: agranda la distancia. Lo que más mueve la punta de arriba es cómo "
+             "se mide el ingreso:\ncon el ingreso que nadie declara (rombos) el decil 10 queda debajo del resto en 2004, 2019 y 2025. "
+             "La punta de abajo depende sobre todo de a quién se le carga la contribución patronal.",
              fontsize=9.3, color=g.TINTA2, va="top")
-    fig.subplots_adjust(wspace=0.08, top=0.84)
-    fig.text(0.01, -0.04, NOTA + " Población fija: scripts/08_poblacion_fija.py; el resultado depende del año base, por "
-             "eso se muestran dos.", fontsize=7.2, color=g.MUDO, ha="left", va="top")
-    guardar(fig, "i5_poblacion_fija")
+    fig.subplots_adjust(wspace=0.05, top=0.83, bottom=0.12)
+    fig.text(0.01, -0.12, NOTA, fontsize=7.2, color=g.MUDO, ha="left", va="top")
+    guardar(fig, "i5_supuestos")
 
 
-def i6_cima(tramos):
-    t = tramos.pivot_table(index=["variante", "anio"], columns="grupo", values="total") * 100
-    dif = (t[99] - t[91]).unstack(0)
-    pr = dif["principal"]
-    fig, ax = plt.subplots(figsize=(11, 5.2))
-    ejes_tiempo(ax)
-    ax.axhline(0, color=g.TINTA2, linewidth=1)
-    ax.fill_between(dif.index, dif.min(axis=1), dif.max(axis=1), color=OSCURO, alpha=0.13, linewidth=0)
-    ax.bar(pr.index, pr, color=[OSCURO if v >= 0 else ROJO for v in pr], width=0.62)
-    for a, v in pr.items():
-        ax.text(a, v + (0.35 if v >= 0 else -0.35), ("+" if v >= 0 else "−") + g.pct(abs(v)), ha="center", va="bottom" if v >= 0 else "top",
-                fontsize=7.4, color=g.TINTA2)
-    ax.set_ylabel("Puntos: tasa del 1% superior − tasa de los percentiles 90-95")
-    ax.yaxis.set_major_locator(matplotlib.ticker.MultipleLocator(2))
-    ax.yaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda v, _: f"{v:+.0f}".replace("-", "−") if v else "0"))
-    n_pos, n_neg = int((pr > 0.5).sum()), int((pr < -0.5).sum())
-    fig.suptitle("Dentro del 10% más rico, ¿la cima paga más o menos?", x=0.01, y=1.04, ha="left", fontsize=14,
-                 fontweight="bold")
-    ax.set_title(f"Azul: el 1% superior paga más que los percentiles 90-95 ({n_pos} años); rojo: paga menos ({n_neg} años). "
-                 "Franja: rango entre cinco supuestos (consumo de la cima,\ningresos ajustados a Cuentas Nacionales, "
-                 "renta de activos externos, sin Bienes Personales). Sigue a Ganancias y Bienes Personales; el 1% es "
-                 "un grupo chico y ruidoso.", loc="left", fontsize=9.3, color=g.TINTA2, pad=10)
-    fig.text(0.01, -0.02, NOTA, fontsize=7.2, color=g.MUDO, ha="left", va="top")
-    guardar(fig, "i6_cima")
+def deltas_referencia(tramos):
+    """Por año y grupo: % de los impuestos que paga − % que pagaría con un reparto proporcional o progresivo
+    de la misma recaudación (mismo cálculo que los paneles derechos de fig8)."""
+    g2 = list(range(1, 10)) + [91, 95, 99]
+    filas = []
+    for a, d in tramos[tramos.variante == "principal"].groupby("anio"):
+        d = d.set_index("grupo")
+        yrel = d.canastas_por_persona[g2] / d.canastas_por_persona[0]
+        peso = d.part_ingreso[g2] * yrel ** g.ELAST_PROG
+        ref_prog = peso / peso.sum()
+        for k in g2:
+            filas.append({"anio": a, "grupo": k, "delta_proporcional": (d.part_impuestos[k] - d.part_ingreso[k]) * 100,
+                          "delta_progresivo": (d.part_impuestos[k] - ref_prog[k]) * 100})
+    return pd.DataFrame(filas)
 
 
-def i7_robustez(tot):
-    nombres = {"recursos_gasto": "Gasto como ingreso del decil 1",
-               "ajuste_cn_rentas_activos_ext": "Con rentas no declaradas y activos externos"}
-    fig, axs = plt.subplots(1, 3, figsize=(15, 4.8), sharey=True)
-    v = tot[~tot.index.get_level_values(0).isin(OTRA_MEDIDA)]
-    for ax, (dec, nombre, color) in zip(axs, [(1, "Decil 1", ROJO), (5, "Decil 5", "#eda100"), (10, "Decil 10", AZUL)]):
-        ejes_tiempo(ax, paso=7)
-        d = v[dec].unstack(0)
-        ax.fill_between(d.index, d.min(axis=1), d.max(axis=1), color=color, alpha=0.18, linewidth=0)
-        ax.plot(d.index, d["principal"], color=color, linewidth=2.6)
-        alt = "recursos_gasto" if dec == 1 else ("ajuste_cn_rentas_activos_ext" if dec == 10 else None)
-        if alt:
-            s = tot.loc[alt][dec]
-            ax.plot(s.index, s, color=g.TINTA, linewidth=1.3, linestyle=(0, (4, 2)), label=nombres[alt])
-            ax.legend(loc="lower center", fontsize=8, frameon=False)
-        ax.set_title(nombre, loc="left", fontsize=11, fontweight="bold")
-    axs[0].set_ylabel("Impuestos, % del ingreso")
-    axs[0].set_ylim(10, 50)
-    fig.suptitle("Qué tan firmes son los resultados", x=0.01, y=1.06, ha="left", fontsize=14, fontweight="bold")
-    fig.text(0.01, 1.0, "Línea: medida principal. Franja: mínimo y máximo entre las variantes de supuestos que miden lo "
-             "mismo (traslado de contribuciones, ediciones de la ENGHo, IVA, Bienes Personales, ingresos altos, Cuentas "
-             "Nacionales,\nrentas, cheque y combustibles). Punteado: la variante que más cambia la conclusión en ese "
-             "grupo. La franja del decil 1 es más ancha que su variación en el tiempo: su nivel es incierto, la "
-             "tendencia no.", fontsize=9.3, color=g.TINTA2, va="top")
-    fig.subplots_adjust(wspace=0.08, top=0.82)
-    fig.text(0.01, -0.04, NOTA, fontsize=7.2, color=g.MUDO, ha="left", va="top")
-    guardar(fig, "i7_robustez")
-
-
-def i8_cheque(tot):
-    """Medida principal contra la variante con el impuesto a los débitos y créditos bancarios."""
-    p, c = tot.loc["principal"], tot.loc["con_cheque"]
-    fig, (ax, ax2) = plt.subplots(1, 2, figsize=(14, 5.2), gridspec_kw={"width_ratios": [1.3, 1]})
-    ejes_tiempo(ax)
-    fin = {}
-    for dec, nombre, color in [(1, "Decil 1", ROJO), (5, "Decil 5", "#eda100"), (10, "Decil 10", AZUL),
-                               (0, "Promedio", g.TINTA)]:
-        ax.plot(p.index, p[dec], color=color, linewidth=1.6, alpha=0.55)
-        ax.plot(c.index, c[dec], color=color, linewidth=2.6, linestyle=(0, (5, 2)))
-        fin[nombre] = (c[dec].iloc[-1], color)
-    etiquetas_finales(ax, fin, 1.3)
-    ax.set_ylabel("Impuestos, % del ingreso")
-    ax.set_title("Línea fina: medida principal. Punteada: con el cheque", loc="left", fontsize=10.5,
-                 fontweight="bold")
-    dif = (c - p)[[1, 2, 3, 5, 8, 10, 0]]
-    ejes_tiempo(ax2)
-    colores = {1: ROJO, 2: "#e8836f", 3: "#eda100", 5: "#c9b25a", 8: "#7fb3ea", 10: AZUL, 0: g.TINTA}
-    nombres = {0: "Promedio"} | {k: f"Decil {k}" for k in range(1, 11)}
-    fin2 = {}
-    for dec in dif.columns:
-        ax2.plot(dif.index, dif[dec], color=colores[dec], linewidth=2.6 if dec in (1, 10) else 1.5,
-                 linestyle=(0, (5, 2)) if dec == 0 else "-")
-        fin2[nombres[dec]] = (dif[dec].iloc[-1], colores[dec])
-    etiquetas_finales(ax2, fin2, 0.22, fmt=lambda v: f"+{g.pct(v)}")
-    ax2.set_ylim(0, None)
-    ax2.set_ylabel("Puntos que agrega el cheque")
-    ax2.set_title("Cuánto le suma a cada grupo", loc="left", fontsize=10.5, fontweight="bold")
-    fig.suptitle("Variante: con el impuesto a los débitos y créditos bancarios (\"cheque\")", x=0.01, y=1.06,
-                 ha="left", fontsize=14, fontweight="bold")
-    fig.text(0.01, 1.0, f"Lo recaudado por el cheque (2,3% a 2,6% del consumo privado) se supone trasladado entero a "
-             f"precios y se reparte según el consumo, como Ingresos Brutos. Le suma {g.pct(dif[1].iloc[-1])} puntos al "
-             f"decil 1 y {g.pct(dif[10].iloc[-1])} al decil 10 en {ANIO_FIN}:\nagranda la distancia entre ellos, pero no "
-             "cambia la forma ni la tendencia. Es la lectura más regresiva posible: parte del cheque la pagan empresas y "
-             "quienes más usan el sistema bancario.", fontsize=9.3, color=g.TINTA2, va="top")
-    fig.subplots_adjust(wspace=0.42, top=0.84, right=0.9)
-    fig.text(0.01, -0.03, NOTA, fontsize=7.2, color=g.MUDO, ha="left", va="top")
-    guardar(fig, "i8_cheque")
+def i9_matriz_deltas(tramos):
+    dl = deltas_referencia(tramos)
+    dl.round(3).to_csv(TABLES / "deltas_proporcional_progresivo.csv", index=False)
+    orden = [99, 95, 91] + list(range(9, 0, -1))
+    nombres = {99: "1% superior", 95: "P95-99", 91: "P90-95"} | {k: f"Decil {k}" for k in range(1, 10)}
+    cmap = MAPA_DIV
+    fig, axs = plt.subplots(2, 1, figsize=(15, 11))
+    paneles = [("delta_proporcional", (-1.0, 1.0), "Frente a un sistema proporcional (todos pagan la tasa promedio)",
+                "Cada celda: % de los impuestos que paga el grupo − % del ingreso que tiene, en puntos."),
+               ("delta_progresivo", (-10.0, 5.0), "Frente a un sistema progresivo (la tasa sube con el ingreso, misma recaudación)",
+                "Cada celda: % de los impuestos que paga el grupo − % que pagaría si la tasa fuera el promedio × "
+                "(ingreso relativo)^0,25.")]
+    for ax, ((vmin, vmax), col, titulo, sub) in zip(axs, [(p_[1], p_[0], p_[2], p_[3]) for p_ in paneles]):
+        m = dl.pivot(index="grupo", columns="anio", values=col).loc[orden]
+        norma = matplotlib.colors.TwoSlopeNorm(vmin=vmin, vcenter=0, vmax=vmax)   # el blanco siempre en 0
+        im = ax.imshow(m.values, cmap=cmap, norm=norma, aspect="auto")
+        dec = 1 if vmax > 2 else 2
+        for i in range(m.shape[0]):
+            for j in range(m.shape[1]):
+                v = m.values[i, j]
+                txt = f"{v:+.{dec}f}".replace(".", ",").replace("-", "−")
+                if round(v, dec) == 0:
+                    txt = "0"
+                ax.text(j, i, txt, ha="center", va="center", fontsize=6.9 if dec == 2 else 7.6,
+                        color="white" if (v < vmin * 0.6 or v > vmax * 0.6) else g.TINTA)
+        ax.set_xticks(range(m.shape[1]))
+        ax.set_xticklabels([str(a) for a in m.columns], fontsize=8.2)
+        ax.set_yticks(range(m.shape[0]))
+        ax.set_yticklabels([nombres[k] for k in m.index], fontsize=9)
+        ax.axhline(2.5, color=g.TINTA, linewidth=1.2)
+        ax.grid(False)
+        for s_ in ax.spines.values():
+            s_.set_visible(False)
+        cb = fig.colorbar(im, ax=ax, fraction=0.025, pad=0.01)
+        cb.set_ticks(np.linspace(vmin, vmax, 5) if vmax == -vmin else [vmin, vmin / 2, 0, vmax / 2, vmax])
+        cb.ax.yaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(
+            lambda v, _: (f"{v:+.{dec}f}".replace(".", ",").replace("-", "−")) if v else "0"))
+        cb.set_label("Puntos de la recaudación", fontsize=8.5, color=g.TINTA2)
+        cb.outline.set_visible(False)
+        ax.set_title(f"{titulo}\n", loc="left", fontsize=11.5, fontweight="bold")
+        ax.text(0, 1.015, sub, transform=ax.transAxes, fontsize=8.8, color=g.TINTA2, va="bottom")
+    fig.suptitle("Cuánto más o menos de los impuestos paga cada grupo que en un sistema proporcional o progresivo",
+                 x=0.01, y=1.0, ha="left", fontsize=14, fontweight="bold")
+    fig.text(0.01, 0.975, "Azul: paga una parte mayor de la recaudación que en el sistema de referencia; rojo: menor. "
+             "Escalas distintas: frente al proporcional los desvíos son de décimas (el sistema real es casi proporcional);\n"
+             "frente al progresivo, de varios puntos: los deciles 1 a 8 pagan más de lo que les tocaría y la cima, sobre "
+             "todo el 1%, bastante menos. Arriba de la línea, el decil 10 partido en tres.",
+             fontsize=9.3, color=g.TINTA2, va="top")
+    fig.subplots_adjust(top=0.9, hspace=0.32)
+    fig.text(0.01, 0.05, NOTA + " Tramos del decil 10 con pocas observaciones: el 1% superior es ruidoso de un año a "
+             "otro. Tabla: outputs/tables/deltas_proporcional_progresivo.csv.",
+             fontsize=7.2, color=g.MUDO, ha="left", va="top")
+    guardar(fig, "i9_matriz_deltas")
 
 
 def gini_agrupado(pob, part):
@@ -429,14 +485,17 @@ def a3_cobertura():
 
 if __name__ == "__main__":
     largo, tot, ancho, tramos, trimestres = cargar()
-    i1_serie(tot, trimestres)
+    for f in OUT.glob("*"):
+        f.unlink()
+    i1_serie(tot, trimestres, tramos)
+    i2_anios(largo, tramos)
     i2_distancia(tot)
     i3_mapa(tramos)
-    i4_composicion(ancho, tramos)
-    i5_poblacion_fija(tot)
-    i6_cima(tramos)
-    i7_robustez(tot)
-    i8_cheque(tot)
+    i5_supuestos(largo)
+    i6_composicion(ancho, tramos)
+    g.fig_distancia(largo, carpeta=OUT, nombre="i7_ricos_pobres")
+    g.fig_decil10_partido(ANIO_FIN, OUT, nombre="i8_decil10_partido")
+    i9_matriz_deltas(tramos)
     k = a1_progresividad(tramos)
     a2_recaudado_consumo()
     a3_cobertura()
