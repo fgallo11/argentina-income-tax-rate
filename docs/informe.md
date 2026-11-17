@@ -106,7 +106,9 @@ menos confiables.
   (mitad las paga el trabajador con menos salario y mitad el consumidor con precios más altos), IVA,
   Internos e Ingresos Brutos. Son entre 56% y 71% de todo lo recaudado (anexo, A3).
 - **Anclado a lo recaudado:** los impuestos al consumo se reparten según lo que efectivamente se
-  cobró por cada peso consumido (anexo, A2), no según la alícuota legal. Así se descuenta la evasión.
+  cobró por cada peso consumido (anexo, A2), no según la alícuota legal. Así no se cuenta como pagado
+  el impuesto que se evade o que está exento. La forma entre deciles sale del IVA legal de la canasta
+  de cada uno; el nivel, de lo recaudado: la parte no cobrada es la misma proporción en todos.
 - **Cada año con sus reglas:** las escalas de Ganancias, aportes y contribuciones de cada año, y la
   encuesta de gastos (ENGHo) de 2004/05, 2012/13 y 2017/18, interpolada entre ediciones.
 
@@ -446,6 +448,31 @@ de cada parte); `scripts/09_ingresos_altos.py` (el reparto de la parte del capit
 rentas de negocios); `scripts/05_incidencia.py` y `scripts/11_tramos_decil10.py` (las cuatro
 variantes); el informe (un apartado como el del cheque, en la sección 7). No hace falta volver a correr la
 microsimulación de la EPH.
+
+**Evasión de IVA distinta por decil (posible pendiente).** Hoy el IVA que no se cobra se reparte
+parejo: si en un año se recauda el 80% del IVA que correspondería por ley, se supone que cada decil
+paga el 80% del IVA legal de su canasta (sección 1, detalle técnico). Pero es probable que los
+hogares más pobres compren una parte mayor en negro (ferias, almacenes de barrio, venta ambulante),
+donde el Estado no cobra IVA. Si es así, su carga real es menor que la medida.
+
+- **Qué importa y qué no.** Para la tasa efectiva sólo cuenta qué parte de lo que compra cada decil
+  es en negro: esa compra no deja IVA al Estado. Cómo se reparten la evasión comprador y vendedor
+  (por ejemplo, un descuento de 10% para el comprador y 10% de ganancia extra para el vendedor, en vez
+  del 21% entero) no cambia el IVA pagado: cambia quién se beneficia de la evasión. La ganancia del
+  vendedor es ingreso suyo (cuentapropistas y pequeños comercios), ya incluido en la encuesta si lo
+  declara.
+- **Cómo se haría.** Con el lugar de compra de la ENGHo (supermercado, almacén, feria, etc.), si la
+  encuesta lo trae con detalle suficiente: calcular por decil la parte del gasto hecha en comercios
+  probablemente informales, cargarle menos IVA a esa parte y reescalar para que el total siga siendo
+  lo recaudado. Es el método de Bachas, Gadenne y Jensen (*Informality, Consumption Taxes and
+  Redistribution*), que en varios países encuentra que la parte informal del consumo cae con el
+  ingreso y que eso vuelve al IVA menos regresivo. Hay que verificar que la ENGHo tenga la variable
+  en las tres ediciones.
+- **Qué se espera.** Baja la tasa del decil 1 y sube un poco la de los de arriba; el total no cambia.
+  Sería una variante, no la medida principal, porque el traslado de "comercio informal" a "no paga
+  IVA" es un supuesto.
+- **Dónde se toca el código.** `src/incidencia/indirectos.py` (perfil de IVA por decil) y la lectura
+  de la ENGHo.
 
 **Otros impuestos que quedan afuera:**
 

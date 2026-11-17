@@ -411,5 +411,9 @@ publicados; los tramos se calcularon con la local.
    registrada del país, aplicada a la masa de cada decil como impuesto e ingreso. Precios: por peso
    de consumo privado, como las contribuciones trasladadas. Detalle en `docs/informe.md`,
    "Pendientes".
-6. **Verificaciones de norma pendientes:** alícuotas patronales 2003-2019, INSSJP y obra
+6. **Evasión de IVA por decil (posible).** Hoy la parte no cobrada del IVA es la misma proporción
+   del IVA legal en todos los deciles. Con el lugar de compra de la ENGHo (si lo trae) se puede
+   cargar menos IVA a lo comprado en comercios probablemente informales, reescalando a lo recaudado
+   (método de Bachas, Gadenne y Jensen). Detalle en `docs/informe.md`, "Pendientes".
+7. **Verificaciones de norma pendientes:** alícuotas patronales 2003-2019, INSSJP y obra
    social, y varias reglas de IVA marcadas "no verificado" en el clasificador.
