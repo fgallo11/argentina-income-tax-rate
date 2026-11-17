@@ -180,7 +180,7 @@ La figura central (`fig0_dos_versiones_*`) muestra:
 - **Sensibilidad de activos externos** (variante `ajuste_cn_activos_ext`): además, 3% anual
   sobre los activos externos de "otros sectores" (inversión de cartera + moneda y
   depósitos; Posición de inversión internacional, INDEC, cuadro 18; a pesos con el tipo de
-  cambio A 3500 promedio) como ingreso no declarado, repartido como la Ganancias faltante
+  cambio A 3500 promedio) como ingreso que no figura en la encuesta, repartido como la Ganancias faltante
   (declaraciones juradas: casi todo al decil 10). Es una cota alta: supone que nada de eso
   se declara, que los billetes rinden como depósitos y que todo pertenece a hogares, aunque
   el sector incluye empresas. 2024: D10 24,1%, debajo de todos los deciles medios. 2025: D10
@@ -188,7 +188,7 @@ La figura central (`fig0_dos_versiones_*`) muestra:
 
 Resultado: la subdeclaración de salarios y de cuentapropia está repartida en toda la
 distribución y casi no cambia el perfil. Lo que puede volver regresiva también la punta
-alta es el ingreso de capital no declarado. Las rentas internas de los hogares
+alta es el ingreso de capital que la encuesta no capta. Las rentas internas de los hogares
 (intereses, alquileres, dividendos) no tienen dato oficial: el INDEC no publica la cuenta
 del sector hogares. La EPH registra rentas por 0,4%-0,7% del PIB, una cifra inverosímil.
 
@@ -261,7 +261,7 @@ Pessino, Rasteletti, Artana y Lustig, *Distributional effects of taxation in Lat
 | `ajuste_cn_rentas_activos_ext` | lo anterior + renta de activos externos | 35,0 | 26,9 | 23,1 | 24,9 |
 
 El panel B de la figura 0 usa `ajuste_cn_rentas` con la marca de `ajuste_cn_rentas_activos_ext`:
-con el ingreso de capital no declarado el decil 10 queda por debajo de todos los demás.
+completando el ingreso de capital que la encuesta no capta (estimado), el decil 10 queda por debajo de todos los demás.
 
 **No vale para todos los años.** Con rentas ×7 y activos externos, el decil 10 queda por
 debajo de todos los deciles medios en 2004-2005, 2007-2008, 2016-2019, 2024 y 2025. En 2010-2015 y

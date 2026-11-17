@@ -8,7 +8,7 @@ corre la microsimulación). Usa el estilo de 07_graficos.py.
   i2_anios                 barras por impuesto de cada decil y del 1% en 2004, 2013, 2019 y el último año.
   i3_distancia_promedio    decil 1 y decil 10 menos el promedio, en puntos, con banda de variantes.
   i4_mapa_calor            año × grupo (D1-D9, P90-95, P95-99, 1%): desvío contra el promedio del año.
-  i5_supuestos             como fig5, en los mismos cuatro años, con el cheque y el ingreso no declarado.
+  i5_supuestos             como fig5, en los mismos cuatro años, con el cheque y el ingreso completado.
   i6_composicion           impuesto por impuesto del decil 1, el 5, el 10 y el 1%, año por año.
   i7_ricos_pobres          fig6 de 07_graficos.py: distancia de ingresos antes y después de impuestos.
   i8_decil10_partido       fig8 de 07_graficos.py para el último año.
@@ -223,7 +223,7 @@ def composicion(paneles, nombre, titulo, sub, ymax=48):
     fig.legend(handles=handles, loc="lower center", ncol=8, fontsize=8.6, frameon=False, bbox_to_anchor=(0.5, -0.04))
     fig.suptitle(titulo, x=0.01, y=1.04, ha="left", fontsize=14, fontweight="bold")
     fig.text(0.01, 0.985, sub, fontsize=9.3, color=g.TINTA2, va="top")
-    fig.subplots_adjust(wspace=0.07, top=0.8, bottom=0.14)
+    fig.subplots_adjust(left=0.035, right=0.99, wspace=0.07, top=0.8, bottom=0.14)
     fig.text(0.01, -0.07, NOTA, fontsize=7.2, color=g.MUDO, ha="left", va="top")
     guardar(fig, nombre)
 
@@ -271,21 +271,22 @@ def i2_anios(largo, tramos):
         base = pd.Series(0.0, index=d.index)
         for col, etq, color in g.IMPUESTOS:
             ax.bar(x, d[col], bottom=base, color=color, width=0.74, label=etq, edgecolor=g.SUP, linewidth=1,
-                   hatch="////" if col == "bienes_personales" else None)
+                   hatch="////" if col == "bienes_personales" else None, zorder=3)
             base = base + d[col]
-        for xi, b in zip(x, base):
-            ax.text(xi, b + 0.5, g.pct(b), ha="center", va="bottom", fontsize=8.6,
-                    fontweight="bold" if xi in (0, 9, 12.9) else None, color=g.TINTA)
+        for xi, b in zip(x, base):      # con fondo, para que la línea del promedio no los tape
+            ax.text(xi, b + 0.45, g.pct(b), ha="center", va="bottom", fontsize=8.6, zorder=5,
+                    fontweight="bold" if xi in (0, 9, 12.9) else None, color=g.TINTA,
+                    bbox=dict(boxstyle="square,pad=0.08", facecolor=g.SUP, edgecolor="none", alpha=0.9))
         ax.axvspan(10.35, 13.5, color="#e8f0fb", zorder=0, linewidth=0)
         prom[a] = v.loc[0, "total"]
-        ax.axhline(prom[a], color=g.TINTA2, linewidth=1, linestyle=(0, (4, 3)))
+        ax.axhline(prom[a], color=g.TINTA2, linewidth=1.1, linestyle=(0, (4, 3)), zorder=2)   # detrás de las barras
         ax.set_xticks(x)
-        ax.set_xticklabels([f"D{i}" for i in range(1, 11)] + ["P90-\n95", "P95-\n99", "1%"], fontsize=8.2)
+        ax.set_xticklabels([f"D{i}" for i in range(1, 11)] + ["P90-\n95", "P95-\n99", "1%"], fontsize=8.6)
         ax.set_xlim(-0.6, 13.5)
         ax.xaxis.grid(False)
         ax.set_title(str(a), loc="left", fontsize=13, fontweight="bold")
         ax.set_title(f"promedio {g.pct(prom[a])}% (línea punteada)", loc="right", fontsize=9, color=g.TINTA2)
-    axs[0].set_ylabel("% del ingreso")
+    axs[0].set_ylabel("Impuestos, % del ingreso", labelpad=4)
     axs[0].set_ylim(0, 45)
     h, l = axs[0].get_legend_handles_labels()
     fig.legend(h[::-1], [x.replace(" (imputado a ingresos altos)", "") for x in l[::-1]], loc="lower center", ncol=8,
@@ -297,14 +298,14 @@ def i2_anios(largo, tramos):
              "todo por el consumo (rojo, violeta y verde),\ny del decil 2 al 10 la carga es pareja. Lo que cambia arriba "
              "es Ganancias y Bienes Personales (azul y naranja), que en 2013 pesaban mucho más que en 2019. A la derecha "
              "de cada año, el decil 10 partido: percentiles 90-95, 95-99 y el 1% más rico.", fontsize=9.3, color=g.TINTA2, va="top")
-    fig.subplots_adjust(wspace=0.05, top=0.83, bottom=0.12)
+    fig.subplots_adjust(left=0.035, right=0.995, wspace=0.05, top=0.83, bottom=0.12)   # sin margen vacío a los costados
     fig.text(0.01, -0.07, NOTA + " Ingreso declarado en la encuesta (medida principal); el gráfico de supuestos muestra "
-             "cuánto cambia con el ingreso no declarado.", fontsize=7.2, color=g.MUDO, ha="left", va="top")
+             "cuánto cambia si se completa el ingreso que la encuesta no capta.", fontsize=7.2, color=g.MUDO, ha="left", va="top")
     guardar(fig, "i2_anios")
 
 
 def i5_supuestos(largo):
-    """Como fig5, en los cuatro años: rango por supuestos, medida principal, con cheque e ingreso no declarado."""
+    """Como fig5, en los cuatro años: rango por supuestos, medida principal, con cheque e ingreso completado."""
     incid = ["principal", "iva_legal", "contrib_100_trabajador", "contrib_100_consumidor", "altos_sin_corregir",
              "sin_bienes_personales"]
     fig, axs = plt.subplots(1, len(ANIOS), figsize=(22, 5.6), sharey=True)
@@ -319,7 +320,7 @@ def i5_supuestos(largo):
         ax.scatter(x, v["con_cheque"], s=46, marker="^", facecolor=g.SUP, edgecolor="#6f6e66", linewidth=1.5, zorder=3,
                    label="Con el impuesto al cheque (trasladado a precios)")
         ax.scatter(x, v["ajuste_cn_rentas_activos_ext"], s=40, marker="D", color=AZUL, zorder=3,
-                   label="Con el ingreso no declarado: Cuentas Nacionales, rentas ×7 y activos externos")
+                   label="Con el ingreso completado (estimado): Cuentas Nacionales, rentas ×7 y activos externos")
         ax.scatter(x, v["principal"], s=56, color=g.TINTA, zorder=4, label="Medida principal")
         ax.text(1.42, v["principal"][1], g.pct(v["principal"][1]), va="center", ha="left", fontsize=8.4,
                 color=g.TINTA, fontweight="bold")
@@ -339,10 +340,10 @@ def i5_supuestos(largo):
                  fontweight="bold")
     fig.text(0.01, 0.985, "En los cuatro años y con cualquier supuesto, el decil 1 paga más que los demás. El cheque "
              "(triángulos) suma más abajo que arriba: agranda la distancia. Lo que más mueve la punta de arriba es cómo "
-             "se mide el ingreso:\ncon el ingreso que nadie declara (rombos) el decil 10 queda debajo del resto en 2004, 2019 y 2025. "
+             "se mide el ingreso:\ncompletando el ingreso que la encuesta no capta (rombos, estimado) el decil 10 queda debajo del resto en 2004, 2019 y 2025. "
              "La punta de abajo depende sobre todo de a quién se le carga la contribución patronal.",
              fontsize=9.3, color=g.TINTA2, va="top")
-    fig.subplots_adjust(wspace=0.05, top=0.83, bottom=0.12)
+    fig.subplots_adjust(left=0.035, right=0.995, wspace=0.05, top=0.83, bottom=0.12)
     fig.text(0.01, -0.12, NOTA, fontsize=7.2, color=g.MUDO, ha="left", va="top")
     guardar(fig, "i5_supuestos")
 
@@ -519,7 +520,7 @@ def c1_comparacion(largo, tramos):
              "el cheque y otros impuestos al consumo (con el cheque, la raya negra en B, los dos quedan casi iguales);\nel "
              "Tax Observatory suma Ganancias de sociedades y, como \"patrimonio\", el cheque y otros impuestos a la "
              "propiedad cargados arriba, y usa el ingreso de Cuentas Nacionales.", fontsize=9.3, color=g.TINTA2, va="top")
-    fig.subplots_adjust(wspace=0.06, top=0.84, bottom=0.17)
+    fig.subplots_adjust(left=0.035, right=0.995, wspace=0.06, top=0.84, bottom=0.17)
     fig.text(0.01, -0.08, "Fuentes: A, Argendata (Fundar), CSV del tópico Sistema tributario, con datos de Pessino, "
              "Rasteletti, Artana y Lustig (Oxford Open Economics, vol. 4); su categoría de Ganancias incluye sociedades. "
              "C, International Tax Observatory, informe n.° 10 (abril 2026),\nfigura 5, y nota sobre Argentina: totales del "
@@ -563,7 +564,7 @@ def c2_canastas(tramos):
              "deciles pone nueve barras para la mitad de abajo y la clase media, y mete en una sola a asalariados de clase "
              "media alta y a los ricos: por eso aquí el decil 10 se parte en tres.",
              fontsize=9.3, color=g.TINTA2, va="top")
-    fig.subplots_adjust(wspace=0.05, top=0.83)
+    fig.subplots_adjust(left=0.05, right=0.99, wspace=0.05, top=0.83)
     fig.text(0.01, -0.03, "Fuente: elaboración propia con EPH (INDEC) y anuarios de ARCA. Ingreso del grupo antes de "
              "impuestos directos (en la cima, completado con el ingreso declarado a ARCA que la encuesta no capta), dividido "
              "por sus adultos\nequivalentes (tabla del INDEC por edad y sexo: un chico o un mayor cuenta menos que un adulto) y "

@@ -6,7 +6,7 @@
   fig1_tasa_por_decil_<año>     gráfico principal: tasa efectiva por decil y por impuesto,
                                 contra el ingreso declarado.
   fig2_serie_historica          tasa total 2004-último año: promedio, D1, D5 y D10 (con la cota de
-                                ingreso no declarado del decil 10).
+                                ingreso que la encuesta no capta del decil 10).
   fig3_composicion_en_el_tiempo composición por impuesto en el tiempo, deciles 1, 5 y 10.
   fig4_deciles_anios_seleccionados
   fig5_sensibilidad             rango de la tasa por decil según los supuestos.
@@ -53,7 +53,7 @@ plt.rcParams.update({
 })
 NOTA = ("Fuente: elaboración propia con EPH y ENGHo (INDEC), recaudación DNIAF (Min. de Economía) y normativa. "
         "Aglomerados urbanos de la EPH. Deciles de personas por ingreso per cápita familiar.\n"
-        "Ingreso: el declarado en la EPH, antes de impuestos directos. Los ingresos no declarados (rentas, "
+        "Ingreso: el declarado en la EPH, antes de impuestos directos. Lo que la encuesta no capta (rentas, "
         "cuentapropia, evasión) se concentran arriba: la tasa real de los deciles altos es menor. Ganancias:\nsimulada "
         "para asalariados registrados y jubilados; "
         "lo recaudado que la simulación no capta y Bienes Personales se asignan a los ingresos más altos con las "
@@ -89,21 +89,22 @@ def guardar(fig, nombre, carpeta=None, formatos=("png", "svg")):
     plt.close(fig)
 
 
-def barras(ax, d, etiquetas=True):
-    """d: tasas por impuesto (en %), índice = decil."""
+def barras(ax, d, etiquetas=True, x=None, nombres=None):
+    """d: tasas por impuesto (en %), índice = decil (o grupo, con x y nombres propios)."""
     base = pd.Series(0.0, index=d.index)
-    x = list(range(len(d)))
+    x = list(range(len(d))) if x is None else x
     for col, etq, color in IMPUESTOS:
         ax.bar(x, d[col], bottom=base, color=color, width=0.72, label=etq, edgecolor=SUP, linewidth=1.2,
                hatch="////" if col == "bienes_personales" else None)
         base = base + d[col]
     tope = base.copy()
     ax.set_xticks(x)
-    ax.set_xticklabels([f"D{i}" for i in d.index])
+    ax.set_xticklabels(nombres if nombres is not None else [f"D{i}" for i in d.index])
     ax.xaxis.grid(False)
     if etiquetas:
         for xi, b, t in zip(x, base, tope):
-            ax.text(xi, t + 0.5, pct(b), ha="center", va="bottom", fontsize=9, color=TINTA)
+            ax.text(xi, t + 0.5, pct(b), ha="center", va="bottom", fontsize=9, color=TINTA, zorder=5,
+                    bbox=dict(boxstyle="square,pad=0.08", facecolor=SUP, edgecolor="none", alpha=0.9))
     return tope
 
 
@@ -245,39 +246,80 @@ def fig_dos_versiones(largo, anio, carpeta=None, formatos=("png", "svg")):
     def tabla(variante):
         v = largo[(largo.anio == anio) & (largo.variante == variante)]
         return v.pivot(index="decil", columns="impuesto", values="tasa") * 100
+    # el decil 10 partido en P90-95, P95-99 y 1% (11_tramos_decil10.py), si está calculado
+    tramos = []
+    for f in ("tasas_tramos_decil10.csv", "tasas_tramos_decil10_fig0.csv"):
+        if (TABLES / f).exists():
+            tramos.append(pd.read_csv(TABLES / f))
+    tramos = pd.concat(tramos) if tramos else None
+    def tabla_tramos(variante):
+        if tramos is None:
+            return None
+        v = tramos[(tramos.anio == anio) & (tramos.variante == variante) & tramos.grupo.isin([91, 95, 99])]
+        return None if len(v) < 3 else v.set_index("grupo").loc[[91, 95, 99]]
+    X = list(range(10)) + [10.9, 11.9, 12.9]
+    NOMBRES_X = [f"D{i}" for i in range(1, 11)] + ["P90-\n95", "P95-\n99", "1%"]
     paneles = [
         ("principal", "A. Con el ingreso que declaran en la encuesta",
-         "Impuestos ÷ ingreso declarado en la EPH. Todos los que no son\n"
-         "asalariados registrados subdeclaran, y más arriba: rentas,\n"
-         "cuentapropia, evasión y activos no declarados en el exterior."),
-        ("ajuste_cn_rentas", "B. Con el ingreso no declarado",
-         "Salarios y cuentapropia llevados a Cuentas Nacionales (INDEC); rentas\n"
-         "(alquileres, intereses, ganancias) multiplicadas por 7, punto medio de\n"
-         "lo que las encuestas latinoamericanas dejan afuera (De Rosa, Flores y\n"
-         "Morgan 2024). Mismo nivel total que A: cambia el reparto. Marca negra\n"
-         "en D10: si además se suma la renta (3%) de los activos externos\n"
-         "privados (los demás deciles suben cerca de 1 punto)."),
+         "Qué mide: impuestos ÷ el ingreso que cada persona dice ganar en la\n"
+         "encuesta (EPH), completado arriba con lo que declara al fisco. Es la\n"
+         "medida principal del estudio.\n"
+         "Qué le falta: en la encuesta casi todos declaran menos de lo que\n"
+         "ganan, salvo los asalariados registrados (su sueldo es fácil de\n"
+         "recordar y está en el recibo). Lo que más falta son rentas del capital\n"
+         "(alquileres, intereses, utilidades) y activos en el exterior, y eso se\n"
+         "concentra arriba: la tasa del decil 10 está sobreestimada."),
+        ("ajuste_cn_rentas", "B. Completando el ingreso que la encuesta no capta (estimado)",
+         "Qué muestra: qué pasa si se completa el ingreso que la encuesta no capta.\n"
+         "No es el ingreso oculto real (no se conoce); es una estimación en 3 partes:\n"
+         "• Sueldos y cuentapropia: llevados al total de las Cuentas Nacionales\n"
+         "  (INDEC). El faltante es un dato; repartirlo según lo declarado, supuesto.\n"
+         "• Rentas del capital: las declaradas × 7 (las encuestas captan 1/5 a 1/10;\n"
+         "  De Rosa, Flores y Morgan 2024). Supuesto: no hay dato oficial.\n"
+         "• Marcas negras: + 3% anual sobre los activos privados en el exterior,\n"
+         "  suponiendo que nada se declara. Cota alta.\n"
+         "No agrega impuestos: la carga total es la de A; cambia quién la soporta."),
     ]
-    fig, axes = plt.subplots(1, 2, figsize=(13.5, 6.2), sharey=True)
-    res = {}
+    con_tramos = tabla_tramos("principal") is not None and tabla_tramos("ajuste_cn_rentas") is not None
+    fig, axes = plt.subplots(1, 2, figsize=(17.5, 6.4) if con_tramos else (13.5, 6.2), sharey=True)
+    res, res_tr = {}, {}
     for ax, (variante, titulo, nota) in zip(axes, paneles):
         t = tabla(variante)
         d = t.loc[1:10, COLS]
         prom = t.loc[0, "total"]
         res[variante] = t.total
-        barras(ax, d)
-        ax.axhline(prom, color=TINTA2, linewidth=1, linestyle=(0, (4, 3)))
-        ax.text(9.5, 0.97, f"Línea punteada: promedio de la población, {pct(prom)}%", ha="right", va="top",
-                transform=ax.get_xaxis_transform(),
+        if con_tramos:
+            tr = tabla_tramos(variante)
+            res_tr[variante] = tr.total * 100
+            d = pd.concat([d, tr[COLS] * 100])
+            barras(ax, d, x=X, nombres=NOMBRES_X)
+            ax.axvspan(10.35, 13.5, color="#e8f1fb", zorder=0, linewidth=0)
+            ax.text(11.9, 0.9, "decil 10\npartido", transform=ax.get_xaxis_transform(), ha="center", va="top",
+                    fontsize=8.4, color=TINTA2, fontweight="bold")
+            ax.set_xlim(-0.6, 13.5)
+        else:
+            barras(ax, d)
+            ax.set_xlim(-0.6, 9.6)
+        ax.axhline(prom, color=TINTA2, linewidth=1, linestyle=(0, (4, 3)), zorder=0.5)
+        ax.text(0.99 if con_tramos else 9.5, 0.99, f"Línea punteada: promedio de la población, {pct(prom)}%",
+                ha="right", va="top", transform=ax.transAxes if con_tramos else ax.get_xaxis_transform(),
                 fontsize=8.8, color=TINTA2)
         ax.set_title(titulo, loc="left", fontsize=11.5, fontweight="bold", pad=8)
-        ax.text(0.0, -0.13, nota, transform=ax.transAxes, fontsize=8.3, color=TINTA2, ha="left", va="top",
-                linespacing=1.35)
-        ax.set_xlim(-0.6, 9.6)
+        ax.text(0.0, -0.15, nota, transform=ax.transAxes, fontsize=8.3, color=TINTA2, ha="left", va="top",
+                linespacing=1.3)
     ext = tabla("ajuste_cn_rentas_activos_ext").total
     res["ext"] = ext
-    axes[1].plot([9 - 0.36, 9 + 0.36], [ext[10]] * 2, color=TINTA, linewidth=2.4, zorder=4)
-    axes[1].text(9 + 0.42, ext[10], pct(ext[10]), va="center", fontsize=8.5, color=TINTA)
+    marcas = [(9, ext[10])]
+    if con_tramos:
+        ext_tr = tabla_tramos("ajuste_cn_rentas_activos_ext").total * 100
+        marcas += list(zip([10.9, 11.9, 12.9], ext_tr.values))
+    for xm, ym in marcas:
+        axes[1].plot([xm - 0.36, xm + 0.36], [ym] * 2, color=TINTA, linewidth=2.4, zorder=6)
+    axes[1].text(9 + 0.42, ext[10], pct(ext[10]), va="center", fontsize=8.5, color=TINTA, zorder=7,
+                 bbox=dict(boxstyle="square,pad=0.05", facecolor=SUP, edgecolor="none", alpha=0.85))
+    if con_tramos:      # los valores de las marcas de los tramos, juntos (al lado se pisarían con los totales)
+        axes[1].text(11.9, 0.8, "marcas negras:\n" + "  ".join(pct(v) for v in ext_tr.values),
+                     transform=axes[1].get_xaxis_transform(), ha="center", va="top", fontsize=8.2, color=TINTA)
     tope = max(max(res["principal"].loc[1:10]), max(res["ajuste_cn_rentas"].loc[1:10]))
     axes[0].set_ylim(0, max(40, (int(tope / 5) + 2) * 5))
     axes[0].set_ylabel("% del ingreso")
@@ -288,23 +330,26 @@ def fig_dos_versiones(largo, anio, carpeta=None, formatos=("png", "svg")):
     a, b = res["principal"], res["ajuste_cn_rentas"]
     medios = b.loc[2:9]
     if ext[10] < medios.min():
-        cierre = f"a {pct(ext[10])}%:\npor debajo de todos los deciles. El sistema resulta regresivo de punta a punta."
+        cierre = f"a {pct(ext[10])}%:\npor debajo de todos los deciles. Con el ingreso así completado, el sistema sería regresivo de punta a punta."
     elif ext[10] < b.loc[0]:
         cierre = f"a {pct(ext[10])}%:\npor debajo del promedio, pero por encima de algunos deciles medios."
     else:
         cierre = f"a {pct(ext[10])}%:\nsigue por encima del promedio."
     fig.text(0.01, 0.975, f"El decil 1 paga {pct(a[1])}% de su ingreso; los deciles medios, alrededor de {pct(a[5])}%; el "
-             f"decil 10, {pct(a[10])}%. El sistema no es progresivo y es regresivo en la punta baja. Si se suma el ingreso\n"
-             f"que la encuesta no capta —sobre todo rentas del capital, concentradas arriba—, el decil 10 pasa a "
-             f"{pct(b[10])}% y, con la renta de los activos externos, " + cierre, fontsize=9.6,
-             color=TINTA2, ha="left", va="top")
-    fig.subplots_adjust(wspace=0.06, right=0.9, top=0.8)
-    fig.text(0.01, -0.2, "Fuente: elaboración propia con EPH y ENGHo (INDEC), recaudación DNIAF (Min. de Economía), "
+             f"decil 10, {pct(a[10])}%. El sistema no es progresivo y es regresivo en la punta baja. Si se completa (con una estimación)\n"
+             f"el ingreso que la encuesta no capta —sobre todo rentas del capital, concentradas arriba—, el decil 10 pasa a "
+             f"{pct(b[10])}% y, con la renta de los activos externos, " + cierre +
+             (f" Partido el decil 10, el 1% más rico paga {pct(res_tr['principal'][99])}% "
+              f"({pct(res_tr['ajuste_cn_rentas'][99])}% con el ingreso completado)." if con_tramos else ""),
+             fontsize=9.6, color=TINTA2, ha="left", va="top")
+    fig.subplots_adjust(wspace=0.06, right=0.9 if not con_tramos else 0.88, left=0.05 if con_tramos else 0.125, top=0.8)
+    fig.text(0.01, -0.27 if con_tramos else -0.2, "Fuente: elaboración propia con EPH y ENGHo (INDEC), recaudación DNIAF (Min. de Economía), "
              "anuarios estadísticos de ARCA y normativa. Aglomerados urbanos de la EPH. Deciles de personas por "
              "ingreso per cápita familiar.\nIncluye Ganancias de personas, Bienes Personales, aportes, contribuciones "
              "patronales, IVA, Internos e Ingresos Brutos. Excluye retenciones, cheque, combustibles, Ganancias de "
-             "sociedades, monotributo e impuestos patrimoniales provinciales (cheque, combustibles y monotributo, como variantes).\nLa encuesta casi no capta al 1% más rico: su carga no se "
-             "estima por separado y queda incluida, de forma incompleta, en el decil 10 (ver figura 7).", fontsize=7.3,
+             "sociedades, monotributo e impuestos patrimoniales provinciales (cheque, combustibles y monotributo, como variantes).\nDecil 10 partido: "
+             "percentiles 90-95, 95-99 y el 1% más rico de la encuesta, completados con las declaraciones juradas de ARCA "
+             "(figura 8); el 1% medido sólo con declaraciones juradas, en la figura 7.", fontsize=7.3,
              color=MUDO, ha="left", va="top")
     guardar(fig, f"fig0_dos_versiones_{anio}", carpeta, formatos)
 
@@ -325,7 +370,7 @@ def fig_sensibilidad(largo, anio):
     ax.scatter([xi for xi in x if dif[xi]], v["recursos_gasto"][dif], s=70, facecolor=SUP, edgecolor="#e34948", linewidth=1.8, zorder=3,
                label="Si el ingreso de los deciles donde el gasto lo supera se reemplaza por el gasto")
     ax.scatter(x, v["ajuste_cn_rentas_activos_ext"], s=60, marker="D", color="#2a78d6", zorder=3,
-               label="Con el ingreso no declarado: Cuentas Nacionales, rentas ×7 y activos externos (cota alta)")
+               label="Con el ingreso completado (estimado): Cuentas Nacionales, rentas ×7 y activos externos (cota alta)")
     for xi in x:
         ax.text(xi + 0.32, v["principal"][xi], pct(v["principal"][xi]), va="center", fontsize=8.5, color=TINTA)
     ax.set_xticks(x)

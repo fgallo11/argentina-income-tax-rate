@@ -22,7 +22,7 @@ los grupos salvo los asalariados registrados, y mucho más arriba (rentas, cuent
 evasión, activos no declarados en el exterior). Ajustar salarios e ingreso de cuentapropistas a
 Cuentas Nacionales (INDEC) casi no cambia el perfil (decil 10: 25,3% en 2024 y 24,0% en 2025):
 esa subdeclaración se reparte en toda la distribución. Lo que puede moverlo es el ingreso de
-capital no declarado: si se suma la renta de los activos externos privados (cota alta), el
+capital que la encuesta no capta (sin dato oficial; se estima con supuestos): si se suma la renta de los activos externos privados (cota alta), el
 decil 10 baja a 24,1% (2024) y 22,9% (2025), debajo de todos los deciles medios. Las rentas
 internas de los hogares no tienen dato oficial.
 
@@ -88,8 +88,8 @@ International Tax Observatory (2026) en `docs/validacion.md`, sección 3, y en l
 informe; sus datos están en `data/externos/`. El "patrimonio" del ITO incluye el impuesto al cheque
 (clasificación de la OCDE): ver `docs/metodologia.md`, sección 15.
 
-La figura central de cada año 2004-2025 está en `outputs/figures/por_anio/`. Con el ingreso
-no declarado, el decil 10 queda por debajo de todos los deciles en 2004-2005, 2007-2008,
+La figura central de cada año 2004-2025 está en `outputs/figures/por_anio/`. Completando (con una estimación) el
+ingreso que la encuesta no capta, el decil 10 queda por debajo de todos los deciles en 2004-2005, 2007-2008,
 2016-2019, 2024 y 2025; en 2010-2015 y 2020-2022 baja pero sigue por encima del promedio.
 
 Los ingresos por decil de la EPH coinciden con los que publica el INDEC (validado contra el
@@ -143,7 +143,7 @@ adelante. No corras `07_graficos.py` solo: las figuras quedarían con tablas vie
 ## Limitaciones principales
 
 - El decil 10 depende de supuestos: entre 21,8% y 25,1% en 2025 según la variante (con el ingreso
-  no declarado, el piso), porque su ingreso real no se observa.
+  completado, el piso), porque su ingreso real no se observa.
 - El consumo de encuesta es 37-55% del de Cuentas Nacionales.
 - El decil 1 declara gastar más de lo que gana: 31,4% contra el ingreso declarado y 22,0%
   si se reemplaza su ingreso por el gasto (2024).

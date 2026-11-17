@@ -65,7 +65,7 @@ flowchart LR
     ING --> TASA
 
     TASA --> RES["Resultados 2004-2025:<br/>por decil y tramo, por impuesto,<br/>contra un sistema proporcional y uno progresivo"]
-    TASA --> VAR["Variantes de supuestos:<br/>quién paga las contribuciones, IVA legal,<br/>ingreso no declarado, cheque, etc."]
+    TASA --> VAR["Variantes de supuestos:<br/>quién paga las contribuciones, IVA legal,<br/>ingreso completado, cheque, etc."]
 
     classDef fuente fill:#eef3fb,stroke:#2a78d6,color:#0b0b0b
     classDef paso fill:#fbfaf6,stroke:#9a998f,color:#0b0b0b
@@ -275,12 +275,38 @@ utilidades de las empresas y del impuesto de sociedades: da 26,6% en 2025 (gráf
 encima del promedio, sobre todo porque suma el impuesto de sociedades, que este informe todavía no
 reparte (ver "Pendientes").
 
-![Con el ingreso no declarado](../outputs/figures/fig0_dos_versiones_2025.png)
+![Completando el ingreso que la encuesta no capta](../outputs/figures/fig0_dos_versiones_2025.png)
 
-**Y aun así está subestimado.** Hay ingreso que no se declara ni en la encuesta ni al fisco: rentas
-del capital, activos en el exterior. Si se lo suma (salarios llevados a Cuentas Nacionales, rentas
-multiplicadas por 7, renta de los activos externos), el decil 10 baja de 23,8% a 21,8% en 2025 y queda
-debajo de todos los deciles (panel B del gráfico de arriba; el panel A es la medida principal).
+**Y aun así está subestimado.** El gráfico de arriba compara dos cuentas.
+
+- **A. Con el ingreso que se declara** (la medida principal de todo el informe). Los impuestos de
+  cada grupo se dividen por el ingreso que sus miembros dicen ganar en la encuesta, completado arriba
+  con lo que declaran al fisco.
+- **B. Completando el ingreso que la encuesta no capta.** Sabemos que la encuesta subestima el
+  ingreso, sobre todo arriba: lo muestran las Cuentas Nacionales y las declaraciones juradas. B
+  estima ese faltante y se lo suma a cada persona. **No es el ingreso oculto real**, que nadie
+  conoce: es una estimación hecha con totales oficiales y supuestos, para ver qué pasaría con las
+  tasas. **No agrega impuestos**: los mismos impuestos se dividen por un ingreso mayor.
+
+**Qué se suma en B, y qué tan firme es cada parte:**
+
+| Qué | De dónde sale | Qué tan firme es |
+|---|---|---|
+| Sueldos e ingreso de cuentapropistas que faltan en la encuesta | Las Cuentas Nacionales del INDEC miden el total del país; la diferencia con la encuesta es un dato | El total es un dato; repartirlo en proporción a lo que cada uno ya declara es un supuesto |
+| Rentas del capital (alquileres, intereses, utilidades) | Las rentas declaradas se multiplican por 7: las encuestas latinoamericanas captan entre un quinto y un décimo (De Rosa, Flores y Morgan, 2024) | Supuesto: el INDEC no publica el total de rentas de los hogares |
+| Renta de los activos privados en el exterior (sólo las marcas negras) | 3% anual sobre el stock que publica el INDEC (Posición de inversión internacional), repartido arriba con las declaraciones juradas | Cota alta: supone que nada de esa renta se declara |
+
+**Detalle técnico.** Sueldos e ingreso mixto se ajustan con la cuenta de generación del ingreso del
+INDEC, cada fuente con su propio factor y sólo a quien declara esa fuente. La carga total de la
+población se mantiene igual que en A, para que la comparación muestre **quién** soporta los
+impuestos y no cuánto se recauda.
+
+**Resultado en 2025.** Con el ingreso así completado, el decil 10 baja de 23,8% a 22,7% (21,8% con los
+activos externos) y queda debajo de todos los deciles; el 1% más rico, de 21,7% a 20,0% (18,1%). El
+decil 1 sube de 28,7% a 31,2%: la carga total es la misma que en A, y su ingreso crece menos que el
+del resto, así que le toca una parte mayor. Lo que se puede afirmar: si el ingreso que falta en la
+encuesta está tan concentrado arriba como sugieren estos datos, el sistema es regresivo de punta a
+punta, y no sólo abajo.
 
 ## 4. ¿Proporcional o progresivo?
 
@@ -350,7 +376,7 @@ promedio todos los años; los deciles 6 a 8 son los que más seguido pagan menos
 de lo que pagaría en un sistema progresivo.
 
 En 2025, a la izquierda: los percentiles 90-95 pagan 24,6%, los 95-99, 23,7%, y el 1%, 21,7% (con el
-ingreso no declarado, los rombos, 20,1%). A la derecha, los mismos dos repartos de referencia de la
+ingreso completado, los rombos, 20,1%). A la derecha, los mismos dos repartos de referencia de la
 sección 4, para ese año:
 
 - **Proporcional:** los percentiles 90-95 pagan 0,5 puntos de la recaudación más de lo que les
@@ -411,7 +437,8 @@ supuesto; el nivel exacto del decil 1 y del decil 10 depende de cómo se mida.
 
 Cada resultado se recalculó con otros supuestos: a quién se le carga la contribución patronal, el IVA
 legal en vez del recaudado, sin corregir los ingresos altos, sin Bienes Personales (franja celeste);
-con el impuesto al cheque (triángulos); con el ingreso que nadie declara (rombos).
+con el impuesto al cheque (triángulos); completando el ingreso que la encuesta no capta (rombos,
+estimado como en la sección 3).
 
 - El decil 1 paga más que los deciles 2 a 9 en todas las variantes y todos los años (418 de 418
   combinaciones).
@@ -419,7 +446,7 @@ con el impuesto al cheque (triángulos); con el ingreso que nadie declara (rombo
 - Si en el decil 1 se usa el gasto en vez del ingreso declarado, paga entre 3 y 7 puntos menos que el
   promedio. Mide otra cosa, pero muestra cuánto depende el resultado de abajo de cómo se mide el
   ingreso.
-- Con el ingreso que nadie declara, el decil 10 queda debajo de todos los deciles en 10 de los 22
+- Con el ingreso completado, el decil 10 queda debajo de todos los deciles en 10 de los 22
   años (entre ellos 2004, 2016-2019, 2024 y 2025).
 
 **El impuesto al cheque.** La medida principal no lo incluye; la variante lo suma suponiendo que se

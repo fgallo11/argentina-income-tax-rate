@@ -43,7 +43,7 @@ flowchart LR
     ING --> TASA
 
     TASA --> RES["Resultados 2004-2025:<br/>por decil y tramo, por impuesto,<br/>contra un sistema proporcional y uno progresivo"]
-    TASA --> VAR["Variantes de supuestos:<br/>quién paga las contribuciones, IVA legal,<br/>ingreso no declarado, cheque, etc."]
+    TASA --> VAR["Variantes de supuestos:<br/>quién paga las contribuciones, IVA legal,<br/>ingreso completado, cheque, etc."]
 
     classDef fuente fill:#eef3fb,stroke:#2a78d6,color:#0b0b0b
     classDef paso fill:#fbfaf6,stroke:#9a998f,color:#0b0b0b

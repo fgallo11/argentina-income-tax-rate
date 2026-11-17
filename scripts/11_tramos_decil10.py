@@ -14,6 +14,7 @@ Variantes:
   sin_bienes_personales
 
 Salidas (outputs/tables/):
+  tasas_tramos_decil10_fig0.csv   los tramos con el ingreso completado (panel B de la figura 0).
   tasas_tramos_decil10.csv   variante, año, grupo (1-9, 91 = P90-95, 95 = P95-99, 99 = P99-100),
                              tasas por impuesto, participación en el ingreso y en los impuestos,
                              ingreso por persona en canastas básicas.
@@ -34,6 +35,12 @@ VARIANTES = [
     Variante("ajuste_cn", ajuste_cn=True),
     Variante("ajuste_cn_activos_ext", ajuste_cn=True, renta_activos_ext=0.03),
     Variante("sin_bienes_personales", incluir_bp=False),
+]
+# Sólo para la figura 0 (panel B: ingreso completado). Van a un archivo aparte para no cambiar
+# los rangos que usan las figuras 8 y 9 y el informe.
+VARIANTES_FIG0 = [
+    Variante("ajuste_cn_rentas", ajuste_cn=True, factor_rentas=7.0),
+    Variante("ajuste_cn_rentas_activos_ext", ajuste_cn=True, factor_rentas=7.0, renta_activos_ext=0.03),
 ]
 NOMBRES = {0: "Población", 91: "P90-95", 95: "P95-99", 99: "1% (EPH)"} | {d: f"D{d}" for d in range(1, 10)}
 
@@ -62,6 +69,18 @@ if __name__ == "__main__":
                                                                    "part_impuestos", "canastas_por_persona", "canastas_por_adulto_eq",
                                                                    "gasto_sobre_ingreso_declarado", "trimestres"]
     t[cols].to_csv(TABLES / "tasas_tramos_decil10.csv", index=False)
+
+    filas = []
+    for v in VARIANTES_FIG0:
+        for anio, qa in q.groupby("anio"):
+            p = promedio_anual(qa, anio, engho, rec.loc[anio], v)
+            p.insert(0, "anio", anio)
+            p.insert(0, "variante", v.nombre)
+            filas.append(p)
+    f0 = pd.concat(filas, ignore_index=True)
+    f0["grupo"] = f0.pop("decil").astype(int)
+    f0[["variante", "anio", "grupo"] + IMPUESTOS + ["total"]].to_csv(TABLES / "tasas_tramos_decil10_fig0.csv",
+                                                                      index=False)
 
     pr = t[t.variante == "principal"].set_index(["anio", "grupo"])
     pd.set_option("display.width", 220)
