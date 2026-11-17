@@ -141,8 +141,8 @@ No entran al cálculo, pero se citan. Ordenadas de menos a más confiable.
 
 | Cifra | Dónde | Origen declarado | Riesgo |
 |---|---|---|---|
-| ITO 2026 para Argentina: pobres ~37%, medios ~29-30%, D10 ~25%, 1% ~30% | `validacion.md` §3, `literatura_previa.md` §9 | **Prensa** (elDiarioAr, Análisis Digital, 18/05/2026). El propio doc dice: "No encontré esas cifras argentinas en el texto del informe" | **Alto.** No citar sin fuente primaria |
-| Pessino et al. (~2018), tabla por decil | `literatura_previa.md` §8, `validacion.md` §3, README | Argendata (Fundar), CSV `TRIBUT/presion_tributaria_media_por_tipo_de_impuesto_y_decil.csv`. El PDF del BID no se pudo abrir. La revista (Oxford Open Economics) "no confirmada" | Medio. Bajar el CSV y cotejar |
+| ITO 2026 para Argentina: 50% inferior 37%, 40% medio 29%, 10% superior 25%, 1% ~30% | `validacion.md` §3, informe §1, `data/externos/` | **Fuente primaria desde el 17/11/2026:** nota del ITO sobre Argentina (p. 3) e informe n.° 10, figura 5 (composición leída del gráfico). No son deciles | Medio (la composición es aproximada) |
+| Pessino et al. (2018), tabla por decil | `validacion.md` §3, informe §1, README | CSV de Argendata bajado el 17/11/2026 (`data/externos/`); el CSV cita Oxford Open Economics, vol. 4 | Bajo |
 | Santiere et al. 1997, Gaggero-Rossignolo 2010, Gómez Sabaini et al. 2008, Rossignolo 2012/13 | `validacion.md` §2, `literatura_previa.md` | Transcritos por un agente auxiliar; `auditoria.md` §1.1 dice haberlos verificado contra los PDF | Medio-bajo. Rossignolo es **suma propia**, no cifra publicada |
 | Gaskín (2022) | sólo `auditoria.md` §1.1 | Auditor | No está en `literatura_previa.md` |
 | CEQ Handbook p. 273 | `validacion.md`, `literatura_previa.md` §7 | 2ª ed. (2022); la 1ª no se abrió | Bajo |

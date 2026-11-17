@@ -4,7 +4,7 @@
 año por año, y cómo fue cambiando. Está escrito para que lo pueda leer cualquiera; los párrafos
 marcados **Detalle técnico** son para quien quiera saber exactamente cómo se calculó. Los gráficos
 se generan con `scripts/12_informe_graficos.py` y están en `outputs/figures/informe/`. El método
-completo está en `docs/metodologia.md`.
+completo está en `docs/metodologia.md` y qué es cada fuente y cómo se usó, en `docs/fuentes.md`.
 
 ## Cómo leer este informe
 
