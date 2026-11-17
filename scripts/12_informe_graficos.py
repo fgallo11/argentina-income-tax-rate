@@ -515,10 +515,10 @@ def c1_comparacion(largo, tramos):
     fig.suptitle("El gráfico de siempre: qué parte de su ingreso paga cada grupo en impuestos, según tres estudios",
                  x=0.01, y=1.04, ha="left", fontsize=14, fontweight="bold")
     fig.text(0.01, 0.985, "Los tres muestran lo mismo: el 10% más pobre paga la proporción más alta y de ahí para arriba "
-             "la carga es pareja o baja. Las diferencias de nivel vienen de qué impuestos suma cada uno: Argendata\nincluye "
-             "el cheque y otros impuestos al consumo (con el cheque, la raya negra en B, los dos quedan casi iguales); el "
-             "Tax Observatory suma Ganancias de sociedades y más impuestos al patrimonio arriba, y usa el ingreso de "
-             "Cuentas Nacionales.", fontsize=9.3, color=g.TINTA2, va="top")
+             "la carga es pareja o baja. Las diferencias de nivel vienen de qué impuestos suma cada uno: Argendata incluye "
+             "el cheque y otros impuestos al consumo (con el cheque, la raya negra en B, los dos quedan casi iguales);\nel "
+             "Tax Observatory suma Ganancias de sociedades y, como \"patrimonio\", el cheque y otros impuestos a la "
+             "propiedad cargados arriba, y usa el ingreso de Cuentas Nacionales.", fontsize=9.3, color=g.TINTA2, va="top")
     fig.subplots_adjust(wspace=0.06, top=0.84, bottom=0.17)
     fig.text(0.01, -0.08, "Fuentes: A, Argendata (Fundar), CSV del tópico Sistema tributario, con datos de Pessino, "
              "Rasteletti, Artana y Lustig (Oxford Open Economics, vol. 4); su categoría de Ganancias incluye sociedades. "

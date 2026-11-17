@@ -159,7 +159,7 @@ Pero hay tres objeciones que un economista va a hacer:
    el manual como respaldo sin mencionar esta diferencia.
 2. **Es por construcción.** Si recursos = gasto, la tasa del decil 1 es el impuesto por peso de
    consumo (22,3%) más sus impuestos directos (2,1%). No puede dar otra cosa que algo cercano al
-   promedio. `docs/metodologia.md` (sección 5 bis) lo admite; el README, no.
+   promedio. `docs/metodologia.md` (sección 6) lo admite; el README, no.
 3. **Mezcla dos medidas de bienestar.** El decil 1 se mide contra consumo y los otros nueve contra
    ingreso, con hogares ordenados por ingreso.
 

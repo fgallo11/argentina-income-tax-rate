@@ -11,9 +11,11 @@ cápita familiar, aglomerados urbanos de la EPH, 2004-2025.
 - **Impuestos incluidos:** Ganancias de personas humanas (4ta categoría), Bienes
   Personales, aportes personales (jubilación + INSSJP), contribuciones patronales, IVA,
   Internos e Ingresos Brutos. Son entre 56% y 71% de la recaudación total del país.
-- **Excluidos:** derechos de exportación, combustibles, impuesto al cheque, Ganancias de
-  sociedades, monotributo y autónomos, impuestos patrimoniales provinciales, sellos y
-  tasas municipales. La obra social (3%) se descuenta del salario pero no se cuenta como
+- **Excluidos de la medida principal:** derechos de exportación, combustibles, impuesto al
+  cheque, Ganancias de sociedades, monotributo y autónomos, impuestos patrimoniales
+  provinciales, sellos y tasas municipales. Cheque y combustibles están como variantes
+  (sección 12); Ganancias de sociedades sólo entra en el 1% de las declaraciones juradas
+  (sección 11). La obra social (3%) se descuenta del salario pero no se cuenta como
   impuesto porque no es recaudación del Estado.
 - **Período:** 2004-2025. 2003 se descarta (sólo dos trimestres de EPH continua y sin
   Cuentas Nacionales base 2004). 2026 no se incluye: a noviembre de 2026 hay sólo dos
@@ -47,7 +49,7 @@ encuesta subdeclara ingresos en todos los grupos salvo los asalariados registrad
 (cuentapropia, rentas, evasión, activos no declarados en el exterior), y la subdeclaración
 crece con el ingreso. Por eso la tasa medida del decil 10 está sobreestimada y la del
 decil 1 algo sobreestimada; la corrección consistente es ajustar los ingresos de todos los
-deciles a Cuentas Nacionales por fuente (sección 8, pendiente).
+deciles a Cuentas Nacionales por fuente (secciones 6 y 14).
 
 **Variante `recursos_gasto`** (era la principal hasta la auditoría). En los deciles más
 bajos el gasto de consumo estimado supera al ingreso declarado (en el decil 1, entre 1,45 y
@@ -102,20 +104,20 @@ siguiente") generaba escalones artificiales en 2012 y 2017; se conserva como var
 ## 5. Ingresos altos: Ganancias y Bienes Personales
 
 La EPH subdeclara los ingresos altos y la simulación de Ganancias sólo alcanza a
-asalariados registrados y jubilados: reproduce entre 12% y 37% de lo recaudado. La
+asalariados registrados y jubilados: reproduce entre 13% y 40% de lo recaudado. La
 corrección usa dos fuentes administrativas (`scripts/aux_anuarios_arca.py` y
 `scripts/09_ingresos_altos.py`):
 
 - **Recaudación oficial** de Ganancias de personas humanas y de Bienes Personales (DNIAF).
 - **Declaraciones juradas de Ganancias por tramo de ingresos** (anuarios de estadísticas
-  tributarias de ARCA, años fiscales 2002-2023): casos, resultado neto e impuesto.
+  tributarias de ARCA, años fiscales 2002-2024): casos, resultado neto e impuesto.
 
 Pasos:
 
 1. *Ganancias faltante* = recaudado − simulado (EPH expandida al país).
 2. *Quién lo paga.* Se acumulan los tramos de las declaraciones de mayor a menor y se
    comparan con las personas de mayor ingreso individual de la EPH. En el punto donde lo
-   declarado al fisco más supera a la encuesta (entre 0,2% y 1,5% de la población) se
+   declarado al fisco más supera a la encuesta (entre 0,3% y 1,6% de la población) se
    observa en qué decil viven esas personas: entre 84% y 99,9% en el decil 10, el resto en
    el 9 y el 8. Con esas proporciones se reparten Ganancias faltante y Bienes Personales.
 3. *Escala.* Tres opciones, que delimitan el rango del decil 10:
@@ -145,7 +147,7 @@ Pasos:
 llevadas a 2025 por el ingreso medio de la EPH. 2024 ya usa sus propias declaraciones. Bienes Personales sigue siendo una imputación (la EPH no releva
 patrimonio): se grafica rayado y existe la variante `sin_bienes_personales`.
 
-## 5 bis. Ingreso declarado y ingreso ajustado a Cuentas Nacionales
+## 6. Ingreso declarado y ingreso ajustado a Cuentas Nacionales
 
 La figura central (`fig0_dos_versiones_*`) muestra:
 
@@ -191,7 +193,7 @@ La variante `altos_registros` ("techo" del decil 10) se sigue calculando pero no
 grafica ni entra en los rangos: implica que el ingreso faltante pagó más Ganancias que la
 alícuota máxima (`docs/auditoria.md`, 3.4).
 
-## 6. Tabla de supuestos
+## 7. Tabla de supuestos
 
 Efecto medido en puntos porcentuales de la tasa total de 2024, salvo indicación.
 
@@ -200,10 +202,10 @@ Efecto medido en puntos porcentuales de la tasa total de 2024, salvo indicación
 | Recursos = ingreso declarado (no se reemplaza por gasto) | Medida principal | `recursos_gasto` | D1: 31,4 → 22,0. D2: −1,2. Resto: 0 |
 | Consumo por ingreso relativo e interpolación de ENGHo | Método | `criterio_inicial` | Elimina escalones de 2012 y 2017 |
 | Contribuciones patronales 50% trabajador / 50% precios | Supuesto | `contrib_100_trabajador`, `contrib_100_consumidor` | D1: 28,8 a 34,0. D5: 24,6 a 25,3. D10: 23,6 a 26,2 |
-| IVA al nivel recaudado (no al legal) | Anclado a datos | `iva_legal` | Promedio +1,6 |
+| IVA al nivel recaudado (no al legal) | Anclado a datos | `iva_legal` | Promedio +1,4 |
 | Ingresos altos: Ganancias y Bienes Personales faltantes en escala de encuesta | Supuesto central del decil 10 | `altos_sin_corregir` (piso), `altos_registros` (techo) | D10: 23,7 a 31,5 (principal 25,0). Promedio: 24,3 a 27,2. El techo no es válido: implica que el ingreso faltante pagó más Ganancias que la alícuota máxima (`docs/auditoria.md`, 3.4) |
 | Lo faltante lo pagan las personas de mayor ingreso de la EPH | Anclado a datos (anuarios ARCA) | No calculada | Reparte entre D8, D9 y D10 |
-| Bienes Personales con el mismo reparto que Ganancias faltante | Imputación | `sin_bienes_personales` | D10 −1,2 |
+| Bienes Personales con el mismo reparto que Ganancias faltante | Imputación | `sin_bienes_personales` | D10 −1,9 |
 | Aportes a AFJP (hasta 11/2008) cuentan como impuesto | Definición | `sin_afjp` | 2004: promedio −2,0. Desde 2009: 0 |
 | 7% de aporte para todo el sector privado hasta 2007 | Supuesto (EPH no informa régimen) | No calculada | Menor |
 | Alícuota patronal mayor si el establecimiento tiene más de 40 personas | Supuesto | No calculada | Menor |
@@ -212,7 +214,7 @@ Efecto medido en puntos porcentuales de la tasa total de 2024, salvo indicación
 | Todo el IVA e Ingresos Brutos recae en consumo de hogares | Supuesto | No calculada | Sobreestima indirectos |
 | Tramo de transición Ley 27.617 interpolado; cedular 2024 reescalado por SMVM | Aproximación | No calculada | Sólo D10, 2021-2024 |
 
-## 7. Población fija
+## 8. Población fija
 
 Los deciles no son las mismas personas a lo largo del tiempo. `scripts/08_poblacion_fija.py`
 aplica las reglas y la presión tributaria de cada año a una población fija, con sus
@@ -226,8 +228,8 @@ Variación 2004-2015, en puntos de la tasa total:
 | | Observada | Población de 2004 | Población de 2017 |
 |---|---|---|---|
 | Decil 1 | +0,5 | +9,7 | +7,2 |
-| Decil 5 | +5,2 | +5,5 | +5,1 |
-| Decil 10 | +11,1 | +11,4 | +10,4 |
+| Decil 5 | +5,2 | +5,5 | +5,2 |
+| Decil 10 | +7,1 | +7,7 | +6,7 |
 
 En los deciles 5 y 10 casi todo el cambio es presión tributaria: las tres columnas se
 parecen. En el decil 1 las reglas habrían subido la carga entre 7 y 10 puntos, pero la
@@ -236,9 +238,11 @@ decil (más asalariados registrados y jubilados) y cambió su gasto respecto de 
 entre ediciones de la ENGHo (el cociente del decil 1 es 1,59 en la 2004/05, 1,68 en la 2012/13 y 1,45 en la
 2017/18). Con estos datos no se pueden separar.
 
-## 6 bis. Lo que se tomó de Pessino et al. (2023) y De Rosa, Flores y Morgan (2024)
+## 9. Lo que se tomó de Pessino et al. y De Rosa, Flores y Morgan (2024)
 
-Papers en `papers/`. Variantes nuevas (2024, total % del ingreso):
+Pessino, Rasteletti, Artana y Lustig, *Distributional effects of taxation in Latin America*
+(Oxford Open Economics, vol. 4; datos de 2018, publicados por Fundar en Argendata). Papers en
+`papers/`. Variantes nuevas (2024, total % del ingreso):
 
 | Variante | Qué hace | D1 | D5 | D10 | Prom. |
 |---|---|---|---|---|---|
@@ -252,8 +256,9 @@ El panel B de la figura 0 usa `ajuste_cn_rentas` con la marca de `ajuste_cn_rent
 con el ingreso de capital no declarado el decil 10 queda por debajo de todos los demás.
 
 **No vale para todos los años.** Con rentas ×7 y activos externos, el decil 10 queda por
-debajo de todos los deciles medios sólo en 2004, 2007, 2008, 2018, 2019, 2024 y 2025. En 2009-2017 y
-2020-2023 baja pero sigue por encima del promedio (Ganancias pesaba más en esos años). La
+debajo de todos los deciles medios en 2004-2005, 2007-2008, 2016-2019, 2024 y 2025. En 2010-2015 y
+2020-2022 baja pero sigue por encima del promedio, y en 2006, 2009 y 2023 queda entre el promedio
+y el decil medio más bajo (Ganancias pesaba más en esos años). La
 figura 0 para cada año está en `outputs/figures/por_anio/` y su texto se adapta al resultado.
 
 Pendiente de Pessino et al. (no implementado):
@@ -267,7 +272,7 @@ Pendiente de Pessino et al. (no implementado):
 - **Concepto de ingreso:** incluyen el alquiler imputado de la vivienda propia; la EPH no lo trae.
 - **Contribuciones con mercado integrado:** 50% recae en salarios informales.
 
-## 7 bis. Distancia entre deciles (figuras 6 y 6b)
+## 10. Distancia entre deciles (figuras 6 y 6b)
 
 Brecha de ingresos: ingreso por persona del decil 10 dividido por el del decil 1 (como la
 "brecha de ingresos" que publica el INDEC), antes de impuestos directos y después de restar
@@ -295,7 +300,7 @@ límites, la media ($442.596) y la población (29.783.755) del cuarto trimestre 
 con el informe "Evolución de la distribución del ingreso (EPH)" del INDEC (cuadro 1). El decil
 10 promedia $1.430.619 por persona en pesos de ese trimestre: es por persona, no por hogar.
 
-## 7 ter. El 1% más rico (figura 7)
+## 11. El 1% más rico (figura 7)
 
 `scripts/10_top1.py`, con las declaraciones juradas de Ganancias por tramo (anuarios de ARCA,
 años fiscales 2002-2024; 2025 extrapolado), como Alvaredo (2010). Grupo: el 1% de la población con mayores
@@ -316,19 +321,19 @@ daba 30,1%, 35,8% y 33,7%: la Ganancias determinada real del grupo es 11,7% de s
 contra 15,8% extrapolado.) 2025 (extrapolado): 26,6% (25,1-28,1); sólo con lo declarado,
 30,2%; sin los activos externos, 30,1%. Sigue siendo un techo: las rentas internas no declaradas no figuran
 en ninguna fuente. Pesa el supuesto de que la mitad del ingreso es salario (aportes y
-contribuciones: 8,2% del ingreso declarado).
+contribuciones: 8,6% del ingreso declarado en 2025).
 
-## 7 quater. Impuesto al cheque y combustibles
+## 12. Impuesto al cheque y combustibles
 
 La medida principal excluye el impuesto a los créditos y débitos bancarios y el de
-combustibles. Pessino et al. (2023) los incluyen ("en cascada" y "otros"). Variantes
+combustibles. Pessino et al. los incluyen ("en cascada" y "otros"). Variantes
 `con_cheque` y `con_cheque_y_combustibles`: recaudación por peso de consumo privado aplicada
 al consumo de cada decil, como Ingresos Brutos. Supuestos: el cheque se traslada entero a
 precios; combustibles se reparte como el consumo total (falta la canasta de combustibles por
-decil de la ENGHo). 2018 con cheque: D1 37,1%, D2 27,6%, D10 28,4% (Pessino et al.: 35,8%,
+decil de la ENGHo). 2018 con cheque: D1 37,1%, D2 27,6%, D10 25,0% (Pessino et al.: 35,8%,
 30,8%, 24,9%).
 
-## 7 quinquies. El decil 10 partido (figura 8)
+## 13. El decil 10 partido (figura 8)
 
 `scripts/11_tramos_decil10.py` (agregado el 16/11/2026). El decil 10 se parte en percentiles
 90-95, 95-99 y el 1% superior, con el mismo orden (ingreso per cápita familiar), la misma regla
@@ -351,7 +356,7 @@ En la cima la tasa baja, por debajo de los deciles medios (~23,6%). El 10% más 
 ingreso (encuesta más el ingreso declarado al fisco que la encuesta no capta) y el 1% 10,8% (9,9%
 de los impuestos). El 1% de la encuesta, completado, tiene 20,9 canastas por persona; el de las
 declaraciones juradas, 35 por declarante. Con la renta de activos externos, el 1% de la encuesta
-paga 20,1%. El 1% de la sección 7 ter da 26,6% porque además suma la mitad del impuesto de
+paga 20,1%. El 1% de la sección 11 da 26,6% porque además suma la mitad del impuesto de
 sociedades (y la mitad de las utilidades al ingreso) y supone que la mitad de su ingreso es salario.
 
 (Hasta la corrección del 16/11/2026 este tramo daba 29,0%: la Ganancias faltante se le sumaba sin
@@ -363,11 +368,14 @@ parte del ingreso) y progresiva (tasa = promedio × (ingreso por persona / prome
 para recaudar lo mismo; con ese exponente el decil 1 pagaría 12,7% y el 1% superior 37,0% en 2025).
 El exponente es una elección para ilustrar, no una norma (`ELAST_PROG` en `scripts/07_graficos.py`).
 Frente al proporcional los desvíos son menores a 1 punto; frente al progresivo, los deciles 1 a 9
-pagan entre 0,5 y 1,5 puntos más de su parte y el 1% superior 7 puntos menos.
+pagan entre 0,5 y 1,5 puntos más de su parte y el 1% superior 7 puntos menos (2025). La misma
+cuenta para los 22 años está en `outputs/tables/deltas_proporcional_progresivo.csv` y en la matriz
+del informe (`i9_matriz_deltas`): frente al progresivo, el 1% paga entre 2,4 y 9,1 puntos menos
+todos los años.
 
 **Serie (figura 9) y figura 8 por año** (`outputs/figures/por_anio/fig8_decil10_partido_<año>.png`).
-El 1% de la encuesta paga más que los percentiles 90-95 en 14 de 22 años y menos en 2016-2019, 2024
-y 2025. Lo que mueve su tasa es Ganancias y Bienes Personales; el consumo pesa poco arriba. El salto
+El 1% de la encuesta paga más que los percentiles 90-95 en 14 de 22 años y menos en 2014, 2016-2019,
+2023, 2024 y 2025. Lo que mueve su tasa es Ganancias y Bienes Personales; el consumo pesa poco arriba. El salto
 de 2006 (31%, contra 24-26% en 2005 y 2007) y los vaivenes de 2016-2019 reflejan en parte el ruido
 del tramo (pocas observaciones).
 
@@ -375,10 +383,10 @@ del tramo (pocas observaciones).
 año. Un trimestre (2011T1) de la base cruda local difiere en 0,1% de la usada para los deciles
 publicados; los tramos se calcularon con la local.
 
-## 8. Qué falta para cerrar los supuestos abiertos
+## 14. Qué falta para cerrar los supuestos abiertos
 
 0. **Subdeclaración de ingresos en todos los deciles.** Hecho para salarios e ingreso mixto
-   (sección 5 bis). Falta lo que no tiene dato oficial: rentas de la propiedad de los hogares
+   (sección 6). Falta lo que no tiene dato oficial: rentas de la propiedad de los hogares
    y la Cuenta de generación del ingreso de 2004-2015. Plan original: ajustar el ingreso de la
    EPH a Cuentas Nacionales por fuente, como Gómez Sabaini y Rossignolo: salarios,
    ingreso de cuentapropistas (ingreso mixto), rentas de la propiedad y jubilaciones, cada
@@ -403,7 +411,7 @@ publicados; los tramos se calcularon con la local.
    incierta (capital, trabajo o precios), sumarlo bien exige sumar también las utilidades al
    ingreso de los dueños (si no, se infla la cima, como pasaba con la Ganancias de personas antes
    de la corrección del 16/11/2026) y no hay datos de propiedad de empresas. Hoy sólo entra en el
-   1% de las declaraciones juradas (sección 7 ter). Plan: cuatro variantes (100% capital; 50%
+   1% de las declaraciones juradas (sección 11). Plan: cuatro variantes (100% capital; 50%
    capital y 50% trabajo; 100% trabajo; 100% precios). Capital: impuesto menos la parte de dueños
    del exterior (inversión extranjera directa, PII del INDEC), más las utilidades (impuesto ÷
    alícuota del año, en `params/`) como ingreso, repartido con el empalme de declaraciones juradas o
@@ -417,3 +425,23 @@ publicados; los tramos se calcularon con la local.
    (método de Bachas, Gadenne y Jensen). Detalle en `docs/informe.md`, "Pendientes".
 7. **Verificaciones de norma pendientes:** alícuotas patronales 2003-2019, INSSJP y obra
    social, y varias reglas de IVA marcadas "no verificado" en el clasificador.
+
+## 15. Informe y comparación con otros estudios
+
+`docs/informe.md` presenta los resultados; sus gráficos salen de `scripts/12_informe_graficos.py`
+(sólo lee `outputs/tables/` y `data/externos/`). Comparación con Argendata (Pessino et al., 2018) y
+con el International Tax Observatory (2026) en `docs/validacion.md`, sección 3; los datos de esos
+estudios están en `data/externos/` y no entran en ningún cálculo.
+
+**Qué incluye el "patrimonio" del ITO.** Sus tasas por impuesto vienen de De Rosa, Flores y Morgan
+(2024), que toman la recaudación de *Revenue Statistics in Latin America and the Caribbean*
+(OCDE/CEPAL/CIAT/BID) con su clasificación. En esa clasificación, "impuestos a la propiedad" (código
+4000) incluye para Argentina, en 2019 y en % del PIB: impuesto a los débitos y créditos bancarios
+(cheque, código 4400) 1,62; sellos 0,41; inmobiliario 0,41; Bienes Personales 0,14; total 2,61. Este
+proyecto sólo cuenta Bienes Personales en esa categoría (el cheque, como variante trasladada a
+precios). Por eso su barra de patrimonio es mucho mayor y llega a todos los grupos. En los
+resultados de De Rosa, Flores y Morgan todos los impuestos a la propiedad, incluida la categoría
+"otros sobre la propiedad" donde cae el cheque, resultan progresivos (pesan más arriba; su figura 3,
+Argentina 2019); el texto no detalla con qué variable los reparte. Este proyecto carga el cheque a
+precios, y así resulta regresivo: es la principal diferencia de supuestos en la cima. Datos: serie `DSD_REV_LAC@DF_REVARG` de la OCDE (vía
+DBnomics), consultada el 17/11/2026.

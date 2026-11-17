@@ -1,7 +1,11 @@
 # Trazabilidad de los datos: de dónde sale cada número
 
 Inventario hecho el 14/11/2026 sobre el commit `63c1d49`. Objetivo: que cada dato del
-proyecto se pueda verificar a mano contra su fuente. Cuatro categorías:
+proyecto se pueda verificar a mano contra su fuente.
+
+> **Agregados después del inventario:** anuarios de ARCA del año fiscal 2024 (anuario 2025); datos de
+> terceros sólo para comparar en `data/externos/` (Argendata, ITO; categoría D, con su README); la
+> serie de impuestos a la propiedad de la OCDE citada en `docs/metodologia.md`, sección 15 (categoría D). Cuatro categorías:
 
 - **A. Descargado por el pipeline** (`scripts/01_descargar_datos.py`): el número no lo tipeó
   nadie; se verifica revisando que la URL/ID sea la serie correcta.
@@ -142,7 +146,7 @@ No entran al cálculo, pero se citan. Ordenadas de menos a más confiable.
 | Santiere et al. 1997, Gaggero-Rossignolo 2010, Gómez Sabaini et al. 2008, Rossignolo 2012/13 | `validacion.md` §2, `literatura_previa.md` | Transcritos por un agente auxiliar; `auditoria.md` §1.1 dice haberlos verificado contra los PDF | Medio-bajo. Rossignolo es **suma propia**, no cifra publicada |
 | Gaskín (2022) | sólo `auditoria.md` §1.1 | Auditor | No está en `literatura_previa.md` |
 | CEQ Handbook p. 273 | `validacion.md`, `literatura_previa.md` §7 | 2ª ed. (2022); la 1ª no se abrió | Bajo |
-| INDEC 4T2024: media $442.596, población 29.783.755, D10 $1.430.619 | `metodologia.md` §7 bis | Informe "Evolución de la distribución del ingreso", cuadro 1 | Bajo (validado por el pipeline) |
+| INDEC 4T2024: media $442.596, población 29.783.755, D10 $1.430.619 | `metodologia.md` §10 | Informe "Evolución de la distribución del ingreso", cuadro 1 | Bajo (validado por el pipeline) |
 
 ---
 

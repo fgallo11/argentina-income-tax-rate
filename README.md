@@ -5,7 +5,7 @@ ingreso per cápita familiar, aglomerados EPH, con serie anual 2004-2025.
 
 **Estado: segunda versión.** Pipeline completo, con variantes de sensibilidad, contrafáctico
 de población fija y documentación. Quedan supuestos abiertos (ver `docs/metodologia.md`,
-secciones 6 y 8): el más importante es la cola alta de ingresos.
+secciones 7 y 14): el más importante es la cola alta de ingresos.
 
 **Informe de resultados:** [`docs/informe.md`](docs/informe.md), con la evolución 2004-2025 en
 gráficos (`outputs/figures/informe/`, generados por `scripts/12_informe_graficos.py`).
@@ -64,13 +64,13 @@ la mitad de su ingreso es salario.
 
 **El decil 10 a lo largo del tiempo** (`outputs/figures/fig9_decil10_serie.png`; la figura 8 de cada
 año en `outputs/figures/por_anio/`): el 1% de la encuesta paga más que los percentiles 90-95 en 14
-de 22 años y menos en 6 (2016-2019, 2024 y 2025). Lo que mueve su tasa es Ganancias y Bienes
+de 22 años y menos en 8 (2014, 2016-2019 y 2023-2025). Lo que mueve su tasa es Ganancias y Bienes
 Personales: en 2012-2013 llegó a 34-35%; en 2016, 2018 y 2019, a 22%.
 
 **Distancia entre deciles** (`outputs/figures/fig6_distancia_entre_deciles.png`, en canastas
 básicas; `fig6b_distancia_en_pesos.png`, en pesos de hoy): el 10% más rico ingresaba por persona
 46 veces lo del 10% más pobre en 2004 y 20 veces en 2024 y 2025; después de impuestos la distancia
-es mayor (22 veces en 2024, 21 en 2025; mayor en 21 de los 22 años). En canastas básicas por
+es mayor (22 veces en 2024 y en 2025; mayor en los 22 años). En canastas básicas por
 persona, el decil 1 pasó de 0,10 en 2004 a 0,28 en 2017, 0,22 en 2024 y 0,28 en 2025; el decil
 10, de 4,0 a 5,3, 4,1 y 5,0.
 
@@ -79,12 +79,14 @@ medida principal no los incluye; Pessino et al. sí. Con el cheque, 2025: D1 32,
 promedio 25,2% (2024: 34,7%, 26,0% y 26,3%); con ambos, 2025: D1 33,1%, D10 25,1%, promedio
 25,7% (2024: 35,6%, 26,3% y 26,7%).
 
-Comparación con Pessino et al. (~2018, publicado por Fundar en Argendata) y con el
-International Tax Observatory (2026) en `docs/validacion.md`, sección 3.
+Comparación con Pessino et al. (2018, publicado por Fundar en Argendata) y con el
+International Tax Observatory (2026) en `docs/validacion.md`, sección 3, y en la sección 1 del
+informe; sus datos están en `data/externos/`. El "patrimonio" del ITO incluye el impuesto al cheque
+(clasificación de la OCDE): ver `docs/metodologia.md`, sección 15.
 
 La figura central de cada año 2004-2025 está en `outputs/figures/por_anio/`. Con el ingreso
-no declarado, el decil 10 queda por debajo de todos los deciles en 2004, 2007-2008, 2018-2019,
-2024 y 2025; en los demás años baja pero sigue por encima del promedio.
+no declarado, el decil 10 queda por debajo de todos los deciles en 2004-2005, 2007-2008,
+2016-2019, 2024 y 2025; en 2010-2015 y 2020-2022 baja pero sigue por encima del promedio.
 
 Los ingresos por decil de la EPH coinciden con los que publica el INDEC (validado contra el
 cuarto trimestre de 2024, los diez deciles).
@@ -128,13 +130,15 @@ adelante. No corras `07_graficos.py` solo: las figuras quedarían con tablas vie
 - **Ingreso:** el declarado en la EPH, antes de impuestos directos, con el aguinaldo en
   base devengada. Variantes: reemplazar el ingreso por el gasto donde éste lo supera
   (`recursos_gasto`) y medir contra el consumo (`sobre_consumo`).
-- **Ingresos altos:** lo recaudado por Ganancias que la simulación no capta y Bienes
-  Personales se asignan a las personas de mayor ingreso (declaraciones juradas de ARCA),
-  en la misma escala que los impuestos indirectos; piso y techo publicados.
+- **Ingresos altos:** a las personas de mayor ingreso de la EPH se les suma el ingreso que
+  declaran a ARCA y la encuesta no capta, junto con la Ganancias que pagan por él (declaraciones
+  juradas por tramo); el resto de la Ganancias no simulada y Bienes Personales se reparten con
+  las mismas declaraciones. El decil 10 se parte además en percentiles 90-95, 95-99 y el 1%.
 
 ## Limitaciones principales
 
-- El decil 10 tiene un rango amplio (24% a 31% en 2024): su ingreso real no se observa.
+- El decil 10 depende de supuestos: entre 21,8% y 25,1% en 2025 según la variante (con el ingreso
+  no declarado, el piso), porque su ingreso real no se observa.
 - El consumo de encuesta es 37-55% del de Cuentas Nacionales.
 - El decil 1 declara gastar más de lo que gana: 31,4% contra el ingreso declarado y 22,0%
   si se reemplaza su ingreso por el gasto (2024).

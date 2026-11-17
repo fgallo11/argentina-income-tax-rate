@@ -39,8 +39,8 @@ citarlas. Presión tributaria total, % del ingreso.
 | Gómez Sabaini, Harriague y Rossignolo | 2008 | 38,3 | 34,3 | 35,5 | 34,6 |
 | Gaggero y Rossignolo (CEFID-AR DT 40) | 2010 | 49,7 | 43,0 | 47,0 | 45,4 |
 | Rossignolo (CEQ WP 45), suma propia del agente | 2012/13 | 44,6 | 34,7 | 45,5 | 39,6 |
-| **Este proyecto, principal (ingreso declarado)** | 2010 | 37,3 | 26,3 | 28,7 | 27,0 |
-| Este proyecto, variante `recursos_gasto` | 2010 | 20,3 | 26,3 | 28,7 | 26,4 |
+| **Este proyecto, principal (ingreso declarado)** | 2010 | 37,3 | 26,3 | 29,2 | 27,3 |
+| Este proyecto, variante `recursos_gasto` | 2010 | 20,3 | 26,3 | 29,2 | 26,8 |
 
 Diferencias que explican la distancia de nivel:
 
@@ -55,7 +55,7 @@ Diferencias que explican la distancia de nivel:
   Fernández Felices et al.).
 - En IVA e Ingresos Brutos los órdenes de magnitud coinciden: Gaggero y Rossignolo dan
   para 2010 IVA 15,8 / 11,8 / 9,3 e Ingresos Brutos 6,2 / 5,1 / 4,3 (D1 / D5 / D10); este
-  proyecto (principal) da IVA 19,4 / 9,2 / 6,4 e Ingresos Brutos 8,7 / 4,1 / 2,9.
+  proyecto (principal) da IVA 19,4 / 9,2 / 5,8 e Ingresos Brutos 8,7 / 4,1 / 2,6.
 - Forma del perfil: los estudios previos encuentran una U (más carga en ambas puntas).
   Aquí la punta alta no aparece porque la EPH no capta los ingresos altos, y la punta baja
   depende de cómo se mida el ingreso del decil 1.
@@ -100,6 +100,8 @@ No da deciles sino cuatro grupos, por hogar, con ingreso de Cuentas Nacionales; 
 | Este proyecto, 2025 | 23,9 | 23,6 | 23,4 | 21,7 |
 
 La forma de abajo coincide. Su 1% llega a ~30% porque suma Ganancias de sociedades (~8 puntos) y
-patrimonio (~9). Su 50% inferior tiene ~30 puntos de impuestos al consumo contra ~18 aquí; no se
+patrimonio (~9). Ese "patrimonio" sigue la clasificación de la OCDE, que incluye el impuesto al
+cheque (1,6% del PIB en 2019, contra 0,14% de Bienes Personales): `docs/metodologia.md`, sección 15.
+Su 50% inferior tiene ~30 puntos de impuestos al consumo contra ~18 aquí; no se
 pudo verificar la causa. Nota: la cifra de "~25% del decil 10" citada antes en esta tabla era la del
 10% superior del ITO, no un decil.

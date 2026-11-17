@@ -1,5 +1,10 @@
 # Respuestas a `preguntas_abiertas.md`
 
+> **Documento histórico (anterior a la auditoría del 13/11/2026).** Varias decisiones cambiaron
+> después: la medida principal es el ingreso declarado (no el gasto), los ingresos altos se
+> corrigieron el 16/11/2026 y las cifras de abajo son de ese momento. El estado actual está en
+> `docs/metodologia.md` y los resultados en `docs/informe.md`.
+
 Cada punto fue contrastado con corridas nuevas. Las cifras salen de `outputs/tables/`.
 
 ## A. Regresividad

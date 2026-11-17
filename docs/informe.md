@@ -71,7 +71,7 @@ otra forma:
 | Año | 2018 | no lo dice (sus fuentes llegan a 2019) | 2004 a 2025, cada año |
 | Unidad | personas | hogares | personas |
 | Ingreso | encuesta | Cuentas Nacionales (más alto que la encuesta) | encuesta, completada arriba con las declaraciones juradas |
-| Impuesto al cheque | sí (como impuesto "en cascada") | no lo detalla | como variante (raya negra en B) |
+| Impuesto al cheque | sí (como impuesto "en cascada") | sí, dentro de "patrimonio", cargado arriba | como variante, cargado a precios (raya negra en B) |
 | Ganancias de sociedades | sí | sí | no (ver "Pendientes") |
 | Impuestos al patrimonio | no | sí | Bienes Personales |
 
@@ -85,6 +85,14 @@ Contra el ITO, la diferencia grande está en las puntas. Abajo, el ITO le carga 
 30 puntos de impuestos al consumo, contra unos 18 de este estudio; no pudimos verificar de dónde
 sale esa diferencia. Arriba, el 1% del ITO llega a 30% porque suma Ganancias de sociedades (unos 8
 puntos) y bastante patrimonio (unos 9); este estudio no reparte el impuesto de sociedades.
+
+**Ojo con el "patrimonio" del ITO.** No es sólo Bienes Personales. Sigue la clasificación
+internacional de la OCDE, donde "impuestos a la propiedad" incluye el impuesto al cheque. En 2019 eso
+sumó 2,6% del PIB: cheque 1,6, sellos 0,4, inmobiliario 0,4 y Bienes Personales apenas 0,14. El ITO
+reparte esa categoría pesando más arriba; este estudio carga el cheque a los precios, donde pesa más
+abajo. Es la diferencia de supuestos más importante en la cima, y no está resuelta: parte del cheque
+la pagan quienes consumen y parte quienes más mueven dinero en los bancos. Detalle en
+`docs/metodologia.md`, sección 15.
 
 ![Serie](../outputs/figures/informe/i1_serie.png)
 
