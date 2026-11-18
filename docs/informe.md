@@ -92,6 +92,10 @@ flowchart LR
 - **Comparado con un sistema progresivo, falta arriba lo que sobra abajo.** Con la misma
   recaudación, el 1% pagaría entre 2,4 y 9,1 puntos más de la recaudación total, todos los años, y
   los deciles 1 a 7 pagarían menos.
+- **En plata, el 1% pagaría unos US$3.500 millones más por año con un sistema proporcional y unos
+  US$13.200 millones más con uno progresivo** (2025, ingreso completado; 0,5% y 1,9% del PIB). Con el
+  progresivo, los deciles 1 a 9 pagarían US$17.800 millones menos. Es una cuenta mecánica, sin
+  cambios de comportamiento: mide la distancia, no lo que se podría recaudar.
 - **Adentro del decil 10 cambia cómo se paga.** Los percentiles 90-95 pagan como un asalariado
   (aportes, contribuciones, consumo); el 1%, sobre todo con Ganancias y Bienes Personales.
 - **Los impuestos agrandan la distancia entre ricos y pobres.** El 10% más rico ingresaba 46 veces
@@ -383,6 +387,116 @@ de los impuestos menos Gini del ingreso, con 12 grupos (aproximado). Tabla de la
 **Otra forma de verlo: contra la tasa promedio.** Cada celda es la tasa del grupo menos la tasa
 promedio del año, en puntos (mismos colores). El decil 1 paga entre 4 y 13 puntos más que el
 promedio todos los años; los deciles 6 a 8 son los que más seguido pagan menos; la cima alterna.
+
+### ¿Cuánta plata es?
+
+Los puntos de la matriz se pueden pasar a plata. La cuenta es simple: se toma lo que de verdad se
+recaudó en el año con los impuestos del estudio (18,7% del PIB en 2025, según la DNIAF) y, para cada
+grupo, se multiplica por la diferencia entre la parte que le tocaría pagar y la que paga hoy.
+
+Se usa lo recaudado y no lo que reconstruye el modelo porque la encuesta capta menos ingreso y menos
+consumo que las Cuentas Nacionales: el modelo acierta en cómo se reparte la carga, no en cuánto suma.
+Los montos se pasan a dólares con el tipo de cambio oficial promedio de cada año. Salvo que se diga
+otra cosa, los números son de la versión B (ingreso completado, sección 3).
+
+![Brecha por grupo](../outputs/figures/informe/i10_brecha_grupos.png)
+
+**En una frase:** con un sistema proporcional, el 1% pagaría unos US$3.500 millones más por año; con
+uno progresivo, unos US$13.200 millones más, y los deciles 1 a 9 pagarían casi US$18.000 millones
+menos.
+
+**Qué pasa en 2025, grupo por grupo** (versión B; signo +: pagaría más; −: pagaría menos):
+
+| Grupo | Tasa hoy | Proporcional: US$ mil M | Progresivo: tasa | Progresivo: US$ mil M | Progresivo: US$ por persona y año |
+|---|---|---|---|---|---|
+| D1 | 31,5% | −0,6 | 12,1% | −1,4 | −309 |
+| D2 | 25,0% | −0,2 | 14,3% | −1,5 | −331 |
+| D3 | 24,5% | −0,2 | 15,6% | −1,8 | −382 |
+| D4 | 25,3% | −0,4 | 16,5% | −2,2 | −480 |
+| D5 | 25,6% | −0,6 | 17,3% | −2,5 | −540 |
+| D6 | 24,7% | −0,4 | 18,3% | −2,4 | −525 |
+| D7 | 24,5% | −0,4 | 19,4% | −2,4 | −529 |
+| D8 | 24,5% | −0,6 | 20,5% | −2,4 | −521 |
+| D9 | 23,8% | −0,1 | 22,3% | −1,2 | −265 |
+| P90-95 | 24,0% | −0,2 | 24,6% | +0,4 | +162 |
+| P95-99 | 23,4% | +0,2 | 28,3% | +4,2 | +2.299 |
+| **1%** | **18,5%** | **+3,5** | **37,8%** | **+13,2** | **+28.746** |
+
+Cómo leer la tabla:
+
+- **Proporcional:** todos pagan la tasa promedio, 23,6%. El 1% es el único que tendría que poner una
+  suma importante: US$3.500 millones por año (0,52% del PIB), unos US$7.650 por persona. Con eso
+  bajaría la carga de todos los deciles 1 a 9, entre US$100 y US$600 millones cada uno.
+- **Progresivo:** la tasa sube con el ingreso. El 1% pasaría de 18,5% a 37,8% y pondría US$13.200
+  millones más (1,94% del PIB). Los percentiles 95-99 pondrían US$4.200 millones. Los deciles 1 a 9
+  pagarían en conjunto US$17.800 millones menos (2,6% del PIB): entre US$265 y US$540 por persona y
+  por año. El decil 1 pasaría de 31,5% a 12,1%.
+- **Los montos por persona cuentan a todos:** chicos, jubilados y desocupados incluidos, no sólo a
+  quienes trabajan o declaran.
+
+**Lo mismo dicho de otra manera.** Como el sistema real y la referencia recaudan lo mismo, la brecha
+del 1% es también lo que se recaudaría de más si sólo el 1% pasara a la tasa de referencia y nadie
+más cambiara. En 2025, subir a todos los que pagan de menos, sin bajarle a nadie, sumaría 0,55% del
+PIB con la referencia proporcional y 2,6% con la progresiva.
+
+![El 1% en el tiempo](../outputs/figures/informe/i11_brecha_1pct.png)
+
+**A lo largo de los años: lo proporcional cambia de signo, lo progresivo no.** El gráfico sigue al
+1%: su tasa (roja), la tasa promedio, que es la que pagaría con un sistema proporcional (gris), y la
+que pagaría con uno progresivo (azul). La tabla pasa las distancias a puntos del PIB:
+
+| Año | Tasa del 1% (B) | Tasa promedio | Proporcional, A | Proporcional, B | Progresivo, A | Progresivo, B |
+|---|---|---|---|---|---|---|
+| 2004 | 21,4% | 22,7% | −0,17 | +0,11 | +0,75 | +1,23 |
+| 2008 | 21,7% | 26,4% | −0,06 | +0,36 | +0,84 | +1,59 |
+| 2012 | 30,9% | 28,6% | −0,29 | −0,14 | +0,48 | +0,76 |
+| 2016 | 20,3% | 25,8% | +0,39 | +0,56 | +1,86 | +2,15 |
+| 2019 | 20,0% | 23,8% | +0,19 | +0,40 | +1,57 | +1,94 |
+| 2022 | 29,9% | 26,6% | −0,40 | −0,27 | +0,82 | +1,04 |
+| 2023 | 23,6% | 26,6% | −0,06 | +0,35 | +1,56 | +2,33 |
+| 2024 | 21,3% | 24,7% | +0,11 | +0,34 | +1,43 | +1,82 |
+| 2025 | 18,5% | 23,6% | +0,16 | +0,52 | +1,31 | +1,94 |
+
+Lo que el 1% tendría que sumar cada año, en % del PIB (+: paga menos que la referencia; −: ya
+paga más). A: encuesta; B: ingreso completado.
+
+- **Frente al proporcional, depende de los años y de la versión.** En 2006, 2009-2013 y 2020-2022
+  el 1% pagaba más que el promedio en las dos versiones. En 2016-2019 y 2024-2025 pagaba menos en las dos.
+  En el resto de los años, el signo depende de cuánto ingreso no captado se le sume. Hacia arriba,
+  la brecha llega a 0,56% del PIB (2016).
+- **Frente al progresivo, el 1% paga menos todos los años y en las dos versiones.** La brecha va de
+  0,35% a 1,86% del PIB con la encuesta sola y de 0,65% a 2,33% con el ingreso completado. Es más
+  chica en 2009-2013 y 2020-2022 y más grande en 2016-2019 y 2023-2025.
+- **Sumando 2016-2025:** el 1% pagó, frente al progresivo, unos US$95.000 millones menos (B; con la
+  encuesta sola, US$73.000 millones). Frente al proporcional, US$12.800 millones menos con el ingreso
+  completado y casi nada con la encuesta sola: en esos años se compensan los que pagó de más con los
+  que pagó de menos.
+
+**Qué tan firme es.** El número que más depende de supuestos es el progresivo, porque la referencia
+progresiva es una elección. Con una progresividad más suave o más fuerte (exponente 0,15 o 0,40 en
+vez de 0,25), lo que el 1% sumaría en 2025 cambia así:
+
+| Exponente | Versión A: US$ mil M | Versión A: % PIB | Versión B: US$ mil M | Versión B: % PIB |
+|---|---|---|---|---|
+| 0,15 (más suave) | 5,5 | 0,81 | 9,0 | 1,31 |
+| 0,25 (la usada) | 8,9 | 1,31 | 13,2 | 1,94 |
+| 0,40 (más fuerte) | 14,8 | 2,17 | 20,4 | 2,99 |
+
+Cambia el monto, no la dirección: con cualquiera de los tres exponentes y en las dos versiones, el 1%
+paga menos de lo que le tocaría.
+
+**Lo que esta cuenta no es.** Es una cuenta mecánica: supone que nadie cambia lo que hace. No es una
+estimación de cuánto se podría cobrar con una reforma. Una suba de impuestos arriba trae más elusión,
+más evasión y más activos afuera, y el monto que de verdad se recauda sería menor. Lo que mide es la
+distancia entre cómo se reparte hoy la carga y cómo se repartiría con cada referencia.
+
+**Detalle técnico.** Brecha del grupo = R × (parte de referencia − parte que paga). R es la
+recaudación de Ganancias de personas humanas, Bienes Personales, aportes y contribuciones, IVA,
+Internos e Ingresos Brutos (DNIAF). Las partes son las de los 12 grupos (deciles 1 a 9, P90-95,
+P95-99 y 1%). La referencia progresiva es la misma de la matriz, con exponente 0,25. En cada año las
+brechas suman cero. Personas por grupo: la población del año (proyección del INDEC) por la parte del
+grupo en la EPH. Versión A: estimación principal; versión B: `ajuste_cn_rentas_cartera_ext`. Script:
+`scripts/13_brecha_recaudacion.py`. Tabla: `outputs/tables/brecha_recaudacion.csv`.
 
 ## 5. Adentro del decil 10 también cambia
 

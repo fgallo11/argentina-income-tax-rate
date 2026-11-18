@@ -14,7 +14,8 @@ Variantes:
   sin_bienes_personales
 
 Salidas (outputs/tables/):
-  tasas_tramos_decil10_fig0.csv   los tramos con el ingreso completado (panel B de la figura 0).
+  tasas_tramos_decil10_fig0.csv   los tramos con el ingreso completado (panel B de la figura 0), con
+                                  ingreso y personas (los usa 13_brecha_recaudacion.py).
   tasas_tramos_decil10.csv   variante, año, grupo (1-9, 91 = P90-95, 95 = P95-99, 99 = P99-100),
                              tasas por impuesto, participación en el ingreso y en los impuestos,
                              ingreso por persona en canastas básicas.
@@ -81,7 +82,7 @@ if __name__ == "__main__":
             filas.append(p)
     f0 = pd.concat(filas, ignore_index=True)
     f0["grupo"] = f0.pop("decil").astype(int)
-    f0[["variante", "anio", "grupo"] + IMPUESTOS + ["total"]].to_csv(TABLES / "tasas_tramos_decil10_fig0.csv",
+    f0[["variante", "anio", "grupo"] + IMPUESTOS + ["total", "ingreso_total", "personas"]].to_csv(TABLES / "tasas_tramos_decil10_fig0.csv",
                                                                       index=False)
 
     pr = t[t.variante == "principal"].set_index(["anio", "grupo"])

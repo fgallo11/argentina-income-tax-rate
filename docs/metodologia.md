@@ -440,6 +440,21 @@ cuenta para los 22 años está en `outputs/tables/deltas_proporcional_progresivo
 del informe (`i9_matriz_deltas`): frente al progresivo, el 1% paga entre 2,4 y 9,1 puntos menos
 todos los años.
 
+**En plata (informe, sección 4, "¿Cuánta plata es?").** `scripts/13_brecha_recaudacion.py` pasa
+esos desvíos a pesos, % del PIB y dólares: brecha del grupo = R × (parte de referencia − parte que
+paga), donde R es la recaudación real (DNIAF) de los impuestos del estudio (Ganancias de personas
+humanas, Bienes Personales, aportes y contribuciones, IVA, Internos e Ingresos Brutos; 18,7% del PIB
+en 2025). Se usa R y no la recaudación que reconstruye el modelo (11-15% del PIB) porque la encuesta
+capta menos ingreso y consumo que Cuentas Nacionales: el modelo da bien las partes, no el nivel. Las
+partes se calculan sobre la suma de los 12 grupos, así las brechas de cada año suman cero. Se hace en
+las dos versiones de la sección 6 (A: principal; B: `ajuste_cn_rentas_cartera_ext`; por eso
+`11_tramos_decil10.py` guarda ingreso y personas en `tasas_tramos_decil10_fig0.csv`) y con exponentes
+0,15, 0,25 y 0,40 para la referencia progresiva. 2025, versión B: el 1% sumaría US$3.500 millones
+(0,52% del PIB) frente al proporcional y US$13.200 millones (1,94%) frente al progresivo; con 0,15 y
+0,40, US$9.000 y US$20.400 millones. Es una cuenta mecánica (sin respuesta de comportamiento: elusión,
+evasión, salida de capitales); mide distancia al reparto de referencia, no recaudación potencial.
+Tabla: `outputs/tables/brecha_recaudacion.csv`; figuras `i10_brecha_grupos` e `i11_brecha_1pct`.
+
 **Serie (figura 9) y figura 8 por año** (`outputs/figures/por_anio/fig8_decil10_partido_<año>.png`).
 El 1% de la encuesta paga más que los percentiles 90-95 en 14 de 22 años y menos en 2014, 2016-2019,
 2023, 2024 y 2025. Lo que mueve su tasa es Ganancias y Bienes Personales; el consumo pesa poco arriba. El salto
@@ -498,7 +513,8 @@ publicados; los tramos se calcularon con la local.
 ## 15. Informe y comparación con otros estudios
 
 `docs/informe.md` presenta los resultados; sus gráficos salen de `scripts/12_informe_graficos.py`
-(sólo lee `outputs/tables/` y `data/externos/`). Comparación con Argendata (Pessino et al., 2018) y
+(sólo lee `outputs/tables/` y `data/externos/`) y de `scripts/13_brecha_recaudacion.py` (la brecha en
+plata, que además lee la recaudación de `data/processed/`). Comparación con Argendata (Pessino et al., 2018) y
 con el International Tax Observatory (2026) en `docs/validacion.md`, sección 3; los datos de esos
 estudios están en `data/externos/` y no entran en ningún cálculo.
 

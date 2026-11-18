@@ -8,7 +8,10 @@ de población fija y documentación. Quedan supuestos abiertos (ver `docs/metodo
 secciones 7 y 14): el más importante es la cola alta de ingresos.
 
 **Informe de resultados:** [`docs/informe.md`](docs/informe.md), con la evolución 2004-2025 en
-gráficos (`outputs/figures/informe/`, generados por `scripts/12_informe_graficos.py`).
+gráficos (`outputs/figures/informe/`, generados por `scripts/12_informe_graficos.py` y
+`scripts/13_brecha_recaudacion.py`). Incluye cuánta plata está en juego: con la misma recaudación,
+el 1% más rico pagaría unos US$3.500 millones más por año con un sistema proporcional y unos
+US$13.200 millones más con uno progresivo (2025, ingreso completado; cuenta mecánica).
 
 **Resultado 2025 (estimación principal, impuestos ÷ ingreso declarado):** tasa promedio
 23,8%; decil 1, 28,7%; deciles 2 a 9 entre 23,0% y 23,8%; decil 10, 23,8%. En 2024: promedio

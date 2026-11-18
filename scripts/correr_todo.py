@@ -33,6 +33,7 @@ PASOS = [
     ("11", "11_tramos_decil10.py"),             # el decil 10 partido en P90-95, P95-99 y 1%
     ("07", "07_graficos.py"),                   # todas las figuras
     ("12", "12_informe_graficos.py"),           # gráficos del informe (docs/informe.md)
+    ("13", "13_brecha_recaudacion.py"),         # cuánta plata: proporcional y progresivo
 ]
 
 
