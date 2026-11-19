@@ -132,7 +132,7 @@ son datos fácticos (códigos de encuesta, fechas legales) que deberían tener u
 | Cobertura 2004-2015 = promedio 2016-2018 | | `aux_cuentas_nacionales.py` | Declarado |
 | Activos externos 2004-2005 = los de 2006 | | `aux_cuentas_nacionales.py` | Declarado |
 | Rentas de la EPH ×7 | 7 | `incidencia.py:92` | De Rosa et al. dicen 5 a 10; el 7 es elección |
-| Renta de activos externos | 3% anual | `incidencia.py:88`, `10_top1.py` | Elección |
+| Renta de activos externos | 4% anual sobre la cartera (3% sobre cartera y depósitos, cota) | `incidencia.py:88`, `10_top1.py` | Elección |
 | 1% más rico: mitad salario, mitad de las empresas, utilidad = impuesto/30% | 0,5; 0,5; 0,30 | `10_top1.py:53-55` | La alícuota legal de sociedades cambió (35% → 30% → escala desde 2021); un 30% fijo es aproximación |
 | 1% más rico: aportes 14%, contribución 20% | 0,14; 0,20 | `10_top1.py:57-58` | El 20% no es ninguna alícuota legal ("aproximada") |
 | 1% más rico: ENGHo escalonada con cortes 2009 y 2016 | | `10_top1.py:80` | Distinto del resto del proyecto (interpolado; la variante escalonada corta en 2012 y 2017) |

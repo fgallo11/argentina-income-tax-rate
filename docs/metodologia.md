@@ -339,9 +339,10 @@ Brecha de ingresos: ingreso por persona del decil 10 dividido por el del decil 1
 "brecha de ingresos" que publica el INDEC), antes de impuestos directos y después de restar
 todos los impuestos estimados con la medida principal.
 
-Panel derecho: ingreso de bolsillo por persona de los diez deciles y, punteado, el ingreso
-declarado a ARCA por declarante del 1% más rico (no estrictamente comparable: es por persona
-que declara, no por miembro del hogar, y no incluye utilidades ni activos externos).
+Panel derecho: ingreso de bolsillo por persona de los diez deciles y, punteado, el del 1% más
+rico de la encuesta, completado con el ingreso que declara al fisco y la encuesta no capta
+(`tasas_tramos_decil10.csv`, como la medida principal; sin utilidades de empresas ni activos
+externos).
 - **Figura 6, en canastas básicas:** ingreso del grupo / sus adultos equivalentes / canasta básica
   total del Gran Buenos Aires por adulto equivalente (INDEC). Los adultos equivalentes salen de la
   edad y el sexo de cada persona de la EPH con la tabla del INDEC ("La medición de la pobreza y la
@@ -366,7 +367,10 @@ límites, la media ($442.596) y la población (29.783.755) del cuarto trimestre 
 con el informe "Evolución de la distribución del ingreso (EPH)" del INDEC (cuadro 1). El decil
 10 promedia $1.430.619 por persona en pesos de ese trimestre: es por persona, no por hogar.
 
-## 11. El 1% más rico (figura 7)
+## 11. El 1% más rico con declaraciones juradas (control de la figura 7)
+
+La medida del 1% del proyecto es la de la encuesta completada (sección 13, figura 8). Esta
+sección es un control: el mismo grupo armado sólo con las declaraciones juradas.
 
 `scripts/10_top1.py`, con las declaraciones juradas de Ganancias por tramo (anuarios de ARCA,
 años fiscales 2002-2024; 2025 extrapolado), como Alvaredo (2010). Grupo: el 1% de la población con mayores
@@ -375,19 +379,26 @@ patrimonio se acumulan de los tramos más altos hacia abajo, interpolando en el 
 
 **Estimación principal ("completo"): todo lo que se le puede atribuir.** Ingreso = declarado
 al fisco + la mitad de las utilidades de las empresas (impuesto de sociedades / 30%; es dueño
-de la mitad) + renta del 3% de los activos externos privados (cartera y depósitos, INDEC).
+de la mitad) + renta del 4% sobre la inversión de cartera en el exterior del sector privado
+(INDEC), el mismo supuesto que el panel B de la figura 0 (sección 6). Con 3% sobre cartera y
+depósitos (cota): columna `completo_ext_todo_stock`.
 Impuestos = Ganancias declarada + Bienes Personales según su patrimonio + la mitad de la
 Ganancias de sociedades + aportes y contribuciones (la mitad del ingreso es salario, aportes
 con tope) + impuestos al consumo (entre la mitad y el total del cociente gasto/ingreso del 5%
 más rico de la ENGHo).
 
-2024: 28,1% (26,6-29,5 según el consumo). Sólo con lo declarado al fisco: 33,0%; sin los
+2024: 30,2% (28,7-31,8 según el consumo). Sólo con lo declarado al fisco: 33,0%; sin los
 activos externos: 31,8%. (Hasta el 16/11/2026, con las declaraciones de 2023 extrapoladas,
 daba 30,1%, 35,8% y 33,7%: la Ganancias determinada real del grupo es 11,7% de su ingreso,
-contra 15,8% extrapolado.) 2025 (extrapolado): 26,6% (25,1-28,1); sólo con lo declarado,
-30,2%; sin los activos externos, 30,1%. Sigue siendo un techo: las rentas internas no declaradas no figuran
-en ninguna fuente. Pesa el supuesto de que la mitad del ingreso es salario (aportes y
-contribuciones: 8,6% del ingreso declarado en 2025).
+contra 15,8% extrapolado.) 2025 (extrapolado): 28,6% (26,9-30,2); sólo con lo declarado,
+30,2%; sin los activos externos, 30,1%; con 3% sobre cartera y depósitos, 26,6%.
+
+**Por qué es control y no medida.** Ganancias y Bienes Personales coinciden con el 1% de la
+encuesta (2025: 11,7% y 2,3% contra 12,4% y 1,8%). Aportes y consumo no se pueden medir con las
+declaraciones y se suponen: la mitad del ingreso es salario (aportes y contribuciones: 8,6% del
+ingreso) y el gasto es el del 5% más rico de la ENGHo (consumo: 7,6%). La encuesta mide para su
+propio 1% 4,3% y 3,3%. Esos dos supuestos explican casi toda la diferencia entre las dos medidas
+(30,2% contra 21,7%).
 
 ## 12. Impuesto al cheque y combustibles
 
@@ -423,8 +434,9 @@ ingreso (encuesta más el ingreso declarado al fisco que la encuesta no capta) y
 de los impuestos). El 1% de la encuesta, completado, tiene 24,5 canastas por adulto equivalente
 (`canastas_por_adulto_eq` en `tasas_tramos_decil10.csv`); el de las declaraciones juradas, 35 por
 declarante. Con la renta de activos externos, el 1% de la encuesta
-paga 20,1%. El 1% de la sección 11 da 26,6% porque además suma la mitad del impuesto de
-sociedades (y la mitad de las utilidades al ingreso) y supone que la mitad de su ingreso es salario.
+paga 20,1%. El 1% de la sección 11 da 28,6% porque supone que la mitad de su ingreso es salario y
+que gasta como el 5% más rico de la ENGHo; sumar la mitad del impuesto de sociedades (y de las
+utilidades al ingreso) casi no cambia su tasa.
 
 (Hasta la corrección del 16/11/2026 este tramo daba 29,0%: la Ganancias faltante se le sumaba sin
 su ingreso.)

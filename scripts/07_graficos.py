@@ -13,7 +13,7 @@
   fig6_distancia_entre_deciles  brecha decil 10 / decil 1 antes y después de impuestos; ingreso de cada
                                 decil en canastas básicas (línea de pobreza).
   fig6b_distancia_en_pesos      la misma, con el ingreso en pesos constantes de hoy.
-  fig7_top1                     el 1% más rico (declaraciones juradas) frente a los deciles 1, 5 y 10.
+  fig7_top1                     el 1% más rico: la medida de la encuesta y el control con declaraciones juradas.
   fig8_decil10_partido          el decil 10 partido en percentiles 90-95, 95-99 y el 1% superior
                                 (también uno por año en por_anio/).
   fig9_decil10_serie            la serie 2004-último año de esos tramos, y qué explica la del 1%.
@@ -444,17 +444,22 @@ def fig_distancia(largo, unidad="canastas", carpeta=None, nombre=None):
     ax1.set_ylabel("Veces")
     ax1.set_title("Cuántas veces más ingresa por persona el 10% más rico\nque el 10% más pobre", loc="left",
                   fontsize=11, fontweight="bold")
-    # todos los deciles, de rojo (D1) a azul (D10), y el 1% más rico (declaraciones juradas) punteado
+    # todos los deciles, de rojo (D1) a azul (D10), y el 1% más rico de la encuesta (11_tramos_decil10.py) punteado
     cmap = matplotlib.colors.LinearSegmentedColormap.from_list("dec", ["#e34948", "#eda100", "#2a78d6"])
     finales = {}
     for dec in range(1, 11):
         y = rel[dec]
         ax2.plot(y.index, y, color=cmap((dec - 1) / 9), linewidth=2.6 if dec in (1, 10) else 1.5)
         finales[f"D{dec}  {fmt(y.iloc[-1])}"] = y.iloc[-1]
-    top = pd.read_csv(TABLES / "top1.csv").set_index("anio") if (TABLES / "top1.csv").exists() else None
+    f_tr = TABLES / "tasas_tramos_decil10.csv"
+    top = pd.read_csv(f_tr) if f_tr.exists() else None
     if top is not None:
-        div = (ipc.reindex(top.index) / a_hoy) if pesos else cbt.reindex(top.index)
-        y = top.ingreso_medio_anual / 12 / div
+        top = top[(top.variante == "principal") & (top.grupo == 99)].set_index("anio")
+        if pesos:
+            cbt_ = pd.read_csv(PROCESSED / "deflactor.csv", index_col=0).cbt
+            y = top.canastas_por_persona * cbt_.reindex(top.index) / ipc.reindex(top.index) * a_hoy
+        else:
+            y = top.canastas_por_adulto_eq
         ax2.plot(y.index, y, color="#0b3d7a", linewidth=2.2, linestyle=(0, (4, 2)))
         finales[f"1% más rico*  {plata(y.iloc[-1]) if pesos else pct(y.iloc[-1])}"] = y.iloc[-1]
     # etiquetas a la derecha sin superponerse (en escala logarítmica)
@@ -501,105 +506,123 @@ def fig_distancia(largo, unidad="canastas", carpeta=None, nombre=None):
              "proporción más alta de su ingreso que el decil 10. Ingreso declarado en la encuesta: arriba está subdeclarado y el 1% más rico casi no aparece, "
              "así que la distancia real es mayor.", fontsize=9.6, color=TINTA2, va="top")
     fig.subplots_adjust(wspace=0.42, right=0.86, top=0.84)
-    fig.text(0.01, -0.07, "* 1% más rico: ingreso declarado a ARCA por declarante (no por miembro del hogar), sin las "
-             "utilidades de las empresas ni la renta de activos externos: no es estrictamente comparable con los deciles y está subestimado.\n"
+    fig.text(0.01, -0.07, "* 1% más rico: el 1% de la encuesta, completado con el ingreso que declara al fisco y la encuesta "
+             "no capta (como en la medida principal); sin las utilidades de las empresas ni la renta de activos externos.\n"
              "Fuente: elaboración propia con EPH (INDEC) y anuarios de ARCA. Ingreso per cápita familiar (ingreso del hogar "
              "dividido por sus miembros), con el aguinaldo en base devengada. Brecha: antes de impuestos directos, y "
              "después de restar\ntodos los impuestos estimados (medida principal). " + ("Panel derecho: pesos constantes (IPC-GBA del INDEC hasta 2006, IPC de San Luis 2007-2016, IPC Nacional "
              "desde 2017)." if pesos else "Panel derecho: ingreso de bolsillo del grupo dividido por sus adultos "
              "equivalentes (tabla del INDEC por edad y sexo) y por la canasta básica total del Gran Buenos Aires\npor adulto "
              "equivalente (INDEC; antes de 2017, la de 2017 llevada hacia atrás con el IPC empalmado). Así se compara como "
-             "el INDEC mide la pobreza: debajo de 1, el grupo promedio es pobre. 1% más rico: por declarante.") + " Aglomerados urbanos de la EPH.",
+             "el INDEC mide la pobreza: debajo de 1, el grupo promedio es pobre.") + " Aglomerados urbanos de la EPH.",
              fontsize=7.3, color=MUDO, ha="left", va="top")
     guardar(fig, nombre or ("fig6b_distancia_en_pesos" if pesos else "fig6_distancia_entre_deciles"), carpeta)
 
 
 def fig_top1(largo):
-    """Deciles 1, 5 y 10 de la EPH y el 1% más rico estimado con declaraciones juradas."""
+    """El 1% más rico: la medida del informe (encuesta completada con las declaraciones juradas,
+    11_tramos_decil10.py) y, como control, el 1% armado sólo con las declaraciones juradas
+    (10_top1.py). Ganancias y Bienes Personales salen del mismo dato en las dos; aportes y
+    consumo, en la segunda, de reglas fijas."""
     t = pd.read_csv(TABLES / "top1.csv").set_index("anio")
-    anio = int(t.index.max())
+    tr = pd.read_csv(TABLES / "tasas_tramos_decil10.csv")
+    e = tr[(tr.variante == "principal") & (tr.grupo == 99)].set_index("anio")
+    anio = int(e.index.max())
     v = largo[(largo.anio == anio) & (largo.variante == "principal") & (largo.impuesto == "total")]
     v = v.set_index("decil").tasa * 100
-    r = t.loc[anio]
-    fig, (ax, ax2) = plt.subplots(1, 2, figsize=(13.5, 5.6), gridspec_kw={"width_ratios": [1.1, 1]})
-    etiquetas = ["Decil 1", "Decil 5", "Decil 10", "1% más rico"]
-    valores = [v[1], v[5], v[10], r.completo * 100]
-    colores = ["#e34948", "#eda100", "#7fb3ea", "#0b3d7a"]
-    x = range(4)
-    ax.bar(x, valores, color=colores, width=0.62)
-    ax.errorbar([3], [r.completo * 100], yerr=[[(r.completo - r.completo_bajo) * 100],
-                                               [(r.completo_alto - r.completo) * 100]],
-                color=TINTA, capsize=6, linewidth=1.4)
-    for xi, val in zip(x, valores):
-        ax.text(xi - 0.36, val + 0.6, pct(val), fontsize=10, color=TINTA, ha="left")
-    for val, mk, lab, dy in [(r.total_central * 100, "o", "sólo con lo que\ndeclara al fisco", 1.4),
-                             (r.con_sociedades * 100, "D", "sin los activos\nexternos", -1.4)]:
-        ax.scatter([3.42], [val], marker=mk, s=50, facecolor=SUP, edgecolor=TINTA, linewidth=1.4, zorder=4)
-        ax.text(3.55, val + dy, f"{pct(val)}: {lab}", fontsize=8.3, color=TINTA2, va="center")
-    ax.axhline(v[0], color=TINTA2, linewidth=1, linestyle=(0, (4, 3)))
-    ax.text(5.3, v[0] - 1.2, f"Promedio de la\npoblación: {pct(v[0])}%", fontsize=8.3, color=TINTA2, ha="right",
-            va="top")
-    ax.set_xticks(list(x))
-    ax.set_xticklabels(etiquetas)
-    ax.set_xlim(-0.6, 5.4)
-    ax.set_ylim(0, max(valores + [r.total_central * 100]) * 1.25)
+    r, s = t.loc[anio], e.loc[anio]
+    enc = [s.ganancias, s.bienes_personales, s.aportes + s.contrib_trabajador + s.monotributo, s.indirectos]
+    dj = [r.ganancias, r.bienes_personales, r.aportes_contrib, r.consumo_central]
+    partes = [("Ganancias", "#2a78d6", "las dos: dato"), ("Bienes Personales", "#eb6834", "las dos: dato"),
+              ("Aportes y contribuciones", "#1baf7a", "DDJJ: supone la mitad\ndel ingreso es sueldo"),
+              ("Impuestos al consumo", "#9a998f", "DDJJ: supone que gasta\ncomo el 5% más rico")]
+    fig, (ax, ax2) = plt.subplots(1, 2, figsize=(13.5, 5.8), gridspec_kw={"width_ratios": [1, 1.1]})
+    x = [0, 1.3]
+    base = [0.0, 0.0]
+    for (nombre, color, _), a, b in zip(partes, enc, dj):
+        vals = [a * 100, b * 100]
+        ax.bar(x, vals, bottom=base, color=color, width=0.62, label=nombre, edgecolor=SUP, linewidth=0.8)
+        for xi, val, b0 in zip(x, vals, base):
+            if val > 1.4:
+                ax.text(xi, b0 + val / 2, pct(val), ha="center", va="center", fontsize=8.5, color="white",
+                        fontweight="bold")
+        base = [b0 + val for b0, val in zip(base, vals)]
+    tot_e, tot_d = base
+    ax.text(x[0], tot_e + 0.6, pct(tot_e), ha="center", fontsize=11, fontweight="bold", color=TINTA)
+    ax.text(x[1], tot_d + 0.6, pct(tot_d), ha="center", fontsize=11, fontweight="bold", color=TINTA)
+    ax.scatter([x[1] + 0.42], [r.completo * 100], marker="D", s=46, facecolor=SUP, edgecolor=TINTA, linewidth=1.4,
+               zorder=5)
+    ax.text(x[1] + 0.32, r.completo * 100 - 1.3, f"{pct(r.completo * 100)}: + mitad de las empresas\ny renta de la "
+            "cartera externa", fontsize=7.8, color=TINTA2, va="top")
+    for dec, nombre, color in [(1, "Decil 1", "#e34948"), (10, "Decil 10", "#7fb3ea")]:
+        ax.axhline(v[dec], color=color, linewidth=1.4, linestyle=(0, (4, 3)), zorder=1)
+        ax.text(-0.5, v[dec] + 0.3, f"{nombre}: {pct(v[dec])}", fontsize=8, color=color, va="bottom",
+                fontweight="bold")
+    ax.set_xticks(x)
+    ax.set_xticklabels(["1% de la encuesta\n(medida del informe)", "1% sólo con\ndeclaraciones juradas\n(control)"])
+    ax.set_xlim(-0.55, 3.0)
+    ax.set_ylim(0, max(tot_d, v[1]) * 1.22)
     ax.set_ylabel("Impuestos, % del ingreso")
     ax.xaxis.grid(False)
-    ax.set_title(f"{anio}", loc="left", fontsize=11, fontweight="bold")
+    ax.legend(loc="center right", bbox_to_anchor=(1.0, 0.3), fontsize=8, frameon=False, reverse=True)
+    titulo_izq = f"{anio}: qué paga cada medida del 1%"
+    if int(r.anio_fiscal_ddjj) != anio:
+        titulo_izq += f"\n(declaraciones de {int(r.anio_fiscal_ddjj)} llevadas a {anio})"
+    ax.set_title(titulo_izq, loc="left", fontsize=11, fontweight="bold")
+
     s_ = largo[(largo.variante == "principal") & (largo.impuesto == "total")]
-    finales, colores_fin, lineas = {}, {}, []
-    for dec, color, nombre in [(1, "#e34948", "Decil 1"), (10, "#7fb3ea", "Decil 10")]:
-        y = s_[s_.decil == dec].set_index("anio").tasa * 100
-        lineas.append(ax2.plot(y.index, y, color=color, linewidth=2.2, label=nombre)[0])
-        finales[nombre], colores_fin[nombre] = y.iloc[-1], color
-    banda = ax2.fill_between(t.index, t.completo_bajo * 100, t.completo_alto * 100, color="#0b3d7a", alpha=0.15,
-                             linewidth=0, label="1%: rango según cuánto consuma")
-    lineas.append(ax2.plot(t.index, t.completo * 100, color="#0b3d7a", linewidth=2.4, linestyle=(0, (4, 2)),
-                           label="1% más rico (declaraciones juradas)")[0])
-    finales["1% más rico"], colores_fin["1% más rico"] = t.completo.iloc[-1] * 100, "#0b3d7a"
-    # etiquetas al final de cada línea (con el color de la línea), separadas si quedan encimadas
-    pos, sep = {}, 1.1
-    for nombre, val in sorted(finales.items(), key=lambda kv: kv[1]):
-        previo = max(pos.values()) if pos else -1e9
-        pos[nombre] = max(val, previo + sep)
-    for nombre, val in pos.items():
-        ax2.text(t.index[-1] + 0.3, val, f"{nombre}  {pct(finales[nombre])}", fontsize=8.8, va="center",
-                 color=colores_fin[nombre], fontweight="bold")
-    bajo = min(s_[s_.decil.isin([1, 10])].tasa.min() * 100, t.completo_bajo.min() * 100)
-    alto = max(s_[s_.decil.isin([1, 10])].tasa.max() * 100, t.completo_alto.max() * 100)
-    ax2.set_ylim(bajo - (alto - bajo) * 0.32, alto + 1)
-    ax2.legend(handles=[lineas[2], banda, lineas[0], lineas[1]], loc="lower center", ncol=2, fontsize=8.5,
+    finales, lineas = {}, []
+    for y, nombre, color, estilo, lw in [
+            (s_[s_.decil == 1].set_index("anio").tasa * 100, "Decil 1", "#e34948", "-", 2.2),
+            (s_[s_.decil == 10].set_index("anio").tasa * 100, "Decil 10", "#7fb3ea", "-", 2.2),
+            (e.total * 100, "1% encuesta", "#0b3d7a", "-", 2.8),
+            (t.completo * 100, "1% DDJJ (control)", "#0b3d7a", (0, (4, 2)), 1.4)]:
+        lineas.append(ax2.plot(y.index, y, color=color, linestyle=estilo, linewidth=lw, label=nombre)[0])
+        finales[nombre] = (y.iloc[-1], color)
+    banda = ax2.fill_between(t.index, t.completo_bajo * 100, t.completo_alto * 100, color="#0b3d7a", alpha=0.10,
+                             linewidth=0, label="DDJJ: rango según cuánto consuma")
+    pos, ult = {}, -1e9
+    for nombre, (val, color) in sorted(finales.items(), key=lambda kv: kv[1][0]):
+        pos[nombre] = max(val, ult + 1.1)
+        ult = pos[nombre]
+    for nombre, yv in pos.items():
+        ax2.text(ANIO_FIN + 0.4, yv, f"{nombre}  {pct(finales[nombre][0])}", fontsize=8.5, va="center",
+                 color=finales[nombre][1], fontweight="bold")
+    todos = pd.concat([pd.Series(l.get_ydata()) for l in lineas])
+    bajo, alto = min(todos.min(), t.completo_bajo.min() * 100), max(todos.max(), t.completo_alto.max() * 100)
+    ax2.set_ylim(bajo - (alto - bajo) * 0.3, alto + 1)
+    ax2.legend(handles=[lineas[2], lineas[3], banda, lineas[0], lineas[1]], loc="lower left", ncol=2, fontsize=8,
                frameon=True, facecolor=SUP, edgecolor=GRILLA, framealpha=1)
     ax2.set_ylabel("Impuestos, % del ingreso")
     ax2.set_xlim(2003.5, ANIO_FIN + 0.3)
     ax2.set_xticks(range(2004, ANIO_FIN + 1, 4))
     ax2.xaxis.grid(False)
-    ax2.set_title(f"2004-{ANIO_FIN} (franja del 1%: según cuánto consuma)", loc="left", fontsize=11, fontweight="bold")
+    ax2.set_title(f"2004-{ANIO_FIN}", loc="left", fontsize=11, fontweight="bold")
+
     def comparar(a, b, quien):      # a menos de medio punto se lo da por igual
         if abs(a - b) < 0.5:
             return f"lo mismo que {quien}"
         return f"{'menos' if a < b else 'más'} que {quien}"
-    fig.suptitle(f"En {anio} el 1% más rico pagó alrededor de {r.completo * 100:.0f}% de su ingreso: "
-                 f"{comparar(r.completo * 100, v[1], 'el decil más pobre')} y "
-                 f"{comparar(r.completo * 100, v[10], 'el decil 10 de la encuesta')}", x=0.01, y=1.06, ha="left",
-                 fontsize=13, fontweight="bold")
-    if int(r.anio_fiscal_ddjj) != anio:
-        ax.set_title(f"{anio} (1%: declaraciones de {int(r.anio_fiscal_ddjj)} llevadas a {anio})", loc="left",
-                     fontsize=11, fontweight="bold")
-    fig.text(0.01, 1.0, "La encuesta casi no capta al 1% más rico; las declaraciones juradas de Ganancias sí. A su "
-             "ingreso declarado al fisco se le suman la mitad de las ganancias de las empresas\n(son sus dueños) y la "
-             "renta de los activos externos privados; a sus impuestos, la mitad del impuesto de las empresas. Con lo "
-             f"que declara al fisco solamente, pagaría {pct(r.total_central * 100)}%.\nAun así es un techo: el "
-             "ingreso del 1% sigue subdeclarado (rentas internas que no figuran en ninguna fuente).",
+    t99 = s.total * 100
+    fig.suptitle(f"En {anio} el 1% más rico pagó {pct(t99)}% de su ingreso: {comparar(t99, v[1], 'el decil 1')} y "
+                 f"{comparar(t99, v[10], 'el decil 10')}", x=0.01, y=1.07, ha="left", fontsize=13.5,
+                 fontweight="bold")
+    fig.text(0.01, 1.01, "Medida del informe: el 1% de la encuesta, completado con el ingreso y la Ganancias que declara "
+             f"al fisco. Control: el 1% armado sólo con las declaraciones juradas. Ganancias y Bienes\nPersonales "
+             f"salen del mismo dato y casi coinciden ({pct(enc[0] * 100)} y {pct(dj[0] * 100)}; {pct(enc[1] * 100)} y "
+             f"{pct(dj[1] * 100)}). Las declaraciones no dicen cuánto es sueldo ni cuánto gasta cada uno: esa parte se "
+             "supone, y es la que lleva\nal control más arriba. Por eso la medida es la de la encuesta.",
              fontsize=9.6, color=TINTA2, va="top")
-    fig.subplots_adjust(wspace=0.22, top=0.82, right=0.93)
-    fig.text(0.01, -0.04, "Fuente: elaboración propia con EPH (deciles) y anuarios de estadísticas tributarias de "
-             "ARCA (1% más rico: el 1% de la población con mayores ingresos declarados en Ganancias). Supuestos del 1%: "
-             "la mitad de su ingreso es salario\n(aportes con tope y contribuciones); consumo entre la mitad y el total "
-             "del cociente gasto/ingreso del 5% más rico de la ENGHo; Bienes Personales según su patrimonio declarado; "
-             "es dueño de la mitad\nde las empresas (utilidad = impuesto de sociedades / 30%); activos externos "
-             "(cartera y depósitos, INDEC) al 3% anual, sin impuesto. Ver scripts/10_top1.py.", fontsize=7.3,
-             color=MUDO, ha="left", va="top")
+    fig.subplots_adjust(wspace=0.28, top=0.80, right=0.88)
+    fig.text(0.01, -0.06, "Fuente: elaboración propia con EPH, ENGHo (INDEC), recaudación DNIAF y anuarios de estadísticas "
+             "tributarias de ARCA. Encuesta: tramo superior del decil 10 por ingreso per cápita familiar, medida principal "
+             "(scripts/11_tramos_decil10.py).\nDeclaraciones juradas (DDJJ): el 1% de la población con mayores ingresos "
+             "declarados en Ganancias, por declarante. Supuestos: la mitad de su ingreso es sueldo (aportes con tope y "
+             "contribuciones);\ngasta entre la mitad y el total del cociente gasto/ingreso del 5% más rico de la ENGHo (centro: "
+             "tres cuartos); Bienes Personales según su patrimonio declarado. Rombo y línea punteada: además, la mitad de "
+             "las empresas\n(utilidad = impuesto de sociedades / 30%) y 4% anual sobre la cartera externa privada (INDEC), "
+             "sin impuesto, como el panel B de la figura 0. Ver scripts/10_top1.py.", fontsize=7.3, color=MUDO,
+             ha="left", va="top")
     guardar(fig, "fig7_top1")
 
 
@@ -609,7 +632,6 @@ ELAST_PROG = 0.25   # fig8: elasticidad de la tasa al ingreso en el sistema prog
 def fig_decil10_partido(anio, carpeta=None, formatos=("png", "svg"), nombre=None):
     """El decil 10 partido en P90-95, P95-99 y el 1% superior (11_tramos_decil10.py)."""
     t = pd.read_csv(TABLES / "tasas_tramos_decil10.csv")
-    top = pd.read_csv(TABLES / "top1.csv").set_index("anio").loc[anio]
     a = t[t.anio == anio]
     pr = a[a.variante == "principal"].set_index("grupo")
     # rombos: el ingreso completado de la figura 0 (panel B, marcas negras), si está calculado
@@ -620,17 +642,17 @@ def fig_decil10_partido(anio, carpeta=None, formatos=("png", "svg"), nombre=None
     else:
         cn = a[a.variante == "ajuste_cn_activos_ext"].set_index("grupo").total * 100
     grupos = [1, 3, 5, 7, 9, 91, 95, 99]
-    etiquetas = ["D1", "D3", "D5", "D7", "D9", "P90-95", "P95-99", "1%", "1%"]
+    etiquetas = ["D1", "D3", "D5", "D7", "D9", "P90-95", "P95-99", "1%"]
     rojo, gris, azul, oscuro = "#e34948", "#b9b8b0", "#7fb3ea", "#0b3d7a"
-    colores = [rojo, gris, gris, gris, gris, azul, azul, azul, oscuro]
-    vals = [pr.total[g] * 100 for g in grupos] + [top.completo * 100]
-    x = list(range(len(grupos))) + [len(grupos) + 0.9]          # el 1% de las DDJJ, separado
+    colores = [rojo, gris, gris, gris, gris, azul, azul, azul]
+    vals = [pr.total[g] * 100 for g in grupos]
+    x = list(range(len(grupos)))
     fig, (ax, ax2, ax3) = plt.subplots(1, 3, figsize=(19, 6.2), gridspec_kw={"width_ratios": [1.25, 0.85, 0.85]})
     ax.bar(x, vals, color=colores, width=0.66, label="Medida principal (ingreso declarado)")
-    arriba = [max(v, cn[g]) for v, g in zip(vals, grupos)] + [vals[-1]]
+    arriba = [max(v, cn[g]) for v, g in zip(vals, grupos)]
     for xi, val, h in zip(x, vals, arriba):
         ax.text(xi, h + 1.0, pct(val), ha="center", fontsize=9, color=TINTA, fontweight="bold")
-    ax.scatter(x[:-1], [cn[g] for g in grupos], marker="D", s=40, facecolor=SUP, edgecolor=TINTA, linewidth=1.3,
+    ax.scatter(x, [cn[g] for g in grupos], marker="D", s=40, facecolor=SUP, edgecolor=TINTA, linewidth=1.3,
                zorder=5, label="Completando el ingreso que la encuesta no capta\n(estimado, como el panel B de la figura 0)")
     ax.axhline(pr.total[0] * 100, color=TINTA2, linewidth=1, linestyle=(0, (4, 3)),
                label=f"Promedio de la población ({pct(pr.total[0] * 100)}%)")
@@ -638,9 +660,6 @@ def fig_decil10_partido(anio, carpeta=None, formatos=("png", "svg"), nombre=None
     ax.axvspan(4.5, 7.5, color="#e8f1fb", zorder=0, linewidth=0)
     ax.text(6, techo * 0.94, "decil 10, partido\n(encuesta)", ha="center", va="top", fontsize=8.5, color=TINTA2,
             fontweight="bold")
-    ax.text(x[-1], techo * 0.94, "otra\nfuente:\nDDJJ*", ha="center", va="top", fontsize=8.5,
-            color=oscuro, fontweight="bold")
-    ax.axvline((7 + x[-1]) / 2, color=EJE, linewidth=1)
     ax.set_xticks(x)
     ax.set_xticklabels(etiquetas, fontsize=8.8)
     ax.set_xlim(-0.6, x[-1] + 0.6)
@@ -712,18 +731,16 @@ def fig_decil10_partido(anio, carpeta=None, formatos=("png", "svg"), nombre=None
     fig.suptitle(titulo, x=0.01, y=1.1, ha="left", fontsize=13.5, fontweight="bold")
     fig.text(0.01, 1.04, f"En {anio} el 10% más rico tiene {pct(p_alto, 0)}% del ingreso (encuesta más el ingreso que declara al fisco y "
              f"la encuesta no capta). Paga {pct(t91)}% en los percentiles 90-95,\n{pct(pr.total[95] * 100)}% en el 95-99 y "
-             f"{pct(t99)}% en el 1% superior; los deciles medios, alrededor de {pct(medios)}%. Dos mediciones del 1%: la encuesta "
-             f"completada con las declaraciones juradas\n({pct(pr.canastas_por_adulto_eq[99])} canastas por adulto equivalente) y sólo las declaraciones "
-             f"juradas, por declarante, con utilidades de empresas y renta de activos externos ({pct(top.completo * 100)}%). "
-             f"Completando el ingreso que la encuesta no capta (estimado), el de la encuesta paga {pct(cn[99])}%.",
+             f"{pct(t99)}% en el 1% superior; los deciles medios, alrededor de {pct(medios)}%. El 1% de la encuesta, completado con "
+             f"las declaraciones juradas, tiene\n{pct(pr.canastas_por_adulto_eq[99])} canastas por adulto equivalente. "
+             f"Completando el ingreso que la encuesta no capta (estimado), paga {pct(cn[99])}%.",
              fontsize=9.6, color=TINTA2, va="top")
     fig.subplots_adjust(wspace=0.32, top=0.84, right=0.87)
     fig.text(0.01, -0.12, "Fuente: elaboración propia con EPH, ENGHo (INDEC), recaudación DNIAF y anuarios de ARCA. "
              "Tramos ordenados por ingreso per cápita familiar, como los deciles. Ganancias que la encuesta no capta y "
              "Bienes Personales se reparten entre los tramos con las\ndeclaraciones juradas. Por encima del 5% más rico "
-             "la ENGHo no informa consumo: se deja fijo. Rombo: ingreso completado como en el panel B\nde la figura 0 (sueldos y cuentapropia a "
-             "Cuentas Nacionales, rentas ×7, 4% sobre la cartera externa atribuido al 1%). * 1% según las declaraciones juradas de Ganancias (ARCA), "
-             "con utilidades de empresas y renta de activos externos; ingreso por declarante, ver fig7.\nPaneles derechos: misma "
+             "la ENGHo no informa consumo: se deja fijo. Rombo: ingreso completado como en el panel B de la figura 0 (sueldos y cuentapropia a "
+             "Cuentas Nacionales, rentas ×7, 4% sobre la cartera externa atribuido al 1%).\nPaneles derechos: misma "
              "recaudación total repartida de dos formas de referencia. Proporcional: todos pagan la tasa promedio. Progresivo: "
              f"tasa = promedio × (ingreso por persona del grupo / promedio)^{pct(ELAST_PROG, 2)}, reescalada para recaudar lo mismo. "
              "Ver scripts/11_tramos_decil10.py.", fontsize=7.3, color=MUDO, ha="left", va="top")
@@ -736,13 +753,11 @@ def fig_decil10_serie():
     t = pd.read_csv(TABLES / "tasas_tramos_decil10.csv")
     pr = t[t.variante == "principal"]
     tasa = pr.pivot(index="anio", columns="grupo", values="total") * 100
-    top = pd.read_csv(TABLES / "top1.csv").set_index("anio")
     medios = tasa[list(range(2, 10))].median(axis=1)
     fig, (ax, ax2) = plt.subplots(1, 2, figsize=(14, 5.8), gridspec_kw={"width_ratios": [1.15, 1]})
     series = [(tasa[1], "Decil 1", "#e34948", "-", 2.2), (medios, "D2-D9", "#9a998f", "-", 2.2),
               (tasa[91], "P90-95", "#a9cdf2", "-", 2.0), (tasa[95], "P95-99", "#4f93dc", "-", 2.0),
-              (tasa[99], "1% encuesta", "#0b3d7a", "-", 2.8),
-              (top.completo * 100, "1% DDJJ*", "#0b3d7a", (0, (4, 2)), 1.8)]
+              (tasa[99], "1% encuesta", "#0b3d7a", "-", 2.8)]
     finales = {}
     for y, nombre, color, estilo, lw in series:
         ax.plot(y.index, y, color=color, linestyle=estilo, linewidth=lw, label=nombre)
@@ -789,9 +804,8 @@ def fig_decil10_serie():
     fig.subplots_adjust(wspace=0.42, top=0.86, right=0.97)
     fig.text(0.01, -0.06, "Fuente: elaboración propia con EPH, ENGHo (INDEC), recaudación DNIAF y anuarios de ARCA. "
              "Tramos ordenados por ingreso per cápita familiar, como los deciles; medida principal. D2-D9: mediana de las "
-             "tasas de los deciles 2 a 9.\n* 1% según las "
-             "declaraciones juradas de Ganancias (ARCA), por declarante, con utilidades de empresas y renta de activos "
-             f"externos (figura 7). {ANIO_FIN}: declaraciones del año anterior actualizadas. Ver scripts/11_tramos_decil10.py.",
+             "tasas de los deciles 2 a 9.\n"
+             f"{ANIO_FIN}: declaraciones del año anterior actualizadas. Ver scripts/11_tramos_decil10.py.",
              fontsize=7.3, color=MUDO, ha="left", va="top")
     guardar(fig, "fig9_decil10_serie")
 

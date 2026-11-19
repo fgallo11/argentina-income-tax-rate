@@ -27,9 +27,12 @@ Definiciones (supuestos marcados con *):
                impuesto que la generaron (impuesto / TASA_SOCIEDADES*), como hacen las cuentas
                nacionales distributivas: las ganancias retenidas en las empresas son ingreso de
                sus dueños. No hay datos de tenencia accionaria.
-  Activos ext. sensibilidad adicional: renta de RENTA_EXTERIOR* sobre los activos externos del
-               sector privado no financiero (cartera + moneda y depósitos, PII del INDEC), toda
-               atribuida al grupo y sin impuesto (cota alta: supone que nada se declara).
+  Activos ext. renta de RENTA_EXTERIOR* sobre la inversión de cartera en el exterior del sector
+               privado no financiero (acciones y bonos, PII del INDEC), toda atribuida al grupo y
+               sin impuesto: el mismo supuesto que el panel B de la figura 0 (variante
+               ajuste_cn_rentas_cartera_ext de incidencia.py). Moneda y depósitos (billetes
+               fuera del sistema, que no rinden) quedan afuera; la versión con todo el stock al
+               RENTA_EXTERIOR_TODO* queda como cota (columna completo_ext_todo_stock).
 Estimación principal ("completo"): ingreso declarado + utilidades de las empresas + renta de
 activos externos, y todos los impuestos atribuibles; el rango refleja el consumo. Aun así el
 ingreso declarado al fisco sigue subdeclarado (rentas internas no declaradas): la tasa es
@@ -54,7 +57,8 @@ FRACCION = 0.01
 PARTE_SALARIAL = 0.5
 PARTE_SOCIEDADES = 0.5
 TASA_SOCIEDADES = 0.30    # impuesto / utilidad antes de impuesto (alícuota legal 25%-35%)
-RENTA_EXTERIOR = 0.03
+RENTA_EXTERIOR = 0.04      # sobre la cartera, como incidencia.py
+RENTA_EXTERIOR_TODO = 0.03 # cota: sobre cartera + moneda y depósitos
 APORTES = 0.14            # jubilación 11% + INSSJP 3%
 CONTRIB = 0.20            # contribución patronal aproximada (Dto. 814/2001 y modif.)
 
@@ -115,7 +119,8 @@ def main() -> None:
         imp_soc = PARTE_SOCIEDADES * r.ganancias_sociedades * 1e6
         util_soc = imp_soc / TASA_SOCIEDADES
         cn = pd.read_csv(PROCESSED / "cn_ingresos.csv", index_col=0).loc[anio]
-        renta_ext = RENTA_EXTERIOR * (cn.pii_cartera_musd + cn.pii_mondep_musd) * cn.tc * 1e6
+        renta_ext = RENTA_EXTERIOR * cn.pii_cartera_musd * cn.tc * 1e6
+        renta_ext_todo = RENTA_EXTERIOR_TODO * (cn.pii_cartera_musd + cn.pii_mondep_musd) * cn.tc * 1e6
         base = ganancias + bp + aportes
         centro = base + 0.75 * consumo_alto
         filas.append({
@@ -134,6 +139,9 @@ def main() -> None:
             "completo": (centro + imp_soc) / (ing_total + util_soc + renta_ext),
             "completo_bajo": (base + 0.5 * consumo_alto + imp_soc) / (ing_total + util_soc + renta_ext),
             "completo_alto": (base + consumo_alto + imp_soc) / (ing_total + util_soc + renta_ext),
+            "completo_ext_todo_stock": (centro + imp_soc) / (ing_total + util_soc + renta_ext_todo),
+            # composición comparable con el 1% de la encuesta (figura 7)
+            "consumo_central": 0.75 * consumo_alto / ing_total,
             "utilidades_sobre_ingreso": util_soc / ing_total, "renta_ext_sobre_ingreso": renta_ext / ing_total,
             "gasto_sobre_ingreso_usado": c_alto,
         })

@@ -254,8 +254,7 @@ cosas:
 parte de su ingreso coincide con la del 1% de las declaraciones juradas: 12,0% contra 11,7% en 2024.
 
 **Detalle técnico.** Se suman a la vez el ingreso faltante y el impuesto faltante, a escala de la
-población del país. Sumar sólo el impuesto inflaría la tasa (fue un error del proyecto, corregido:
-ver `docs/metodologia.md`, sección 5). La parte de Ganancias que no corresponde a esas personas se
+población del país. Sumar sólo el impuesto inflaría la tasa. La parte de Ganancias que no corresponde a esas personas se
 reparte entre los que presentan declaración, a escala de consumo. 2025 usa las declaraciones de 2024
 actualizadas.
 
@@ -273,11 +272,16 @@ año, los tres tramos.
 
 ![El 1% con declaraciones juradas](../outputs/figures/fig7_top1.png)
 
-**Dos medidas del 1% más rico.** La de este informe es el 1% de la encuesta, completado. Otra forma
-de medirlo es tomar sólo las declaraciones juradas, por contribuyente, y sumar la mitad de las
-utilidades de las empresas y del impuesto de sociedades: da 26,6% en 2025 (gráfico de arriba). No es el mismo grupo ni la misma cuenta: esa medida queda por
-encima del promedio, sobre todo porque suma el impuesto de sociedades, que este informe todavía no
-reparte (ver "Pendientes").
+**Dos medidas del 1% más rico.** La de este informe es el 1% de la encuesta, completado con lo que
+declara al fisco: 21,7% en 2025. Como control, el 1% se puede armar sólo con las declaraciones
+juradas de Ganancias, por contribuyente. Ganancias y Bienes Personales salen del mismo dato en las
+dos y casi coinciden (12,4% y 11,7%; 1,8% y 2,3%). La diferencia está en lo demás: las
+declaraciones no dicen cuánto del ingreso es sueldo ni cuánto gasta cada uno, así que esa medida
+lo supone (la mitad del ingreso es sueldo; gasta como el 5% más rico de la ENGHo). Con esos
+supuestos, aportes e impuestos al consumo pesan el doble que lo que la encuesta mide para su propio
+1% (16,2% contra 7,6% del ingreso), y el total da 30,2%. Sumarle la mitad de las empresas (impuesto
+y utilidades) casi no cambia la tasa; la renta de la cartera externa la baja a 28,6%. Como depende
+de supuestos que la encuesta mide, la medida del informe es la de la encuesta.
 
 ![Completando el ingreso que la encuesta no capta](../outputs/figures/fig0_dos_versiones_2025.png)
 
@@ -307,8 +311,8 @@ no rinde nada. Esos se dejan afuera. Las acciones y bonos (US$118.000 millones) 
 plausible que sean de los de arriba: en Bienes Personales declaran tener bienes en el exterior unas
 87.000 personas (ARCA, año fiscal 2023), alrededor del 0,2% de la población. El 4% combina
 dividendos (~2%), cupones de bonos (~3-4%) y la gestión activa de las carteras grandes; con 3% o 5%
-el resultado casi no cambia. Las marcas grises son la versión anterior, más extrema (3% sobre todo
-el stock, billetes incluidos): se dejan como cota alta.
+el resultado casi no cambia. Las marcas grises usan un supuesto más extremo (3% sobre todo el
+stock, billetes incluidos): quedan como cota alta.
 
 **Detalle técnico.** Sueldos e ingreso mixto se ajustan con la cuenta de generación del ingreso del
 INDEC, cada fuente con su propio factor y sólo a quien declara esa fuente. La carga total de la
@@ -625,8 +629,8 @@ medida principal por tres razones:
    literatura usa escenarios (100% a los dueños del capital, o 50% capital y 50% trabajo) y el
    resultado de la cima depende de cuál se elija.
 2. **Sumarlo bien exige sumar también las utilidades al ingreso de los dueños.** Si se suma sólo el
-   impuesto, la tasa de la cima se infla (es el mismo error que se corrigió con la Ganancias de
-   personas: impuesto sin el ingreso que lo genera). Con las utilidades, esa parte paga cerca del
+   impuesto, la tasa de la cima se infla (lo mismo pasaría con la Ganancias de personas: impuesto
+   sin el ingreso que lo genera). Con las utilidades, esa parte paga cerca del
    30% y el efecto es mucho menor: en el 1% de las declaraciones juradas (figura 7) sumar la mitad
    del impuesto y de las utilidades casi no cambia su tasa (30,2% sin sociedades, 30,1% con).
 3. **No hay datos de quién es dueño de qué.** Ni la EPH ni las declaraciones juradas publicadas dicen
