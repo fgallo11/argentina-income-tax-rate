@@ -365,7 +365,7 @@ def fig_dos_versiones(largo, anio, carpeta=None, formatos=("png", "svg")):
              "patronales, IVA, Internos e Ingresos Brutos. Excluye retenciones, cheque, combustibles, Ganancias de "
              "sociedades, monotributo e impuestos patrimoniales provinciales (cheque, combustibles y monotributo, como variantes).\nDecil 10 partido: "
              "percentiles 90-95, 95-99 y el 1% más rico de la encuesta, completados con las declaraciones juradas de ARCA "
-             "(figura 8); el 1% medido sólo con declaraciones juradas, en la figura 7.", fontsize=7.3,
+             "; el 1% medido sólo con declaraciones juradas, en el gráfico de las dos medidas del 1% (fig7_top1).", fontsize=7.3,
              color=MUDO, ha="left", va="top")
     guardar(fig, f"fig0_dos_versiones_{anio}", carpeta, formatos)
 
@@ -621,7 +621,7 @@ def fig_top1(largo):
              "contribuciones);\ngasta entre la mitad y el total del cociente gasto/ingreso del 5% más rico de la ENGHo (centro: "
              "tres cuartos); Bienes Personales según su patrimonio declarado. Rombo y línea punteada: además, la mitad de "
              "las empresas\n(utilidad = impuesto de sociedades / 30%) y 4% anual sobre la cartera externa privada (INDEC), "
-             "sin impuesto, como el panel B de la figura 0. Ver scripts/10_top1.py.", fontsize=7.3, color=MUDO,
+             "sin impuesto, como el ingreso completado (B). Ver scripts/10_top1.py.", fontsize=7.3, color=MUDO,
              ha="left", va="top")
     guardar(fig, "fig7_top1")
 
@@ -653,7 +653,7 @@ def fig_decil10_partido(anio, carpeta=None, formatos=("png", "svg"), nombre=None
     for xi, val, h in zip(x, vals, arriba):
         ax.text(xi, h + 1.0, pct(val), ha="center", fontsize=9, color=TINTA, fontweight="bold")
     ax.scatter(x, [cn[g] for g in grupos], marker="D", s=40, facecolor=SUP, edgecolor=TINTA, linewidth=1.3,
-               zorder=5, label="Completando el ingreso que la encuesta no capta\n(estimado, como el panel B de la figura 0)")
+               zorder=5, label="Completando el ingreso que la encuesta no capta\n(estimado, versión B)")
     ax.axhline(pr.total[0] * 100, color=TINTA2, linewidth=1, linestyle=(0, (4, 3)),
                label=f"Promedio de la población ({pct(pr.total[0] * 100)}%)")
     techo = max(vals + list(cn[grupos])) * 1.32
@@ -739,7 +739,7 @@ def fig_decil10_partido(anio, carpeta=None, formatos=("png", "svg"), nombre=None
     fig.text(0.01, -0.12, "Fuente: elaboración propia con EPH, ENGHo (INDEC), recaudación DNIAF y anuarios de ARCA. "
              "Tramos ordenados por ingreso per cápita familiar, como los deciles. Ganancias que la encuesta no capta y "
              "Bienes Personales se reparten entre los tramos con las\ndeclaraciones juradas. Por encima del 5% más rico "
-             "la ENGHo no informa consumo: se deja fijo. Rombo: ingreso completado como en el panel B de la figura 0 (sueldos y cuentapropia a "
+             "la ENGHo no informa consumo: se deja fijo. Rombo: ingreso completado, versión B (sueldos y cuentapropia a "
              "Cuentas Nacionales, rentas ×7, 4% sobre la cartera externa atribuido al 1%).\nPaneles derechos: misma "
              "recaudación total repartida de dos formas de referencia. Proporcional: todos pagan la tasa promedio. Progresivo: "
              f"tasa = promedio × (ingreso por persona del grupo / promedio)^{pct(ELAST_PROG, 2)}, reescalada para recaudar lo mismo. "

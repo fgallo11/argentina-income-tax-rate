@@ -104,7 +104,9 @@ flowchart LR
 
 ## 1. El gráfico de siempre
 
-![Comparación](../outputs/figures/informe/c1_comparacion.png)
+![Figura 1](../outputs/figures/informe/c1_comparacion.png)
+
+**Figura 1.** El gráfico de siempre: tres estudios, el mismo perfil por deciles.
 
 **En una frase:** tres estudios distintos, con datos y métodos distintos, dibujan el mismo perfil:
 el 10% más pobre paga la proporción más alta y de ahí para arriba la carga es pareja.
@@ -151,7 +153,9 @@ abajo. Es la diferencia de supuestos más importante en la cima, y no está resu
 la pagan quienes consumen y parte quienes más mueven dinero en los bancos. Detalle en
 `docs/metodologia.md`, sección 15.
 
-![Serie](../outputs/figures/informe/i1_serie.png)
+![Figura 2](../outputs/figures/informe/i1_serie.png)
+
+**Figura 2.** La carga por decil, 2004-2025.
 
 **El mismo gráfico, 22 años.** Este estudio repite la cuenta todos los años desde 2004. La carga
 promedio sube de 23,0% en 2004 a 29,4% en 2013, baja a 24,0% en 2019, sube a 27,1% en 2021 y vuelve a
@@ -169,14 +173,14 @@ menos confiables.
   ingreso que se declara a ARCA y la encuesta no capta (sección 3).
 - **Impuestos:** Ganancias y Bienes Personales, aportes personales, contribuciones patronales
   (mitad las paga el trabajador con menos salario y mitad el consumidor con precios más altos), IVA,
-  Internos e Ingresos Brutos. Son entre 56% y 71% de todo lo recaudado (anexo, A3). El cheque, los
+  Internos e Ingresos Brutos. Son entre 56% y 71% de todo lo recaudado (figura 19). El cheque, los
   combustibles y el monotributo se suman como variantes (secciones 7 y 8); Ganancias de sociedades,
   retenciones e impuestos provinciales distintos de Ingresos Brutos quedan afuera ("Pendientes").
 - **Impuestos directos persona por persona:** aportes, contribuciones y Ganancias se calculan para
   cada asalariado registrado y jubilado de la encuesta con la ley de cada mes. Cómo, con ejemplos:
   [el simulador](microsimulacion.md).
 - **Anclado a lo recaudado:** los impuestos al consumo se reparten según lo que efectivamente se
-  cobró por cada peso consumido (anexo, A2), no según la alícuota legal. Así no se cuenta como pagado
+  cobró por cada peso consumido (figura 18), no según la alícuota legal. Así no se cuenta como pagado
   el impuesto que se evade o que está exento. La forma entre deciles sale del IVA legal de la canasta
   de cada uno; el nivel, de lo recaudado: la parte no cobrada es la misma proporción en todos.
 - **Cada año con sus reglas:** las escalas de Ganancias, aportes y contribuciones de cada año, y la
@@ -184,7 +188,9 @@ menos confiables.
 
 ## 2. Por qué ese gráfico engaña en Argentina
 
-![Canastas](../outputs/figures/informe/c2_canastas.png)
+![Figura 3](../outputs/figures/informe/c2_canastas.png)
+
+**Figura 3.** Ingreso de cada grupo en canastas básicas por adulto equivalente.
 
 **En una frase:** los deciles reparten a la población en partes iguales, pero en Argentina la
 mitad de esas partes son pobres o casi, y todos los ricos quedan apretados en la última barra.
@@ -205,7 +211,9 @@ asalariado de clase media alta con quien tiene casi cinco veces su ingreso. Nuev
 hablan de la mitad de abajo y de la clase media; lo que pasa con los ricos queda escondido en una
 sola. La solución de este estudio es partir el decil 10 en tres (sección 3).
 
-![Composición](../outputs/figures/informe/i6_composicion.png)
+![Figura 4](../outputs/figures/informe/i6_composicion.png)
+
+**Figura 4.** Con qué impuestos paga cada decil.
 
 **Por qué el decil 1 paga tanto.** Cada grupo paga impuestos distintos:
 
@@ -258,7 +266,9 @@ población del país. Sumar sólo el impuesto inflaría la tasa. La parte de Gan
 reparte entre los que presentan declaración, a escala de consumo. 2025 usa las declaraciones de 2024
 actualizadas.
 
-![Cuatro años](../outputs/figures/informe/i2_anios.png)
+![Figura 5](../outputs/figures/informe/i2_anios.png)
+
+**Figura 5.** Cuatro años, con el decil 10 partido.
 
 **El gráfico de siempre, con el decil 10 partido.** Cuatro años: 2004, el comienzo; 2013, el de carga
 promedio más alta; 2019, el punto bajo antes de la pandemia; 2025, el último. A la derecha de cada
@@ -270,7 +280,9 @@ año, los tres tramos.
   y menos que cualquier decil.
 - Lo que cambia es el tamaño del azul y el naranja: Ganancias y Bienes Personales.
 
-![El 1% con declaraciones juradas](../outputs/figures/fig7_top1.png)
+![Figura 6](../outputs/figures/fig7_top1.png)
+
+**Figura 6.** Dos medidas del 1% más rico: encuesta y declaraciones juradas.
 
 **Dos medidas del 1% más rico.** La de este informe es el 1% de la encuesta, completado con lo que
 declara al fisco: 21,7% en 2025. Como control, el 1% se puede armar sólo con las declaraciones
@@ -283,9 +295,11 @@ supuestos, aportes e impuestos al consumo pesan el doble que lo que la encuesta 
 y utilidades) casi no cambia la tasa; la renta de la cartera externa la baja a 28,6%. Como depende
 de supuestos que la encuesta mide, la medida del informe es la de la encuesta.
 
-![Completando el ingreso que la encuesta no capta](../outputs/figures/fig0_dos_versiones_2025.png)
+![Figura 7](../outputs/figures/fig0_dos_versiones_2025.png)
 
-**Y aun así está subestimado.** El gráfico de arriba compara dos cuentas.
+**Figura 7.** Completando el ingreso que la encuesta no capta (A y B), 2025.
+
+**Y aun así está subestimado.** La figura 7 compara dos cuentas.
 
 - **A. Con el ingreso que se declara** (la medida principal de todo el informe). Los impuestos de
   cada grupo se dividen por el ingreso que sus miembros dicen ganar en la encuesta, completado arriba
@@ -334,7 +348,9 @@ punta, y no sólo abajo.
 
 ## 4. ¿Proporcional o progresivo?
 
-![Matriz de deltas](../outputs/figures/informe/i9_matriz_deltas.png)
+![Figura 8](../outputs/figures/informe/i9_matriz_deltas.png)
+
+**Figura 8.** Frente a un sistema proporcional y uno progresivo, por año.
 
 **En una frase:** el sistema argentino reparte casi igual que uno donde todos pagan la misma tasa;
 lejos de uno progresivo. El que más se aleja de lo proporcional es el 1%, y su dirección cambia con
@@ -372,7 +388,9 @@ está al final.
 deciles 1 a 7 pagan más de lo que les tocaría todos los años (hasta 1,8 puntos). El 1% paga entre 2,4
 y 9,1 puntos menos, también todos los años. Lo que falta arriba es lo que sobra abajo y en el medio.
 
-![Progresividad](../outputs/figures/informe/a1_progresividad.png)
+![Figura 9](../outputs/figures/informe/a1_progresividad.png)
+
+**Figura 9.** Índice de Kakwani, 2004-2025.
 
 **Un número por año.** El índice de Kakwani resume lo mismo: compara cómo se reparten los
 impuestos con cómo se reparte el ingreso. Si es positivo, el sistema es progresivo; si es negativo,
@@ -386,7 +404,9 @@ decil 1 paga cerca de la mitad del promedio y el 1% cerca del doble. Kakwani: í
 de los impuestos menos Gini del ingreso, con 12 grupos (aproximado). Tabla de la matriz:
 `outputs/tables/deltas_proporcional_progresivo.csv`.
 
-![Mapa de calor](../outputs/figures/informe/i4_mapa_calor.png)
+![Figura 10](../outputs/figures/informe/i4_mapa_calor.png)
+
+**Figura 10.** Tasa de cada grupo menos la tasa promedio, por año.
 
 **Otra forma de verlo: contra la tasa promedio.** Cada celda es la tasa del grupo menos la tasa
 promedio del año, en puntos (mismos colores). El decil 1 paga entre 4 y 13 puntos más que el
@@ -403,7 +423,9 @@ consumo que las Cuentas Nacionales: el modelo acierta en cómo se reparte la car
 Los montos se pasan a dólares con el tipo de cambio oficial promedio de cada año. Salvo que se diga
 otra cosa, los números son de la versión B (ingreso completado, sección 3).
 
-![Brecha por grupo](../outputs/figures/informe/i10_brecha_grupos.png)
+![Figura 11](../outputs/figures/informe/i10_brecha_grupos.png)
+
+**Figura 11.** Cuánta plata: brecha de cada grupo frente a las dos referencias, 2025.
 
 **En una frase:** con un sistema proporcional, el 1% pagaría unos US$3.500 millones más por año; con
 uno progresivo, unos US$13.200 millones más, y los deciles 1 a 9 pagarían casi US$18.000 millones
@@ -443,7 +465,9 @@ del 1% es también lo que se recaudaría de más si sólo el 1% pasara a la tasa
 más cambiara. En 2025, subir a todos los que pagan de menos, sin bajarle a nadie, sumaría 0,55% del
 PIB con la referencia proporcional y 2,6% con la progresiva.
 
-![El 1% en el tiempo](../outputs/figures/informe/i11_brecha_1pct.png)
+![Figura 12](../outputs/figures/informe/i11_brecha_1pct.png)
+
+**Figura 12.** El 1% frente a las dos referencias, 2004-2025.
 
 **A lo largo de los años: lo proporcional cambia de signo, lo progresivo no.** El gráfico sigue al
 1%: su tasa (roja), la tasa promedio, que es la que pagaría con un sistema proporcional (gris), y la
@@ -504,7 +528,9 @@ grupo en la EPH. Versión A: estimación principal; versión B: `ajuste_cn_renta
 
 ## 5. Adentro del decil 10 también cambia
 
-![Decil 10 partido](../outputs/figures/informe/i8_decil10_partido.png)
+![Figura 13](../outputs/figures/informe/i8_decil10_partido.png)
+
+**Figura 13.** El decil 10 partido, 2025.
 
 **En una frase:** dentro del 10% más rico la tasa baja hacia la cima, y el 1% es el que más se aleja
 de lo que pagaría en un sistema progresivo.
@@ -520,7 +546,9 @@ sección 4, para ese año:
 
 El mismo gráfico para cada año está en `outputs/figures/por_anio/`.
 
-![Composición de los tramos](../outputs/figures/informe/c3_composicion_tramos.png)
+![Figura 14](../outputs/figures/informe/c3_composicion_tramos.png)
+
+**Figura 14.** Con qué impuestos paga cada tramo del decil 10.
 
 **Cómo paga cada tramo.** No sólo cambia cuánto pagan: cambia con qué.
 
@@ -537,7 +565,9 @@ según el año), mientras que la de los percentiles 90-95 se mueve menos.
 
 ## 6. Conclusión: ricos y pobres
 
-![Ricos y pobres](../outputs/figures/informe/i7_ricos_pobres.png)
+![Figura 15](../outputs/figures/informe/i7_ricos_pobres.png)
+
+**Figura 15.** La distancia entre ricos y pobres, antes y después de impuestos.
 
 **En una frase:** la distancia de ingresos entre ricos y pobres se achicó desde 2004, pero el
 sistema tributario no la reduce: la agranda un poco.
@@ -564,7 +594,9 @@ sí redistribuye ingreso.
 
 ## 7. Qué tan firme es
 
-![Supuestos](../outputs/figures/informe/i5_supuestos.png)
+![Figura 16](../outputs/figures/informe/i5_supuestos.png)
+
+**Figura 16.** Los resultados con otros supuestos.
 
 **En una frase:** que el decil 1 paga más y que del 2 al 10 la carga es pareja aguanta cualquier
 supuesto; el nivel exacto del decil 1 y del decil 10 depende de cómo se mida.
@@ -599,7 +631,9 @@ Es regresivo: al decil 1 le suma tres veces más que al decil 10, porque consume
 tendencia. Es la lectura más regresiva posible: parte del cheque la pagan empresas y quienes más
 usan el sistema bancario, que están más arriba.
 
-![Distancia al promedio](../outputs/figures/informe/i3_distancia_promedio.png)
+![Figura 17](../outputs/figures/informe/i3_distancia_promedio.png)
+
+**Figura 17.** Distancia del decil 1 al promedio.
 
 **La tendencia del decil 1.** Pagaba 12,5 puntos más que el promedio en 2004 y 5,0 en 2025; la
 caída aparece con todos los supuestos (franjas). **Cuidado con 2009:** el pico del decil 1 (12,9
@@ -631,7 +665,7 @@ medida principal por tres razones:
 2. **Sumarlo bien exige sumar también las utilidades al ingreso de los dueños.** Si se suma sólo el
    impuesto, la tasa de la cima se infla (lo mismo pasaría con la Ganancias de personas: impuesto
    sin el ingreso que lo genera). Con las utilidades, esa parte paga cerca del
-   30% y el efecto es mucho menor: en el 1% de las declaraciones juradas (figura 7) sumar la mitad
+   30% y el efecto es mucho menor: en el 1% de las declaraciones juradas (figura 6) sumar la mitad
    del impuesto y de las utilidades casi no cambia su tasa (30,2% sin sociedades, 30,1% con).
 3. **No hay datos de quién es dueño de qué.** Ni la EPH ni las declaraciones juradas publicadas dicen
    cuántas acciones o participaciones tiene cada persona.
@@ -729,16 +763,20 @@ donde el Estado no cobra IVA. Si es así, su carga real es menor que la medida.
 
 ## Anexo
 
-![Recaudado por peso de consumo](../outputs/figures/informe/a2_recaudado_consumo.png)
+![Figura 18](../outputs/figures/informe/a2_recaudado_consumo.png)
 
-**A2. Recaudado por peso de consumo.** Es la tasa que el estudio aplica al consumo de cada grupo.
+**Figura 18.** Recaudado por peso de consumo.
+
+Es la tasa que el estudio aplica al consumo de cada grupo.
 El IVA pasó de 9,9% del consumo privado en 2004 a 11,6% en 2023 y 10,2% en 2025; Ingresos Brutos,
 de 3,7% a 6,2% en 2014 y 5,5% en 2025. Cuando baja, baja más la carga de los deciles de abajo, que
 consumen todo su ingreso.
 
-![Cobertura](../outputs/figures/informe/a3_cobertura.png)
+![Figura 19](../outputs/figures/informe/a3_cobertura.png)
 
-**A3. Cobertura.** Qué parte de todo lo recaudado entra en el estudio: entre 56% (2004) y 71%.
+**Figura 19.** Qué parte de lo recaudado cubre el estudio.
+
+Qué parte de todo lo recaudado entra en el estudio: entre 56% (2004) y 71%.
 
 **Datos de otros estudios.** Los de la sección 1 están en `data/externos/`, con sus fuentes.
 
