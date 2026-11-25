@@ -464,14 +464,32 @@ Al final de la sección se muestra cuánto cambian los resultados con otros expo
 
 ![Figura 12](../outputs/figures/informe_v2/f12_matriz_deltas.png)
 
-**Figura 12.** Cuánto más o menos de los impuestos paga cada grupo que en un sistema proporcional o
-progresivo, año por año.
+**Figura 12.** Qué parte de los impuestos paga cada grupo frente a su parte del ingreso, año por año,
+con los dos años extremos en detalle.
 
-La figura 12 tiene dos tablas de colores. Cada fila es un grupo (los deciles 1 a 9 abajo y el decil
-10 partido arriba de la línea) y cada columna, un año. Cada celda compara dos porcentajes: la parte
-de la recaudación total que paga el grupo y la parte que pagaría en el sistema de referencia. La
-diferencia está en puntos de la recaudación. Azul significa que el grupo paga una parte mayor que en
-la referencia; rojo, una parte menor; blanco, la misma. Las dos tablas tienen escalas distintas.
+La figura 12 se lee de los costados hacia el centro. A los costados hay dos gráficos de flujo. Cada
+franja es un grupo y tiene tres alturas: a la izquierda, la parte de la población que es (10% cada
+decil); en el medio, la parte del ingreso total que recibe; a la derecha, la parte de todo lo que se
+paga en impuestos que pone. Para calcular esa última, se suman los pesos que paga el grupo en los
+siete impuestos y se dividen por lo que pagan todos los grupos juntos. Si una franja tiene la misma
+altura en el medio y a la derecha, el grupo paga impuestos en proporción a su ingreso; si se
+ensancha, paga una parte mayor; si se angosta, menor. Las partes suman siempre 100%: si un grupo
+pone una parte mayor, los demás ponen una parte menor, aunque paguen los mismos pesos.
+
+Los dos años elegidos son los extremos del período. En 2022, el más lejos de lo proporcional, el 1%
+tiene el 10,8% del ingreso y pone el 12,9% de los impuestos, mientras la clase media pasa del 38,8%
+al 35,7%. En 2025, el más cerca, las franjas casi no cambian de altura y la única que se angosta es
+la del 1% (del 10,8% al 9,9%). La distancia de cada año a lo proporcional se mide con la parte de la
+recaudación que tendría que cambiar de grupo para que todos pagaran la misma tasa: 4,4 puntos en
+2022 y 1,0 en 2025.
+
+La tabla del centro (A) muestra lo mismo para todos los grupos y todos los años. Cada fila es un
+grupo y cada columna, un año; las líneas horizontales separan el 1%, la clase alta, la clase media y
+la clase baja. Cada celda es la diferencia entre las dos columnas de la derecha de un gráfico de
+flujo: la parte de los impuestos que paga el grupo menos su parte del ingreso, en puntos de la
+recaudación. Las columnas de 2022 y 2025 están recuadradas. Azul significa que el grupo paga una
+parte mayor que su parte del ingreso; rojo, una parte menor; blanco, la misma. La tabla de abajo (B)
+hace la misma cuenta frente al sistema progresivo de referencia, con otra escala de colores.
 
 En la tabla de arriba, frente al sistema proporcional, casi todas las celdas están cerca de cero:
 las diferencias son de décimas de punto. El decil 1 paga una parte mayor que su parte del ingreso
