@@ -284,12 +284,21 @@ X13 = list(range(10)) + [10.9, 11.9, 12.9]
 NOMBRES13 = [f"D{i}" for i in range(1, 11)] + ["P90-\n95", "P95-\n99", "1%"]
 
 
+def decil10(tr, cols):
+    """El decil 10 entero a partir de sus tres tramos: tasas ponderadas por el ingreso de cada tramo."""
+    peso = tr["part_ingreso"] if "part_ingreso" in tr else tr["ingreso_total"]
+    w = peso.loc[[91, 95, 99]]
+    return tr.loc[[91, 95, 99], cols].mul(w, axis=0).sum() / w.sum()
+
+
 def datos13(largo, tramos_v, anio, variante):
-    d = tabla_deciles(largo, anio, variante)
+    """Deciles 1-9, el decil 10 recombinado y sus tres tramos, todo de la misma tabla de tramos: así el
+    decil 10 es exactamente la suma de sus partes (con el consumo de la cima estimado por tramo)."""
     tr = tramos_v[(tramos_v.anio == anio) & (tramos_v.variante == variante)].set_index("grupo")
-    filas = pd.concat([d.loc[1:10, g.COLS], tr.loc[[91, 95, 99], g.COLS] * 100])
-    tot = list(d.loc[1:10, "total"]) + list(tr.loc[[91, 95, 99], "total"] * 100)
-    return filas, tot, d.loc[0, "total"]
+    d10 = decil10(tr, g.COLS + ["total"])
+    filas = pd.concat([tr.loc[list(range(1, 10)), g.COLS], d10[g.COLS].to_frame(10).T, tr.loc[[91, 95, 99], g.COLS]]) * 100
+    tot = list(tr.loc[list(range(1, 10)), "total"] * 100) + [d10["total"] * 100] + list(tr.loc[[91, 95, 99], "total"] * 100)
+    return filas, tot, tr.loc[0, "total"] * 100
 
 
 def panel13(ax, filas, tot, prom, fs=9):
@@ -382,8 +391,20 @@ def kakwani_referencia(tramos, e):
     return pd.DataFrame(filas).set_index("anio").kakwani
 
 
-def f13_kakwani(tramos):
-    k = inf.kakwani(tramos)
+def todas_variantes(tramos, f0):
+    """Tramos con todos los supuestos: principal y los de la tabla de tramos, los de robustez y la versión B."""
+    rob = pd.read_csv(TABLES / "tasas_tramos_decil10_robustez.csv")
+    b = f0[f0.variante == VERSION_B].copy()
+    tot = b[b.grupo == 0].set_index("anio")
+    b["part_ingreso"] = b.ingreso_total / b.anio.map(tot.ingreso_total)
+    b["part_impuestos"] = b.total * b.ingreso_total / b.anio.map(tot.total * tot.ingreso_total)
+    b["variante"] = "version_b"
+    base = tramos[~tramos.variante.isin(["ajuste_cn", "ajuste_cn_activos_ext"])]
+    return pd.concat([base, rob, b], ignore_index=True)
+
+
+def f13_kakwani(tramos, todas):
+    k = inf.kakwani(todas[["variante", "anio", "grupo", "part_ingreso", "part_impuestos"]])
     kk = k.pivot(index="anio", columns="variante", values="kakwani")
     ref = {e: kakwani_referencia(tramos, e) for e in (0.15, 0.25, 0.40)}
     fig, ax = plt.subplots(figsize=(12, 5.8))
@@ -406,7 +427,7 @@ def f13_kakwani(tramos):
     fig.suptitle("Índice de Kakwani: qué tan progresivo es el sistema, año por año", x=0.01, y=1.02, ha="left",
                  fontsize=14, fontweight="bold")
     fig.text(0.01, 0.965, "Kakwani = concentración de los impuestos − concentración del ingreso (Gini). Mayor que 0: "
-             "progresivo; 0: proporcional; menor que 0: regresivo. Rojo: Argentina (franja: cinco supuestos).\nAzul "
+             "progresivo; 0: proporcional; menor que 0: regresivo. Rojo: Argentina (franja: todos los supuestos de la sección 8).\nAzul "
              "punteado: el valor que tendría el sistema progresivo de referencia de esta sección, con la misma recaudación "
              "(franja: con exponente 0,15 a 0,40 en lugar de 0,25).", fontsize=9.4, color=TINTA2, va="top")
     fig.text(0.01, -0.03, FUENTE + "\nCalculado con 12 grupos (deciles 1 a 9 y el decil 10 partido en tres): aproximado. "
@@ -588,6 +609,100 @@ def f18_veces(tramos):
     return v
 
 
+# ---------------------------------------------------------------- sección 8
+OTROS = ["version_b", "recursos_gasto"]          # se muestran aparte, no dentro de la franja
+
+
+def tasas_por_variante(todas):
+    """Tasa total (%) por variante, año y grupo."""
+    return todas.pivot_table(index=["variante", "anio"], columns="grupo", values="total") * 100
+
+
+def f19_rangos(w):
+    sup = w.drop(OTROS, level=0)
+    orden = list(range(1, 10)) + [91, 95, 99]
+    x = list(range(9)) + [9.9, 10.9, 11.9]
+    fig, axs = plt.subplots(2, 4, figsize=(22, 10.5), sharey=True)
+    for ax, a in zip(axs.flat, ANIOS_GOBIERNO):
+        s_ = sup.xs(a, level=1)[orden]
+        lo, hi = s_.min(), s_.max()
+        ax.bar(x, hi - lo, bottom=lo, width=0.62, color="#b9d4f4", zorder=2)
+        pr = w.loc[("principal", a), orden]
+        ax.scatter(x, w.loc[("version_b", a), orden], marker="D", s=30, color=AZUL, zorder=4)
+        ax.scatter(x[:3], w.loc[("recursos_gasto", a), orden][:3], marker="x", s=46, color=ROJO, linewidth=1.8, zorder=4)
+        ax.scatter(x, pr, s=42, color=TINTA, zorder=5)
+        ax.axhline(w.loc[("principal", a), 0], color=TINTA2, linewidth=1, linestyle=(0, (4, 3)), zorder=1)
+        ax.axvspan(9.45, 12.35, color="#e8f0fb", zorder=0, linewidth=0)
+        ax.set_xticks(x)
+        ax.set_xticklabels([f"D{k}" for k in range(1, 10)] + ["P90-\n95", "P95-\n99", "1%"], fontsize=8.2)
+        ax.set_xlim(-0.6, 12.4)
+        ax.xaxis.grid(False)
+        ax.set_title(str(a), loc="left", fontsize=13, fontweight="bold")
+        ax.set_title(GOBIERNO[a], loc="right", fontsize=8.6, color=TINTA2)
+    ult = axs.flat[-1]
+    ult.axis("off")
+    h = [g.Patch(facecolor="#b9d4f4", label="Rango entre los supuestos de las\nfamilias 1, 2 y 4 y sin completar la cima"),
+         matplotlib.lines.Line2D([], [], marker="o", color=TINTA, linestyle="", label="Versión A (medida del informe)"),
+         matplotlib.lines.Line2D([], [], marker="D", color=AZUL, linestyle="", label="Versión B (ingreso completado)"),
+         matplotlib.lines.Line2D([], [], marker="x", color=ROJO, linestyle="", markeredgewidth=1.8,
+                                 label="Deciles 1 a 3 medidos por su gasto"),
+         matplotlib.lines.Line2D([], [], color=TINTA2, linestyle=(0, (4, 3)), label="Promedio (versión A)")]
+    ult.legend(handles=h, loc="center", fontsize=10, frameon=False)
+    for ax in axs[:, 0]:
+        ax.set_ylabel("Impuestos, % del ingreso")
+    axs[0, 0].set_ylim(10, 46)
+    fig.suptitle("Cuánto cambia la tasa de cada grupo con cada supuesto, en los años de cambio de gobierno", x=0.01,
+                 y=1.0, ha="left", fontsize=14, fontweight="bold")
+    fig.text(0.01, 0.965, "Franja celeste: entre qué valores queda la tasa del grupo con los distintos supuestos sobre quién "
+             "paga, qué impuestos entran y cuánto consume la cima. Puntos negros: la medida del informe.\nRombos azules: "
+             "con el ingreso que la encuesta no capta estimado. Cruces rojas: los deciles más pobres medidos por lo que "
+             "gastan en lugar de lo que declaran ganar.", fontsize=9.4, color=TINTA2, va="top")
+    fig.subplots_adjust(left=0.04, right=0.995, wspace=0.06, hspace=0.32, top=0.89)
+    fig.text(0.01, 0.02, FUENTE, fontsize=7.3, color=MUDO, va="top")
+    guardar(fig, "f19_rangos_supuestos")
+
+
+def f20_distancias(w):
+    sup = w.drop(OTROS, level=0)
+    paneles = [
+        ("A. Decil 1 menos el promedio", lambda d: d[1] - d[0], ROJO),
+        ("B. El 1% más rico menos el promedio", lambda d: d[99] - d[0], OSCURO),
+        ("C. El 1% más rico menos los percentiles 90-95", lambda d: d[99] - d[91], MEDIO),
+    ]
+    fig, axs = plt.subplots(1, 3, figsize=(21, 6))
+    for ax, (titulo, f, color) in zip(axs, paneles):
+        banda = f(sup).unstack(0)
+        inf.ejes_tiempo(ax, paso=4)
+        ax.axhline(0, color=TINTA, linewidth=1)
+        ax.fill_between(banda.index, banda.min(axis=1), banda.max(axis=1), color=color, alpha=0.16, linewidth=0)
+        ax.plot(banda.index, banda["principal"], color=color, linewidth=2.6)
+        vb = f(w.loc["version_b"])
+        ax.plot(vb.index, vb, color=AZUL, linewidth=1.6, linestyle=(0, (4, 2)))
+        if color == ROJO:
+            vg = f(w.loc["recursos_gasto"])
+            ax.plot(vg.index, vg, color="#8c1716", linewidth=1.6, linestyle=(0, (1, 1.5)))
+        ax.set_title(titulo, loc="left", fontsize=11.5, fontweight="bold")
+        ax.set_ylabel("Puntos de ingreso")
+        ax.yaxis.set_major_locator(matplotlib.ticker.MultipleLocator(5 if color == ROJO else 2))
+        ax.yaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(
+            lambda v, _: f"{v:+.0f}".replace("-", "−") if v else "0"))
+    h = [g.Patch(facecolor=TINTA2, alpha=0.25, label="rango entre supuestos"),
+         matplotlib.lines.Line2D([], [], color=TINTA, linewidth=2.6, label="versión A (medida del informe)"),
+         matplotlib.lines.Line2D([], [], color=AZUL, linewidth=1.6, linestyle=(0, (4, 2)), label="versión B"),
+         matplotlib.lines.Line2D([], [], color="#8c1716", linewidth=1.6, linestyle=(0, (1, 1.5)),
+                                 label="decil 1 medido por su gasto")]
+    fig.legend(handles=h, loc="lower center", ncol=4, frameon=False, fontsize=9.5, bbox_to_anchor=(0.5, -0.04))
+    fig.subplots_adjust(wspace=0.22, top=0.78, bottom=0.14)
+    fig.suptitle("Las tres comparaciones centrales del informe, con todos los supuestos, 2004-" + str(ANIO_FIN), x=0.01,
+                 y=1.0, ha="left", fontsize=14, fontweight="bold")
+    fig.text(0.01, 0.945, "Cada panel es una diferencia de tasas, en puntos: por encima de 0, el primer grupo paga una "
+             "proporción de su ingreso mayor que el segundo; por debajo, menor. La línea llena es la medida del informe;\n"
+             "la franja, entre qué valores queda la diferencia con los demás supuestos. Si la franja entera está de un "
+             "lado del 0, el resultado de ese año no depende de los supuestos.", fontsize=9.4, color=TINTA2, va="top")
+    fig.text(0.01, -0.07, FUENTE + " Sombreado gris: INDEC intervenido (2007-2015).", fontsize=7.3, color=MUDO, va="top")
+    guardar(fig, "f20_distancias_supuestos")
+
+
 if __name__ == "__main__":
     largo, tot, ancho, tramos, trimestres = inf.cargar()
     f0 = pd.read_csv(TABLES / "tasas_tramos_decil10_fig0.csv")
@@ -606,7 +721,8 @@ if __name__ == "__main__":
     reusar(inf, inf.i6_composicion, "f10_composicion_1pct", ancho, tramos)
     f11_anios_partido(largo, tramos)
     reusar(inf, inf.i9_matriz_deltas, "f12_matriz_deltas", tramos)
-    kp, ref = f13_kakwani(tramos)
+    todas = todas_variantes(tramos, f0)
+    kp, ref = f13_kakwani(tramos, todas)
     reusar(inf, inf.i3_mapa, "f14_mapa_calor", tramos)
     from incidencia.indirectos import cargar_insumos  # noqa: E402
     _, rec = cargar_insumos()
@@ -615,6 +731,9 @@ if __name__ == "__main__":
     f16_brecha_1pct(b)
     f17_deltas_2025(tramos)
     v = f18_veces(tramos)
+    w = tasas_por_variante(todas)
+    f19_rangos(w)
+    f20_distancias(w)
     print("Gráficos en", OUT)
     print("límite clase alta (canastas):", (2 * mediana).round(2).loc[[2004, 2015, 2019, ANIO_FIN]].to_dict(),
           "75% mediana:", (0.75 * mediana).round(2).loc[[2004, ANIO_FIN]].to_dict())

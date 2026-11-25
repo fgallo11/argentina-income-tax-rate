@@ -16,6 +16,8 @@ Variantes:
 Salidas (outputs/tables/):
   tasas_tramos_decil10_fig0.csv   los tramos con el ingreso completado (panel B de la figura 0), con
                                   ingreso y personas (los usa 13_brecha_recaudacion.py).
+  tasas_tramos_decil10_robustez.csv   los tramos con los demás supuestos (sección "Qué tan firme es"
+                                  del informe nuevo).
   tasas_tramos_decil10.csv   variante, año, grupo (1-9, 91 = P90-95, 95 = P95-99, 99 = P99-100),
                              tasas por impuesto, participación en el ingreso y en los impuestos,
                              ingreso por persona en canastas básicas.
@@ -44,6 +46,20 @@ VARIANTES_FIG0 = [
     Variante("ajuste_cn_rentas_activos_ext", ajuste_cn=True, factor_rentas=7.0, renta_activos_ext=0.03),
     Variante("ajuste_cn_rentas_cartera_ext", ajuste_cn=True, factor_rentas=7.0, renta_activos_ext=0.04,
              base_activos_ext="cartera"),
+]
+# Para la sección "Qué tan firme es" del informe nuevo: los mismos supuestos que se prueban en los
+# deciles, ahora también sobre los tramos. Archivo aparte para no cambiar las franjas de las
+# figuras que usan tasas_tramos_decil10.csv.
+VARIANTES_ROBUSTEZ = [
+    Variante("contrib_100_trabajador", fraccion_contrib_trabajador=1.0),
+    Variante("contrib_100_consumidor", fraccion_contrib_trabajador=0.0),
+    Variante("iva_legal", iva_nivel_legal=True),
+    Variante("con_cheque", incluir_cheque=True),
+    Variante("con_cheque_y_combustibles", incluir_cheque=True, incluir_combustibles=True),
+    Variante("con_monotributo", incluir_monotributo=True),
+    Variante("altos_sin_corregir", altos_ingresos="no"),
+    Variante("engho_escalonado", modo_engho="escalonado"),
+    Variante("recursos_gasto", corregir_recursos=True),
 ]
 NOMBRES = {0: "Población", 91: "P90-95", 95: "P95-99", 99: "1% (EPH)"} | {d: f"D{d}" for d in range(1, 10)}
 
@@ -84,6 +100,24 @@ if __name__ == "__main__":
     f0["grupo"] = f0.pop("decil").astype(int)
     f0[["variante", "anio", "grupo"] + IMPUESTOS + ["total", "ingreso_total", "personas"]].to_csv(TABLES / "tasas_tramos_decil10_fig0.csv",
                                                                       index=False)
+
+    filas = []
+    for v in VARIANTES_ROBUSTEZ:
+        for anio, qa in q.groupby("anio"):
+            p = promedio_anual(qa, anio, engho, rec.loc[anio], v)
+            p.insert(0, "anio", anio)
+            p.insert(0, "variante", v.nombre)
+            filas.append(p)
+    r = pd.concat(filas, ignore_index=True)
+    r["grupo"] = r.pop("decil").astype(int)
+    tot_r = r[r.grupo == 0].set_index(["variante", "anio"])
+    clave = r.set_index(["variante", "anio"]).index
+    r["part_ingreso"] = r.ingreso_total / clave.map(tot_r.ingreso_total)
+    r["part_impuestos"] = r.total * r.ingreso_total / clave.map(tot_r.total * tot_r.ingreso_total)
+    r["canastas_por_persona"] = r.ingreso_total / r.personas / r.anio.map(cbt)
+    r[["variante", "anio", "grupo"] + IMPUESTOS + ["total", "part_ingreso", "part_impuestos", "canastas_por_persona",
+                                                   "ingreso_total", "personas"]].to_csv(
+        TABLES / "tasas_tramos_decil10_robustez.csv", index=False)
 
     pr = t[t.variante == "principal"].set_index(["anio", "grupo"])
     pd.set_option("display.width", 220)

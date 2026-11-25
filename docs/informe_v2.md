@@ -276,9 +276,15 @@ como parte de su ingreso, coincide con la que surge de las declaraciones juradas
 ingresos (12,0% contra 11,7% en 2024). Para 2025 todavía no hay declaraciones publicadas y se usan
 las de 2024, actualizadas con la variación del ingreso del decil 10 de la encuesta.
 
-Con la versión A, en 2025 el decil 10 paga 23,8% y sus tramos 24,6% (percentiles 90-95), 23,7%
+Partir el decil 10 cambia también un cálculo. En la figura 2 el consumo del decil 10 sale del
+promedio de ese decil en la ENGHo. Partido, el consumo se estima tramo por tramo, y por encima del 5%
+de mayores ingresos la ENGHo no tiene datos (ver la segunda limitación, más abajo). Con esa
+estimación más detallada el decil 10 completo paga 23,4% en lugar de 23,8%, y el promedio de la
+población, 23,6% en lugar de 23,8%. Desde aquí, todas las cifras usan este cálculo.
+
+Con la versión A, en 2025 el decil 10 paga 23,4% y sus tramos 24,6% (percentiles 90-95), 23,7%
 (95-99) y 21,7% (el 1%). La tasa baja hacia la cima: el 1% más rico paga menos que el promedio
-(23,8%) y menos que cualquier decil. También cambia con qué paga cada tramo. Los percentiles 90-95
+(23,6%) y menos que cualquier decil. También cambia con qué paga cada tramo. Los percentiles 90-95
 pagan sobre todo aportes, contribuciones y consumo, con poca Ganancias: su composición se parece a la
 del decil 9. En el 1%, Ganancias y Bienes Personales son 14,2 de sus 21,7 puntos. Los aportes pesan
 poco porque tienen tope, y el consumo pesa poco porque se supone que, por encima del 5% de mayores
@@ -328,9 +334,9 @@ La carga total de la población se mantiene igual que en la versión A. Lo que c
 soporta en proporción a su ingreso: los grupos cuyo ingreso crece más con la estimación pasan a
 tener una tasa menor, y los demás una mayor.
 
-Con la versión B, en 2025 el decil 10 baja de 23,8% a 22,4% y queda por debajo de todos los demás
+Con la versión B, en 2025 el decil 10 baja de 23,4% a 22,0% y queda por debajo de todos los demás
 deciles. Partido, los percentiles 90-95 pagan 24,0%, los 95-99, 23,4%, y el 1% más rico, 18,5% (20,0%
-sin la renta de la cartera externa, rayas grises). El decil 1 sube de 28,7% a 31,6%: su ingreso
+sin la renta de la cartera externa, rayas grises). El decil 1 sube de 28,7% a 31,5%: su ingreso
 crece menos que el del resto con la estimación y, como la carga total es la misma, le toca una
 parte mayor.
 
@@ -392,18 +398,18 @@ entero esconde movimientos de signo contrario adentro:
 
 | Año | Decil 10 | P90-95 | P95-99 | 1% | Promedio |
 |---|---|---|---|---|---|
-| 2004 | 23,8% | 21,7% | 22,6% | 25,1% | 23,0% |
-| 2007 | 25,1% | 24,0% | 24,1% | 25,6% | 24,8% |
-| 2011 | 30,2% | 27,6% | 29,4% | 32,5% | 27,9% |
-| 2015 | 30,8% | 29,5% | 31,2% | 30,0% | 28,8% |
-| 2019 | 23,7% | 24,4% | 23,7% | 21,8% | 24,0% |
-| 2023 | 28,3% | 27,5% | 28,5% | 27,1% | 26,8% |
-| 2025 | 23,8% | 24,6% | 23,7% | 21,7% | 23,8% |
+| 2004 | 23,1% | 21,7% | 22,6% | 25,1% | 22,7% |
+| 2007 | 24,5% | 24,0% | 24,1% | 25,6% | 24,6% |
+| 2011 | 29,6% | 27,6% | 29,4% | 32,5% | 27,7% |
+| 2015 | 30,4% | 29,5% | 31,2% | 30,0% | 28,6% |
+| 2019 | 23,3% | 24,4% | 23,7% | 21,8% | 23,8% |
+| 2023 | 27,7% | 27,5% | 28,5% | 27,1% | 26,5% |
+| 2025 | 23,4% | 24,6% | 23,7% | 21,7% | 23,6% |
 
 Entre 2004 y 2011 la tasa sube dentro del decil 10: el 1% paga más que los otros dos tramos. Desde
 2015 la relación se invierte y el 1% paga menos que los percentiles 95-99, y en 2019 y 2025 menos que
-todos. En 2004 el decil 10 y el promedio de la población estaban casi a la par (23,8% y 23,0%), con el
-1% por encima de ambos; en 2025 el decil 10 y el promedio coinciden (23,8%), con el 1% dos puntos por
+todos. En 2004 el decil 10 y el promedio de la población estaban casi a la par (23,1% y 22,7%), con el
+1% por encima de ambos; en 2025 también están a la par (23,4% y 23,6%), pero con el 1% dos puntos por
 debajo.
 
 ## 6. ¿Proporcional o progresivo?
@@ -462,8 +468,9 @@ entre los dos. Si los impuestos están más concentrados arriba que el ingreso, 
 y el sistema es progresivo; si están igual de concentrados, es 0 y el sistema es proporcional; si
 están menos concentrados, es negativo y el sistema es regresivo.
 
-La línea roja es Argentina, con una franja que muestra cómo cambia el índice con cinco supuestos
-distintos. Va de −0,021 (2016) a +0,031 (2022): prácticamente cero en todo el período, con cambios de
+La línea roja es Argentina, con una franja que muestra cómo cambia el índice con todos los
+supuestos que se prueban en la sección 8. Con la medida del informe va de −0,021 (2016) a +0,031
+(2022), y con cualquier supuesto queda entre −0,039 y +0,040: prácticamente cero en todo el período, con cambios de
 signo que siguen a los del 1% en la figura 12. La línea azul punteada es el índice que tendría el
 sistema progresivo de referencia, con la misma recaudación: alrededor de 0,10 en todos los años
 (0,109 en 2025). La franja azul muestra ese valor con exponentes entre 0,15 y 0,40: va de 0,06 a 0,18.
@@ -570,7 +577,110 @@ paga 55 veces más en impuestos. La línea de impuestos queda debajo de la de in
 salvo 2022. La distancia entre las dos se achicó en los años en que el 1% pagó más (2009-2015 y
 2020-2023) y se agrandó en 2016-2019 y desde 2024.
 
-El panel A depende del nivel del decil 1, que es el resultado menos firme del estudio: si en lugar
-del ingreso declarado se usa su gasto, el decil 1 paga menos que el promedio y la distancia después
-de impuestos quedaría menor que antes. Los paneles B y C, en cambio, comparan dos cosas medidas sobre
-el mismo grupo y no dependen de esa elección.
+Los tres paneles dependen de cómo se mide el ingreso del decil 1, que es la elección que más pesa
+en todo el estudio. En los paneles B y C, que la línea de impuestos quede debajo de la de ingreso es
+lo mismo que decir que el grupo de arriba paga una tasa menor que el decil 1. Si el decil 1 se mide
+por lo que gasta en lugar de lo que declara ganar, su ingreso es cerca de 40% mayor, sus impuestos son
+los mismos y su tasa queda por debajo del promedio. Entonces los resultados se invierten: en 2025 el
+decil 10 ingresaría 17,8 veces lo del decil 1 y pagaría 20,6 veces más; el 1%, 51 y 55 veces. La
+distancia después de impuestos quedaría menor que antes en los 22 años. La sección 8 vuelve sobre
+esta elección.
+
+## 8. Qué tan firme es cada resultado
+
+Cada resultado de las secciones anteriores depende de decisiones: a quién se le carga cada impuesto,
+qué impuestos se incluyen, cómo se mide el ingreso. Esta sección repite el cálculo cambiando esas
+decisiones una por una y revisa, para cada afirmación del informe, si se sostiene. El resultado de
+cada prueba se resume con tres veredictos: **firme** (se sostiene con cualquier supuesto, todos los
+años), **depende del año** o **depende de un supuesto**, en cuyo caso se dice cuál.
+
+### Los supuestos que se prueban
+
+Se agrupan en cuatro familias. Cada una reemplaza una decisión de la medida del informe por otra
+que también es defendible:
+
+1. **Quién paga.** Las contribuciones patronales cargadas enteras al trabajador o enteras a los
+   consumidores, en lugar de mitad y mitad. Y el IVA cobrado con la alícuota legal, como si nadie lo
+   evadiera, en lugar de lo que efectivamente se recaudó por peso de consumo.
+2. **Qué impuestos entran.** Sumando el impuesto al cheque, cargado a los precios; el cheque y los
+   impuestos a los combustibles; el monotributo. O sacando Bienes Personales.
+3. **Cómo se mide el ingreso de la cima.** Sin completar la cima con las declaraciones juradas (sólo
+   la encuesta), o con la versión B de la sección 4.
+4. **Cuánto consume la cima.** Por encima del 5% de mayores ingresos, el consumo proporcional al
+   ingreso en lugar de fijo.
+
+Se agrega una prueba más, sobre la forma de combinar las tres ediciones de la ENGHo: por tramos de
+años en lugar de interpolarlas. Con la medida del informe son 12 versiones del cálculo.
+
+Hay una decisión que se trata aparte, porque no cambia un supuesto sino lo que se mide: **medir a los
+deciles más pobres por lo que gastan en lugar de lo que declaran ganar**. Según la ENGHo, el decil 1
+gasta 1,4 veces lo que declara en la encuesta. Esa diferencia puede ser ingreso que no se declara,
+ayuda de otros hogares, ahorro o deuda. El informe usa el ingreso declarado porque la pregunta es qué
+parte de lo que se gana se va en impuestos. Con el gasto, la pregunta pasa a ser qué parte de lo que
+se consume.
+
+![Figura 19](../outputs/figures/informe_v2/f19_rangos_supuestos.png)
+
+**Figura 19.** Cuánto cambia la tasa de cada grupo con cada supuesto, en los años de cambio de
+gobierno.
+
+La figura 19 muestra, para los mismos siete años de las figuras 3 y 11, entre qué valores queda la
+tasa de cada grupo con los supuestos de las familias 1, 2 y 4, sin completar la cima y con la otra
+forma de combinar la ENGHo (franja celeste). El punto negro es la medida del informe; el rombo azul,
+la versión B; la cruz roja, los deciles 1 a 3 medidos por su gasto. La línea punteada es el promedio
+de la población.
+
+La franja del decil 1 es la más larga, porque el decil 1 paga sobre todo impuestos al consumo y las
+contribuciones, y esos son los supuestos que más cambian: en 2025 su tasa va de 26% a 33%. Las
+franjas mezclan supuestos distintos y por eso se tocan entre grupos, pero comparando con el mismo
+supuesto el decil 1 paga más que cada uno de los deciles 2 a 9 en todos los años. La cruz roja, en cambio,
+queda debajo: medido por su gasto, el decil 1 paga una tasa menor que el promedio en todos los años.
+Las franjas de los deciles 2 a 9 se superponen entre sí: con cualquier supuesto pagan parecido. En
+la cima las franjas son anchas y la del 1% cruza el promedio en varios años.
+
+![Figura 20](../outputs/figures/informe_v2/f20_distancias_supuestos.png)
+
+**Figura 20.** Las tres comparaciones centrales del informe, con todos los supuestos, 2004-2025.
+
+La figura 20 sigue las tres comparaciones en las que se apoya el informe, año por año. Cada panel es
+una diferencia de tasas en puntos de ingreso: por encima de cero, el primer grupo paga una
+proporción de su ingreso mayor que el segundo. La línea llena es la medida del informe; la franja,
+el rango con los demás supuestos; la línea azul punteada, la versión B. Cuando toda la franja queda
+de un lado del cero, ese año el resultado no depende de los supuestos.
+
+En el panel A, la franja del decil 1 queda por encima de cero los 22 años, y baja: la distancia del
+decil 1 al promedio se redujo entre 7 y 11 puntos de 2004 a 2025 con cualquier supuesto. La línea
+punteada oscura es el decil 1 medido por su gasto: queda entre 2,3 y 6,4 puntos debajo del promedio
+todos los años.
+
+En el panel B, la franja del 1% cruza el cero en la mayoría de los años. Queda entera por debajo en
+2018, 2019 y 2025, años en que el 1% paga menos que el promedio con cualquier supuesto, y entera por
+encima en 2012, 2013 y 2020-2022. En 2016, 2017 y 2024 el 1% paga menos que el promedio con todos los
+supuestos salvo uno.
+
+En el panel C, el 1% paga menos que los percentiles 90-95 con cualquier supuesto en 2018, 2019 y 2025,
+y más con cualquier supuesto en 2011-2013, 2020 y 2022. En el resto de los años depende del supuesto.
+
+### Veredicto por afirmación
+
+| Afirmación | Dónde | Veredicto | Detalle |
+|---|---|---|---|
+| El decil 1 paga la tasa más alta entre los deciles | Sección 2 | Firme midiendo por ingreso | Con el decil 10 partido, algún tramo de la cima lo supera en 13 de las 264 combinaciones de año y supuesto; en la medida del informe, sólo el 1% en 2022. Medido por su gasto, el decil 1 paga menos que el promedio todos los años |
+| Los deciles 2 a 9 pagan casi lo mismo | Sección 2 | Firme | La diferencia entre el que más paga y el que menos es de hasta 3,9 puntos en la medida del informe y de hasta 5,6 con contribuciones cargadas enteras a los consumidores (2012) |
+| La distancia del decil 1 al promedio se achicó | Secciones 2 y 8 | Firme midiendo por ingreso | Baja entre 7 y 11 puntos de 2004 a 2025 con todos los supuestos. El valor de 2009 depende de cómo se combinan las ediciones de la ENGHo |
+| El decil 10 esconde mucha diferencia adentro | Sección 3 | Firme | No depende de los supuestos sobre impuestos; con la versión B la diferencia es mayor |
+| La tasa baja hacia la cima (el 1% paga menos que los percentiles 90-95) | Secciones 4 y 5 | Depende del año | Con cualquier supuesto en 2018, 2019 y 2025; nunca en 2011-2013, 2020 y 2022 |
+| El 1% paga menos que el promedio | Secciones 5 y 6 | Depende del año | Con cualquier supuesto en 2018, 2019 y 2025, y con todos salvo uno en 2016, 2017 y 2024. Paga más con cualquier supuesto en 2012, 2013 y 2020-2022 |
+| En 2025 el 1% paga menos que cualquier decil | Sección 4 | Depende de un supuesto | Se sostiene con 10 de las 12 versiones. No se sostiene si la cima consume en proporción a su ingreso o si las contribuciones se cargan enteras al trabajador |
+| El sistema es casi proporcional | Sección 6 | Firme | El índice de Kakwani queda entre −0,039 y +0,040 con todos los supuestos, lejos del 0,06 del sistema progresivo más suave de la figura 13 |
+| El 1% paga menos y el decil 1 más que en un sistema progresivo | Sección 6 | Firme en la dirección | Con todos los supuestos, incluido medir al decil 1 por su gasto, y todos los años. El monto depende del exponente de la referencia y de la versión (sección 6) |
+| Los de arriba pagan, en proporción a su ingreso, menos que el decil 1 | Sección 7 | Depende de cómo se mide el decil 1 | Midiendo por ingreso, sí (salvo el 1% en 2022). Medido por su gasto, se invierte en todos los años |
+
+Los resultados se ordenan entonces en tres grupos. Son firmes la forma del sistema para la gran
+mayoría de la población (los deciles 2 a 9 pagan parecido y el sistema, en conjunto, es casi
+proporcional), la distancia frente a un sistema progresivo y que la carga relativa del decil 1 bajó.
+Dependen del año los resultados sobre el 1%: en 2018, 2019 y 2025 paga menos que el promedio y que los
+percentiles 90-95 con cualquier supuesto, y en 2012, 2013 y 2020-2022 paga más. Depende de una elección
+de medida que el decil 1 pague la tasa más alta: es cierto si se mide lo que gana, y no si se mide lo
+que gasta.
+
