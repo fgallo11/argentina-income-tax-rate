@@ -767,9 +767,8 @@ def brecha_por_clase(b):
     return r
 
 
-def f_flujo(tramos):
-    """Población → ingreso → impuestos, por grupo (2025, versión A), al estilo de un diagrama de flujo."""
-    a = ANIO_FIN
+def f_flujo(tramos, a=ANIO_FIN, archivo="fXX_flujo", carpeta=None):
+    """Población → ingreso → impuestos, por grupo (versión A), al estilo de un diagrama de flujo."""
     d = tabla_tramos(tramos, a)
     orden = list(range(1, 10)) + [91, 95, 99]              # de abajo (D1) hacia arriba (1%)
     pob = np.array([POB[k] * 100 for k in orden])
@@ -829,7 +828,7 @@ def f_flujo(tramos):
              "recaudado paga. Si una franja tiene el mismo ancho en el medio y a la derecha, el grupo paga impuestos en "
              "proporción a su ingreso.", fontsize=9.4, color=TINTA2, va="top")
     fig.text(0.01, 0.02, FUENTE + " Versión A.", fontsize=7.3, color=MUDO, va="top")
-    guardar(fig, "fXX_flujo")
+    g.guardar(fig, archivo, carpeta or OUT)
 
 
 if __name__ == "__main__":
