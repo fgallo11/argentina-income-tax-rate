@@ -810,93 +810,9 @@ causas demostradas.
 
 ### Cada año, grupo por grupo
 
-Las figuras A.3 a A.24 repiten la figura 8 para cada año de 2004 a 2025: la tasa de cada decil y del
-decil 10 partido en tres, separada por impuesto, con la versión A.
+![Figura A.3](../outputs/figures/informe_v2/a3_anios.png)
 
-![Figura A.3](../outputs/figures/informe_v2/a_anio_2004.png)
+**Figura A.3.** Qué parte de su ingreso pagó cada grupo en impuestos, año por año, 2004-2025.
 
-**Figura A.3.** 2004: qué parte de su ingreso pagó cada grupo en impuestos.
-
-![Figura A.4](../outputs/figures/informe_v2/a_anio_2005.png)
-
-**Figura A.4.** 2005: qué parte de su ingreso pagó cada grupo en impuestos.
-
-![Figura A.5](../outputs/figures/informe_v2/a_anio_2006.png)
-
-**Figura A.5.** 2006: qué parte de su ingreso pagó cada grupo en impuestos.
-
-![Figura A.6](../outputs/figures/informe_v2/a_anio_2007.png)
-
-**Figura A.6.** 2007: qué parte de su ingreso pagó cada grupo en impuestos.
-
-![Figura A.7](../outputs/figures/informe_v2/a_anio_2008.png)
-
-**Figura A.7.** 2008: qué parte de su ingreso pagó cada grupo en impuestos.
-
-![Figura A.8](../outputs/figures/informe_v2/a_anio_2009.png)
-
-**Figura A.8.** 2009: qué parte de su ingreso pagó cada grupo en impuestos.
-
-![Figura A.9](../outputs/figures/informe_v2/a_anio_2010.png)
-
-**Figura A.9.** 2010: qué parte de su ingreso pagó cada grupo en impuestos.
-
-![Figura A.10](../outputs/figures/informe_v2/a_anio_2011.png)
-
-**Figura A.10.** 2011: qué parte de su ingreso pagó cada grupo en impuestos.
-
-![Figura A.11](../outputs/figures/informe_v2/a_anio_2012.png)
-
-**Figura A.11.** 2012: qué parte de su ingreso pagó cada grupo en impuestos.
-
-![Figura A.12](../outputs/figures/informe_v2/a_anio_2013.png)
-
-**Figura A.12.** 2013: qué parte de su ingreso pagó cada grupo en impuestos.
-
-![Figura A.13](../outputs/figures/informe_v2/a_anio_2014.png)
-
-**Figura A.13.** 2014: qué parte de su ingreso pagó cada grupo en impuestos.
-
-![Figura A.14](../outputs/figures/informe_v2/a_anio_2015.png)
-
-**Figura A.14.** 2015: qué parte de su ingreso pagó cada grupo en impuestos.
-
-![Figura A.15](../outputs/figures/informe_v2/a_anio_2016.png)
-
-**Figura A.15.** 2016: qué parte de su ingreso pagó cada grupo en impuestos.
-
-![Figura A.16](../outputs/figures/informe_v2/a_anio_2017.png)
-
-**Figura A.16.** 2017: qué parte de su ingreso pagó cada grupo en impuestos.
-
-![Figura A.17](../outputs/figures/informe_v2/a_anio_2018.png)
-
-**Figura A.17.** 2018: qué parte de su ingreso pagó cada grupo en impuestos.
-
-![Figura A.18](../outputs/figures/informe_v2/a_anio_2019.png)
-
-**Figura A.18.** 2019: qué parte de su ingreso pagó cada grupo en impuestos.
-
-![Figura A.19](../outputs/figures/informe_v2/a_anio_2020.png)
-
-**Figura A.19.** 2020: qué parte de su ingreso pagó cada grupo en impuestos.
-
-![Figura A.20](../outputs/figures/informe_v2/a_anio_2021.png)
-
-**Figura A.20.** 2021: qué parte de su ingreso pagó cada grupo en impuestos.
-
-![Figura A.21](../outputs/figures/informe_v2/a_anio_2022.png)
-
-**Figura A.21.** 2022: qué parte de su ingreso pagó cada grupo en impuestos.
-
-![Figura A.22](../outputs/figures/informe_v2/a_anio_2023.png)
-
-**Figura A.22.** 2023: qué parte de su ingreso pagó cada grupo en impuestos.
-
-![Figura A.23](../outputs/figures/informe_v2/a_anio_2024.png)
-
-**Figura A.23.** 2024: qué parte de su ingreso pagó cada grupo en impuestos.
-
-![Figura A.24](../outputs/figures/informe_v2/a_anio_2025.png)
-
-**Figura A.24.** 2025: qué parte de su ingreso pagó cada grupo en impuestos.
+La figura A.3 repite la figura 8 para cada año de 2004 a 2025: la tasa de cada decil y del decil 10
+partido en tres, separada por impuesto, con la versión A.

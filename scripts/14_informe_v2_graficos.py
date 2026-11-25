@@ -957,22 +957,30 @@ def f13_flujos(tramos, ex):
 
 
 # ---------------------------------------------------------------- anexo
-def anexo_anio(largo, tramos, a):
-    filas, tot, prom = datos13(largo, tramos, a, "principal")
-    fig, ax = plt.subplots(figsize=(13.5, 6.2))
-    panel13(ax, filas, tot, prom)
-    ax.text(11.9, 0.97, "el decil 10, partido", transform=ax.get_xaxis_transform(), ha="center", va="top",
-            fontsize=8.8, color=TINTA2, fontweight="bold")
-    ax.set_ylim(0, 46)
-    ax.set_ylabel("Impuestos, % del ingreso")
-    leyenda_impuestos(fig, loc="center left", bbox_to_anchor=(0.86, 0.55), fontsize=9)
-    fig.subplots_adjust(right=0.85)
-    fig.suptitle(f"{a}: qué parte de su ingreso pagó cada grupo en impuestos", x=0.01, y=1.0, ha="left", fontsize=14,
-                 fontweight="bold")
-    fig.text(0.01, 0.95, f"Deciles 1 a 10 y el decil 10 partido en tres (fondo celeste). Línea punteada: promedio de la "
-             f"población ({pct(prom)}%). Versión A.", fontsize=9.4, color=TINTA2, va="top")
-    fig.text(0.01, -0.02, FUENTE, fontsize=7.3, color=MUDO, va="top")
-    guardar(fig, f"a_anio_{a}")
+def anexo_grilla(largo, tramos):
+    anios = sorted(int(a) for a in tramos.anio.unique())
+    filas_, cols_ = 6, 4
+    fig, axs = plt.subplots(filas_, cols_, figsize=(26, 33), sharey=True)
+    for ax, a in zip(axs.flat, anios):
+        filas, tot, prom = datos13(largo, tramos, a, "principal")
+        panel13(ax, filas, tot, prom, fs=6.6)
+        ax.set_xticklabels(NOMBRES13, fontsize=7)
+        ax.set_title(str(a), loc="left", fontsize=13, fontweight="bold")
+        ax.set_title(f"promedio {pct(prom)}%", loc="right", fontsize=8.6, color=TINTA2)
+    for ax in axs.flat[len(anios):]:
+        ax.axis("off")
+    leyenda_impuestos(axs.flat[-1], loc="center", fontsize=11)
+    for ax in axs[:, 0]:
+        ax.set_ylabel("Impuestos, % del ingreso")
+    axs[0, 0].set_ylim(0, 46)
+    fig.suptitle("Qué parte de su ingreso pagó cada grupo en impuestos, año por año, 2004-2025", x=0.01, y=0.995,
+                 ha="left", fontsize=16, fontweight="bold")
+    fig.text(0.01, 0.985, "Cada panel es un año: los deciles 1 a 10 y el decil 10 partido en tres (fondo celeste), con la "
+             "tasa separada por impuesto. Línea punteada: promedio de la población. Versión A.", fontsize=10.5,
+             color=TINTA2, va="top")
+    fig.subplots_adjust(left=0.04, right=0.995, wspace=0.06, hspace=0.3, top=0.965, bottom=0.035)
+    fig.text(0.01, 0.01, FUENTE, fontsize=8, color=MUDO, va="top")
+    guardar(fig, "a3_anios")
 
 
 if __name__ == "__main__":
@@ -1009,8 +1017,7 @@ if __name__ == "__main__":
     f20_distancias(w)
     reusar(inf, inf.a2_recaudado_consumo, "a1_recaudado_consumo")
     reusar(inf, inf.a3_cobertura, "a2_cobertura")
-    for a in sorted(tramos.anio.unique()):
-        anexo_anio(largo, tramos, int(a))
+    anexo_grilla(largo, tramos)
     cl = por_clase(tramos)
     bc = brecha_por_clase(b)
     pd.set_option("display.width", 200)
