@@ -629,9 +629,6 @@ def f19_rangos(w):
         ax.bar(x, hi - lo, bottom=lo, width=0.62, color="#b9d4f4", zorder=2)
         pr = w.loc[("principal", a), orden]
         ax.scatter(x, w.loc[("version_b", a), orden], marker="D", s=30, color=AZUL, zorder=4)
-        rg = w.loc[("recursos_gasto", a), orden]
-        afectados = [i for i, k in enumerate(orden) if abs(rg[k] - pr[k]) > 0.05]   # consumo > ingreso declarado
-        ax.scatter([x[i] for i in afectados], rg.iloc[afectados], marker="x", s=46, color=ROJO, linewidth=1.8, zorder=4)
         ax.scatter(x, pr, s=42, color=TINTA, zorder=5)
         ax.axhline(w.loc[("principal", a), 0], color=TINTA2, linewidth=1, linestyle=(0, (4, 3)), zorder=1)
         ax.axvspan(9.45, 12.35, color="#e8f0fb", zorder=0, linewidth=0)
@@ -646,8 +643,6 @@ def f19_rangos(w):
     h = [g.Patch(facecolor="#b9d4f4", label="Rango entre los supuestos de las\nfamilias 1, 2 y 4 y sin completar la cima"),
          matplotlib.lines.Line2D([], [], marker="o", color=TINTA, linestyle="", label="Versión A (medida del informe)"),
          matplotlib.lines.Line2D([], [], marker="D", color=AZUL, linestyle="", label="Versión B (ingreso completado)"),
-         matplotlib.lines.Line2D([], [], marker="x", color=ROJO, linestyle="", markeredgewidth=1.8,
-                                 label="Grupos cuyo consumo supera su ingreso\ndeclarado, medidos por su consumo"),
          matplotlib.lines.Line2D([], [], color=TINTA2, linestyle=(0, (4, 3)), label="Promedio (versión A)")]
     ult.legend(handles=h, loc="center", fontsize=10, frameon=False)
     for ax in axs[:, 0]:
@@ -657,8 +652,7 @@ def f19_rangos(w):
                  y=1.0, ha="left", fontsize=14, fontweight="bold")
     fig.text(0.01, 0.965, "Franja celeste: entre qué valores queda la tasa del grupo con los distintos supuestos sobre quién "
              "paga, qué impuestos entran y cuánto consume la cima. Puntos negros: la medida del informe.\nRombos azules: "
-             "con el ingreso que la encuesta no capta estimado. Cruces rojas: los grupos cuyo consumo supera su ingreso "
-             "declarado, medidos por lo que consumen en lugar de lo que declaran ganar.", fontsize=9.4, color=TINTA2, va="top")
+             "con el ingreso que la encuesta no capta estimado.", fontsize=9.4, color=TINTA2, va="top")
     fig.subplots_adjust(left=0.04, right=0.995, wspace=0.06, hspace=0.32, top=0.89)
     fig.text(0.01, 0.02, FUENTE, fontsize=7.3, color=MUDO, va="top")
     guardar(fig, "f19_rangos_supuestos")
@@ -680,9 +674,6 @@ def f20_distancias(w):
         ax.plot(banda.index, banda["principal"], color=color, linewidth=2.6)
         vb = f(w.loc["version_b"])
         ax.plot(vb.index, vb, color=AZUL, linewidth=1.6, linestyle=(0, (4, 2)))
-        if color == ROJO:
-            vg = f(w.loc["recursos_gasto"])
-            ax.plot(vg.index, vg, color="#8c1716", linewidth=1.6, linestyle=(0, (1, 1.5)))
         ax.set_title(titulo, loc="left", fontsize=11.5, fontweight="bold")
         ax.set_ylabel("Puntos de ingreso")
         ax.yaxis.set_major_locator(matplotlib.ticker.MultipleLocator(5 if color == ROJO else 2))
@@ -690,10 +681,8 @@ def f20_distancias(w):
             lambda v, _: f"{v:+.0f}".replace("-", "−") if v else "0"))
     h = [g.Patch(facecolor=TINTA2, alpha=0.25, label="rango entre supuestos"),
          matplotlib.lines.Line2D([], [], color=TINTA, linewidth=2.6, label="versión A (medida del informe)"),
-         matplotlib.lines.Line2D([], [], color=AZUL, linewidth=1.6, linestyle=(0, (4, 2)), label="versión B"),
-         matplotlib.lines.Line2D([], [], color="#8c1716", linewidth=1.6, linestyle=(0, (1, 1.5)),
-                                 label="decil 1 medido por su consumo")]
-    fig.legend(handles=h, loc="lower center", ncol=4, frameon=False, fontsize=9.5, bbox_to_anchor=(0.5, -0.04))
+         matplotlib.lines.Line2D([], [], color=AZUL, linewidth=1.6, linestyle=(0, (4, 2)), label="versión B")]
+    fig.legend(handles=h, loc="lower center", ncol=3, frameon=False, fontsize=9.5, bbox_to_anchor=(0.5, -0.04))
     fig.subplots_adjust(wspace=0.22, top=0.78, bottom=0.14)
     fig.suptitle("Las tres comparaciones centrales del informe, con todos los supuestos, 2004-" + str(ANIO_FIN), x=0.01,
                  y=1.0, ha="left", fontsize=14, fontweight="bold")

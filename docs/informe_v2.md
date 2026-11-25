@@ -101,11 +101,24 @@ decisión no siempre es quien lo deposita:
   con lo recaudado se completa con las declaraciones juradas (sección 4).
 - **Bienes Personales.** Se reparte según el patrimonio declarado en las declaraciones juradas, que
   se concentra en el decil 10.
-- **IVA, Internos e Ingresos Brutos.** Se reparten según el consumo de cada decil. El consumo sale
-  de la Encuesta Nacional de Gastos de los Hogares (ENGHo) del INDEC, ediciones 2004/05, 2012/13 y
-  2017/18, interpoladas entre sí. La tasa que se aplica a ese consumo es lo que efectivamente se
-  recaudó por cada peso de consumo privado del país, no la alícuota legal: así no se cuenta como
-  pagado el impuesto que se evade o que está exento.
+- **IVA, Internos e Ingresos Brutos.** Se pagan al comprar, así que para saber cuánto paga cada
+    decil hace falta saber cuánto consume. El cálculo tiene tres pasos.
+    1. *Cuánto se cobra por cada peso que se consume.* Se toma lo que el Estado recaudó en el año con
+    estos tres impuestos, según la Dirección Nacional de Investigaciones y Análisis Fiscal del
+    Ministerio de Economía, y se lo divide por todo lo que consumieron los hogares del país, según
+    las Cuentas Nacionales del INDEC. En 2025 se cobraron $16,2 por cada $100 de consumo ($10,2 de
+    IVA, $5,5 de Ingresos Brutos y el resto de Internos).
+    2. *Cuánto consume cada decil.* La EPH pregunta cuánto gana cada persona, pero no cuánto gasta.
+    Ese dato sale de otra encuesta del INDEC, la Encuesta Nacional de Gastos de los Hogares (ENGHo,
+    ediciones 2004/05, 2012/13 y 2017/18), que pregunta las dos cosas. De la ENGHo se toma cuánto
+    consumen los hogares de cada nivel de ingreso, y eso se aplica al decil de la EPH que está en
+    el mismo nivel.
+    3. *Cuánto paga cada decil.* Su consumo multiplicado por lo que se cobra por peso. En el IVA se
+    ajusta además según qué compra cada decil, porque unos productos pagan 21%, otros 10,5% y otros
+    están exentos.
+
+    Como el punto de partida es lo que efectivamente se recaudó y no la alícuota de la ley, no se
+    cuenta como pagado el impuesto que se evade.
 
 Quedan afuera Ganancias de sociedades, retenciones a la exportación, impuesto al cheque,
 combustibles, monotributo, impuestos provinciales distintos de Ingresos Brutos y tasas municipales.
@@ -125,9 +138,20 @@ casi la misma: entre 23,0% y 23,8%. Lo que cambia entre deciles es con qué se p
 26,8 de los 28,7 puntos son impuestos al consumo: IVA, Ingresos Brutos, Internos y la mitad de las
 contribuciones que pasa a precios. Ese peso se explica porque el consumo estimado del decil 1 es
 1,4 veces el ingreso que declara en la EPH, y paga los impuestos al consumo sobre todo ese consumo
-(la sección 8 explica de dónde sale esa diferencia). Hacia arriba el consumo pesa
-menos y los aportes y contribuciones más. El decil 10 es el único con una parte importante de
-Ganancias y Bienes Personales (7,9 puntos).
+Hacia arriba el consumo pesa menos y los aportes y
+contribuciones más. El decil 10 es el único con una parte importante de Ganancias y Bienes
+Personales (7,9 puntos).
+
+Ese resultado del decil 1 hay que leerlo con cuidado. En los deciles más pobres, los dos números del
+cálculo no coinciden: el consumo que se estima con la ENGHo es mayor que el ingreso que se declara en
+la EPH. En 2025 pasa en los deciles 1 y 2: el decil 1 consume 1,43 veces lo que declara ganar y el
+decil 2, 1,03 veces. En 2004 pasaba en los deciles 1 a 5. Ningún hogar puede consumir durante años
+más de lo que tiene, y estos hogares no tienen ahorros de los que echar mano. La explicación más
+probable es que una parte de su ingreso no aparece en la encuesta: trabajo informal, changas, ayuda
+de otros hogares o planes sociales que no se declaran. También puede haber consumo con deudas. Como
+los impuestos se calculan sobre el consumo y se dividen por el ingreso declarado, si falta ingreso
+la tasa del decil 1 sale más alta de lo que es. Por eso el 28,7% del decil 1 es el resultado menos
+seguro del informe; la sección 8 muestra cuánto puede cambiar.
 
 ### Los años de cambio de gobierno
 
@@ -612,33 +636,20 @@ que también es defendible:
 Se agrega una prueba más, sobre la forma de combinar las tres ediciones de la ENGHo: por tramos de
 años en lugar de interpolarlas. Con la medida del informe son 12 versiones del cálculo.
 
-Hay una decisión que se trata aparte, porque no cambia un supuesto sino lo que se mide: **medir a los
-grupos cuyo consumo supera su ingreso declarado por lo que consumen y no por lo que declaran ganar**.
+Hay una prueba que se trata aparte y no se muestra en las figuras, porque no cambia un supuesto sino
+la forma de medir el ingreso de los más pobres: tomar el consumo, en lugar del ingreso declarado, en
+los deciles donde el consumo estimado es mayor (sección 2). Con ese cálculo, en 2025 el decil 1 paga
+20,2% y el decil 2, 22,7%, los dos por debajo del promedio (23,6%). El decil 1 queda entre 2,3 y 6,4
+puntos por debajo del promedio en los 22 años.
 
-Para entenderla hay que recordar de dónde sale cada número. Los impuestos al consumo que paga cada
-grupo son su consumo multiplicado por lo que se recaudó por cada peso de consumo en el país: la
-recaudación de IVA, Internos e Ingresos Brutos (Dirección Nacional de Investigaciones y Análisis
-Fiscal) dividida por el consumo privado de las Cuentas Nacionales (INDEC). El consumo de cada grupo no
-lo mide la EPH, que pregunta por ingresos y no por gastos. Se estima con la ENGHo: para cada nivel de
-ingreso relativo, la ENGHo dice cuánto consumen los hogares en relación con el ingreso promedio, y ese
-cociente se aplica al grupo de la EPH que está en la misma posición. Esto se hace para todos los
-grupos, del decil 1 al 1% más rico.
-
-En la ENGHo, los hogares de menores ingresos declaran gastar más de lo que declaran ganar, y lo mismo
-pasa con el consumo que se les asigna en la EPH. En 2025, el consumo estimado del decil 1 es 1,43
-veces su ingreso declarado, y el del decil 2, 1,03 veces; del decil 3 para arriba el consumo es menor
-que el ingreso. En 2004 la diferencia era mayor y alcanzaba a los deciles 1 a 5 (2,15 veces en el
-decil 1). La diferencia no puede venir del ahorro, que estos hogares no tienen. Lo más probable es
-que sea ingreso que la encuesta no registra (trabajo informal, changas, transferencias o ayuda de
-otros hogares que no se declaran como ingreso), consumo financiado con deudas y, en parte, hogares
-que ese mes tuvieron un ingreso excepcionalmente bajo. Las encuestas no permiten separar estas
-causas.
-
-Medir por el consumo reemplaza, sólo en los grupos donde el consumo supera al ingreso declarado, el
-ingreso por el consumo. El informe usa el ingreso declarado porque la pregunta es qué parte de lo que
-se gana se va en impuestos, y porque así todos los grupos se miden igual. Pero si la diferencia es
-sobre todo ingreso que no se declara, la tasa del decil 1 está sobreestimada en la medida del
-informe, y medida por el consumo es más cercana a la real.
+Los datos no permiten saber cuál de las dos medidas está más cerca de la realidad. Si la diferencia
+entre consumo e ingreso es sobre todo ingreso que no se declara, la más cercana es la del consumo; si
+es sobre todo consumo con deudas, la del ingreso. Lo que sí se puede afirmar es cuánto pagan los
+deciles por cada peso que consumen: por cada $100 de consumo, el decil 1 paga $18,7 en impuestos al
+consumo, el decil 5, $17,2, y el decil 10, $12,3. Lo que no se sabe con certeza es qué parte de su
+ingreso real representan esos $100 en el decil 1. Por eso el informe no afirma que el sistema sea
+regresivo en la base: medido por lo que declara ganar, el decil 1 paga más que el resto; medido por
+lo que consume, paga menos.
 
 ![Figura 19](../outputs/figures/informe_v2/f19_rangos_supuestos.png)
 
@@ -647,17 +658,13 @@ gobierno.
 
 La figura 19 muestra, para los mismos siete años de las figuras 3 y 11, entre qué valores queda la
 tasa de cada grupo con los supuestos de las familias 1, 2 y 4, sin completar la cima y con la otra
-forma de combinar la ENGHo (franja celeste). El punto negro es la medida del informe; el rombo azul,
-la versión B; la cruz roja, la tasa de los grupos cuyo consumo supera su ingreso declarado, medidos
-por su consumo (en 2004, los deciles 1 a 5; desde 2015, los deciles 1 y 2). La línea punteada es el promedio
-de la población.
+forma de combinar la ENGHo (franja celeste). El punto negro es la medida del informe y el rombo
+azul, la versión B. La línea punteada es el promedio de la población.
 
 La franja del decil 1 es la más larga, porque el decil 1 paga sobre todo impuestos al consumo y las
 contribuciones, y esos son los supuestos que más cambian: en 2025 su tasa va de 26% a 33%. Las
 franjas mezclan supuestos distintos y por eso se tocan entre grupos, pero comparando con el mismo
-supuesto el decil 1 paga más que cada uno de los deciles 2 a 9 en todos los años. La cruz roja, en cambio,
-queda debajo: medido por su consumo, el decil 1 paga una tasa menor que el promedio en todos los años.
-Las franjas de los deciles 2 a 9 se superponen entre sí: con cualquier supuesto pagan parecido. En
+supuesto el decil 1 paga más que cada uno de los deciles 2 a 9 en todos los años. Las franjas de los deciles 2 a 9 se superponen entre sí: con cualquier supuesto pagan parecido. En
 la cima las franjas son anchas y la del 1% cruza el promedio en varios años.
 
 ![Figura 20](../outputs/figures/informe_v2/f20_distancias_supuestos.png)
@@ -671,9 +678,8 @@ el rango con los demás supuestos; la línea azul punteada, la versión B. Cuand
 de un lado del cero, ese año el resultado no depende de los supuestos.
 
 En el panel A, la franja del decil 1 queda por encima de cero los 22 años, y baja: la distancia del
-decil 1 al promedio se redujo entre 7 y 11 puntos de 2004 a 2025 con cualquier supuesto. La línea
-punteada oscura es el decil 1 medido por su consumo: queda entre 2,3 y 6,4 puntos debajo del promedio
-todos los años.
+decil 1 al promedio se redujo entre 7 y 11 puntos de 2004 a 2025 con cualquier supuesto. Medido por
+su consumo, en cambio, quedaría debajo del promedio todos los años.
 
 En el panel B, la franja del 1% cruza el cero en la mayoría de los años. Queda entera por debajo en
 2018, 2019 y 2025, años en que el 1% paga menos que el promedio con cualquier supuesto, y entera por
