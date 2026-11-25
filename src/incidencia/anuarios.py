@@ -150,7 +150,7 @@ def conceptos_por_columna(filas: list[list]) -> tuple[int, int, list[tuple[int, 
     return i_tot, b, out
 
 
-def importes(filas: list[list], identidad) -> tuple[dict[str, list[float]], list[float], float]:
+def importes(filas: list[list], identidad, con_casos: bool = False):
     """Importe por tramo de cada concepto, con el corrimiento de columnas que cumple `identidad`.
 
     `identidad(tot)` recibe {concepto: importe de la fila TOTAL} (conceptos repetidos se
@@ -180,7 +180,12 @@ def importes(filas: list[list], identidad) -> tuple[dict[str, list[float]], list
         except (KeyError, StopIteration, ValueError):
             continue
         if y > 0 and abs(x / y - 1) < 0.02:
-            return {n: [val(f, j) * unidad for f in datos] for n, j in cols.items()}, desde, unidad
+            imp = {n: [val(f, j) * unidad for f in datos] for n, j in cols.items()}
+            if con_casos:
+                cas = {n: [val(f, j - 1) for f in datos] for n, (j0, _, par) in zip(nombres, cc)
+                       for j in [cols[n]] if par}
+                return imp, cas, desde, unidad
+            return imp, desde, unidad
     raise ValueError("ningún corrimiento cumple la identidad contable del cuadro")
 
 
