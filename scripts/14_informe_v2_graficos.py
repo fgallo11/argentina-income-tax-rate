@@ -903,9 +903,8 @@ def f12_matrices(tramos):
              "A. Frente a un sistema proporcional: % de los impuestos que paga − % del ingreso que tiene"),
             (axp, "delta_progresivo", (-10.0, 5.0, 1),
              "B. Frente al sistema progresivo de referencia: % de los impuestos que paga − % que pagaría en él")]:
-        claves = (("paga una parte mayor\nque su parte del ingreso", "paga una parte menor\nque su parte del ingreso")
-                  if col == "delta_proporcional" else
-                  ("paga una parte mayor\nque en el progresivo", "paga una parte menor\nque en el progresivo"))
+        ref = "proporcional" if col == "delta_proporcional" else "progresivo"
+        claves = (f"pagó más de lo que\nle correspondería\nsi fuera {ref}", f"pagó menos de lo que\nle correspondería\nsi fuera {ref}")
         m = dibujar_matriz(fig, ax, dl.pivot(index="grupo", columns="anio", values=col), vmin, vmax, dec, claves)
         lejos, cerca, _ = ex[col]
         anios = list(m.columns)
