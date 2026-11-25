@@ -767,14 +767,23 @@ def brecha_por_clase(b):
     return r
 
 
-def dibujar_flujo(ax, tramos, a, compacto=False, clases=True):
-    """Población → ingreso → impuestos, por grupo (versión A), sobre un eje dado."""
+def dibujar_flujo(ax, tramos, a, compacto=False, clases=True, modo="proporcional"):
+    """Por grupo (versión A), sobre un eje dado. modo="proporcional": población → ingreso → impuestos;
+    modo="progresivo": ingreso → parte que pagaría en el sistema progresivo de referencia → impuestos."""
     fs = 0.85 if compacto else 1.0
     d = tabla_tramos(tramos, a)
     orden = list(range(1, 10)) + [91, 95, 99]              # de abajo (D1) hacia arriba (1%)
     pob = np.array([POB[k] * 100 for k in orden])
     ing = np.array([d.part_ingreso[k] * 100 for k in orden])
     imp = np.array([d.part_impuestos[k] * 100 for k in orden])
+    titulos = ["Parte de la\npoblación", "Parte del\ningreso", "Parte de los\nimpuestos"]
+    dec0 = 0
+    if modo == "progresivo":
+        yrel = d.canastas_por_persona[orden] / d.canastas_por_persona[0]
+        peso = d.part_ingreso[orden] * yrel ** g.ELAST_PROG
+        pob, ing = ing, (peso / peso.sum()).values * 100
+        titulos = ["Parte del\ningreso", "Parte en el\nprogresivo", "Parte de los\nimpuestos"]
+        dec0 = 1
     clase = {k: c for c, ks in [("baja", [1, 2, 3]), ("media", [4, 5, 6, 7, 8]), ("alta", [9, 91, 95]), ("1", [99])] for k in ks}
     tonos = {"baja": ["#f2b8b5", "#ec9a97", "#e57b78"], "media": ["#dcdbd4", "#cfcec6", "#c2c1b8", "#b5b4aa", "#a8a79c"],
              "alta": ["#b9d4f4", "#8fbaec", "#5f9ae0"], "1": [OSCURO]}
@@ -802,23 +811,24 @@ def dibujar_flujo(ax, tramos, a, compacto=False, clases=True):
                                                       edgecolor=SUP))
     nombres = [f"D{k}" for k in range(1, 10)] + ["P90-95", "P95-99", "1%" if compacto else "1% más rico"]
     for i, n in enumerate(nombres):
-        ax.text(cols_x[0] - ancho / 2 - 0.03, (yp[0][i] + yp[1][i]) / 2, f"{n}  {pct(pob[i], 0)}%", ha="right",
+        ax.text(cols_x[0] - ancho / 2 - 0.03, (yp[0][i] + yp[1][i]) / 2, f"{n}  {pct(pob[i], dec0)}%", ha="right",
                 va="center", fontsize=9 * fs, color=TINTA)
         ax.text(cols_x[2] + ancho / 2 + 0.03, (yt[0][i] + yt[1][i]) / 2, f"{pct(imp[i])}%", ha="left", va="center",
                 fontsize=9 * fs, color=TINTA, fontweight="bold" if orden[i] == 99 else None)
         if ing[i] > 2.2:
             ax.text(cols_x[1], (yi[0][i] + yi[1][i]) / 2, f"{pct(ing[i])}%", ha="center", va="center", fontsize=8 * fs,
                     color="white" if orden[i] in (95, 99) else TINTA)
-    for x, t_ in zip(cols_x, ["Parte de la\npoblación", "Parte del\ningreso", "Parte de los\nimpuestos"]):
+    for x, t_ in zip(cols_x, titulos):
         ax.text(x, 103, t_, ha="center", va="bottom", fontsize=11 * fs, fontweight="bold", color=TINTA)
     # nombres de clase a la izquierda de todo
     for nombre, ks, color in ([] if not clases else [("Clase baja", [1, 2, 3], ROJO), ("Clase media", [4, 5, 6, 7, 8], "#6f6e66"),
                               ("Clase alta", [9, 91, 95], MEDIO), ("", [99], OSCURO)]):
         idx = [orden.index(k) for k in ks]
         lo, hi = yp[0][idx[0]], yp[1][idx[-1]]
-        ax.plot([-0.52, -0.52], [lo + 0.4, hi - 0.4], color=color, linewidth=2.5)
-        ax.text(-0.56, (lo + hi) / 2, nombre, ha="right", va="center", fontsize=10 * fs, color=color, fontweight="bold")
-    ax.set_xlim(-0.85, 2.35)
+        xc = -0.72 if modo == "progresivo" else -0.52
+        ax.plot([xc, xc], [lo + 0.4, hi - 0.4], color=color, linewidth=2.5)
+        ax.text(xc - 0.04, (lo + hi) / 2, nombre, ha="right", va="center", fontsize=10 * fs, color=color, fontweight="bold")
+    ax.set_xlim(-1.05 if modo == "progresivo" else -0.85, 2.35)
     ax.set_ylim(-1, 110)
     ax.axis("off")
 
@@ -874,6 +884,14 @@ def f12_matrices_flujo(tramos):
     gs = fig.add_gridspec(2, 3, width_ratios=[1, 2.3, 0.85], height_ratios=[1, 1], wspace=0.22, hspace=0.32)
     axl, axm, axr = fig.add_subplot(gs[0, 0]), fig.add_subplot(gs[0, 1]), fig.add_subplot(gs[0, 2])
     axp = fig.add_subplot(gs[1, 1])
+    axpl, axpr = fig.add_subplot(gs[1, 0]), fig.add_subplot(gs[1, 2])
+    lejos_p = dl.groupby("anio").delta_progresivo.apply(lambda x: x.abs().sum() / 2)
+    p_lejos, p_cerca = int(lejos_p.idxmax()), int(lejos_p.idxmin())
+    dibujar_flujo(axpl, tramos, p_lejos, compacto=True, modo="progresivo")
+    dibujar_flujo(axpr, tramos, p_cerca, compacto=True, clases=False, modo="progresivo")
+    axpr.set_xlim(-0.35, 2.35)
+    axpl.set_title(f"{p_lejos}: el año más lejos del progresivo", loc="left", fontsize=12, fontweight="bold")
+    axpr.set_title(f"{p_cerca}: el año más cerca del progresivo", loc="left", fontsize=12, fontweight="bold")
     dibujar_flujo(axl, tramos, a_lejos, compacto=True)
     dibujar_flujo(axr, tramos, a_cerca, compacto=True, clases=False)
     axr.set_xlim(-0.35, 2.35)
@@ -889,7 +907,14 @@ def f12_matrices_flujo(tramos):
                                                    linewidth=2.2, zorder=5, clip_on=False))
         axm.text(j, m.shape[0] + 0.9, f"{a}: flujo a la\n{lado}", ha="center", va="top", fontsize=8.2, color=TINTA,
                  fontweight="bold")
-    dibujar_matriz(fig, axp, dl.pivot(index="grupo", columns="anio", values="delta_progresivo"), -10.0, 5.0, 1)
+    mp = dibujar_matriz(fig, axp, dl.pivot(index="grupo", columns="anio", values="delta_progresivo"), -10.0, 5.0, 1)
+    anios_p = list(mp.columns)
+    for a, lado in ((p_lejos, "izquierda"), (p_cerca, "derecha")):
+        j = anios_p.index(a)
+        axp.add_patch(matplotlib.patches.Rectangle((j - 0.5, -0.5), 1, mp.shape[0], fill=False, edgecolor=TINTA,
+                                                   linewidth=2.2, zorder=5, clip_on=False))
+        axp.text(j, mp.shape[0] + 0.9, f"{a}: flujo a la\n{lado}", ha="center", va="top", fontsize=8.2, color=TINTA,
+                 fontweight="bold")
     axp.set_title("B. Frente al sistema progresivo de referencia: % de los impuestos que paga − % que pagaría en él",
                   loc="left", fontsize=11.5, fontweight="bold")
     fig.suptitle("Qué parte de los impuestos paga cada grupo frente a su parte del ingreso, año por año", x=0.01,
@@ -899,12 +924,12 @@ def f12_matrices_flujo(tramos):
              f"ingreso; rojo: menor; blanco: lo mismo.\nA los costados, los dos años marcados: {a_lejos}, el más lejos de lo "
              f"proporcional ({pct(lejos[a_lejos])} puntos de la recaudación tendrían que cambiar de grupo para que todos "
              f"pagaran la misma tasa), y {a_cerca}, el más cerca ({pct(lejos[a_cerca])} puntos). Abajo, la misma cuenta "
-             "frente al sistema progresivo de referencia.\nLas líneas horizontales separan el 1%, la clase alta, la "
+             f"frente al sistema progresivo de referencia, con sus propios años extremos: {p_lejos} ({pct(lejos_p[p_lejos])} puntos) y {p_cerca} ({pct(lejos_p[p_cerca])} puntos);\nen esos flujos la columna del medio es la parte de los impuestos que pagaría cada grupo en ese sistema. Las líneas horizontales separan el 1%, la clase alta, la "
              "clase media y la clase baja.", fontsize=10, color=TINTA2, va="top")
-    fig.text(0.01, 0.06, FUENTE + " Versión A. Tabla: outputs/tables/deltas_proporcional_progresivo.csv.", fontsize=7.6,
+    fig.text(0.01, 0.025, FUENTE + " Versión A. Tabla: outputs/tables/deltas_proporcional_progresivo.csv.", fontsize=7.6,
              color=MUDO, va="top")
     guardar(fig, "f12_matriz_deltas")
-    return a_lejos, a_cerca
+    return a_lejos, a_cerca, p_lejos, p_cerca
 
 
 if __name__ == "__main__":

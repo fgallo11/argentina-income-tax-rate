@@ -464,8 +464,8 @@ Al final de la sección se muestra cuánto cambian los resultados con otros expo
 
 ![Figura 12](../outputs/figures/informe_v2/f12_matriz_deltas.png)
 
-**Figura 12.** Qué parte de los impuestos paga cada grupo frente a su parte del ingreso, año por año,
-con los dos años extremos en detalle.
+**Figura 12.** Qué parte de los impuestos paga cada grupo frente a su parte del ingreso y frente a un
+sistema progresivo, año por año, con los años extremos de cada comparación en detalle.
 
 La figura 12 se lee de los costados hacia el centro. A los costados hay dos gráficos de flujo. Cada
 franja es un grupo y tiene tres alturas: a la izquierda, la parte de la población que es (10% cada
@@ -488,8 +488,18 @@ grupo y cada columna, un año; las líneas horizontales separan el 1%, la clase 
 la clase baja. Cada celda es la diferencia entre las dos columnas de la derecha de un gráfico de
 flujo: la parte de los impuestos que paga el grupo menos su parte del ingreso, en puntos de la
 recaudación. Las columnas de 2022 y 2025 están recuadradas. Azul significa que el grupo paga una
-parte mayor que su parte del ingreso; rojo, una parte menor; blanco, la misma. La tabla de abajo (B)
-hace la misma cuenta frente al sistema progresivo de referencia, con otra escala de colores.
+parte mayor que su parte del ingreso; rojo, una parte menor; blanco, la misma.
+
+La fila de abajo hace lo mismo frente al sistema progresivo de referencia, que se explica al comienzo
+de esta sección. En la tabla B cada celda es la parte de los impuestos que paga el grupo menos la que
+pagaría en ese sistema, con otra escala de colores. Sus años extremos son otros: 2016, el más lejos
+del progresivo (11,9 puntos de la recaudación tendrían que cambiar de grupo), y 2013, el más cerca
+(5,8 puntos). Incluso el año más cercano al progresivo está más lejos de él que el año más lejano al
+proporcional. En estos dos gráficos de flujo la columna del medio no es el ingreso sino la parte que
+cada grupo pagaría en el sistema progresivo. En 2016 el 1% tenía el 12,1% del ingreso, en el sistema
+progresivo pagaría el 19,2% de los impuestos y pagó el 10,1%; la clase media tenía el 38,0% del
+ingreso, pagaría el 30,7% y pagó el 38,1%. En 2013 la distancia fue la menor del período: el 1% pagó
+el 9,5% frente al 11,9% que le tocaría, y la clase media, el 38,8% frente al 36,3%.
 
 En la tabla de arriba, frente al sistema proporcional, casi todas las celdas están cerca de cero:
 las diferencias son de décimas de punto. El decil 1 paga una parte mayor que su parte del ingreso
