@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-"""Gráficos del informe nuevo (docs/informe_v2.md), numerados en el orden en que aparecen.
+"""Gráficos del informe (docs/informe.md), numerados en el orden en que aparecen.
 
-Salida: outputs/figures/informe_v2/f01_... a f18_... (PNG y SVG). Todo sale de las tablas de
+Salida: outputs/figures/informe_v2/f01_... a f20_... y el anexo a1_... a a3_... (PNG y SVG). Todo sale de las tablas de
 outputs/tables/ (no corre la microsimulación). Reutiliza el estilo y varias figuras de
 07_graficos.py, 12_informe_graficos.py y 13_brecha_recaudacion.py; las nuevas están acá.
 

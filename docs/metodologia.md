@@ -452,7 +452,7 @@ cuenta para los 22 años está en `outputs/tables/deltas_proporcional_progresivo
 del informe (`i9_matriz_deltas`): frente al progresivo, el 1% paga entre 2,4 y 9,1 puntos menos
 todos los años.
 
-**En plata (informe, sección 4, "¿Cuánta plata es?").** `scripts/13_brecha_recaudacion.py` pasa
+**En plata (informe, sección 6, figuras 15 y 16).** `scripts/13_brecha_recaudacion.py` pasa
 esos desvíos a pesos, % del PIB y dólares: brecha del grupo = R × (parte de referencia − parte que
 paga), donde R es la recaudación real (DNIAF) de los impuestos del estudio (Ganancias de personas
 humanas, Bienes Personales, aportes y contribuciones, IVA, Internos e Ingresos Brutos; 18,7% del PIB
@@ -513,20 +513,20 @@ publicados; los tramos se calcularon con la local.
    alícuota del año, en `params/`) como ingreso, repartido con el empalme de declaraciones juradas o
    con las rentas de negocios de los anuarios. Trabajo: tasa = recaudación ÷ masa salarial privada
    registrada del país, aplicada a la masa de cada decil como impuesto e ingreso. Precios: por peso
-   de consumo privado, como las contribuciones trasladadas. Detalle en `docs/informe.md`,
-   "Pendientes".
+   de consumo privado, como las contribuciones trasladadas. Detalle en `docs/preguntas_abiertas.md`,
+   "Pendientes de desarrollo".
 6. **Evasión de IVA por decil (posible).** Hoy la parte no cobrada del IVA es la misma proporción
    del IVA legal en todos los deciles. Con el lugar de compra de la ENGHo (si lo trae) se puede
    cargar menos IVA a lo comprado en comercios probablemente informales, reescalando a lo recaudado
-   (método de Bachas, Gadenne y Jensen). Detalle en `docs/informe.md`, "Pendientes".
+   (método de Bachas, Gadenne y Jensen). Detalle en `docs/preguntas_abiertas.md`, "Pendientes de desarrollo".
 7. **Verificaciones de norma pendientes:** alícuotas patronales 2003-2019, INSSJP y obra
    social, y varias reglas de IVA marcadas "no verificado" en el clasificador.
 
 ## 15. Informe y comparación con otros estudios
 
-`docs/informe.md` presenta los resultados; sus gráficos salen de `scripts/12_informe_graficos.py`
-(sólo lee `outputs/tables/` y `data/externos/`) y de `scripts/13_brecha_recaudacion.py` (la brecha en
-plata, que además lee la recaudación de `data/processed/`). Comparación con Argendata (Pessino et al., 2018) y
+`docs/informe.md` presenta los resultados; sus gráficos salen de `scripts/14_informe_v2_graficos.py`,
+que lee `outputs/tables/` y `data/externos/` y reutiliza funciones de `scripts/12_informe_graficos.py`
+y `scripts/13_brecha_recaudacion.py` (la brecha en plata). Comparación con Argendata (Pessino et al., 2018) y
 con el International Tax Observatory (2026) en `docs/validacion.md`, sección 3; los datos de esos
 estudios están en `data/externos/` y no entran en ningún cálculo.
 

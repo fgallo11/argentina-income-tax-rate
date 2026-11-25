@@ -8,10 +8,12 @@ de población fija y documentación. Quedan supuestos abiertos (ver `docs/metodo
 secciones 7 y 14): el más importante es la cola alta de ingresos.
 
 **Informe de resultados:** [`docs/informe.md`](docs/informe.md), con la evolución 2004-2025 en
-gráficos (`outputs/figures/informe/`, generados por `scripts/12_informe_graficos.py` y
-`scripts/13_brecha_recaudacion.py`). Incluye cuánta plata está en juego: con la misma recaudación,
-el 1% más rico pagaría unos US$3.500 millones más por año con un sistema proporcional y unos
-US$13.200 millones más con uno progresivo (2025, ingreso completado; cuenta mecánica).
+gráficos (`outputs/figures/informe_v2/`, generados por `scripts/14_informe_v2_graficos.py`). Del
+decil 1 al 9 y en las tres clases, cada grupo paga una parte de los impuestos casi igual a su parte
+del ingreso; el que se aparta es el 1% más rico, que pagó menos de lo que le correspondería en un
+sistema proporcional en 2016-2019 y 2024-2025. Con la misma recaudación y un sistema progresivo, el
+1% pagaría unos US$8.900 millones más por año y la clase media unos US$8.800 millones menos (2025;
+cuenta mecánica).
 
 **Resultado 2025 (estimación principal, impuestos ÷ ingreso declarado):** tasa promedio
 23,8%; decil 1, 28,7%; deciles 2 a 9 entre 23,0% y 23,8%; decil 10, 23,8%. En 2024: promedio
@@ -109,7 +111,7 @@ declarado y con el ingreso ajustado a Cuentas Nacionales, con la sensibilidad de
 externos. La lectura contra el consumo queda como variante (`sobre_consumo`): responde otra
 pregunta y no registra la capacidad de ahorro de los deciles altos.
 
-Documentación: [metodología](docs/metodologia.md) · [glosario de fuentes](docs/fuentes.md) · [diagramas](docs/diagramas.md) · [simulador de impuestos directos](docs/microsimulacion.md) · [glosario de términos](docs/informe.md#cómo-leer-este-informe) · [validación](docs/validacion.md) ·
+Documentación: [metodología](docs/metodologia.md) · [glosario de fuentes](docs/fuentes.md) · [diagramas](docs/diagramas.md) · [simulador de impuestos directos](docs/microsimulacion.md) · [qué mide el informe](docs/informe.md#qué-se-mide) · [validación](docs/validacion.md) ·
 [respuestas a preguntas abiertas](docs/respuestas_preguntas_abiertas.md) ·
 [estudios previos](docs/literatura_previa.md)
 

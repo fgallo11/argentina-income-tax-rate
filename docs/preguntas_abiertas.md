@@ -140,3 +140,113 @@ lo modelado, pero la traslación podría ser parcial.
 - `requirements.txt` sin versiones fijadas.
 - `data/processed` y `outputs` no están en `.gitignore`; confirmar si es intencional.
 - El README no documenta el punto B3 (AFJP) ni destaca el A1 como la principal incertidumbre.
+
+---
+
+## Pendientes de desarrollo (antes en el informe)
+
+**Ganancias de sociedades (2,4% del PIB en 2025; entre 2,4% y 3,1% en la serie).** No se suma a la
+medida principal por tres razones:
+
+1. **No se sabe bien quién lo paga.** Lo paga la empresa, pero el costo puede recaer en los dueños
+   (menos ganancia), en los trabajadores (menos salario) o en los consumidores (más precio). La
+   literatura usa escenarios (100% a los dueños del capital, o 50% capital y 50% trabajo) y el
+   resultado de la cima depende de cuál se elija.
+2. **Sumarlo bien exige sumar también las utilidades al ingreso de los dueños.** Si se suma sólo el
+   impuesto, la tasa de la cima se infla (lo mismo pasaría con la Ganancias de personas: impuesto
+   sin el ingreso que lo genera). Con las utilidades, esa parte paga cerca del
+   30% y el efecto es mucho menor: en el 1% de las declaraciones juradas (figura 6) sumar la mitad
+   del impuesto y de las utilidades casi no cambia su tasa (30,2% sin sociedades, 30,1% con).
+3. **No hay datos de quién es dueño de qué.** Ni la EPH ni las declaraciones juradas publicadas dicen
+   cuántas acciones o participaciones tiene cada persona.
+
+**Cómo se agregaría.** Como variantes, con una sola perilla: quién paga cada peso del impuesto. A
+quien lo paga se le suman a la vez el impuesto y el ingreso que tendría sin el impuesto, como en la
+corrección de la Ganancias de personas. Cuatro escenarios:
+
+| Escenario | Capital | Trabajo | Consumidores |
+|---|---|---|---|
+| Todo al capital | 100% | | |
+| Mitad capital, mitad trabajo | 50% | 50% | |
+| Todo al trabajo | | 100% | |
+| Todo a precios | | | 100% |
+
+- **Parte del capital (los dueños).** Impuesto: su parte de la recaudación, menos la que corresponde
+  a dueños del exterior (aproximada con la inversión extranjera directa de la Posición de inversión
+  internacional del INDEC). Ingreso: las utilidades antes del impuesto (impuesto ÷ alícuota), que
+  son ingreso de los dueños aunque la empresa no las reparta. La alícuota va año por año en
+  `params/`: 35% hasta 2017, 30% en 2018-2020, escala de 25/30/35% desde 2021 (Ley 27.630). A quién:
+  primero con las proporciones del empalme con las declaraciones juradas (como la Ganancias que la
+  encuesta no capta); mejor, con las rentas de negocios por tramo de los anuarios de ARCA, si vienen
+  separadas; las ganancias de negocios de la EPH pueden dar la forma en los deciles medios.
+- **Parte del trabajo (salarios más bajos).** Se trata como un impuesto al salario: tasa = su parte
+  de la recaudación ÷ la masa salarial privada registrada del país; a cada decil, esa tasa × su masa
+  salarial privada registrada, como impuesto y también como ingreso (es salario que habría cobrado).
+  No alcanza a informales, empleados públicos ni jubilados.
+- **Parte de los consumidores (precios más altos).** Como la mitad de las contribuciones patronales
+  que pasa a precios: recaudación por peso de consumo privado × el consumo de cada decil.
+
+**Qué se espera.** El nivel sube unos 3 puntos en cualquier escenario (2,4% a 3,1% del PIB).
+
+- Todo al capital: sube la cima; el 1% de la encuesta (21,7% en 2025) se acerca al 30%, porque esa
+  parte paga más que su promedio, y su parte del ingreso crece mucho (las utilidades son del orden
+  de 8% del PIB). Los deciles 1 a 8 casi no cambian.
+- Todo al trabajo: recae en los deciles con empleo privado registrado (4 a 10) y sube varios puntos
+  a los del medio; el decil 1 casi no cambia. El perfil queda con una joroba en el medio.
+- Todo a precios: regresivo, como el IVA.
+- Mitad y mitad: entre los dos primeros.
+
+**Dónde se toca el código.** `params/` (alícuota por año); `src/incidencia/incidencia.py` (un campo
+de `Variante` con el reparto entre capital, trabajo y precios; un impuesto `sociedades`; el cálculo
+de cada parte); `scripts/09_ingresos_altos.py` (el reparto de la parte del capital si se usan las
+rentas de negocios); `scripts/05_incidencia.py` y `scripts/11_tramos_decil10.py` (las cuatro
+variantes); el informe (un apartado en la sección 8, "Qué tan firme es cada resultado"). No hace falta volver a correr la
+microsimulación de la EPH.
+
+**Evasión de IVA distinta por decil (posible pendiente).** Hoy el IVA que no se cobra se reparte
+parejo: si en un año se recauda el 80% del IVA que correspondería por ley, se supone que cada decil
+paga el 80% del IVA legal de su canasta (informe, sección 2). Pero es probable que los
+hogares más pobres compren una parte mayor en negro (ferias, almacenes de barrio, venta ambulante),
+donde el Estado no cobra IVA. Si es así, su carga real es menor que la medida.
+
+- **Qué importa y qué no.** Para la tasa efectiva sólo cuenta qué parte de lo que compra cada decil
+  es en negro: esa compra no deja IVA al Estado. Cómo se reparten la evasión comprador y vendedor
+  (por ejemplo, un descuento de 10% para el comprador y 10% de ganancia extra para el vendedor, en vez
+  del 21% entero) no cambia el IVA pagado: cambia quién se beneficia de la evasión. La ganancia del
+  vendedor es ingreso suyo (cuentapropistas y pequeños comercios), ya incluido en la encuesta si lo
+  declara.
+- **Cómo se haría.** Con el lugar de compra de la ENGHo (supermercado, almacén, feria, etc.), si la
+  encuesta lo trae con detalle suficiente: calcular por decil la parte del gasto hecha en comercios
+  probablemente informales, cargarle menos IVA a esa parte y reescalar para que el total siga siendo
+  lo recaudado. Es el método de Bachas, Gadenne y Jensen (*Informality, Consumption Taxes and
+  Redistribution*), que en varios países encuentra que la parte informal del consumo cae con el
+  ingreso y que eso vuelve al IVA menos regresivo. Hay que verificar que la ENGHo tenga la variable
+  en las tres ediciones.
+- **Qué se espera.** Baja la tasa del decil 1 y sube un poco la de los de arriba; el total no cambia.
+  Sería una variante, no la medida principal, porque el traslado de "comercio informal" a "no paga
+  IVA" es un supuesto.
+- **Dónde se toca el código.** `src/incidencia/indirectos.py` (perfil de IVA por decil) y la lectura
+  de la ENGHo.
+
+**Otros impuestos que quedan afuera:**
+
+- **Combustibles (0,6% del PIB en 2025)** está como variante: se reparte según el consumo total de
+  cada decil. Le llega a los hogares por dos vías: directa (la nafta del auto propio, que crece con
+  el ingreso) e indirecta (el gasoil del transporte de carga y de pasajeros, de la producción
+  agropecuaria y de la industria, que encarece casi todo lo que se compra). Repartirlo según el
+  consumo total representa bien la vía indirecta y exagera algo lo regresivo de la directa. Le suma
+  1,1 puntos al decil 1 y 0,3 al decil 10 en 2025 (3,7 y 0,9 en 2004, cuando el impuesto pesaba el
+  doble). Para separar las dos vías haría falta el gasto en combustible de la ENGHo y una matriz
+  insumo-producto.
+- **Impuestos provinciales distintos de Ingresos Brutos** (inmobiliario, automotor, sellos; 1,0% a
+  1,4% del PIB): habría que conseguir la recaudación separada por impuesto y repartir el inmobiliario
+  según la propiedad de la vivienda, el automotor según la tenencia de autos y sellos a precios.
+  Sumaría entre 1 y 2 puntos, bastante parejo.
+- **Tasas municipales:** no hay una serie nacional de recaudación.
+- **Retenciones a la exportación:** no está claro si las pagan los productores o los consumidores
+  internos, con precios de alimentos más bajos.
+- **Monotributo:** está como variante (`con_monotributo`): cuota por categoría, quién paga según la
+  propia encuesta y nivel ajustado a lo recaudado. Sube la tasa total entre 0,1 y 0,7 puntos por decil y no
+  cambia la forma ([el simulador](microsimulacion.md), sección 8). Faltan los aportes de autónomos del
+  régimen general y los asalariados que aportan por su cuenta (monotributistas que facturan a un solo
+  empleador: de 2,2% de los ocupados en 2016 a 4,4% en 2025), que el modelo trata como no registrados.

@@ -1,5 +1,7 @@
 #!/usr/bin/env python
-"""Gráficos del informe (docs/informe.md): la tasa efectiva a lo largo de los años.
+"""Gráficos de la versión anterior del informe (hasta el 26/11/2026; ver la historia de git de
+docs/informe.md). El informe actual usa scripts/14_informe_v2_graficos.py, que reutiliza funciones
+de este script.
 
 Salida: outputs/figures/informe/ (PNG y SVG). Todo sale de las tablas de outputs/tables/ (no
 corre la microsimulación). Usa el estilo de 07_graficos.py.
