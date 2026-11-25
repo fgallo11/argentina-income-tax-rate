@@ -72,8 +72,16 @@ def cuadros(anuario: int) -> dict[str, Path]:
 def leer(f: Path) -> list[list]:
     """Filas del cuadro como listas de celdas (texto o número)."""
     if f.suffix.lower() == ".xls":
-        sh = xlrd.open_workbook(f).sheet_by_index(0)
-        return [[sh.cell_value(r, c) for c in range(sh.ncols)] for r in range(sh.nrows)]
+        wb = xlrd.open_workbook(f)
+        sh = wb.sheet_by_index(0)
+        filas = [[sh.cell_value(r, c) for c in range(sh.ncols)] for r in range(sh.nrows)]
+        # algunos cuadros anchos siguen en una segunda hoja ("2.2.2.1.4. (2)"), con las
+        # mismas filas: sus columnas de valores se agregan a la derecha
+        for extra in wb.sheets()[1:]:
+            if extra.name.startswith(sh.name.strip()) and extra.nrows == sh.nrows:
+                for r in range(sh.nrows):
+                    filas[r] += [extra.cell_value(r, c) for c in range(3, extra.ncols)]
+        return filas
     p = _Tabla()
     p.feed(html.unescape(f.read_bytes().decode("latin-1", "ignore")))
     return p.filas
@@ -112,3 +120,73 @@ def por_tramo(filas: list[list]) -> tuple[list[str], list[list[float]], float]:
         vals = [(_numero(fila[j]) or 0.0) if j < len(fila) else 0.0 for j in cols]
         out.append([desde, hasta if hasta is not None else float("inf")] + vals)
     return enc, out, unidad
+
+
+_GENERICOS = re.compile(r"^(casos|importe|más de|mas de|hasta|\(pesos\)|tramo de ingresos.*|presentaciones con.*|\d+(\.\d+)+\.?)$", re.I)
+
+
+def conceptos_por_columna(filas: list[list]) -> tuple[int, int, list[tuple[int, str, bool]]]:
+    """Encabezados de concepto de un cuadro por tramo.
+
+    Devuelve (fila del TOTAL, columna de la etiqueta de tramo, [(columna, concepto, es_par)]).
+    Se toma la fila de encabezado con más conceptos. Un concepto ocupa un par de columnas
+    (casos, importe) si el siguiente está dos columnas más allá, y una sola si está a una.
+    En los .htm las etiquetas quedan corridas respecto de los datos; el corrimiento se
+    resuelve aparte (ver `importes`).
+    """
+    i_tot, b = next((i, j) for i, fila in enumerate(filas) for j, c in enumerate(fila[:3])
+                    if str(c).strip().upper() == "TOTAL" and any(_numero(v) is not None for v in fila[j + 1:]))
+    i_casos = max(i for i in range(i_tot) if any(str(c).strip().lower() == "casos" for c in filas[i]))
+    mejor = []
+    for i in range(max(0, i_casos - 4), i_casos):
+        et = [(j, " ".join(str(c).split())) for j, c in enumerate(filas[i])
+              if isinstance(c, str) and len(c.strip()) > 2 and not _GENERICOS.match(" ".join(c.split()))]
+        if len(et) > len(mejor):
+            mejor = et
+    out = []
+    for k, (j, t) in enumerate(mejor):
+        sig = mejor[k + 1][0] if k + 1 < len(mejor) else j + 2
+        out.append((j, t.upper(), sig - j >= 2))
+    return i_tot, b, out
+
+
+def importes(filas: list[list], identidad) -> tuple[dict[str, list[float]], list[float], float]:
+    """Importe por tramo de cada concepto, con el corrimiento de columnas que cumple `identidad`.
+
+    `identidad(tot)` recibe {concepto: importe de la fila TOTAL} (conceptos repetidos se
+    numeran: 'TOTAL', 'TOTAL#2') y devuelve (a, b) que deben coincidir. Devuelve
+    ({concepto: [TOTAL, tramo1, ...]}, desde por fila, unidad en pesos).
+    """
+    cab = " ".join(str(c) for fila in filas[:12] for c in fila).lower()
+    unidad = 1e6 if "millones de pesos" in cab else 1e3 if "miles de pesos" in cab else 1.0
+    i_tot, b, cc = conceptos_por_columna(filas)
+    datos = [filas[i_tot]]
+    for fila in filas[i_tot + 1:]:
+        if any(isinstance(c, str) and "structura porcentual" in c for c in fila):
+            break
+        if len(fila) > b and _numero(fila[b]) is not None:
+            datos.append(fila)
+    desde = [float("nan")] + [_numero(f[b]) for f in datos[1:]]
+    nombres, vistos = [], {}
+    for _, t, _ in cc:
+        vistos[t] = vistos.get(t, 0) + 1
+        nombres.append(t if vistos[t] == 1 else f"{t}#{vistos[t]}")
+    val = lambda f, j: (_numero(f[j]) or 0.0) if 0 <= j < len(f) else 0.0  # noqa: E731
+    for d in (0, 1, 2, 3, 4, 5, 6, -1, -2):
+        cols = {n: j + d + (1 if par else 0) for n, (j, _, par) in zip(nombres, cc)}
+        tot = {n: val(datos[0], j) for n, j in cols.items()}
+        try:
+            x, y = identidad(tot)
+        except (KeyError, StopIteration, ValueError):
+            continue
+        if y > 0 and abs(x / y - 1) < 0.02:
+            return {n: [val(f, j) * unidad for f in datos] for n, j in cols.items()}, desde, unidad
+    raise ValueError("ningún corrimiento cumple la identidad contable del cuadro")
+
+
+def buscar(tot: dict, patron: str, todos: bool = False):
+    """Concepto(s) cuyo nombre cumple la expresión regular."""
+    hall = [n for n in tot if re.search(patron, n, re.I)]
+    if not hall:
+        raise KeyError(patron)
+    return hall if todos else hall[0]
