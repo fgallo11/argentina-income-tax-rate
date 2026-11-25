@@ -681,8 +681,8 @@ def f19_rangos(w):
     ult = axs.flat[-1]
     ult.axis("off")
     h = [g.Patch(facecolor="#b9d4f4", label="Rango entre los supuestos de las\nfamilias 1, 2 y 4 y sin completar la cima"),
-         matplotlib.lines.Line2D([], [], marker="o", color=TINTA, linestyle="", label="Versión A (medida del informe)"),
-         matplotlib.lines.Line2D([], [], marker="D", color=AZUL, linestyle="", label="Versión B (ingreso completado)"),
+         matplotlib.lines.Line2D([], [], marker="o", color=TINTA, linestyle="", label="Medida del informe"),
+         matplotlib.lines.Line2D([], [], marker="D", color=AZUL, linestyle="", label="Con el ingreso que la encuesta\nno capta, estimado"),
          matplotlib.lines.Line2D([], [], color=TINTA2, linestyle=(0, (4, 3)), label="Promedio (versión A)")]
     ult.legend(handles=h, loc="center", fontsize=10, frameon=False)
     for ax in axs[:, 0]:
@@ -701,7 +701,7 @@ def f19_rangos(w):
 def f20_distancias(w):
     sup = w.drop(OTROS, level=0)
     paneles = [
-        ("A. Decil 1 menos el promedio", lambda d: d[1] - d[0], ROJO),
+        ("A. El decil más pobre menos el promedio", lambda d: d[1] - d[0], ROJO),
         ("B. El 1% más rico menos el promedio", lambda d: d[99] - d[0], OSCURO),
         ("C. El 1% más rico menos los percentiles 90-95", lambda d: d[99] - d[91], MEDIO),
     ]
@@ -720,8 +720,9 @@ def f20_distancias(w):
         ax.yaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(
             lambda v, _: f"{v:+.0f}".replace("-", "−") if v else "0"))
     h = [g.Patch(facecolor=TINTA2, alpha=0.25, label="rango entre supuestos"),
-         matplotlib.lines.Line2D([], [], color=TINTA, linewidth=2.6, label="versión A (medida del informe)"),
-         matplotlib.lines.Line2D([], [], color=AZUL, linewidth=1.6, linestyle=(0, (4, 2)), label="versión B")]
+         matplotlib.lines.Line2D([], [], color=TINTA, linewidth=2.6, label="medida del informe"),
+         matplotlib.lines.Line2D([], [], color=AZUL, linewidth=1.6, linestyle=(0, (4, 2)),
+                                 label="con el ingreso que la encuesta no capta, estimado")]
     fig.legend(handles=h, loc="lower center", ncol=3, frameon=False, fontsize=9.5, bbox_to_anchor=(0.5, -0.04))
     fig.subplots_adjust(wspace=0.22, top=0.78, bottom=0.14)
     fig.suptitle("Las tres comparaciones centrales del informe, con todos los supuestos, 2004-" + str(ANIO_FIN), x=0.01,

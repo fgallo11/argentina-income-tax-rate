@@ -671,7 +671,7 @@ gobierno.
 La figura 19 muestra, para los mismos siete años de las figuras 3 y 11, entre qué valores queda la
 tasa de cada grupo con los supuestos de las familias 1, 2 y 4, sin completar la cima y con la otra
 forma de combinar la ENGHo (franja celeste). El punto negro es la medida del informe y el rombo
-azul, la versión B. La línea punteada es el promedio de la población.
+azul, el cálculo con el ingreso que la encuesta no capta estimado (la versión B de la sección 4). La línea punteada es el promedio de la población.
 
 La franja del decil 1 es la más larga, porque el decil 1 paga sobre todo impuestos al consumo y las
 contribuciones, y esos son los supuestos que más cambian: en 2025 su tasa va de 26% a 33%. Las
@@ -686,11 +686,12 @@ la cima las franjas son anchas y la del 1% cruza el promedio en varios años.
 La figura 20 sigue las tres comparaciones en las que se apoya el informe, año por año. Cada panel es
 una diferencia de tasas en puntos de ingreso: por encima de cero, el primer grupo paga una
 proporción de su ingreso mayor que el segundo. La línea llena es la medida del informe; la franja,
-el rango con los demás supuestos; la línea azul punteada, la versión B. Cuando toda la franja queda
+el rango con los demás supuestos; la línea azul punteada, el cálculo con el ingreso que la encuesta no
+capta estimado (la versión B de la sección 4). Cuando toda la franja queda
 de un lado del cero, ese año el resultado no depende de los supuestos.
 
-En el panel A, la franja del decil 1 queda por encima de cero los 22 años, y baja: la distancia del
-decil 1 al promedio se redujo entre 7 y 11 puntos de 2004 a 2025 con cualquier supuesto.
+En el panel A, la franja del decil más pobre queda por encima de cero los 22 años, y baja: su
+distancia al promedio se redujo entre 7 y 11 puntos de 2004 a 2025 con cualquier supuesto.
 
 En el panel B, la franja del 1% cruza el cero en la mayoría de los años. Queda entera por debajo en
 2018, 2019 y 2025, años en que el 1% paga menos que el promedio con cualquier supuesto, y entera por
