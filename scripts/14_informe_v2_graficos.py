@@ -767,6 +767,71 @@ def brecha_por_clase(b):
     return r
 
 
+def f_flujo(tramos):
+    """Población → ingreso → impuestos, por grupo (2025, versión A), al estilo de un diagrama de flujo."""
+    a = ANIO_FIN
+    d = tabla_tramos(tramos, a)
+    orden = list(range(1, 10)) + [91, 95, 99]              # de abajo (D1) hacia arriba (1%)
+    pob = np.array([POB[k] * 100 for k in orden])
+    ing = np.array([d.part_ingreso[k] * 100 for k in orden])
+    imp = np.array([d.part_impuestos[k] * 100 for k in orden])
+    clase = {k: c for c, ks in [("baja", [1, 2, 3]), ("media", [4, 5, 6, 7, 8]), ("alta", [9, 91, 95]), ("1", [99])] for k in ks}
+    tonos = {"baja": ["#f2b8b5", "#ec9a97", "#e57b78"], "media": ["#dcdbd4", "#cfcec6", "#c2c1b8", "#b5b4aa", "#a8a79c"],
+             "alta": ["#b9d4f4", "#8fbaec", "#5f9ae0"], "1": [OSCURO]}
+    usados = {c: 0 for c in tonos}
+    colores = []
+    for k in orden:
+        c = clase[k]
+        colores.append(tonos[c][usados[c]])
+        usados[c] += 1
+    cols_x = [0.0, 1.0, 2.0]
+    ancho = 0.10
+    def tramos_y(v):
+        hi = np.cumsum(v)
+        return hi - v, hi
+    yp, yi, yt = tramos_y(pob), tramos_y(ing), tramos_y(imp)
+    fig, ax = plt.subplots(figsize=(13, 8.6))
+    t = np.linspace(0, 1, 60)
+    suave = 3 * t ** 2 - 2 * t ** 3
+    for i, col in enumerate(colores):
+        for (x0, (a0, b0)), (x1, (a1, b1)) in [((cols_x[0], (yp[0][i], yp[1][i])), (cols_x[1], (yi[0][i], yi[1][i]))),
+                                              ((cols_x[1], (yi[0][i], yi[1][i])), (cols_x[2], (yt[0][i], yt[1][i])))]:
+            xs = x0 + ancho / 2 + (x1 - x0 - ancho) * t
+            ax.fill_between(xs, a0 + (a1 - a0) * suave, b0 + (b1 - b0) * suave, color=col, alpha=0.55, linewidth=0)
+        for x, (lo, hi) in zip(cols_x, [(yp[0][i], yp[1][i]), (yi[0][i], yi[1][i]), (yt[0][i], yt[1][i])]):
+            ax.add_patch(matplotlib.patches.Rectangle((x - ancho / 2, lo), ancho, hi - lo, color=col, linewidth=0.6,
+                                                      edgecolor=SUP))
+    nombres = [f"D{k}" for k in range(1, 10)] + ["P90-95", "P95-99", "1% más rico"]
+    for i, n in enumerate(nombres):
+        ax.text(cols_x[0] - ancho / 2 - 0.03, (yp[0][i] + yp[1][i]) / 2, f"{n}  {pct(pob[i], 0)}%", ha="right",
+                va="center", fontsize=9, color=TINTA)
+        ax.text(cols_x[2] + ancho / 2 + 0.03, (yt[0][i] + yt[1][i]) / 2, f"{pct(imp[i])}%", ha="left", va="center",
+                fontsize=9, color=TINTA, fontweight="bold" if orden[i] == 99 else None)
+        if ing[i] > 2.2:
+            ax.text(cols_x[1], (yi[0][i] + yi[1][i]) / 2, f"{pct(ing[i])}%", ha="center", va="center", fontsize=8,
+                    color="white" if orden[i] in (95, 99) else TINTA)
+    for x, t_ in zip(cols_x, ["Parte de la\npoblación", "Parte del\ningreso", "Parte de los\nimpuestos"]):
+        ax.text(x, 103, t_, ha="center", va="bottom", fontsize=11, fontweight="bold", color=TINTA)
+    # nombres de clase a la izquierda de todo
+    for nombre, ks, color in [("Clase baja", [1, 2, 3], ROJO), ("Clase media", [4, 5, 6, 7, 8], "#6f6e66"),
+                              ("Clase alta", [9, 91, 95], MEDIO), ("1%", [99], OSCURO)]:
+        idx = [orden.index(k) for k in ks]
+        lo, hi = yp[0][idx[0]], yp[1][idx[-1]]
+        ax.plot([-0.52, -0.52], [lo + 0.4, hi - 0.4], color=color, linewidth=2.5)
+        ax.text(-0.56, (lo + hi) / 2, nombre, ha="right", va="center", fontsize=10, color=color, fontweight="bold")
+    ax.set_xlim(-0.85, 2.35)
+    ax.set_ylim(-1, 110)
+    ax.axis("off")
+    fig.suptitle(f"De cada 100 personas, cuánto del ingreso tienen y cuánto de los impuestos pagan, {a}", x=0.01, y=1.0,
+                 ha="left", fontsize=14, fontweight="bold")
+    fig.text(0.01, 0.955, "Cada franja es un grupo: los deciles 1 a 9 y el decil 10 partido en tres. A la izquierda, qué parte "
+             "de la población es; en el medio, qué parte del ingreso total recibe; a la derecha, qué parte de lo\n"
+             "recaudado paga. Si una franja tiene el mismo ancho en el medio y a la derecha, el grupo paga impuestos en "
+             "proporción a su ingreso.", fontsize=9.4, color=TINTA2, va="top")
+    fig.text(0.01, 0.02, FUENTE + " Versión A.", fontsize=7.3, color=MUDO, va="top")
+    guardar(fig, "fXX_flujo")
+
+
 if __name__ == "__main__":
     largo, tot, ancho, tramos, trimestres = inf.cargar()
     f0 = pd.read_csv(TABLES / "tasas_tramos_decil10_fig0.csv")
@@ -798,6 +863,7 @@ if __name__ == "__main__":
     w = tasas_por_variante(todas)
     f19_rangos(w)
     f20_distancias(w)
+    f_flujo(tramos)
     cl = por_clase(tramos)
     bc = brecha_por_clase(b)
     pd.set_option("display.width", 200)
