@@ -154,8 +154,10 @@ El estudio no trata esa diferencia como ingreso de los hogares. No hay forma de 
 atribuir a los hogares más vulnerables una capacidad económica que no declaran iría más allá de lo
 que los datos sostienen. La tasa del decil 1 se expresa entonces sobre el ingreso que declara, y debe
 leerse así: incluye los impuestos que se pagan al consumir bienes financiados con esos otros
-recursos. Por esa razón no alcanza, por sí sola, para afirmar que el sistema sea regresivo en la
-base. La sección 8 lo complementa con la carga medida sobre el consumo.
+recursos. Incluir esos recursos como ingreso podría alterar la lectura de la regresividad del
+sistema en la base, porque la carga del decil 1 resultaría menor. Como no pueden medirse ni
+verificarse por separado, el estudio no lo hace; la sección 8 presenta, como lectura complementaria,
+la carga medida sobre el consumo.
 
 ### Los años de cambio de gobierno
 
