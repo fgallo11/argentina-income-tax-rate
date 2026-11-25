@@ -400,6 +400,7 @@ def todas_variantes(tramos, f0):
     b["part_impuestos"] = b.total * b.ingreso_total / b.anio.map(tot.total * tot.ingreso_total)
     b["variante"] = "version_b"
     base = tramos[~tramos.variante.isin(["ajuste_cn", "ajuste_cn_activos_ext"])]
+    rob = rob[rob.variante != "recursos_gasto"]      # descartada: no se mide a los más pobres por su consumo
     return pd.concat([base, rob, b], ignore_index=True)
 
 
@@ -436,6 +437,32 @@ def f13_kakwani(tramos, todas):
     return kk["principal"], ref
 
 
+# clases para marcar en las figuras 15 y 17: posiciones en GRUPOS (D1..D9, P90-95, P95-99, 1%)
+CLASES_MARCA = [("Clase baja", 0, 2, "#f6dede", ROJO), ("Clase media", 3, 7, "#ecebe6", "#6f6e66"),
+                ("Clase alta", 8, 10, "#e3eefb", MEDIO), ("1%", 11, 11, "#d3e0f0", OSCURO)]
+
+
+def marcar_clases_x(ax, y_txt=-0.2):
+    """Fondo por clase y su nombre debajo del eje x (barras verticales)."""
+    tr = matplotlib.transforms.blended_transform_factory(ax.transData, ax.transAxes)
+    for nombre, i0, i1, fondo, color in CLASES_MARCA:
+        ax.axvspan(i0 - 0.48, i1 + 0.48, color=fondo, zorder=0, linewidth=0)
+        ax.plot([i0 - 0.4, i1 + 0.4], [y_txt + 0.035] * 2, color=color, linewidth=2, transform=tr, clip_on=False)
+        ax.text((i0 + i1) / 2, y_txt, nombre, transform=tr, ha="center", va="top", fontsize=9.5, color=color,
+                fontweight="bold", clip_on=False)
+
+
+def marcar_clases_y(ax, etiquetas=False):
+    """Fondo por clase (barras horizontales); con etiquetas, el nombre a la derecha del panel."""
+    tr = matplotlib.transforms.blended_transform_factory(ax.transAxes, ax.transData)
+    for nombre, i0, i1, fondo, color in CLASES_MARCA:
+        ax.axhspan(i0 - 0.48, i1 + 0.48, color=fondo, zorder=0, linewidth=0)
+        if etiquetas:
+            ax.plot([1.02, 1.02], [i0 - 0.35, i1 + 0.35], color=color, linewidth=2, transform=tr, clip_on=False)
+            ax.text(1.04, (i0 + i1) / 2, nombre, transform=tr, ha="left", va="center", fontsize=9.5, color=color,
+                    fontweight="bold", clip_on=False)
+
+
 def f15_brecha_grupos(b):
     x = b[(b.version == "A") & (b.anio == ANIO_FIN)].set_index("grupo").loc[GRUPOS]
     fig, ax = plt.subplots(figsize=(13, 6.2))
@@ -456,6 +483,8 @@ def f15_brecha_grupos(b):
     ax.text(1.01, -0.4, "↓ pagaría menos\nque hoy", transform=bt, fontsize=9, color=ROJO, va="top", ha="left",
             fontweight="bold")
     ax.set_xticks(xs, [f"{NOMBRES[k]}\n{pct(x.tasa[k] * 100)}%" for k in GRUPOS])
+    ax.set_xlim(-0.6, len(GRUPOS) - 0.4)
+    marcar_clases_x(ax, y_txt=-0.15)
     ax.set_ylabel("miles de millones de US$ por año")
     ax.xaxis.grid(False)
     ax.legend(frameon=False, loc="upper left", fontsize=9.5)
@@ -464,7 +493,7 @@ def f15_brecha_grupos(b):
     fig.text(0.01, 0.965, "Debajo de cada grupo, la tasa que paga hoy. Gris: frente a un sistema proporcional; azul: "
              "frente al progresivo de referencia. En cada color, lo que suman unos lo restan otros: el total es cero.",
              fontsize=9.4, color=TINTA2, va="top")
-    fig.text(0.01, -0.03, FUENTE + "\nBrecha = recaudación real de los impuestos del estudio (DNIAF) × (parte de los "
+    fig.text(0.01, -0.09, FUENTE + "\nBrecha = recaudación real de los impuestos del estudio (DNIAF) × (parte de los "
              "impuestos que le tocaría − parte que paga). Dólares al tipo de cambio oficial promedio del año. Versión A. "
              "Cálculo mecánico, sin cambios de comportamiento.", fontsize=7.3, color=MUDO, va="top")
     guardar(fig, "f15_brecha_grupos")
@@ -537,12 +566,14 @@ def f17_deltas_2025(tramos):
 
     panel(ax2, d_prop, "Frente a un sistema proporcional", "Puntos: % de los impuestos que paga − % del ingreso que tiene")
     ax2.set_yticklabels([NOMBRES[k] for k in GRUPOS])
+    marcar_clases_y(ax2)
     panel(ax3, d_prog, "Frente al sistema progresivo de referencia",
           "Puntos: % de los impuestos que paga − % que pagaría en el progresivo")
     ax3.set_yticklabels([f"{pct(tasa_prog[k] * 100)}%" for k in GRUPOS], fontsize=8.4, color=TINTA2)
     ax3.text(-0.02, len(GRUPOS) - 0.35, "tasa en el\nprogresivo", transform=matplotlib.transforms.
              blended_transform_factory(ax3.transAxes, ax3.transData), ha="right", va="bottom", fontsize=7.6, color=MUDO)
-    fig.subplots_adjust(wspace=0.3, top=0.8)
+    marcar_clases_y(ax3, etiquetas=True)
+    fig.subplots_adjust(wspace=0.3, top=0.8, right=0.9)
     fig.suptitle(f"Qué parte de los impuestos paga cada grupo frente a lo que pagaría con cada referencia, {a}",
                  x=0.01, y=1.0, ha="left", fontsize=14, fontweight="bold")
     fig.text(0.01, 0.945, "Cada barra: la parte de la recaudación total que paga el grupo menos la que pagaría con el "
@@ -610,7 +641,7 @@ def f18_veces(tramos):
 
 
 # ---------------------------------------------------------------- sección 8
-OTROS = ["version_b", "recursos_gasto"]          # se muestran aparte, no dentro de la franja
+OTROS = ["version_b"]                            # se muestra aparte, no dentro de la franja
 
 
 def tasas_por_variante(todas):
@@ -694,6 +725,42 @@ def f20_distancias(w):
     guardar(fig, "f20_distancias_supuestos")
 
 
+# ---------------------------------------------------------------- sección 9
+CLASES = [("Clase baja\n(deciles 1 a 3)", [1, 2, 3], ROJO), ("Clase media\n(deciles 4 a 8)", [4, 5, 6, 7, 8], GRIS),
+          ("Clase alta sin el 1%\n(decil 9 a percentil 99)", [9, 91, 95], MEDIO), ("1% más rico", [99], OSCURO)]
+
+
+def por_clase(tramos):
+    """Por año y clase: parte del ingreso, parte de los impuestos, tasa y composición (versión A)."""
+    pr = tramos[tramos.variante == "principal"]
+    filas = []
+    for a, d in pr.groupby("anio"):
+        d = d.set_index("grupo")
+        for nombre, gr, _ in CLASES:
+            w = d.part_ingreso[gr]
+            f = {"anio": a, "clase": nombre, "part_ingreso": w.sum() * 100, "part_impuestos": d.part_impuestos[gr].sum() * 100,
+                 "tasa": (d.total[gr] * w).sum() / w.sum() * 100}
+            for c in g.COLS:
+                f[c] = (d[c][gr] * w).sum() / w.sum()
+            filas.append(f)
+    return pd.DataFrame(filas)
+
+
+def brecha_por_clase(b):
+    filas = []
+    x = b[b.version == "A"]
+    for (a,), d in x.groupby(["anio"]):
+        d = d.set_index("grupo")
+        for n, gr, _ in CLASES:
+            filas.append({"anio": a, "clase": n, "personas": d.personas[gr].sum(),
+                          "prop_musd": d.proporcional_musd[gr].sum(), "prog_musd": d.progresivo_e025_musd[gr].sum(),
+                          "prog_pib": d.progresivo_e025_pib[gr].sum() * 100, "prop_pib": d.proporcional_pib[gr].sum() * 100})
+    r = pd.DataFrame(filas)
+    r["prop_pp"] = r.prop_musd * 1e6 / r.personas
+    r["prog_pp"] = r.prog_musd * 1e6 / r.personas
+    return r
+
+
 if __name__ == "__main__":
     largo, tot, ancho, tramos, trimestres = inf.cargar()
     f0 = pd.read_csv(TABLES / "tasas_tramos_decil10_fig0.csv")
@@ -725,6 +792,12 @@ if __name__ == "__main__":
     w = tasas_por_variante(todas)
     f19_rangos(w)
     f20_distancias(w)
+    cl = por_clase(tramos)
+    bc = brecha_por_clase(b)
+    pd.set_option("display.width", 200)
+    print(cl[cl.anio.isin([2004, 2013, 2019, ANIO_FIN])].round(1)[["anio", "clase", "part_ingreso", "part_impuestos", "tasa"]].to_string())
+    print(bc[bc.anio == ANIO_FIN].round(2).to_string())
+    print(bc[bc.anio >= 2016].groupby("clase")[["prop_musd", "prog_musd"]].sum().round(0))
     print("Gráficos en", OUT)
     print("límite clase alta (canastas):", (2 * mediana).round(2).loc[[2004, 2015, 2019, ANIO_FIN]].to_dict(),
           "75% mediana:", (0.75 * mediana).round(2).loc[[2004, ANIO_FIN]].to_dict())
