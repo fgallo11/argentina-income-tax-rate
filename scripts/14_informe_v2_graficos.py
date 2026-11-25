@@ -429,6 +429,11 @@ def f15_brecha_grupos(b):
             ax.text(xi, vi + (0.15 if vi >= 0 else -0.15), ("+" if vi >= 0 else "−") + pct(abs(vi)), ha="center",
                     va="bottom" if vi >= 0 else "top", fontsize=8, color=color)
     ax.axhline(0, color=TINTA, lw=0.9, zorder=4)
+    bt = matplotlib.transforms.blended_transform_factory(ax.transAxes, ax.transData)
+    ax.text(1.01, 0.4, "↑ pagaría más\nque hoy", transform=bt, fontsize=9, color=OSCURO, va="bottom",
+            ha="left", fontweight="bold")
+    ax.text(1.01, -0.4, "↓ pagaría menos\nque hoy", transform=bt, fontsize=9, color=ROJO, va="top", ha="left",
+            fontweight="bold")
     ax.set_xticks(xs, [f"{NOMBRES[k]}\n{pct(x.tasa[k] * 100)}%" for k in GRUPOS])
     ax.set_ylabel("miles de millones de US$ por año")
     ax.xaxis.grid(False)
@@ -542,7 +547,7 @@ def veces(tramos):
 
 def f18_veces(tramos):
     v = veces(tramos)
-    fig, axs = plt.subplots(1, 3, figsize=(19, 6))
+    fig, axs = plt.subplots(1, 3, figsize=(21, 6))
     paneles = [
         (axs[0], [("ingreso_d10", "antes de impuestos", TINTA2, "-"), ("ingreso_d10_despues", "después de impuestos",
                                                                          ROJO, "-")],
@@ -569,7 +574,7 @@ def f18_veces(tramos):
         ax.set_ylabel("Veces")
     a = axs[0]
     a.fill_between(v.index, v.ingreso_d10, v.ingreso_d10_despues, color=ROJO, alpha=0.15, linewidth=0)
-    fig.subplots_adjust(wspace=0.42, right=0.94, top=0.78)
+    fig.subplots_adjust(wspace=0.62, right=0.93, top=0.78)
     fig.suptitle("Cuántas veces más ingresan y cuántas veces más pagan los de arriba que el 10% más pobre", x=0.01,
                  y=1.0, ha="left", fontsize=14, fontweight="bold")
     fig.text(0.01, 0.945, "A: ingreso por persona del decil 10 dividido por el del decil 1, antes y después de pagar los "
