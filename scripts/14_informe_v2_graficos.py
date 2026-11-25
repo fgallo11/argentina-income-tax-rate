@@ -505,7 +505,7 @@ def f15_brecha_grupos(b):
     fig.text(0.01, -0.13, FUENTE + "\nBrecha = recaudación real de los impuestos del estudio (DNIAF) × (parte de los "
              "impuestos que le tocaría − parte que paga). Dólares al tipo de cambio oficial promedio del año. Versión A. "
              "Cálculo mecánico, sin cambios de comportamiento.", fontsize=7.3, color=MUDO, va="top")
-    guardar(fig, "f16_brecha_grupos")
+    guardar(fig, "f15_brecha_grupos")
 
 
 def f16_brecha_1pct(b):
@@ -538,7 +538,7 @@ def f16_brecha_1pct(b):
              fontsize=9.4, color=TINTA2, va="top")
     fig.text(0.01, -0.03, FUENTE + "\nVersión A. Progresivo: tasa = promedio × (ingreso por persona del grupo ÷ "
              "promedio)^0,25, reescalada para recaudar lo mismo.", fontsize=7.3, color=MUDO, va="top")
-    guardar(fig, "f17_brecha_1pct")
+    guardar(fig, "f16_brecha_1pct")
 
 
 def f17_deltas_2025(tramos):
@@ -590,7 +590,7 @@ def f17_deltas_2025(tramos):
              "parte del ingreso. Derecha: la tasa sube con el ingreso (a la izquierda de cada barra, la tasa que le tocaría).",
              fontsize=9.4, color=TINTA2, va="top")
     fig.text(0.01, -0.03, FUENTE + " Versión A.", fontsize=7.3, color=MUDO, va="top")
-    guardar(fig, "f18_deltas_2025")
+    guardar(fig, "f17_deltas_2025")
 
 
 # ---------------------------------------------------------------- sección 7
@@ -645,7 +645,7 @@ def f18_veces(tramos):
     fig.text(0.01, -0.03, FUENTE + "\nIngreso antes de impuestos directos, completado en la cima con el ingreso declarado "
              "a ARCA que la encuesta no capta; por persona (ingreso del grupo ÷ sus miembros). Versión A.",
              fontsize=7.3, color=MUDO, va="top")
-    guardar(fig, "f19_veces")
+    guardar(fig, "f18_veces")
     return v
 
 
@@ -695,7 +695,7 @@ def f19_rangos(w):
              "con el ingreso que la encuesta no capta estimado.", fontsize=9.4, color=TINTA2, va="top")
     fig.subplots_adjust(left=0.04, right=0.995, wspace=0.06, hspace=0.32, top=0.89)
     fig.text(0.01, 0.02, FUENTE, fontsize=7.3, color=MUDO, va="top")
-    guardar(fig, "f20_rangos_supuestos")
+    guardar(fig, "f19_rangos_supuestos")
 
 
 def f20_distancias(w):
@@ -731,7 +731,7 @@ def f20_distancias(w):
              "la franja, entre qué valores queda la diferencia con los demás supuestos. Si la franja entera está de un "
              "lado del 0, el resultado de ese año no depende de los supuestos.", fontsize=9.4, color=TINTA2, va="top")
     fig.text(0.01, -0.07, FUENTE + " Sombreado gris: INDEC intervenido (2007-2015).", fontsize=7.3, color=MUDO, va="top")
-    guardar(fig, "f21_distancias_supuestos")
+    guardar(fig, "f20_distancias_supuestos")
 
 
 # ---------------------------------------------------------------- sección 9
@@ -849,7 +849,7 @@ def f_flujo(tramos, a=ANIO_FIN, archivo="fXX_flujo", carpeta=None):
     g.guardar(fig, archivo, carpeta or OUT)
 
 
-def dibujar_matriz(fig, ax, m, vmin, vmax, dec):
+def dibujar_matriz(fig, ax, m, vmin, vmax, dec, claves=None):
     orden = [99, 95, 91] + list(range(9, 0, -1))
     nombres = {99: "1% más rico", 95: "P95-99", 91: "P90-95"} | {k: f"Decil {k}" for k in range(1, 10)}
     m = m.loc[orden]
@@ -876,6 +876,12 @@ def dibujar_matriz(fig, ax, m, vmin, vmax, dec):
         lambda v, _: (f"{v:+.{dec}f}".replace(".", ",").replace("-", "−")) if v else "0"))
     cb.set_label("Puntos de la recaudación", fontsize=8.5, color=TINTA2)
     cb.outline.set_visible(False)
+    if claves:
+        arriba, abajo = claves
+        cb.ax.text(5.2, 1.0, f"↑ {arriba}", transform=cb.ax.transAxes, ha="left", va="top", fontsize=8.8,
+                   color=OSCURO, fontweight="bold")
+        cb.ax.text(5.2, 0.0, f"↓ {abajo}", transform=cb.ax.transAxes, ha="left", va="bottom", fontsize=8.8,
+                   color=ROJO, fontweight="bold")
     return m
 
 
@@ -891,13 +897,16 @@ def extremos(dl):
 def f12_matrices(tramos):
     dl = inf.deltas_referencia(tramos)
     ex = extremos(dl)
-    fig, (axm, axp) = plt.subplots(2, 1, figsize=(16, 15))
+    fig, (axm, axp) = plt.subplots(2, 1, figsize=(18, 15))
     for ax, col, (vmin, vmax, dec), titulo in [
             (axm, "delta_proporcional", (-2.5, 2.5, 2),
              "A. Frente a un sistema proporcional: % de los impuestos que paga − % del ingreso que tiene"),
             (axp, "delta_progresivo", (-10.0, 5.0, 1),
              "B. Frente al sistema progresivo de referencia: % de los impuestos que paga − % que pagaría en él")]:
-        m = dibujar_matriz(fig, ax, dl.pivot(index="grupo", columns="anio", values=col), vmin, vmax, dec)
+        claves = (("paga una parte mayor\nque su parte del ingreso", "paga una parte menor\nque su parte del ingreso")
+                  if col == "delta_proporcional" else
+                  ("paga una parte mayor\nque en el progresivo", "paga una parte menor\nque en el progresivo"))
+        m = dibujar_matriz(fig, ax, dl.pivot(index="grupo", columns="anio", values=col), vmin, vmax, dec, claves)
         lejos, cerca, _ = ex[col]
         anios = list(m.columns)
         for a, txt in ((lejos, "el más lejos"), (cerca, "el más cerca")):
@@ -907,7 +916,7 @@ def f12_matrices(tramos):
             ax.text(j, m.shape[0] + 1.0, f"{a}: {txt}\n(figura 13)", ha="center", va="top", fontsize=8.2, color=TINTA,
                     fontweight="bold")
         ax.set_title(titulo, loc="left", fontsize=11.5, fontweight="bold")
-    fig.subplots_adjust(hspace=0.38, top=0.89, bottom=0.1)
+    fig.subplots_adjust(hspace=0.38, top=0.89, bottom=0.1, right=0.86)
     fig.suptitle("Qué parte de los impuestos paga cada grupo, frente a dos sistemas de referencia, año por año", x=0.01,
                  y=0.975, ha="left", fontsize=14, fontweight="bold")
     fig.text(0.01, 0.955, "Cada celda: la parte de la recaudación que paga el grupo menos la que pagaría en el sistema de "
@@ -947,6 +956,25 @@ def f13_flujos(tramos, ex):
     guardar(fig, "f13_flujos_extremos")
 
 
+# ---------------------------------------------------------------- anexo
+def anexo_anio(largo, tramos, a):
+    filas, tot, prom = datos13(largo, tramos, a, "principal")
+    fig, ax = plt.subplots(figsize=(13.5, 6.2))
+    panel13(ax, filas, tot, prom)
+    ax.text(11.9, 0.97, "el decil 10, partido", transform=ax.get_xaxis_transform(), ha="center", va="top",
+            fontsize=8.8, color=TINTA2, fontweight="bold")
+    ax.set_ylim(0, 46)
+    ax.set_ylabel("Impuestos, % del ingreso")
+    leyenda_impuestos(fig, loc="center left", bbox_to_anchor=(0.86, 0.55), fontsize=9)
+    fig.subplots_adjust(right=0.85)
+    fig.suptitle(f"{a}: qué parte de su ingreso pagó cada grupo en impuestos", x=0.01, y=1.0, ha="left", fontsize=14,
+                 fontweight="bold")
+    fig.text(0.01, 0.95, f"Deciles 1 a 10 y el decil 10 partido en tres (fondo celeste). Línea punteada: promedio de la "
+             f"población ({pct(prom)}%). Versión A.", fontsize=9.4, color=TINTA2, va="top")
+    fig.text(0.01, -0.02, FUENTE, fontsize=7.3, color=MUDO, va="top")
+    guardar(fig, f"a_anio_{a}")
+
+
 if __name__ == "__main__":
     largo, tot, ancho, tramos, trimestres = inf.cargar()
     f0 = pd.read_csv(TABLES / "tasas_tramos_decil10_fig0.csv")
@@ -969,7 +997,6 @@ if __name__ == "__main__":
     f13_flujos(tramos, ex)
     todas = todas_variantes(tramos, f0)
     kp, ref = f13_kakwani(tramos, todas)
-    reusar(inf, inf.i3_mapa, "f15_mapa_calor", tramos)
     from incidencia.indirectos import cargar_insumos  # noqa: E402
     _, rec = cargar_insumos()
     b = bre.brechas(bre.cargar(), rec)
@@ -980,6 +1007,10 @@ if __name__ == "__main__":
     w = tasas_por_variante(todas)
     f19_rangos(w)
     f20_distancias(w)
+    reusar(inf, inf.a2_recaudado_consumo, "a1_recaudado_consumo")
+    reusar(inf, inf.a3_cobertura, "a2_cobertura")
+    for a in sorted(tramos.anio.unique()):
+        anexo_anio(largo, tramos, int(a))
     cl = por_clase(tramos)
     bc = brecha_por_clase(b)
     pd.set_option("display.width", 200)
