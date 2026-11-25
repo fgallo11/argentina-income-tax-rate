@@ -442,14 +442,18 @@ CLASES_MARCA = [("Clase baja", 0, 2, "#f6dede", ROJO), ("Clase media", 3, 7, "#e
                 ("Clase alta", 8, 10, "#e3eefb", MEDIO), ("1%", 11, 11, "#d3e0f0", OSCURO)]
 
 
-def marcar_clases_x(ax, y_txt=-0.2):
-    """Fondo por clase y su nombre debajo del eje x (barras verticales)."""
+def marcar_clases_x(ax, y_txt=-0.2, totales=None):
+    """Fondo por clase y su nombre debajo del eje x (barras verticales); con totales, el monto debajo."""
     tr = matplotlib.transforms.blended_transform_factory(ax.transData, ax.transAxes)
     for nombre, i0, i1, fondo, color in CLASES_MARCA:
         ax.axvspan(i0 - 0.48, i1 + 0.48, color=fondo, zorder=0, linewidth=0)
         ax.plot([i0 - 0.4, i1 + 0.4], [y_txt + 0.035] * 2, color=color, linewidth=2, transform=tr, clip_on=False)
         ax.text((i0 + i1) / 2, y_txt, nombre, transform=tr, ha="center", va="top", fontsize=9.5, color=color,
                 fontweight="bold", clip_on=False)
+        if totales is not None:
+            v = totales[nombre]
+            ax.text((i0 + i1) / 2, y_txt - 0.05, f"{'+' if v >= 0 else '−'}US${pct(abs(v))} mil M",
+                    transform=tr, ha="center", va="top", fontsize=8.6, color=color, clip_on=False)
 
 
 def marcar_clases_y(ax, etiquetas=False):
@@ -484,16 +488,18 @@ def f15_brecha_grupos(b):
             fontweight="bold")
     ax.set_xticks(xs, [f"{NOMBRES[k]}\n{pct(x.tasa[k] * 100)}%" for k in GRUPOS])
     ax.set_xlim(-0.6, len(GRUPOS) - 0.4)
-    marcar_clases_x(ax, y_txt=-0.15)
+    totales = {n: x.progresivo_e025_musd.iloc[i0:i1 + 1].sum() / 1000 for n, i0, i1, _, _ in CLASES_MARCA}
+    marcar_clases_x(ax, y_txt=-0.15, totales=totales)
     ax.set_ylabel("miles de millones de US$ por año")
     ax.xaxis.grid(False)
     ax.legend(frameon=False, loc="upper left", fontsize=9.5)
     fig.suptitle(f"Cuánto más (+) o menos (−) pagaría cada grupo con otro sistema que recaude lo mismo, {ANIO_FIN}",
                  x=0.01, y=1.02, ha="left", fontsize=14, fontweight="bold")
     fig.text(0.01, 0.965, "Debajo de cada grupo, la tasa que paga hoy. Gris: frente a un sistema proporcional; azul: "
-             "frente al progresivo de referencia. En cada color, lo que suman unos lo restan otros: el total es cero.",
+             "frente al progresivo de referencia. En cada color, lo que suman unos lo restan otros: el total es cero.\n"
+             "Debajo del nombre de cada clase, su total frente al sistema progresivo.",
              fontsize=9.4, color=TINTA2, va="top")
-    fig.text(0.01, -0.09, FUENTE + "\nBrecha = recaudación real de los impuestos del estudio (DNIAF) × (parte de los "
+    fig.text(0.01, -0.13, FUENTE + "\nBrecha = recaudación real de los impuestos del estudio (DNIAF) × (parte de los "
              "impuestos que le tocaría − parte que paga). Dólares al tipo de cambio oficial promedio del año. Versión A. "
              "Cálculo mecánico, sin cambios de comportamiento.", fontsize=7.3, color=MUDO, va="top")
     guardar(fig, "f15_brecha_grupos")

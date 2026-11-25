@@ -543,19 +543,10 @@ y desocupados.
 
 La figura marca también las clases sociales, con el criterio de la OCDE de la figura 6 aproximado
 con deciles: clase baja, por debajo del 75% del ingreso mediano (deciles 1 a 3); clase media, entre
-el 75% y el doble del ingreso mediano (deciles 4 a 8); clase alta, por encima del doble (decil 9 y
-percentiles 90 a 99). El 1% más rico se muestra aparte.
-
-Agrupada así, la figura muestra de dónde saldría y adónde iría la diferencia. Frente al sistema
-proporcional casi nada cambia para la clase baja, la media y la alta: cada una ya paga una parte de
-los impuestos muy parecida a su parte del ingreso. El único grupo que se aparta es el 1%, que pagaría
-US$1.100 millones más. Frente al sistema progresivo, la clase media pagaría US$8.800 millones menos
-por año (unos US$385 por persona) y la clase baja, US$4.000 millones menos (unos US$290 por
-persona). Del otro lado, la clase alta sin el 1% pagaría US$3.900 millones más (unos US$450 por
-persona) y el 1%, US$8.900 millones más (unos US$19.500 por persona). El 1% sostendría por sí solo
-más de la mitad del cambio, siendo el 1% de la población y teniendo el 10,8% del ingreso. Entre 2016 y 2025, la suma de lo que la clase media pagó de más frente
-al sistema progresivo fue de US$65.700 millones, y la de lo que el 1% pagó de menos, de US$73.100
-millones.
+el 75% y el doble (deciles 4 a 8); clase alta, por encima del doble (decil 9 y percentiles 90 a 99). El
+1% más rico se muestra aparte. Debajo de cada clase está su total frente al sistema progresivo. Entre
+2016 y 2025, lo que la clase media pagó de más frente a ese sistema suma US$65.700 millones, y lo que
+el 1% pagó de menos, US$73.100 millones.
 
 Es una cuenta mecánica, que supone que nadie cambia su comportamiento. No estima lo que se podría
 recaudar con una reforma: una suba de impuestos en la cima traería más elusión, más evasión y más
@@ -591,11 +582,7 @@ La figura 17 es la columna de 2025 de la figura 12, dibujada en barras para leer
 izquierda, frente al sistema proporcional; a la derecha, frente al progresivo, con la tasa que le
 tocaría a cada grupo al lado de su nombre.
 
-Por clase, frente al proporcional, en 2025 la clase baja tiene el 8,2% del ingreso y paga el 8,4% de
-los impuestos; la clase media, el 38,8% y el 39,0%; la clase alta sin el 1%, el 42,2% y el 42,7%. Las
-tres pagan casi exactamente en proporción a su ingreso. El 1% tiene el 10,8% del ingreso y paga el 9,9%.
-
-Grupo por grupo, frente al proporcional, en 2025 el 1% paga 0,86 puntos menos de la recaudación que su parte del
+Los fondos de color marcan las mismas clases que la figura 15. Frente al proporcional, en 2025 el 1% paga 0,86 puntos menos de la recaudación que su parte del
 ingreso, y el decil 1 y los percentiles 90-95 pagan algo más (0,32 y 0,46 puntos). Los demás grupos
 quedan a menos de una décima. Frente al progresivo, todos los deciles 1 a 9 pagan una parte mayor
 que la que les tocaría (entre 0,5 y 1,5 puntos cada uno), los percentiles 90-95 casi la misma, los
