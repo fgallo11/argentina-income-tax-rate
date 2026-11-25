@@ -464,42 +464,18 @@ Al final de la sección se muestra cuánto cambian los resultados con otros expo
 
 ![Figura 12](../outputs/figures/informe_v2/f12_matriz_deltas.png)
 
-**Figura 12.** Qué parte de los impuestos paga cada grupo frente a su parte del ingreso y frente a un
-sistema progresivo, año por año, con los años extremos de cada comparación en detalle.
+**Figura 12.** Qué parte de los impuestos paga cada grupo frente a dos sistemas de referencia, año por
+año.
 
-La figura 12 se lee de los costados hacia el centro. A los costados hay dos gráficos de flujo. Cada
-franja es un grupo y tiene tres alturas: a la izquierda, la parte de la población que es (10% cada
-decil); en el medio, la parte del ingreso total que recibe; a la derecha, la parte de todo lo que se
-paga en impuestos que pone. Para calcular esa última, se suman los pesos que paga el grupo en los
-siete impuestos y se dividen por lo que pagan todos los grupos juntos. Si una franja tiene la misma
-altura en el medio y a la derecha, el grupo paga impuestos en proporción a su ingreso; si se
-ensancha, paga una parte mayor; si se angosta, menor. Las partes suman siempre 100%: si un grupo
-pone una parte mayor, los demás ponen una parte menor, aunque paguen los mismos pesos.
-
-Los dos años elegidos son los extremos del período. En 2022, el más lejos de lo proporcional, el 1%
-tiene el 10,8% del ingreso y pone el 12,9% de los impuestos, mientras la clase media pasa del 38,8%
-al 35,7%. En 2025, el más cerca, las franjas casi no cambian de altura y la única que se angosta es
-la del 1% (del 10,8% al 9,9%). La distancia de cada año a lo proporcional se mide con la parte de la
-recaudación que tendría que cambiar de grupo para que todos pagaran la misma tasa: 4,4 puntos en
-2022 y 1,0 en 2025.
-
-La tabla del centro (A) muestra lo mismo para todos los grupos y todos los años. Cada fila es un
-grupo y cada columna, un año; las líneas horizontales separan el 1%, la clase alta, la clase media y
-la clase baja. Cada celda es la diferencia entre las dos columnas de la derecha de un gráfico de
-flujo: la parte de los impuestos que paga el grupo menos su parte del ingreso, en puntos de la
-recaudación. Las columnas de 2022 y 2025 están recuadradas. Azul significa que el grupo paga una
-parte mayor que su parte del ingreso; rojo, una parte menor; blanco, la misma.
-
-La fila de abajo hace lo mismo frente al sistema progresivo de referencia, que se explica al comienzo
-de esta sección. En la tabla B cada celda es la parte de los impuestos que paga el grupo menos la que
-pagaría en ese sistema, con otra escala de colores. Sus años extremos son otros: 2016, el más lejos
-del progresivo (11,9 puntos de la recaudación tendrían que cambiar de grupo), y 2013, el más cerca
-(5,8 puntos). Incluso el año más cercano al progresivo está más lejos de él que el año más lejano al
-proporcional. En estos dos gráficos de flujo la columna del medio no es el ingreso sino la parte que
-cada grupo pagaría en el sistema progresivo. En 2016 el 1% tenía el 12,1% del ingreso, en el sistema
-progresivo pagaría el 19,2% de los impuestos y pagó el 10,1%; la clase media tenía el 38,0% del
-ingreso, pagaría el 30,7% y pagó el 38,1%. En 2013 la distancia fue la menor del período: el 1% pagó
-el 9,5% frente al 11,9% que le tocaría, y la clase media, el 38,8% frente al 36,3%.
+La figura 12 tiene dos tablas de colores. Cada fila es un grupo y cada columna, un año; las líneas
+horizontales separan el 1%, la clase alta, la clase media y la clase baja. En la tabla A, cada celda
+es la parte de todo lo que se paga en impuestos que pone el grupo, menos la parte del ingreso total
+que recibe, en puntos de la recaudación. Si la diferencia es cero, el grupo paga en proporción a su
+ingreso, como en un sistema proporcional. En la tabla B, cada celda es la parte de los impuestos que
+pone el grupo menos la que pondría en el sistema progresivo de referencia. Azul significa que el
+grupo paga una parte mayor que en la referencia; rojo, una parte menor; blanco, la misma. Las dos
+tablas tienen escalas distintas. Las columnas recuadradas son los años más lejos y más cerca de cada
+referencia, que la figura 13 muestra en detalle.
 
 En la tabla de arriba, frente al sistema proporcional, casi todas las celdas están cerca de cero:
 las diferencias son de décimas de punto. El decil 1 paga una parte mayor que su parte del ingreso
@@ -513,11 +489,38 @@ años (entre 0,3 y 1,8 puntos), y el 1% una parte menor todos los años (entre 2
 es lo esperable en un sistema casi proporcional: cualquier referencia progresiva le asigna más a la
 cima y menos a la base que un sistema donde todos pagan parecido.
 
-![Figura 13](../outputs/figures/informe_v2/f13_kakwani.png)
+![Figura 13](../outputs/figures/informe_v2/f13_flujos_extremos.png)
 
-**Figura 13.** Índice de Kakwani: qué tan progresivo es el sistema, año por año.
+**Figura 13.** Los años extremos de la figura 12, grupo por grupo.
 
-La figura 13 resume cada año en un número, el **índice de Kakwani**. Compara dos repartos: cómo se
+La figura 13 muestra en detalle los cuatro años recuadrados en la figura 12. Cada panel es un gráfico
+de flujo: cada franja es un grupo, y su altura en cada columna es la parte que le corresponde de un
+total. Para calcular la parte de los impuestos, se suman los pesos que paga el grupo en los siete
+impuestos y se dividen por lo que pagan todos los grupos juntos. Las partes suman siempre 100%: si un
+grupo pone una parte mayor, los demás ponen una parte menor, aunque paguen los mismos pesos.
+
+Arriba están los años extremos frente al sistema proporcional, y las columnas son la parte de la
+población, la parte del ingreso y la parte de los impuestos. Si una franja tiene la misma altura en
+las dos últimas, el grupo paga en proporción a su ingreso; si se ensancha, una parte mayor; si se
+angosta, una menor. La distancia de cada año a lo proporcional se mide con la parte de la
+recaudación que tendría que cambiar de grupo para que todos pagaran la misma tasa. En 2022, el año
+más lejos (4,4 puntos), el 1% tiene el 10,8% del ingreso y pone el 12,9% de los impuestos, mientras
+la clase media pasa del 38,8% al 35,7%. En 2025, el más cerca (1,0 punto), las franjas casi no
+cambian de altura y la única que se angosta es la del 1%, del 10,8% al 9,9%.
+
+Abajo están los años extremos frente al sistema progresivo, y la columna del medio cambia: en lugar
+de la población, a la izquierda está la parte del ingreso, y en el medio, la parte de los impuestos
+que el grupo pagaría en ese sistema. En 2016, el año más lejos (11,9 puntos), el 1% tenía el 12,1% del
+ingreso, en el sistema progresivo pagaría el 19,2% de los impuestos y pagó el 10,1%; la clase media
+tenía el 38,0% del ingreso, pagaría el 30,7% y pagó el 38,1%. En 2013, el más cerca (5,8 puntos), el
+1% pagó el 9,5% frente al 11,9% que le tocaría, y la clase media, el 38,8% frente al 36,3%. Incluso el
+año más cercano al sistema progresivo está más lejos de él que el año más lejano al proporcional.
+
+![Figura 14](../outputs/figures/informe_v2/f14_kakwani.png)
+
+**Figura 14.** Índice de Kakwani: qué tan progresivo es el sistema, año por año.
+
+La figura 14 resume cada año en un número, el **índice de Kakwani**. Compara dos repartos: cómo se
 concentra la recaudación entre los grupos y cómo se concentra el ingreso. El segundo se mide con el
 coeficiente de Gini, que vale 0 si todos tienen el mismo ingreso y 1 si una sola persona tiene todo;
 el primero se calcula igual, con los impuestos en lugar del ingreso. El índice es la diferencia
@@ -533,11 +536,11 @@ sistema progresivo de referencia, con la misma recaudación: alrededor de 0,10 e
 (0,109 en 2025). La franja azul muestra ese valor con exponentes entre 0,15 y 0,40: va de 0,06 a 0,18.
 Incluso el más suave de esos sistemas progresivos queda lejos del sistema argentino.
 
-![Figura 14](../outputs/figures/informe_v2/f14_mapa_calor.png)
+![Figura 15](../outputs/figures/informe_v2/f15_mapa_calor.png)
 
-**Figura 14.** Tasa de cada grupo menos la tasa promedio, año por año.
+**Figura 15.** Tasa de cada grupo menos la tasa promedio, año por año.
 
-La figura 14 mira lo mismo con otra medida: la tasa de cada grupo menos la tasa promedio del año,
+La figura 15 mira lo mismo con otra medida: la tasa de cada grupo menos la tasa promedio del año,
 en puntos de ingreso. Azul significa que el grupo paga una tasa mayor que el promedio; rojo, menor.
 Es la forma más directa de ver quién paga más de lo que pagaría con un sistema proporcional.
 
@@ -546,9 +549,9 @@ deciles 6 a 8 son los que más seguido pagan menos. El 1% alterna: pagó más qu
 2004-2015 y 2020-2023 (hasta 6,4 puntos, en 2006) y menos en 2016-2019 y 2024-2025 (hasta 4,1
 puntos, en 2016).
 
-![Figura 15](../outputs/figures/informe_v2/f15_brecha_grupos.png)
+![Figura 16](../outputs/figures/informe_v2/f16_brecha_grupos.png)
 
-**Figura 15.** Cuánto más o menos pagaría cada grupo con otro sistema que recaude lo mismo, 2025.
+**Figura 16.** Cuánto más o menos pagaría cada grupo con otro sistema que recaude lo mismo, 2025.
 
 Las diferencias de la figura 12 se pueden pasar a dinero. Para cada grupo, la diferencia entre la
 parte de la recaudación que le tocaría y la que paga se multiplica por lo que efectivamente se
@@ -558,7 +561,7 @@ modelo porque la encuesta capta menos ingreso y consumo que las Cuentas Nacional
 reproduce bien cómo se reparte la carga, no cuánto suma. Los montos se pasan a dólares con el tipo
 de cambio oficial promedio del año.
 
-En la figura 15, cada grupo tiene dos barras: gris, frente al sistema proporcional; azul, frente al
+En la figura 16, cada grupo tiene dos barras: gris, frente al sistema proporcional; azul, frente al
 progresivo. Debajo de cada grupo está la tasa que paga hoy. En cada color, lo que suman unos grupos
 lo restan otros, porque la recaudación total no cambia.
 
@@ -581,12 +584,12 @@ recaudar con una reforma: una suba de impuestos en la cima traería más elusió
 activos afuera. Mide la distancia entre cómo se reparte hoy la carga y cómo se repartiría con cada
 referencia.
 
-![Figura 16](../outputs/figures/informe_v2/f16_brecha_1pct.png)
+![Figura 17](../outputs/figures/informe_v2/f17_brecha_1pct.png)
 
-**Figura 16.** El 1% más rico: la tasa que paga y la que pagaría con cada sistema de referencia,
+**Figura 17.** El 1% más rico: la tasa que paga y la que pagaría con cada sistema de referencia,
 2004-2025.
 
-La figura 16 sigue al 1% en el tiempo con tres tasas. La roja es la que paga. La gris es la tasa
+La figura 17 sigue al 1% en el tiempo con tres tasas. La roja es la que paga. La gris es la tasa
 promedio, que es la que pagaría con un sistema proporcional. La azul es la que pagaría con el
 progresivo de referencia. El sombreado gris marca los años en que el 1% paga más que el promedio; el
 rojo, los años en que paga menos; el celeste, la distancia hasta el progresivo.
@@ -601,16 +604,16 @@ El monto frente al progresivo depende del exponente elegido. En 2025, con un exp
 sistema menos progresivo) el 1% pagaría US$5.500 millones más (0,81% del PIB); con 0,25, US$8.900
 millones (1,31%); con 0,40, US$14.800 millones (2,17%). Cambia el monto, no la dirección.
 
-![Figura 17](../outputs/figures/informe_v2/f17_deltas_2025.png)
+![Figura 18](../outputs/figures/informe_v2/f18_deltas_2025.png)
 
-**Figura 17.** Qué parte de los impuestos paga cada grupo frente a lo que pagaría con cada
+**Figura 18.** Qué parte de los impuestos paga cada grupo frente a lo que pagaría con cada
 referencia, 2025.
 
-La figura 17 es la columna de 2025 de la figura 12, dibujada en barras para leer los valores. A la
+La figura 18 es la columna de 2025 de la figura 12, dibujada en barras para leer los valores. A la
 izquierda, frente al sistema proporcional; a la derecha, frente al progresivo, con la tasa que le
 tocaría a cada grupo al lado de su nombre.
 
-Los fondos de color marcan las mismas clases que la figura 15. Frente al proporcional, en 2025 el 1% paga 0,86 puntos menos de la recaudación que su parte del
+Los fondos de color marcan las mismas clases que la figura 16. Frente al proporcional, en 2025 el 1% paga 0,86 puntos menos de la recaudación que su parte del
 ingreso, y el decil 1 y los percentiles 90-95 pagan algo más (0,32 y 0,46 puntos). Los demás grupos
 quedan a menos de una décima. Frente al progresivo, todos los deciles 1 a 9 pagan una parte mayor
 que la que les tocaría (entre 0,5 y 1,5 puntos cada uno), los percentiles 90-95 casi la misma, los
@@ -618,12 +621,12 @@ que la que les tocaría (entre 0,5 y 1,5 puntos cada uno), los percentiles 90-95
 
 ## 7. Cuántas veces más ingresan y cuántas veces más pagan
 
-![Figura 18](../outputs/figures/informe_v2/f18_veces.png)
+![Figura 19](../outputs/figures/informe_v2/f19_veces.png)
 
-**Figura 18.** Cuántas veces más ingresan y cuántas veces más pagan los de arriba que el 10% más
+**Figura 19.** Cuántas veces más ingresan y cuántas veces más pagan los de arriba que el 10% más
 pobre.
 
-La figura 18 compara a los de arriba con el decil 1 dividiendo una cosa por otra. Todo está por
+La figura 19 compara a los de arriba con el decil 1 dividiendo una cosa por otra. Todo está por
 persona: el ingreso o los impuestos del grupo divididos por la cantidad de personas del grupo.
 
 El panel A divide el ingreso por persona del decil 10 por el del decil 1, antes y después de pagar
@@ -672,12 +675,12 @@ que también es defendible:
 Se agrega una prueba más, sobre la forma de combinar las tres ediciones de la ENGHo: por tramos de
 años en lugar de interpolarlas. Con la medida del informe son 12 versiones del cálculo.
 
-![Figura 19](../outputs/figures/informe_v2/f19_rangos_supuestos.png)
+![Figura 20](../outputs/figures/informe_v2/f20_rangos_supuestos.png)
 
-**Figura 19.** Cuánto cambia la tasa de cada grupo con cada supuesto, en los años de cambio de
+**Figura 20.** Cuánto cambia la tasa de cada grupo con cada supuesto, en los años de cambio de
 gobierno.
 
-La figura 19 muestra, para los mismos siete años de las figuras 3 y 11, entre qué valores queda la
+La figura 20 muestra, para los mismos siete años de las figuras 3 y 11, entre qué valores queda la
 tasa de cada grupo con los supuestos de las familias 1, 2 y 4, sin completar la cima y con la otra
 forma de combinar la ENGHo (franja celeste). El punto negro es la medida del informe y el rombo
 azul, la versión B. La línea punteada es el promedio de la población.
@@ -688,11 +691,11 @@ franjas mezclan supuestos distintos y por eso se tocan entre grupos, pero compar
 supuesto el decil 1 paga más que cada uno de los deciles 2 a 9 en todos los años. Las franjas de los deciles 2 a 9 se superponen entre sí: con cualquier supuesto pagan parecido. En
 la cima las franjas son anchas y la del 1% cruza el promedio en varios años.
 
-![Figura 20](../outputs/figures/informe_v2/f20_distancias_supuestos.png)
+![Figura 21](../outputs/figures/informe_v2/f21_distancias_supuestos.png)
 
-**Figura 20.** Las tres comparaciones centrales del informe, con todos los supuestos, 2004-2025.
+**Figura 21.** Las tres comparaciones centrales del informe, con todos los supuestos, 2004-2025.
 
-La figura 20 sigue las tres comparaciones en las que se apoya el informe, año por año. Cada panel es
+La figura 21 sigue las tres comparaciones en las que se apoya el informe, año por año. Cada panel es
 una diferencia de tasas en puntos de ingreso: por encima de cero, el primer grupo paga una
 proporción de su ingreso mayor que el segundo. La línea llena es la medida del informe; la franja,
 el rango con los demás supuestos; la línea azul punteada, la versión B. Cuando toda la franja queda
@@ -720,7 +723,7 @@ y más con cualquier supuesto en 2011-2013, 2020 y 2022. En el resto de los año
 | La tasa baja hacia la cima (el 1% paga menos que los percentiles 90-95) | Secciones 4 y 5 | Depende del año | Con cualquier supuesto en 2018, 2019 y 2025; nunca en 2011-2013, 2020 y 2022 |
 | El 1% paga menos que el promedio | Secciones 5 y 6 | Depende del año | Con cualquier supuesto en 2018, 2019 y 2025, y con todos salvo uno en 2016, 2017 y 2024. Paga más con cualquier supuesto en 2012, 2013 y 2020-2022 |
 | En 2025 el 1% paga menos que cualquier decil | Sección 4 | Depende de un supuesto | Se sostiene con 10 de las 12 versiones. No se sostiene si la cima consume en proporción a su ingreso o si las contribuciones se cargan enteras al trabajador |
-| El sistema es casi proporcional | Sección 6 | Firme | El índice de Kakwani queda entre −0,039 y +0,040 con todos los supuestos, lejos del 0,06 del sistema progresivo más suave de la figura 13 |
+| El sistema es casi proporcional | Sección 6 | Firme | El índice de Kakwani queda entre −0,039 y +0,040 con todos los supuestos, lejos del 0,06 del sistema progresivo más suave de la figura 14 |
 | El 1% paga menos y el decil 1 más que en un sistema progresivo | Sección 6 | Firme en la dirección | Con todos los supuestos y todos los años. El monto depende del exponente de la referencia y de la versión (sección 6) |
 | Los de arriba pagan, en proporción a su ingreso, menos que el decil 1 | Sección 7 | Firme sobre el ingreso declarado | Salvo el 1% en 2022 |
 

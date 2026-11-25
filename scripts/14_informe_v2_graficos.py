@@ -20,13 +20,16 @@ con estimaciones) se muestra sólo en la figura 9.
   f09  versión B, 2025: lo mismo con el ingreso completado
   f10  composición en el tiempo: deciles 1, 5 y 10 y el 1% (= i6)
   f11  años de cambio de gobierno, con el decil 10 partido
-  f12  matrices frente a un sistema proporcional y uno progresivo (= i9)
-  f13  índice de Kakwani, con el de un sistema progresivo de referencia
-  f14  tasa de cada grupo menos el promedio (= i4)
-  f15  cuánta plata: brecha de cada grupo, 2025 (versión A)
-  f16  el 1% frente a las dos referencias, 2004-2025 (versión A)
-  f17  2025: parte de los impuestos frente a las dos referencias, por grupo
-  f18  cuántas veces más ingresan y cuántas veces más pagan los de arriba que el decil 1
+  f12  matrices frente a un sistema proporcional y uno progresivo, con los años extremos recuadrados
+  f13  gráficos de flujo de los años extremos de cada matriz
+  f14  índice de Kakwani, con el de un sistema progresivo de referencia
+  f15  tasa de cada grupo menos el promedio (= i4)
+  f16  cuánta plata: brecha de cada grupo, 2025 (versión A), con las clases marcadas
+  f17  el 1% frente a las dos referencias, 2004-2025 (versión A)
+  f18  2025: parte de los impuestos frente a las dos referencias, por grupo, con las clases marcadas
+  f19  cuántas veces más ingresan y cuántas veces más pagan los de arriba que el decil 1
+  f20  rango de la tasa de cada grupo con cada supuesto (sección 8)
+  f21  decil 1 y 1% contra el promedio, y 1% contra P90-95, con franjas de supuestos (sección 8)
 """
 import importlib.util
 import sys
@@ -433,7 +436,7 @@ def f13_kakwani(tramos, todas):
              "(franja: con exponente 0,15 a 0,40 en lugar de 0,25).", fontsize=9.4, color=TINTA2, va="top")
     fig.text(0.01, -0.03, FUENTE + "\nCalculado con 12 grupos (deciles 1 a 9 y el decil 10 partido en tres): aproximado. "
              "Versión A.", fontsize=7.3, color=MUDO, va="top")
-    guardar(fig, "f13_kakwani")
+    guardar(fig, "f14_kakwani")
     return kk["principal"], ref
 
 
@@ -502,7 +505,7 @@ def f15_brecha_grupos(b):
     fig.text(0.01, -0.13, FUENTE + "\nBrecha = recaudación real de los impuestos del estudio (DNIAF) × (parte de los "
              "impuestos que le tocaría − parte que paga). Dólares al tipo de cambio oficial promedio del año. Versión A. "
              "Cálculo mecánico, sin cambios de comportamiento.", fontsize=7.3, color=MUDO, va="top")
-    guardar(fig, "f15_brecha_grupos")
+    guardar(fig, "f16_brecha_grupos")
 
 
 def f16_brecha_1pct(b):
@@ -535,7 +538,7 @@ def f16_brecha_1pct(b):
              fontsize=9.4, color=TINTA2, va="top")
     fig.text(0.01, -0.03, FUENTE + "\nVersión A. Progresivo: tasa = promedio × (ingreso por persona del grupo ÷ "
              "promedio)^0,25, reescalada para recaudar lo mismo.", fontsize=7.3, color=MUDO, va="top")
-    guardar(fig, "f16_brecha_1pct")
+    guardar(fig, "f17_brecha_1pct")
 
 
 def f17_deltas_2025(tramos):
@@ -587,7 +590,7 @@ def f17_deltas_2025(tramos):
              "parte del ingreso. Derecha: la tasa sube con el ingreso (a la izquierda de cada barra, la tasa que le tocaría).",
              fontsize=9.4, color=TINTA2, va="top")
     fig.text(0.01, -0.03, FUENTE + " Versión A.", fontsize=7.3, color=MUDO, va="top")
-    guardar(fig, "f17_deltas_2025")
+    guardar(fig, "f18_deltas_2025")
 
 
 # ---------------------------------------------------------------- sección 7
@@ -642,7 +645,7 @@ def f18_veces(tramos):
     fig.text(0.01, -0.03, FUENTE + "\nIngreso antes de impuestos directos, completado en la cima con el ingreso declarado "
              "a ARCA que la encuesta no capta; por persona (ingreso del grupo ÷ sus miembros). Versión A.",
              fontsize=7.3, color=MUDO, va="top")
-    guardar(fig, "f18_veces")
+    guardar(fig, "f19_veces")
     return v
 
 
@@ -692,7 +695,7 @@ def f19_rangos(w):
              "con el ingreso que la encuesta no capta estimado.", fontsize=9.4, color=TINTA2, va="top")
     fig.subplots_adjust(left=0.04, right=0.995, wspace=0.06, hspace=0.32, top=0.89)
     fig.text(0.01, 0.02, FUENTE, fontsize=7.3, color=MUDO, va="top")
-    guardar(fig, "f19_rangos_supuestos")
+    guardar(fig, "f20_rangos_supuestos")
 
 
 def f20_distancias(w):
@@ -728,7 +731,7 @@ def f20_distancias(w):
              "la franja, entre qué valores queda la diferencia con los demás supuestos. Si la franja entera está de un "
              "lado del 0, el resultado de ese año no depende de los supuestos.", fontsize=9.4, color=TINTA2, va="top")
     fig.text(0.01, -0.07, FUENTE + " Sombreado gris: INDEC intervenido (2007-2015).", fontsize=7.3, color=MUDO, va="top")
-    guardar(fig, "f20_distancias_supuestos")
+    guardar(fig, "f21_distancias_supuestos")
 
 
 # ---------------------------------------------------------------- sección 9
@@ -876,60 +879,72 @@ def dibujar_matriz(fig, ax, m, vmin, vmax, dec):
     return m
 
 
-def f12_matrices_flujo(tramos):
+def extremos(dl):
+    """Años más lejos y más cerca de cada referencia: parte de la recaudación que tendría que cambiar de grupo."""
+    d = {}
+    for col in ("delta_proporcional", "delta_progresivo"):
+        dist = dl.groupby("anio")[col].apply(lambda x: x.abs().sum() / 2)
+        d[col] = (int(dist.idxmax()), int(dist.idxmin()), dist)
+    return d
+
+
+def f12_matrices(tramos):
     dl = inf.deltas_referencia(tramos)
-    lejos = dl.groupby("anio").delta_proporcional.apply(lambda x: x.abs().sum() / 2)
-    a_lejos, a_cerca = int(lejos.idxmax()), int(lejos.idxmin())
-    fig = plt.figure(figsize=(26, 17))
-    gs = fig.add_gridspec(2, 3, width_ratios=[1, 2.3, 0.85], height_ratios=[1, 1], wspace=0.22, hspace=0.32)
-    axl, axm, axr = fig.add_subplot(gs[0, 0]), fig.add_subplot(gs[0, 1]), fig.add_subplot(gs[0, 2])
-    axp = fig.add_subplot(gs[1, 1])
-    axpl, axpr = fig.add_subplot(gs[1, 0]), fig.add_subplot(gs[1, 2])
-    lejos_p = dl.groupby("anio").delta_progresivo.apply(lambda x: x.abs().sum() / 2)
-    p_lejos, p_cerca = int(lejos_p.idxmax()), int(lejos_p.idxmin())
-    dibujar_flujo(axpl, tramos, p_lejos, compacto=True, modo="progresivo")
-    dibujar_flujo(axpr, tramos, p_cerca, compacto=True, clases=False, modo="progresivo")
-    axpr.set_xlim(-0.35, 2.35)
-    axpl.set_title(f"{p_lejos}: el año más lejos del progresivo", loc="left", fontsize=12, fontweight="bold")
-    axpr.set_title(f"{p_cerca}: el año más cerca del progresivo", loc="left", fontsize=12, fontweight="bold")
-    dibujar_flujo(axl, tramos, a_lejos, compacto=True)
-    dibujar_flujo(axr, tramos, a_cerca, compacto=True, clases=False)
-    axr.set_xlim(-0.35, 2.35)
-    axl.set_title(f"{a_lejos}: el año más lejos de lo proporcional", loc="left", fontsize=12, fontweight="bold")
-    axr.set_title(f"{a_cerca}: el año más cerca de lo proporcional", loc="left", fontsize=12, fontweight="bold")
-    m = dibujar_matriz(fig, axm, dl.pivot(index="grupo", columns="anio", values="delta_proporcional"), -2.5, 2.5, 2)
-    axm.set_title("A. Frente a un sistema proporcional: % de los impuestos que paga − % del ingreso que tiene",
-                  loc="left", fontsize=11.5, fontweight="bold")
-    anios = list(m.columns)
-    for a, lado in ((a_lejos, "izquierda"), (a_cerca, "derecha")):
-        j = anios.index(a)
-        axm.add_patch(matplotlib.patches.Rectangle((j - 0.5, -0.5), 1, m.shape[0], fill=False, edgecolor=TINTA,
-                                                   linewidth=2.2, zorder=5, clip_on=False))
-        axm.text(j, m.shape[0] + 0.9, f"{a}: flujo a la\n{lado}", ha="center", va="top", fontsize=8.2, color=TINTA,
-                 fontweight="bold")
-    mp = dibujar_matriz(fig, axp, dl.pivot(index="grupo", columns="anio", values="delta_progresivo"), -10.0, 5.0, 1)
-    anios_p = list(mp.columns)
-    for a, lado in ((p_lejos, "izquierda"), (p_cerca, "derecha")):
-        j = anios_p.index(a)
-        axp.add_patch(matplotlib.patches.Rectangle((j - 0.5, -0.5), 1, mp.shape[0], fill=False, edgecolor=TINTA,
-                                                   linewidth=2.2, zorder=5, clip_on=False))
-        axp.text(j, mp.shape[0] + 0.9, f"{a}: flujo a la\n{lado}", ha="center", va="top", fontsize=8.2, color=TINTA,
-                 fontweight="bold")
-    axp.set_title("B. Frente al sistema progresivo de referencia: % de los impuestos que paga − % que pagaría en él",
-                  loc="left", fontsize=11.5, fontweight="bold")
-    fig.suptitle("Qué parte de los impuestos paga cada grupo frente a su parte del ingreso, año por año", x=0.01,
-                 y=0.97, ha="left", fontsize=15, fontweight="bold")
-    fig.text(0.01, 0.955, f"Arriba al centro, cada celda es la diferencia entre la columna de impuestos y la de ingreso de "
-             f"los gráficos de flujo de los costados, para un grupo y un año. Azul: paga una parte mayor que su parte del "
-             f"ingreso; rojo: menor; blanco: lo mismo.\nA los costados, los dos años marcados: {a_lejos}, el más lejos de lo "
-             f"proporcional ({pct(lejos[a_lejos])} puntos de la recaudación tendrían que cambiar de grupo para que todos "
-             f"pagaran la misma tasa), y {a_cerca}, el más cerca ({pct(lejos[a_cerca])} puntos). Abajo, la misma cuenta "
-             f"frente al sistema progresivo de referencia, con sus propios años extremos: {p_lejos} ({pct(lejos_p[p_lejos])} puntos) y {p_cerca} ({pct(lejos_p[p_cerca])} puntos);\nen esos flujos la columna del medio es la parte de los impuestos que pagaría cada grupo en ese sistema. Las líneas horizontales separan el 1%, la clase alta, la "
-             "clase media y la clase baja.", fontsize=10, color=TINTA2, va="top")
-    fig.text(0.01, 0.025, FUENTE + " Versión A. Tabla: outputs/tables/deltas_proporcional_progresivo.csv.", fontsize=7.6,
+    ex = extremos(dl)
+    fig, (axm, axp) = plt.subplots(2, 1, figsize=(16, 15))
+    for ax, col, (vmin, vmax, dec), titulo in [
+            (axm, "delta_proporcional", (-2.5, 2.5, 2),
+             "A. Frente a un sistema proporcional: % de los impuestos que paga − % del ingreso que tiene"),
+            (axp, "delta_progresivo", (-10.0, 5.0, 1),
+             "B. Frente al sistema progresivo de referencia: % de los impuestos que paga − % que pagaría en él")]:
+        m = dibujar_matriz(fig, ax, dl.pivot(index="grupo", columns="anio", values=col), vmin, vmax, dec)
+        lejos, cerca, _ = ex[col]
+        anios = list(m.columns)
+        for a, txt in ((lejos, "el más lejos"), (cerca, "el más cerca")):
+            j = anios.index(a)
+            ax.add_patch(matplotlib.patches.Rectangle((j - 0.5, -0.5), 1, m.shape[0], fill=False, edgecolor=TINTA,
+                                                      linewidth=2.2, zorder=5, clip_on=False))
+            ax.text(j, m.shape[0] + 1.0, f"{a}: {txt}\n(figura 13)", ha="center", va="top", fontsize=8.2, color=TINTA,
+                    fontweight="bold")
+        ax.set_title(titulo, loc="left", fontsize=11.5, fontweight="bold")
+    fig.subplots_adjust(hspace=0.38, top=0.89, bottom=0.1)
+    fig.suptitle("Qué parte de los impuestos paga cada grupo, frente a dos sistemas de referencia, año por año", x=0.01,
+                 y=0.975, ha="left", fontsize=14, fontweight="bold")
+    fig.text(0.01, 0.955, "Cada celda: la parte de la recaudación que paga el grupo menos la que pagaría en el sistema de "
+             "referencia, en puntos. Azul: paga una parte mayor; rojo: menor; blanco: lo mismo. Escalas distintas en A y B.\n"
+             "Las líneas horizontales separan el 1%, la clase alta, la clase media y la clase baja. Recuadrados: el año más "
+             "lejos y el más cerca de cada referencia, que la figura 13 muestra en detalle.", fontsize=9.6, color=TINTA2,
+             va="top")
+    fig.text(0.01, 0.012, FUENTE + " Versión A. Tabla: outputs/tables/deltas_proporcional_progresivo.csv.", fontsize=7.3,
              color=MUDO, va="top")
     guardar(fig, "f12_matriz_deltas")
-    return a_lejos, a_cerca, p_lejos, p_cerca
+    return ex
+
+
+def f13_flujos(tramos, ex):
+    (a_lejos, a_cerca, dist), (p_lejos, p_cerca, dist_p) = ex["delta_proporcional"], ex["delta_progresivo"]
+    fig, axs = plt.subplots(2, 2, figsize=(22, 18))
+    paneles = [(axs[0, 0], a_lejos, "proporcional", True, f"A. {a_lejos}: el año más lejos de lo proporcional "
+                f"({pct(dist[a_lejos])} puntos)"),
+               (axs[0, 1], a_cerca, "proporcional", True, f"B. {a_cerca}: el año más cerca de lo proporcional "
+                f"({pct(dist[a_cerca])} puntos)"),
+               (axs[1, 0], p_lejos, "progresivo", True, f"C. {p_lejos}: el año más lejos del progresivo "
+                f"({pct(dist_p[p_lejos])} puntos)"),
+               (axs[1, 1], p_cerca, "progresivo", True, f"D. {p_cerca}: el año más cerca del progresivo "
+                f"({pct(dist_p[p_cerca])} puntos)")]
+    for ax, a, modo, clases, titulo in paneles:
+        dibujar_flujo(ax, tramos, a, compacto=True, clases=clases, modo=modo)
+        ax.set_title(titulo, loc="left", fontsize=12.5, fontweight="bold")
+    fig.subplots_adjust(hspace=0.16, wspace=0.12, top=0.9, bottom=0.04)
+    fig.suptitle("Los años extremos de la figura 12, grupo por grupo", x=0.01, y=0.985, ha="left", fontsize=15,
+                 fontweight="bold")
+    fig.text(0.01, 0.965, "Cada franja es un grupo. Arriba (A y B): parte de la población → parte del ingreso → parte de los "
+             "impuestos que paga; si la franja mantiene su alto entre las dos últimas columnas, el grupo paga en proporción\n"
+             "a su ingreso. Abajo (C y D): parte del ingreso → parte de los impuestos que pagaría en el sistema progresivo de "
+             "referencia → parte que paga. Entre paréntesis, cuántos puntos de la recaudación tendrían que cambiar de grupo\n"
+             "para llegar a cada sistema de referencia.", fontsize=10, color=TINTA2, va="top")
+    fig.text(0.01, 0.02, FUENTE + " Versión A.", fontsize=7.6, color=MUDO, va="top")
+    guardar(fig, "f13_flujos_extremos")
 
 
 if __name__ == "__main__":
@@ -950,10 +965,11 @@ if __name__ == "__main__":
     reusar(inf, inf.i6_composicion, "f10_composicion_1pct", ancho, tramos)
     f11_anios_partido(largo, tramos)
     reusar(inf, inf.i9_matriz_deltas, "f12_matriz_deltas", tramos)      # escribe la tabla de deltas
-    f12_matrices_flujo(tramos)
+    ex = f12_matrices(tramos)
+    f13_flujos(tramos, ex)
     todas = todas_variantes(tramos, f0)
     kp, ref = f13_kakwani(tramos, todas)
-    reusar(inf, inf.i3_mapa, "f14_mapa_calor", tramos)
+    reusar(inf, inf.i3_mapa, "f15_mapa_calor", tramos)
     from incidencia.indirectos import cargar_insumos  # noqa: E402
     _, rec = cargar_insumos()
     b = bre.brechas(bre.cargar(), rec)
