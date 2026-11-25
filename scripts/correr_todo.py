@@ -34,6 +34,7 @@ PASOS = [
     ("07", "07_graficos.py"),                   # todas las figuras
     ("12", "12_informe_graficos.py"),           # gráficos del informe (docs/informe.md)
     ("13", "13_brecha_recaudacion.py"),         # cuánta plata: proporcional y progresivo
+    ("14", "14_informe_v2_graficos.py"),        # gráficos del informe nuevo (docs/informe_v2.md)
 ]
 
 
