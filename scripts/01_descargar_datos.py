@@ -102,7 +102,7 @@ FUENTES_VARIAS = [
     ("macro", "ipc_97.2_ING_2008_M_17.csv", _serie("97.2_ING_2008_M_17")),          # IPC-GBA, INDEC
     ("macro", "ipc_197.1_NIVEL_GENERAL_2014_0_13.csv", _serie("197.1_NIVEL_GENERAL_2014_0_13")),  # San Luis
     ("macro", "ipc_148.3_INIVELNAL_DICI_M_26.csv", _serie("148.3_INIVELNAL_DICI_M_26")),  # IPC Nacional
-    # Canasta básica total, Gran Buenos Aires, por adulto equivalente (INDEC; figura 6)
+    # Canasta básica total, Gran Buenos Aires, por adulto equivalente (INDEC; fig6 y figuras 5 y 6 del informe)
     ("macro", "cbt_gba_mensual.csv", _serie("444.1_CANASTA_batotGBA_0_0_26_47")),
     # Población total país (Banco Mundial, SP.POP.TOTL; uso auxiliar en validación)
     ("macro", "poblacion_total_wb.json",

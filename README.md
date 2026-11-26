@@ -8,12 +8,16 @@ de población fija y documentación. Quedan supuestos abiertos (ver `docs/metodo
 secciones 7 y 14): el más importante es la cola alta de ingresos.
 
 **Informe de resultados:** [`docs/informe.md`](docs/informe.md), con la evolución 2004-2025 en
-gráficos (`outputs/figures/informe_v2/`, generados por `scripts/14_informe_v2_graficos.py`). Del
-decil 1 al 9 y en las tres clases, cada grupo paga una parte de los impuestos casi igual a su parte
-del ingreso; el que se aparta es el 1% más rico, que pagó menos de lo que le correspondería en un
-sistema proporcional en 2016-2019 y 2024-2025. Con la misma recaudación y un sistema progresivo, el
-1% pagaría unos US$8.900 millones más por año y la clase media unos US$8.800 millones menos (2025;
-cuenta mecánica).
+gráficos (`outputs/figures/informe/`, generados por `scripts/14_informe_graficos.py`). Su conclusión:
+el sistema es proporcional en el centro, se aparta en sentido regresivo en las puntas y nunca se
+acerca a uno progresivo. Del decil 2 al 9 y en las tres clases, cada grupo paga una parte de los
+impuestos casi igual a su parte del ingreso. El decil más pobre paga la tasa más alta sobre el
+ingreso que declara, y el 1% más rico, una menor que la del decil más pobre casi todos los años;
+frente al promedio, el 1% pagó menos en 2016-2019 y 2024-2025 y más en los demás años. Con la
+misma recaudación y un sistema progresivo, el 1% pagaría unos US$8.900 millones más por año y la
+clase media unos US$8.800 millones menos (2025; cuenta mecánica). El 1% se mide con la encuesta
+completada con declaraciones juradas (versión A) y se controla con una medida armada sólo con lo
+que declara a ARCA (sección 4 del informe).
 
 **Resultado 2025 (estimación principal, impuestos ÷ ingreso declarado):** tasa promedio
 23,8%; decil 1, 28,7%; deciles 2 a 9 entre 23,0% y 23,8%; decil 10, 23,8%. En 2024: promedio
@@ -41,6 +45,14 @@ le corresponde, los dos de las declaraciones juradas; la Ganancias del 1% de la 
 con la de las declaraciones (2024: 12,0% contra 12,1%). El decil 10 bajó de 26,8% a 25,0% (2024)
 y de 26,5% a 23,8% (2025); los deciles 1 a 8 no cambian.
 
+**Cambio del 26/11/2026 (control del 1%).** El 1% armado sólo con las declaraciones juradas
+suponía que la mitad de su ingreso era sueldo y que gastaba como el 5% más rico de la ENGHo, y
+daba 28,6% en 2025. Ahora usa los aportes que declara, las contribuciones sobre la parte de su
+trabajo personal que corresponde a empleados y un consumo intermedio entre el que calcula ARCA y
+el de la encuesta: 22,8% en 2025, con escenarios de ingreso no declarado. Además se completaron
+los ingresos exentos que faltaban en los años fiscales 2006 y 2009-2013. Ver
+`docs/metodologia.md`, sección 11.
+
 **Auditoría externa:** `docs/auditoria.md` (13/11/2026). Ya se corrigieron el aguinaldo,
 la escala de las contribuciones trasladadas a precios y dos parámetros (tope de aportes
 09/2007 y edad de hijo deducible 2017). Tras la auditoría la medida principal pasó a ser
@@ -64,9 +76,9 @@ percentiles 90-95, 95-99 y el 1% superior de la encuesta, con el mismo método q
 2025: 24,6%, 23,7% y 21,7%: en la cima la tasa baja, por debajo de los deciles medios. El 1% de
 la encuesta, completado con el ingreso de las declaraciones juradas, tiene 24,5 canastas por
 adulto equivalente; con la renta de activos externos paga 20,1%. El 1% medido sólo con las declaraciones
-juradas (control de la figura 7) da 22,8%.
+juradas (`fig7_top1`; figura 10 del informe) da 22,8%.
 
-**El decil 10 a lo largo del tiempo** (`outputs/figures/fig9_decil10_serie.png`; la figura 8 de cada
+**El decil 10 a lo largo del tiempo** (`outputs/figures/fig9_decil10_serie.png`; `fig8_decil10_partido` de cada
 año en `outputs/figures/por_anio/`): el 1% de la encuesta paga más que los percentiles 90-95 en 14
 de 22 años y menos en 8 (2014, 2016-2019 y 2023-2025). Lo que mueve su tasa es Ganancias y Bienes
 Personales: en 2012-2013 llegó a 34-35%; en 2016, 2018 y 2019, a 22%.
@@ -126,7 +138,12 @@ adelante. No corras `07_graficos.py` solo: las figuras quedarían con tablas vie
 - `src/incidencia/` código: lectura EPH, microsimulación de directos, clasificación fiscal
   de artículos ENGHo, impuestos indirectos.
 - `scripts/` pipeline numerado. `data/raw` e `interim` no se versionan.
-- `outputs/tables`, `outputs/figures` resultados. `legacy/` notebook original (borrador).
+- `outputs/tables` resultados. `outputs/figures/informe/` las figuras del informe
+  (`scripts/14_informe_graficos.py`); `outputs/figures/fig0_...` a `fig9_...` y `por_anio/`, las
+  figuras de trabajo del proyecto (`scripts/07_graficos.py`), que el README y la metodología citan
+  por su nombre de archivo. `legacy/` notebook original (borrador).
+- `docs/` el informe, la metodología y la documentación; `auditoria/` los scripts de la auditoría
+  externa (`docs/auditoria.md`).
 
 ## Método en breve
 
@@ -142,7 +159,9 @@ adelante. No corras `07_graficos.py` solo: las figuras quedarían con tablas vie
 - **Ingresos altos:** a las personas de mayor ingreso de la EPH se les suma el ingreso que
   declaran a ARCA y la encuesta no capta, junto con la Ganancias que pagan por él (declaraciones
   juradas por tramo); el resto de la Ganancias no simulada y Bienes Personales se reparten con
-  las mismas declaraciones. El decil 10 se parte además en percentiles 90-95, 95-99 y el 1%.
+  las mismas declaraciones. El decil 10 se parte además en percentiles 90-95, 95-99 y el 1%. El 1%
+  se controla con una medida armada sólo con las declaraciones juradas (aportes, cantidad de
+  empleados y consumo calculado por ARCA), con escenarios de ingreso no declarado.
 
 ## Limitaciones principales
 
@@ -152,6 +171,7 @@ adelante. No corras `07_graficos.py` solo: las figuras quedarían con tablas vie
 - El decil 1 declara gastar más de lo que gana: 31,4% contra el ingreso declarado y 22,0%
   si se reemplaza su ingreso por el gasto (2024).
 - La encuesta casi no capta al 1% más rico: se completa con las declaraciones juradas de ARCA
-  (figuras 8 y 9) y se estima aparte sólo con ellas (figura 7). El 1% de la encuesta tiene pocas
-  observaciones y es ruidoso de un año a otro.
+  (`fig8_decil10_partido`, `fig9_decil10_serie`) y se controla con una medida armada sólo con ellas
+  (`fig7_top1`; figuras 10 y A.4 del informe), que depende de cuánto ingreso no declara el 1%. El 1%
+  de la encuesta tiene pocas observaciones y es ruidoso de un año a otro.
 - 2007-2015 con reservas (INDEC). 2007, 2015 y 2016 con trimestres faltantes.

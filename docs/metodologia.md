@@ -18,8 +18,7 @@ cómo se usa: [glosario de fuentes](fuentes.md). Diagramas del método y del flu
   cheque, Ganancias de sociedades, monotributo y autónomos, impuestos patrimoniales
   provinciales, sellos y tasas municipales. Cheque y combustibles están como variantes
   (sección 12) y el monotributo también (`con_monotributo`, [microsimulación](microsimulacion.md),
-  sección 8); Ganancias de sociedades sólo entra en el 1% de las declaraciones juradas
-  (sección 11). La obra social (3%) se descuenta del salario pero no se cuenta como
+  sección 8); Ganancias de sociedades no entra en ninguna medida (sección 14, punto 5). La obra social (3%) se descuenta del salario pero no se cuenta como
   impuesto porque no es recaudación del Estado.
 - **Período:** 2004-2025. 2003 se descarta (sólo dos trimestres de EPH continua y sin
   Cuentas Nacionales base 2004). 2026 no se incluye: a noviembre de 2026 hay sólo dos
@@ -142,7 +141,7 @@ Pasos:
      Antes toda la Ganancias faltante se sumaba a los de arriba sin su ingreso: el 1% de la
      encuesta quedaba con más Ganancias sobre su ingreso que el 1% de las declaraciones juradas
      (2016: 20,2% contra 12,4%), lo que es incoherente con un impuesto progresivo. Ahora coinciden
-     (2004: 13,3% y 13,0%; 2024: 12,0% y 12,1%).
+     (2004: 13,3% y 13,6%; 2024: 12,0% y 12,1%).
    - **Piso (`altos_sin_corregir`)**: Ganancias sólo simulada sobre la EPH. Incluye
      Bienes Personales imputado al decil 10; sin él, ver `sin_correcciones`.
    - **Techo (`altos_registros`)**: todo lo recaudado, por habitante, y al ingreso de la
@@ -154,9 +153,10 @@ Pasos:
 llevadas a 2025 por el ingreso medio de la EPH. 2024 ya usa sus propias declaraciones. Bienes Personales sigue siendo una imputación (la EPH no releva
 patrimonio): se grafica rayado y existe la variante `sin_bienes_personales`.
 
-## 6. Completar el ingreso que la encuesta no capta (panel B de la figura 0)
+## 6. Completar el ingreso que la encuesta no capta (panel B de `fig0`; versión B del informe)
 
-La figura central (`fig0_dos_versiones_*`) muestra dos cuentas:
+Es la versión B del informe (sección 4, figura 9). La figura central del juego de trabajo
+(`fig0_dos_versiones_*`) muestra dos cuentas:
 
 - **A. Ingreso declarado** (variante `principal`, la medida de todo el proyecto). 2024: D1 31,4%,
   deciles medios ~25%, D10 25,0%, promedio 24,9%. 2025: D1 28,7%, deciles medios ~23,5%, D10 23,8%,
@@ -194,8 +194,9 @@ sobreestima la tasa de los de arriba.
    *Dato:* el faltante total. *Supuesto:* que se reparte en proporción a lo que cada uno declara.
 2. **Rentas del capital: las declaradas × 7** (`factor_rentas`). No hay total oficial con qué
    comparar: el INDEC no publica la cuenta del sector hogares. De Rosa, Flores y Morgan (2024)
-   encuentran que las encuestas latinoamericanas captan entre un quinto y un décimo de las rentas de
-   la propiedad de las Cuentas Nacionales; se toma el punto medio, 7.
+   encuentran que en las encuestas latinoamericanas el ingreso del capital es el que peor se capta,
+   y que hay que multiplicarlo "por un factor de 5 a 10 en la mayoría de los casos" para llegar a
+   las Cuentas Nacionales (para Argentina no lo miden y usan el promedio regional); se toma 7.
    *Supuesto*, el más débil: el factor viene de otros países y sólo multiplica a quien ya declara
    alguna renta (el que declara cero sigue en cero).
 3. **Renta de los activos privados en el exterior** (marcas negras; `base_activos_ext = "cartera"`).
@@ -231,7 +232,8 @@ billetes rinden como depósitos y que todos son de los de arriba. Fue la versió
 - Lo declarado en Bienes Personales es alrededor del 5% de lo que el INDEC estima que el sector
   privado tiene afuera; el resto no está declarado y no se sabe de quién es. El blanqueo de 2024-2025
   sacó a la luz más de US$31.000 millones no declarados (International Tax Observatory, nota sobre
-  Argentina, 2026), lo que confirma que el stock es real, no su reparto.
+  Argentina, 2026), y el de 2016 (Ley 27.260), US$116.800 millones, el 80% en el exterior: eso
+  confirma que el stock es real, no su reparto.
 - El ×7 es un supuesto importado; la renta interna no declarada podría ser mayor (operaciones
   financieras locales de alto rendimiento) o menor.
 - La posición de inversión internacional de "otros sectores" incluye empresas, no sólo hogares.
@@ -318,9 +320,9 @@ Pessino, Rasteletti, Artana y Lustig, *Distributional effects of taxation in Lat
 | `ajuste_cn_rentas_cartera_ext` | lo anterior + 4% sobre la cartera externa, al 1% (panel B, sección 6) | 34,3 | 26,4 | 23,7 | 24,9 |
 | `ajuste_cn_rentas_activos_ext` | cota alta: 3% sobre todos los activos externos | 35,0 | 26,9 | 23,1 | 24,9 |
 
-El panel B de la figura 0 usa `ajuste_cn_rentas` con las marcas de `ajuste_cn_rentas_cartera_ext`
+El panel B de `fig0` usa `ajuste_cn_rentas` con las marcas de `ajuste_cn_rentas_cartera_ext`
 (negras) y `ajuste_cn_rentas_activos_ext` (grises). Detalle, justificación y limitaciones en la
-sección 6; la figura 0 de cada año está en `outputs/figures/por_anio/`.
+sección 6; `fig0` de cada año está en `outputs/figures/por_anio/`.
 
 Pendiente de Pessino et al. (no implementado):
 - **Compras informales:** el IVA y Ingresos Brutos de lo que se compra en comercios informales
@@ -333,7 +335,10 @@ Pendiente de Pessino et al. (no implementado):
 - **Concepto de ingreso:** incluyen el alquiler imputado de la vivienda propia; la EPH no lo trae.
 - **Contribuciones con mercado integrado:** 50% recae en salarios informales.
 
-## 10. Distancia entre deciles (figuras 6 y 6b)
+## 10. Distancia entre deciles (`fig6_distancia_entre_deciles` y `fig6b_distancia_en_pesos`)
+
+Figuras del juego de trabajo (`scripts/07_graficos.py`). El informe mide lo mismo en canastas en
+sus figuras 5 y 6.
 
 Brecha de ingresos: ingreso por persona del decil 10 dividido por el del decil 1 (como la
 "brecha de ingresos" que publica el INDEC), antes de impuestos directos y después de restar
@@ -343,7 +348,7 @@ Panel derecho: ingreso de bolsillo por persona de los diez deciles y, punteado, 
 rico de la encuesta, completado con el ingreso que declara al fisco y la encuesta no capta
 (`tasas_tramos_decil10.csv`, como la medida principal; sin utilidades de empresas ni activos
 externos).
-- **Figura 6, en canastas básicas:** ingreso del grupo / sus adultos equivalentes / canasta básica
+- **`fig6`, en canastas básicas:** ingreso del grupo / sus adultos equivalentes / canasta básica
   total del Gran Buenos Aires por adulto equivalente (INDEC). Los adultos equivalentes salen de la
   edad y el sexo de cada persona de la EPH con la tabla del INDEC ("La medición de la pobreza y la
   indigencia en la Argentina", 2016, anexo 7.1; `adulto_equivalente` en `src/incidencia/eph.py`;
@@ -354,7 +359,7 @@ externos).
   el IPC empalmado (las canastas oficiales de 2007-2015 están intervenidas). Hasta el 17/11/2026 se
   dividía el ingreso por persona y no por adulto equivalente, lo que exageraba cuántos deciles
   quedaban debajo de la línea (cuatro en 2025, contra tres ahora).
-- **Figura 6b, en pesos de hoy:** pesos constantes del último mes publicado del IPC. Deflactor
+- **`fig6b`, en pesos de hoy:** pesos constantes del último mes publicado del IPC. Deflactor
   (`scripts/aux_deflactor.py`): IPC-GBA del INDEC hasta 12/2006, IPC de San Luis 2007-2016 e
   IPC Nacional del INDEC desde 2017.
 
@@ -367,10 +372,11 @@ límites, la media ($442.596) y la población (29.783.755) del cuarto trimestre 
 con el informe "Evolución de la distribución del ingreso (EPH)" del INDEC (cuadro 1). El decil
 10 promedia $1.430.619 por persona en pesos de ese trimestre: es por persona, no por hogar.
 
-## 11. El 1% más rico con declaraciones juradas (control de la figura 7; medida C del informe)
+## 11. El 1% más rico con declaraciones juradas (medida de control del informe; `fig7_top1`)
 
-La medida del 1% del proyecto es la de la encuesta completada (sección 13, figura 8). Esta
-sección es un control: el mismo grupo armado sólo con las declaraciones juradas.
+La medida del 1% del proyecto es la de la encuesta completada (sección 13; versión A del
+informe). Esta sección es un control: el mismo grupo armado sólo con las declaraciones juradas
+(medida C; figuras 10 y A.4 del informe).
 
 `scripts/10_top1.py`, con las declaraciones juradas de Ganancias por tramo (anuarios de ARCA,
 años fiscales 2002-2024; 2025 extrapolado), como Alvaredo (2010). Grupo: el 1% de la población con
@@ -435,7 +441,7 @@ precios; combustibles se reparte como el consumo total (falta la canasta de comb
 decil de la ENGHo). 2018 con cheque: D1 37,1%, D2 27,6%, D10 25,0% (Pessino et al.: 35,8%,
 30,8%, 24,9%).
 
-## 13. El decil 10 partido (figura 8)
+## 13. El decil 10 partido (`fig8_decil10_partido`; versión A del informe, figura 8)
 
 `scripts/11_tramos_decil10.py` (agregado el 16/11/2026). El decil 10 se parte en percentiles
 90-95, 95-99 y el 1% superior, con el mismo orden (ingreso per cápita familiar), la misma regla
@@ -457,14 +463,14 @@ Resultado 2025 (principal): P90-95 24,6%, P95-99 23,7%, 1% de la encuesta 21,7% 
 En la cima la tasa baja, por debajo de los deciles medios (~23,6%). El 10% más rico tiene 37,6% del
 ingreso (encuesta más el ingreso declarado al fisco que la encuesta no capta) y el 1% 10,8% (9,9%
 de los impuestos). El 1% de la encuesta, completado, tiene 24,5 canastas por adulto equivalente
-(`canastas_por_adulto_eq` en `tasas_tramos_decil10.csv`); el de las declaraciones juradas, 35 por
+(`canastas_por_adulto_eq` en `tasas_tramos_decil10.csv`); el de las declaraciones juradas, 34 por
 declarante. Con la renta de activos externos, el 1% de la encuesta
 paga 20,1%. El 1% de la sección 11 (sólo declaraciones juradas) da 22,8%.
 
 (Hasta la corrección del 16/11/2026 este tramo daba 29,0%: la Ganancias faltante se le sumaba sin
 su ingreso.)
 
-**Comparación con repartos de referencia (figura 8, paneles derechos).** Misma recaudación total,
+**Comparación con repartos de referencia (`fig8_decil10_partido`, paneles derechos).** Misma recaudación total,
 repartida de dos formas: proporcional (todos pagan la tasa promedio, es decir, cada grupo aporta su
 parte del ingreso) y progresiva (tasa = promedio × (ingreso por persona / promedio)^0,25, reescalada
 para recaudar lo mismo; con ese exponente el decil 1 pagaría 12,7% y el 1% superior 37,0% en 2025).
@@ -472,10 +478,10 @@ El exponente es una elección para ilustrar, no una norma (`ELAST_PROG` en `scri
 Frente al proporcional los desvíos son menores a 1 punto; frente al progresivo, los deciles 1 a 9
 pagan entre 0,5 y 1,5 puntos más de su parte y el 1% superior 7 puntos menos (2025). La misma
 cuenta para los 22 años está en `outputs/tables/deltas_proporcional_progresivo.csv` y en la matriz
-del informe (`i9_matriz_deltas`): frente al progresivo, el 1% paga entre 2,4 y 9,1 puntos menos
+del informe (figura 13): frente al progresivo, el 1% paga entre 2,4 y 9,1 puntos menos
 todos los años.
 
-**En plata (informe, sección 6, figuras 15 y 16).** `scripts/13_brecha_recaudacion.py` pasa
+**En plata (informe, sección 6, figuras 16 y 17).** `scripts/13_brecha_recaudacion.py` pasa
 esos desvíos a pesos, % del PIB y dólares: brecha del grupo = R × (parte de referencia − parte que
 paga), donde R es la recaudación real (DNIAF) de los impuestos del estudio (Ganancias de personas
 humanas, Bienes Personales, aportes y contribuciones, IVA, Internos e Ingresos Brutos; 18,7% del PIB
@@ -488,9 +494,10 @@ las dos versiones de la sección 6 (A: principal; B: `ajuste_cn_rentas_cartera_e
 (0,52% del PIB) frente al proporcional y US$13.200 millones (1,94%) frente al progresivo; con 0,15 y
 0,40, US$9.000 y US$20.400 millones. Es una cuenta mecánica (sin respuesta de comportamiento: elusión,
 evasión, salida de capitales); mide distancia al reparto de referencia, no recaudación potencial.
-Tabla: `outputs/tables/brecha_recaudacion.csv`; figuras `i10_brecha_grupos` e `i11_brecha_1pct`.
+Tabla: `outputs/tables/brecha_recaudacion.csv`; figuras 16 y 17 del informe (`f16_brecha_grupos` y
+`f17_brecha_1pct`, hechas por `scripts/14_informe_graficos.py`).
 
-**Serie (figura 9) y figura 8 por año** (`outputs/figures/por_anio/fig8_decil10_partido_<año>.png`).
+**Serie (`fig9_decil10_serie`) y `fig8` por año** (`outputs/figures/por_anio/fig8_decil10_partido_<año>.png`).
 El 1% de la encuesta paga más que los percentiles 90-95 en 14 de 22 años y menos en 2014, 2016-2019,
 2023, 2024 y 2025. Lo que mueve su tasa es Ganancias y Bienes Personales; el consumo pesa poco arriba. El salto
 de 2006 (31%, contra 24-26% en 2005 y 2007) y los vaivenes de 2016-2019 reflejan en parte el ruido
@@ -515,8 +522,10 @@ publicados; los tramos se calcularon con la local.
    externos no declarados del sector privado (Posición de Inversión Internacional, INDEC).
 1. **Altos ingresos.** Hecho en parte (sección 5). Falta: una medida del ingreso real del
    decil 10 que no dependa de la encuesta ni de lo declarado al fisco (Argentina no
-   publica cuentas del sector hogares), las rentas exentas (los anuarios las informan de
-   forma irregular) y repartir Bienes Personales con las declaraciones de ese impuesto.
+   publica cuentas del sector hogares) y repartir Bienes Personales con las declaraciones de
+   ese impuesto. Las rentas exentas ya se leen en todos los años (antes faltaban en los años
+   fiscales 2006 y 2009-2013; las ventas exentas de 2006 siguen sin leerse y las de 2012 vienen
+   incompletas en el anuario).
 2. **Monotributo y autónomos.** Monotributo hecho como variante (`con_monotributo`, 17/11/2026):
    cuota por categoría con las tablas de cada período, quién paga según la EPH (PP05I desde
    2023T4) y nivel calibrado a lo recaudado ([microsimulación](microsimulacion.md), sección 8).
@@ -529,8 +538,7 @@ publicados; los tramos se calcularon con la local.
 5. **Ganancias de sociedades** (2,4% a 3,1% del PIB). No se reparte por deciles: su incidencia es
    incierta (capital, trabajo o precios), sumarlo bien exige sumar también las utilidades al
    ingreso de los dueños (si no, se infla la cima, como pasaba con la Ganancias de personas antes
-   de la corrección del 16/11/2026) y no hay datos de propiedad de empresas. Hoy sólo entra en el
-   1% de las declaraciones juradas (sección 11). Plan: cuatro variantes (100% capital; 50%
+   de la corrección del 16/11/2026) y no hay datos de propiedad de empresas. Plan: cuatro variantes (100% capital; 50%
    capital y 50% trabajo; 100% trabajo; 100% precios). Capital: impuesto menos la parte de dueños
    del exterior (inversión extranjera directa, PII del INDEC), más las utilidades (impuesto ÷
    alícuota del año, en `params/`) como ingreso, repartido con el empalme de declaraciones juradas o
@@ -544,11 +552,16 @@ publicados; los tramos se calcularon con la local.
    (método de Bachas, Gadenne y Jensen). Detalle en `docs/preguntas_abiertas.md`, "Pendientes de desarrollo".
 7. **Verificaciones de norma pendientes:** alícuotas patronales 2003-2019, INSSJP y obra
    social, y varias reglas de IVA marcadas "no verificado" en el clasificador.
+8. **Control del 1% (sección 11).** No hay una estimación de cuánto ingreso no declara el 1% en
+   Argentina: la medida se informa con escenarios. Que el "monto consumido" de ARCA excluya los
+   impuestos pagados sale de manuales de contadores; la lista oficial de conceptos del aplicativo
+   está en imágenes y no se pudo leer. El consumo del 1% (punto medio entre ARCA y la encuesta) es
+   el supuesto que más mueve la medida.
 
 ## 15. Informe y comparación con otros estudios
 
-`docs/informe.md` presenta los resultados; sus gráficos salen de `scripts/14_informe_v2_graficos.py`,
-que lee `outputs/tables/` y `data/externos/` y reutiliza funciones de `scripts/12_informe_graficos.py`
+`docs/informe.md` presenta los resultados; sus gráficos salen de `scripts/14_informe_graficos.py`,
+que lee `outputs/tables/` y `data/externos/` y reutiliza funciones de `scripts/12_graficos_comunes.py`
 y `scripts/13_brecha_recaudacion.py` (la brecha en plata). Comparación con Argendata (Pessino et al., 2018) y
 con el International Tax Observatory (2026) en `docs/validacion.md`, sección 3; los datos de esos
 estudios están en `data/externos/` y no entran en ningún cálculo.

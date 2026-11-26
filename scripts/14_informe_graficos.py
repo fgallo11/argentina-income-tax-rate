@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 """Gráficos del informe (docs/informe.md), numerados en el orden en que aparecen.
 
-Salida: outputs/figures/informe_v2/f01_... a f21_... y el anexo a1_... a a4_... (PNG y SVG). Todo sale de las tablas de
+Salida: outputs/figures/informe/f01_... a f21_... y el anexo a1_... a a4_... (PNG y SVG). Todo sale de las tablas de
 outputs/tables/ (no corre la microsimulación). Reutiliza el estilo y varias figuras de
-07_graficos.py, 12_informe_graficos.py y 13_brecha_recaudacion.py; las nuevas están acá.
+07_graficos.py, 12_graficos_comunes.py y 13_brecha_recaudacion.py; las nuevas están acá.
 
 Medida usada desde la sección 5: versión A (variante "principal": ingreso declarado en la
 encuesta, completado arriba con lo que se declara al fisco). La versión B (ingreso completado
@@ -50,12 +50,12 @@ def _modulo(nombre, archivo):
     return m
 
 
-inf = _modulo("informe", "12_informe_graficos.py")
+inf = _modulo("graficos_comunes", "12_graficos_comunes.py")
 bre = _modulo("brecha", "13_brecha_recaudacion.py")
 g, plt, matplotlib = inf.g, inf.plt, inf.matplotlib
 from incidencia.config import ANIO_FIN, TABLES  # noqa: E402
 
-OUT = g.FIGURES / "informe_v2"
+OUT = g.FIGURES / "informe"
 pct, TINTA, TINTA2, MUDO, SUP = g.pct, g.TINTA, g.TINTA2, g.MUDO, g.SUP
 ROJO, AZUL, OSCURO, GRIS, MEDIO = inf.ROJO, inf.AZUL, inf.OSCURO, inf.GRIS, inf.MEDIO
 # años de cambio de gobierno: los mandatos empiezan el 10 de diciembre, así que el último año de

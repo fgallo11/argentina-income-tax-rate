@@ -25,7 +25,7 @@ combinan, en los [diagramas](diagramas.md); el método completo, en la [metodolo
 | [RIPTE](#ripte) | Secretaría de Trabajo | Anualizar sueldos; actualizar ingresos | Sí |
 | [Haber mínimo jubilatorio](#haber-mínimo-jubilatorio) | ANSES | Tope de aportes; deducción de jubilados | Sí |
 | [Salario mínimo (SMVM)](#salario-mínimo-vital-y-móvil-smvm) | Secretaría de Trabajo | Régimen cedular de Ganancias 2024 | Sí |
-| [Índices de precios (IPC)](#índices-de-precios-al-consumidor-ipc) | INDEC y San Luis | Pesos constantes (figura 6b) | Sólo gráficos |
+| [Índices de precios (IPC)](#índices-de-precios-al-consumidor-ipc) | INDEC y San Luis | Pesos constantes (`fig6b`) | Sólo gráficos |
 | [Canasta básica total](#canasta-básica-total-cbt) | INDEC | Ingreso medido en canastas | Sólo gráficos |
 | [Tabla de equivalencias](#tabla-de-equivalencias-adulto-equivalente) | INDEC | Pasar personas a adultos equivalentes | Sólo gráficos |
 | [Distribución del ingreso (informe)](#evolución-de-la-distribución-del-ingreso-indec) | INDEC | Validar los deciles | Sólo validación |
@@ -124,7 +124,7 @@ combinan, en los [diagramas](diagramas.md); el método completo, en la [metodolo
   - Repartir el resto de la Ganancias no simulada y Bienes Personales (este último según el
     patrimonio declarado en Ganancias).
   - Estimar el 1% más rico sólo con declaraciones juradas: la medida de control (figuras 10 y A.4
-    del informe, figura 7 del conjunto anterior).
+    del informe; `fig7_top1`).
   - Saber quién tiene bienes en el exterior: los declaran en Bienes Personales unas 87.000 personas
     (cuadro 2.5.1.2.3), lo que justifica atribuir la renta de la cartera externa al 1% más rico.
   - 2025 usa las declaraciones de 2024 actualizadas (las de 2025 todavía no se publicaron).
@@ -193,7 +193,7 @@ combinan, en los [diagramas](diagramas.md); el método completo, en la [metodolo
   sectores", es decir, el sector privado no financiero).
 - **Qué aporta.** Cuántos activos tiene afuera el sector privado: inversión de cartera (acciones,
   fondos, bonos) y moneda y depósitos (sobre todo billetes fuera del sistema).
-- **Cómo se usó.** En el panel B de la figura 0 (ingreso completado, estimado): una renta de 4% anual
+- **Cómo se usó.** En la versión B del informe (panel B de `fig0`; ingreso completado, estimado): una renta de 4% anual
   sobre la inversión de cartera, atribuida al 1% más rico. La moneda y depósitos no se usa en la
   versión central (no rinde y está repartida); sí en la cota alta, 3% sobre todo el stock
   ([metodología](metodologia.md), sección 6).
@@ -244,7 +244,7 @@ combinan, en los [diagramas](diagramas.md); el método completo, en la [metodolo
 - **Qué es.** El IPC-GBA del INDEC hasta 2006, el IPC de San Luis para 2007-2016 (por la
   intervención del INDEC) y el IPC Nacional del INDEC desde 2017.
 - **Qué aporta.** Cuánto subieron los precios.
-- **Cómo se usó.** Sólo para expresar ingresos en pesos de hoy (figura 6b) y para llevar hacia
+- **Cómo se usó.** Sólo para expresar ingresos en pesos de hoy (`fig6b`) y para llevar hacia
   atrás la canasta básica antes de 2017.
 - **Dónde.** `scripts/aux_deflactor.py`.
 
@@ -254,8 +254,8 @@ combinan, en los [diagramas](diagramas.md); el método completo, en la [metodolo
   60 años) en el Gran Buenos Aires (INDEC; serie oficial desde 04/2016). Define la línea de pobreza.
 - **Qué aporta.** Un umbral de "lo necesario para no ser pobre" que se actualiza solo con los
   precios.
-- **Cómo se usó.** Para medir el ingreso de cada grupo en canastas (figura 6, gráfico de
-  canastas del informe). Antes de 2017 se usa la de 2017 llevada hacia atrás con el IPC. El ingreso
+- **Cómo se usó.** Para medir el ingreso de cada grupo en canastas (`fig6` y figuras 5 y 6 del
+  informe). Antes de 2017 se usa la de 2017 llevada hacia atrás con el IPC. El ingreso
   se divide por los adultos equivalentes del grupo, no por sus personas, para que esté en la misma
   unidad que la canasta (ver la tabla de equivalencias, abajo).
 

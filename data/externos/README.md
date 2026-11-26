@@ -1,7 +1,7 @@
 # Datos de terceros (sólo para comparar)
 
-No entran en ningún cálculo del proyecto; los usa `scripts/12_informe_graficos.py` para la
-comparación de la sección 1 del informe.
+No entran en ningún cálculo del proyecto; los usa `scripts/12_graficos_comunes.py` (desde `14_informe_graficos.py`) para la
+comparación de la sección 1 del informe (figura 1).
 
 | Archivo | Fuente | Qué es |
 |---|---|---|

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-"""Genera los gráficos del proyecto (outputs/figures/, PNG y SVG).
+"""Genera los gráficos de trabajo del proyecto (outputs/figures/, PNG y SVG). Las figuras del
+informe (docs/informe.md) las hace 14_informe_graficos.py en outputs/figures/informe/.
 
   fig0_dos_versiones_<año>      la carga contra el ingreso declarado y contra el ingreso ajustado
                                 a Cuentas Nacionales (con la sensibilidad de activos externos).

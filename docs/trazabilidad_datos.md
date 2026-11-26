@@ -6,7 +6,9 @@ Para una descripción de cada fuente (qué es, qué aporta, cómo se usa) ver el
 Inventario hecho el 14/11/2026 sobre el commit `63c1d49`. Objetivo: que cada dato del
 proyecto se pueda verificar a mano contra su fuente.
 
-> **Agregados después del inventario:** anuarios de ARCA del año fiscal 2024 (anuario 2025); datos de
+> **Agregados después del inventario:** anuarios de ARCA del año fiscal 2024 (anuario 2025) y, el
+> 26/11/2026, sus cuadros 2.2.2.1.1, 2.2.2.1.2, 2.2.2.1.4 y 2.2.2.1.8 de todos los años (categorías,
+> deducciones y justificación patrimonial; categoría A, controlados contra su fila TOTAL); datos de
 > terceros sólo para comparar en `data/externos/` (Argendata, ITO; categoría D, con su README); la
 > serie de impuestos a la propiedad de la OCDE citada en `docs/metodologia.md`, sección 15 (categoría D);
 > `params/monotributo.yaml` (categoría B: tablas de ARCA 2010-2026 leídas con un programa y controladas
@@ -133,9 +135,10 @@ son datos fácticos (códigos de encuesta, fechas legales) que deberían tener u
 | Activos externos 2004-2005 = los de 2006 | | `aux_cuentas_nacionales.py` | Declarado |
 | Rentas de la EPH ×7 | 7 | `incidencia.py:92` | De Rosa et al. dicen 5 a 10; el 7 es elección |
 | Renta de activos externos | 4% anual sobre la cartera (3% sobre cartera y depósitos, cota) | `incidencia.py:88`, `10_top1.py` | Elección |
-| 1% más rico: mitad salario, mitad de las empresas, utilidad = impuesto/30% | 0,5; 0,5; 0,30 | `10_top1.py:53-55` | La alícuota legal de sociedades cambió (35% → 30% → escala desde 2021); un 30% fijo es aproximación |
-| 1% más rico: aportes 14%, contribución 20% | 0,14; 0,20 | `10_top1.py:57-58` | El 20% no es ninguna alícuota legal ("aproximada") |
-| 1% más rico: ENGHo escalonada con cortes 2009 y 2016 | | `10_top1.py:80` | Distinto del resto del proyecto (interpolado; la variante escalonada corta en 2012 y 2017) |
+| 1% más rico (control): contribución patronal 20% sobre la parte de la 4ta categoría de empleados | 0,20 | `10_top1.py:63, 108` | El 20% no es ninguna alícuota legal ("aproximada"); la parte de empleados sale de los casos de los anuarios |
+| 1% más rico (control): consumo = punto medio entre el "monto consumido" de ARCA y el de la versión A | 0,5 | `10_top1.py:118` | Elección: ninguna fuente mide el consumo del 1% |
+| 1% más rico (control): ingreso no salarial no declarado | 5%, 10%, 25% | `10_top1.py:65` | Escenarios; el 25% sigue a Alstadsæter, Johannesen y Zucman (2019), dato del 0,01% de Escandinavia |
+| 1% más rico (control): desde 2012 | 2012 | `10_top1.py:64` | Antes, pocos empleados declaraban sus aportes |
 | Aguinaldo devengado 13/12 | | `directos.py:29` | Definición |
 
 ---

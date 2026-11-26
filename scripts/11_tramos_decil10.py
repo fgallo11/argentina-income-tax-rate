@@ -3,8 +3,9 @@
 
 Mismo orden (ingreso per cápita familiar), misma microsimulación y mismos supuestos que los
 deciles; los deciles 1-9 no cambian. Ganancias faltante y Bienes Personales se reparten
-entre los tramos con las declaraciones juradas (09_ingresos_altos.py). Se compara el 1% de
-la encuesta con el 1% estimado con las declaraciones juradas (10_top1.py).
+entre los tramos con las declaraciones juradas (09_ingresos_altos.py). Es la versión A del
+informe. El 1% se controla con el 1% armado sólo con las declaraciones juradas (10_top1.py, que
+usa la columna consumo_sobre_ingreso de esta salida).
 
 Variantes:
   principal               por encima del veintil más alto de la ENGHo el consumo queda fijo
@@ -14,10 +15,10 @@ Variantes:
   sin_bienes_personales
 
 Salidas (outputs/tables/):
-  tasas_tramos_decil10_fig0.csv   los tramos con el ingreso completado (panel B de la figura 0), con
+  tasas_tramos_decil10_fig0.csv   los tramos con el ingreso completado (versión B del informe; panel B de fig0), con
                                   ingreso y personas (los usa 13_brecha_recaudacion.py).
-  tasas_tramos_decil10_robustez.csv   los tramos con los demás supuestos (sección "Qué tan firme es"
-                                  del informe nuevo).
+  tasas_tramos_decil10_robustez.csv   los tramos con los demás supuestos (sección 8 del informe,
+                                  "Qué tan firme es cada resultado").
   tasas_tramos_decil10.csv   variante, año, grupo (1-9, 91 = P90-95, 95 = P95-99, 99 = P99-100),
                              tasas por impuesto, participación en el ingreso y en los impuestos,
                              ingreso por persona en canastas básicas.
@@ -39,15 +40,15 @@ VARIANTES = [
     Variante("ajuste_cn_activos_ext", ajuste_cn=True, renta_activos_ext=0.03),
     Variante("sin_bienes_personales", incluir_bp=False),
 ]
-# Sólo para la figura 0 (panel B: ingreso completado). Van a un archivo aparte para no cambiar
-# los rangos que usan las figuras 8 y 9 y el informe.
+# Sólo para la versión B del informe y el panel B de fig0 (ingreso completado). Van a un archivo aparte para no cambiar
+# los rangos que usan fig8, fig9 y el informe.
 VARIANTES_FIG0 = [
     Variante("ajuste_cn_rentas", ajuste_cn=True, factor_rentas=7.0),
     Variante("ajuste_cn_rentas_activos_ext", ajuste_cn=True, factor_rentas=7.0, renta_activos_ext=0.03),
     Variante("ajuste_cn_rentas_cartera_ext", ajuste_cn=True, factor_rentas=7.0, renta_activos_ext=0.04,
              base_activos_ext="cartera"),
 ]
-# Para la sección "Qué tan firme es" del informe nuevo: los mismos supuestos que se prueban en los
+# Para la sección 8 del informe ("Qué tan firme es cada resultado"): los mismos supuestos que se prueban en los
 # deciles, ahora también sobre los tramos. Archivo aparte para no cambiar las franjas de las
 # figuras que usan tasas_tramos_decil10.csv.
 VARIANTES_ROBUSTEZ = [

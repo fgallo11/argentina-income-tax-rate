@@ -1,23 +1,12 @@
 #!/usr/bin/env python
-"""Gráficos de la versión anterior del informe (hasta el 26/11/2026; ver la historia de git de
-docs/informe.md). El informe actual usa scripts/14_informe_v2_graficos.py, que reutiliza funciones
-de este script.
+"""Funciones de gráficos compartidas por 13_brecha_recaudacion.py y 14_informe_graficos.py.
 
-Salida: outputs/figures/informe/ (PNG y SVG). Todo sale de las tablas de outputs/tables/ (no
-corre la microsimulación). Usa el estilo de 07_graficos.py.
-
-  i1_serie                 deciles 1 y 10, promedio y 1% más rico; franja con los deciles 2 a 9.
-  i2_anios                 barras por impuesto de cada decil y del 1% en 2004, 2013, 2019 y el último año.
-  i3_distancia_promedio    decil 1 y decil 10 menos el promedio, en puntos, con banda de variantes.
-  i4_mapa_calor            año × grupo (D1-D9, P90-95, P95-99, 1%): desvío contra el promedio del año.
-  i5_supuestos             como fig5, en los mismos cuatro años, con el cheque y el ingreso completado.
-  i6_composicion           impuesto por impuesto del decil 1, el 5, el 10 y el 1%, año por año.
-  i7_ricos_pobres          fig6 de 07_graficos.py: distancia de ingresos antes y después de impuestos.
-  i8_decil10_partido       fig8 de 07_graficos.py para el último año.
-  i9_matriz_deltas         año × grupo: parte de los impuestos menos la de un reparto proporcional y uno progresivo.
-  a1_progresividad         índice de Kakwani por año (anexo).
-  a2_recaudado_consumo     IVA, Ingresos Brutos e Internos recaudados por peso de consumo (anexo).
-  a3_cobertura             qué parte de la recaudación total cubre el estudio (anexo).
+No es un paso del pipeline: no genera figuras por sí solo. Tiene el estilo y los colores del
+informe y las funciones que 14_informe_graficos.py reutiliza (c1_comparacion, c2_canastas,
+composicion, i6_composicion, i9_matriz_deltas, kakwani, a2_recaudado_consumo, a3_cobertura,
+entre otras). Algunas otras vienen de la versión anterior del informe (hasta el 26/11/2026; ver
+la historia de git de docs/informe.md) y se conservan por si se reutilizan. Usa el estilo de
+07_graficos.py.
 """
 import importlib.util
 import sys
@@ -657,27 +646,3 @@ def a3_cobertura():
     fig.text(0.01, -0.02, "Fuente: recaudación DNIAF; outputs/tables/validacion_cobertura.csv.", fontsize=7.2,
              color=g.MUDO, ha="left", va="top")
     guardar(fig, "a3_cobertura")
-
-
-if __name__ == "__main__":
-    largo, tot, ancho, tramos, trimestres = cargar()
-    for f in OUT.glob("*"):
-        f.unlink()
-    i1_serie(tot, trimestres, tramos)
-    i2_anios(largo, tramos)
-    i2_distancia(tot)
-    i3_mapa(tramos)
-    i5_supuestos(largo)
-    i6_composicion(ancho, tramos)
-    g.fig_distancia(largo, carpeta=OUT, nombre="i7_ricos_pobres")
-    g.fig_decil10_partido(ANIO_FIN, OUT, nombre="i8_decil10_partido")
-    i9_matriz_deltas(tramos)
-    c1_comparacion(largo, tramos)
-    c2_canastas(tramos)
-    c3_composicion_tramos(ancho, tramos)
-    k = a1_progresividad(tramos)
-    a2_recaudado_consumo()
-    a3_cobertura()
-    print("Gráficos del informe en", OUT)
-    kp = k[k.variante == "principal"].set_index("anio")
-    print("Kakwani principal:", kp.kakwani.round(3).to_dict())

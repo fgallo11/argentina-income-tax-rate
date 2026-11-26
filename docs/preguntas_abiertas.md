@@ -1,5 +1,10 @@
 # Preguntas abiertas para quien continúe el proyecto
 
+> **Las secciones A a E son históricas** (primera revisión del proyecto, anterior a la auditoría
+> del 13/11/2026); sus respuestas están en `docs/respuestas_preguntas_abiertas.md` y el estado
+> actual, en `docs/metodologia.md` (sección 14) y `docs/informe.md`. La sección F y los
+> "Pendientes de desarrollo" están al día.
+
 Resultado de una primera revisión del proyecto (código, parámetros, tablas de validación y
 log de la última corrida). **Nada de esto fue verificado con corridas nuevas**: son lecturas
 del código y de las tablas existentes. Los pesos numéricos que se mencionan son aproximados.
@@ -133,13 +138,15 @@ lo modelado, pero la traslación podría ser parcial.
 
 ## F. Higiene del proyecto
 
-- No es un repositorio git (`git init` pendiente).
-- No hay tests; `pytest` está en `requirements.txt` pero `tests/` está vacío.
-- Faltan `docs/metodologia.md`, `docs/validacion.md` y `docs/errores_notebook.md`.
-- `PerformanceWarning` de pandas en `src/incidencia/eph.py:50` (DataFrame fragmentado).
-- `requirements.txt` sin versiones fijadas.
-- `data/processed` y `outputs` no están en `.gitignore`; confirmar si es intencional.
-- El README no documenta el punto B3 (AFJP) ni destaca el A1 como la principal incertidumbre.
+Estado al 26/11/2026 (la lista original, del inicio del proyecto, ya se resolvió en su mayor parte:
+hay repositorio git, tests en `tests/`, `docs/metodologia.md` y `docs/validacion.md`).
+
+- `requirements.txt` sigue sin versiones fijadas.
+- `data/processed/` se versiona en parte (las tablas chicas que leen los scripts de gráficos);
+  `data/raw/` e `interim/` no.
+- La auditoría externa (`docs/auditoria.md`, `auditoria/`) y la trazabilidad
+  (`docs/trazabilidad_datos.md`) describen el proyecto en la fecha en que se hicieron; sus cifras
+  no se actualizan.
 
 ---
 
@@ -155,8 +162,10 @@ medida principal por tres razones:
 2. **Sumarlo bien exige sumar también las utilidades al ingreso de los dueños.** Si se suma sólo el
    impuesto, la tasa de la cima se infla (lo mismo pasaría con la Ganancias de personas: impuesto
    sin el ingreso que lo genera). Con las utilidades, esa parte paga cerca del
-   30% y el efecto es mucho menor: en el 1% de las declaraciones juradas (figura 6) sumar la mitad
-   del impuesto y de las utilidades casi no cambia su tasa (30,2% sin sociedades, 30,1% con).
+   30% y el efecto es mucho menor: en la versión anterior del 1% de las declaraciones juradas
+   (hasta el 26/11/2026), sumar la mitad del impuesto y de las utilidades casi no cambiaba su tasa
+   (30,2% sin sociedades, 30,1% con). La medida de control actual no lo incluye, para ser
+   comparable con la versión A.
 3. **No hay datos de quién es dueño de qué.** Ni la EPH ni las declaraciones juradas publicadas dicen
    cuántas acciones o participaciones tiene cada persona.
 

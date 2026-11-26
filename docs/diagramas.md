@@ -110,9 +110,9 @@ flowchart LR
     subgraph OUT["5. Resultados"]
         direction LR
         tablas[("outputs/tables/")]
-        s07["07_graficos<br/>figuras 0 a 9"]
-        s12["12_informe_graficos<br/>+ data/externos/"]
+        s07["07_graficos<br/>figuras de trabajo<br/>fig0 a fig9"]
         s13["13_brecha_recaudacion<br/>la brecha en plata"]
+        s14["14_informe_graficos<br/>figuras del informe<br/>(con 12_graficos_comunes<br/>y data/externos/)"]
         inf(["docs/informe.md"])
     end
 
@@ -125,7 +125,7 @@ flowchart LR
     classDef script fill:#fbfaf6,stroke:#9a998f,color:#0b0b0b
     classDef salida fill:#0b3d7a,stroke:#0b3d7a,color:#ffffff
     class r_eph,r_engho,r_rec,r_arca,r_macro,r_par,tablas datos
-    class s02,s03,s_arca,s_lmi,s_ipc,s04,s09,s_cn,s05,s11,s10,s08,s06,s07,s12,s13 script
+    class s02,s03,s_arca,s_lmi,s_ipc,s04,s09,s_cn,s05,s11,s10,s08,s06,s07,s13,s14 script
     class inf salida
 ```
 
@@ -141,9 +141,9 @@ flowchart LR
 | `10_top1` | declaraciones por tramo, `03`, `04`, `11` (consumo del 1% en la versión A) | `top1.csv` (medida de control del 1%) |
 | `08_poblacion_fija` | EPH de 2004 y 2017, `params/`, `02`, `03`, `09` | `serie_poblacion_fija.csv` |
 | `06_validacion` | `04`, `02`, `03`, `09` | tablas de validación |
-| `07_graficos` | tablas, `aux_deflactor` | `outputs/figures/` |
-| `12_informe_graficos` | tablas, `data/externos/` | `outputs/figures/informe/` |
-| `13_brecha_recaudacion` | tablas de `11`, `03`, `09`, `aux_cuentas_nacionales` | `brecha_recaudacion.csv`, figuras `i10` e `i11` |
+| `07_graficos` | tablas, `aux_deflactor` | `outputs/figures/fig0_...` a `fig9_...` y `por_anio/` (figuras de trabajo) |
+| `13_brecha_recaudacion` | tablas de `11`, `03`, `09`, `aux_cuentas_nacionales` | `brecha_recaudacion.csv` |
+| `14_informe_graficos` | tablas, `data/externos/`; funciones de `12_graficos_comunes` y `13` | `outputs/figures/informe/` (figuras del informe) |
 
 **Archivos intermedios** (`data/processed/`, no se versionan):
 

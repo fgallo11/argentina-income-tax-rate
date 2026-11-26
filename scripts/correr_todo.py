@@ -32,9 +32,8 @@ PASOS = [
     ("11", "11_tramos_decil10.py"),             # el decil 10 partido en P90-95, P95-99 y 1%
     ("10", "10_top1.py"),                       # el 1% con declaraciones juradas (control; usa 11)
     ("07", "07_graficos.py"),                   # todas las figuras
-    ("12", "12_informe_graficos.py"),           # gráficos de la versión anterior del informe
     ("13", "13_brecha_recaudacion.py"),         # cuánta plata: proporcional y progresivo
-    ("14", "14_informe_v2_graficos.py"),        # gráficos del informe (docs/informe.md)
+    ("14", "14_informe_graficos.py"),           # gráficos del informe (docs/informe.md)
 ]
 
 

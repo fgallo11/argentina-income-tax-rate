@@ -74,7 +74,7 @@ Dondo, Hanni, Martner y Podestá (2015).
 
 ## 3. Contra Pessino et al. (Argendata, 2018) y el International Tax Observatory (2026)
 
-Datos y fuentes en `data/externos/`; gráfico en `outputs/figures/informe/c1_comparacion.png`.
+Datos y fuentes en `data/externos/`; gráfico en `outputs/figures/informe/f01_comparacion.png` (figura 1 del informe).
 
 **Pessino, Rasteletti, Artana y Lustig** (*Distributional effects of taxation in Latin America*,
 Oxford Open Economics, vol. 4), publicado por Fundar en Argendata, 2018, % del ingreso:

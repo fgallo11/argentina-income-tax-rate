@@ -123,3 +123,46 @@ def test_monotributo_categorias():
     assert sipa.tolist() == pytest.approx([11871.01, 17380.35, 0.0])
     imp, sipa = monotributo_mes(P, 2006, 5, np.array([10000.0, 100000.0]), np.array([False, True]))
     assert imp.tolist() == [33, 405] and sipa.tolist() == [35, 35]   # Ley 25.865: A servicios, L bienes
+
+
+@pytest.mark.skipif(not (PARAMS.parent / "data/processed/ddjj_ganancias_tramos.csv").exists(),
+                    reason="requiere correr scripts/aux_anuarios_arca.py")
+def test_ddjj_composicion():
+    """Los tramos suman la fila TOTAL y los conteos son coherentes (anuarios de ARCA)."""
+    d = pd.read_csv(PARAMS.parent / "data/processed/ddjj_ganancias_tramos.csv")
+    cols = ["cuarta_bruta", "cuarta_gastos", "aportes_deducidos", "monto_consumido", "casos_cuarta",
+            "casos_aportes_empleado"]
+    s = d[~d.es_total].groupby("anio_fiscal")[cols].sum()
+    t = d[d.es_total].set_index("anio_fiscal")[cols]
+    assert (s / t - 1).abs().max().max() < 0.002
+    assert (t.casos_aportes_empleado <= t.casos_cuarta).all()
+    assert (t.cuarta_gastos < t.cuarta_bruta).all()
+    assert d.exentos.notna().all()
+
+
+@pytest.mark.skipif(not (PARAMS.parent / "outputs/tables/top1.csv").exists(),
+                    reason="requiere correr scripts/10_top1.py")
+def test_control_top1():
+    """Medida de control del 1%: escenarios ordenados y consumo entre las dos aproximaciones."""
+    t = pd.read_csv(PARAMS.parent / "outputs/tables/top1.csv")
+    t = t[t.confiable]
+    assert t.anio.min() == 2012
+    assert ((t.total > t.total_oculta05) & (t.total_oculta05 > t.total_oculta10)
+            & (t.total_oculta10 > t.total_oculta25)).all()
+    lo, hi = t[["consumo_arca", "consumo_encuesta"]].min(axis=1), t[["consumo_arca", "consumo_encuesta"]].max(axis=1)
+    assert t.consumo_usado.between(lo, hi).all()
+    assert t.parte_empleados.between(0.2, 0.8).all()
+    partes = t[["ganancias", "bienes_personales", "aportes_personales", "contribuciones", "consumo"]].sum(axis=1)
+    assert (partes - t.total).abs().max() < 1e-9
+
+
+def test_importes_identidad_contable():
+    """importes() elige el corrimiento de columnas que cumple la identidad del cuadro (.htm corridos)."""
+    from incidencia.anuarios import importes
+    filas = [["", "TRAMO", "", "PRESENTACIONES", "", "", ""],
+             ["", "", "", "TOTAL", "UNO", "", "DOS"],
+             ["", "Más de", "Hasta", "Casos", "Importe", "Casos", "Importe"],
+             ["", "TOTAL", "", 10, 30, 3, 10, 6, 20],      # datos corridos una columna
+             ["", 0, 100, 10, 30, 3, 10, 6, 20]]
+    v, c, desde, u = importes(filas, lambda tot: (tot["UNO"] + tot["DOS"], tot["TOTAL"]), con_casos=True)
+    assert v["UNO"] == [10, 10] and v["DOS"] == [20, 20] and c["UNO"] == [3, 3]

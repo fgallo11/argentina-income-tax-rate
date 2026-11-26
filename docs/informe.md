@@ -1,7 +1,7 @@
 # Quién paga impuestos en Argentina, 2004-2025
 
-*Los gráficos se generan con `scripts/14_informe_v2_graficos.py` y están en
-`outputs/figures/informe_v2/`.*
+*Los gráficos se generan con `scripts/14_informe_graficos.py` y están en
+`outputs/figures/informe/`.*
 
 Este informe estima qué parte de su ingreso paga en impuestos cada grupo de la población argentina,
 año por año entre 2004 y 2025. La medida es la **tasa efectiva**: lo que un grupo paga en
@@ -20,7 +20,7 @@ declaraciones juradas.
 
 ## 1. Lo que muestran otros estudios
 
-![Figura 1](../outputs/figures/informe_v2/f01_comparacion.png)
+![Figura 1](../outputs/figures/informe/f01_comparacion.png)
 
 **Figura 1.** El gráfico de siempre: tres estudios, el mismo perfil por deciles.
 
@@ -128,7 +128,7 @@ Ganancias de sociedades queda afuera porque no se sabe quién la paga (los dueñ
 o los consumidores) ni hay datos de quién es dueño de qué empresa. El cheque, los combustibles y el
 monotributo se calcularon como variantes y no cambian la forma de los resultados.
 
-![Figura 2](../outputs/figures/informe_v2/f02_deciles_2025.png)
+![Figura 2](../outputs/figures/informe/f02_deciles_2025.png)
 
 **Figura 2.** Qué parte de su ingreso pagó cada decil en impuestos, 2025.
 
@@ -162,7 +162,7 @@ verificarse por separado, el estudio no lo hace.
 
 ### Los años de cambio de gobierno
 
-![Figura 3](../outputs/figures/informe_v2/f03_deciles_anios_gobierno.png)
+![Figura 3](../outputs/figures/informe/f03_deciles_anios_gobierno.png)
 
 **Figura 3.** Qué parte de su ingreso pagó cada decil, en los años de cambio de gobierno.
 
@@ -181,7 +181,7 @@ achicó: pagaba 12,5 puntos más que el promedio en 2004 y 4,9 en 2025.
 
 ### Con qué impuestos paga cada decil
 
-![Figura 4](../outputs/figures/informe_v2/f04_composicion_deciles.png)
+![Figura 4](../outputs/figures/informe/f04_composicion_deciles.png)
 
 **Figura 4.** Con qué impuestos paga cada decil, año por año.
 
@@ -203,7 +203,7 @@ mayoría, pero tiene una consecuencia: los grupos tienen la misma cantidad de pe
 nivel de vida, y la distancia entre el primero y el último de cada grupo es muy distinta. Esta
 sección mide esa distancia.
 
-![Figura 5](../outputs/figures/informe_v2/f05_canastas.png)
+![Figura 5](../outputs/figures/informe/f05_canastas.png)
 
 **Figura 5.** Ingreso de cada grupo en canastas básicas por adulto equivalente, 2004 y 2025.
 
@@ -224,7 +224,7 @@ percentiles 90 a 95 tienen 5,2, los percentiles 95 a 99, 9,1, y el 1% más rico,
 última barra hay casi cinco veces de distancia entre el primer tramo y el último; entre el decil 1
 y el decil 5 hay cuatro.
 
-![Figura 6](../outputs/figures/informe_v2/f06_canastas_tiempo.png)
+![Figura 6](../outputs/figures/informe/f06_canastas_tiempo.png)
 
 **Figura 6.** Ingreso de cada decil y del 1% más rico en canastas básicas, 2004-2025.
 
@@ -244,7 +244,7 @@ promedio (3,6 canastas en 2025) está apenas por encima del límite. El decil 8 
 línea del 1% más rico, en cambio, está entre 17 y 31 canastas en toda la serie, muy lejos del resto
 del decil 10 (entre 6 y 10).
 
-![Figura 7](../outputs/figures/informe_v2/f07_parte_ingreso.png)
+![Figura 7](../outputs/figures/informe/f07_parte_ingreso.png)
 
 **Figura 7.** Qué parte del ingreso total tiene cada grupo, 2025.
 
@@ -280,7 +280,7 @@ agrega estimaciones de lo que ninguna fuente registra persona por persona.
 
 ### Versión A: con los mismos datos que los deciles
 
-![Figura 8](../outputs/figures/informe_v2/f08_version_a.png)
+![Figura 8](../outputs/figures/informe/f08_version_a.png)
 
 **Figura 8.** Versión A: el decil 10 partido en tres, con los mismos datos que los deciles, 2025.
 
@@ -338,7 +338,7 @@ La versión A tiene tres limitaciones, todas en la cima:
 
 ### Versión B: completando el ingreso que la encuesta no capta
 
-![Figura 9](../outputs/figures/informe_v2/f09_version_b.png)
+![Figura 9](../outputs/figures/informe/f09_version_b.png)
 
 **Figura 9.** Versión B: los mismos impuestos, con el ingreso que la encuesta no capta estimado,
 2025.
@@ -438,7 +438,7 @@ lo que declara el propio contribuyente. Los dos primeros escenarios son moderado
 en el orden de lo que Alstadsæter, Johannesen y Zucman encuentran para el 0,01% más rico, y funciona
 como techo para el 1%.
 
-![Figura 10](../outputs/figures/informe_v2/f10_control_1pct.png)
+![Figura 10](../outputs/figures/informe/f10_control_1pct.png)
 
 **Figura 10.** Medida de control: tasa del 1% más rico según qué parte de su ingreso no salarial
 declara a ARCA, 2025.
@@ -488,7 +488,7 @@ no.
 
 ## 5. El decil 10 partido a lo largo del tiempo
 
-![Figura 11](../outputs/figures/informe_v2/f11_composicion_1pct.png)
+![Figura 11](../outputs/figures/informe/f11_composicion_1pct.png)
 
 **Figura 11.** Qué impuestos paga cada grupo, año por año: deciles 1, 5 y 10 y el 1% más rico.
 
@@ -502,7 +502,7 @@ alícuotas de Bienes Personales bajaron en 2016 (Ley 27.260, con blanqueo), subi
 27.541) y volvieron a bajar en 2024 (Ley 27.743). Son coincidencias en el tiempo, no causas
 demostradas; el estudio no aísla el efecto de cada ley.
 
-![Figura 12](../outputs/figures/informe_v2/f12_partido_anios_gobierno.png)
+![Figura 12](../outputs/figures/informe/f12_partido_anios_gobierno.png)
 
 **Figura 12.** Qué parte de su ingreso pagó cada grupo, con el decil 10 partido, en los años de cambio
 de gobierno.
@@ -555,7 +555,7 @@ elección: un valor mayor daría un sistema más progresivo y uno menor, uno má
 proporcional. Sirve para medir cuán lejos está el sistema real de un sistema progresivo concreto.
 Al final de la sección se muestra cuánto cambian los resultados con otros exponentes.
 
-![Figura 13](../outputs/figures/informe_v2/f13_matriz_deltas.png)
+![Figura 13](../outputs/figures/informe/f13_matriz_deltas.png)
 
 **Figura 13.** Qué parte de los impuestos paga cada grupo frente a dos sistemas de referencia, año por
 año.
@@ -582,7 +582,7 @@ años (entre 0,3 y 1,8 puntos), y el 1% una parte menor todos los años (entre 2
 es lo esperable en un sistema casi proporcional: cualquier referencia progresiva le asigna más a la
 cima y menos a la base que un sistema donde todos pagan parecido.
 
-![Figura 14](../outputs/figures/informe_v2/f14_flujos_extremos.png)
+![Figura 14](../outputs/figures/informe/f14_flujos_extremos.png)
 
 **Figura 14.** Los años extremos de la figura 13, grupo por grupo.
 
@@ -609,7 +609,7 @@ tenía el 38,0% del ingreso, pagaría el 30,7% y pagó el 38,1%. En 2013, el má
 1% pagó el 9,5% frente al 11,9% que le tocaría, y la clase media, el 38,8% frente al 36,3%. Incluso el
 año más cercano al sistema progresivo está más lejos de él que el año más lejano al proporcional.
 
-![Figura 15](../outputs/figures/informe_v2/f15_kakwani.png)
+![Figura 15](../outputs/figures/informe/f15_kakwani.png)
 
 **Figura 15.** Índice de Kakwani: qué tan progresivo es el sistema, año por año.
 
@@ -629,7 +629,7 @@ sistema progresivo de referencia, con la misma recaudación: alrededor de 0,10 e
 (0,109 en 2025). La franja azul muestra ese valor con exponentes entre 0,15 y 0,40: va de 0,06 a 0,18.
 Incluso el más suave de esos sistemas progresivos queda lejos del sistema argentino.
 
-![Figura 16](../outputs/figures/informe_v2/f16_brecha_grupos.png)
+![Figura 16](../outputs/figures/informe/f16_brecha_grupos.png)
 
 **Figura 16.** Cuánto más o menos pagaría cada grupo con otro sistema que recaude lo mismo, 2025.
 
@@ -664,7 +664,7 @@ recaudar con una reforma: una suba de impuestos en la cima traería más elusió
 activos afuera. Mide la distancia entre cómo se reparte hoy la carga y cómo se repartiría con cada
 referencia.
 
-![Figura 17](../outputs/figures/informe_v2/f17_brecha_1pct.png)
+![Figura 17](../outputs/figures/informe/f17_brecha_1pct.png)
 
 **Figura 17.** El 1% más rico: la tasa que paga y la que pagaría con cada sistema de referencia,
 2004-2025.
@@ -697,7 +697,7 @@ Las matrices (figura 13), el índice de Kakwani (figura 15) y los montos en dól
 con la versión A, porque comparan las partes de todos los grupos y la medida de control sólo existe
 para el 1%.
 
-![Figura 18](../outputs/figures/informe_v2/f18_deltas_2025.png)
+![Figura 18](../outputs/figures/informe/f18_deltas_2025.png)
 
 **Figura 18.** Qué parte de los impuestos paga cada grupo frente a lo que pagaría con cada
 referencia, 2025.
@@ -714,7 +714,7 @@ que la que les tocaría (entre 0,5 y 1,5 puntos cada uno), los percentiles 90-95
 
 ## 7. Cuántas veces más ingresan y cuántas veces más pagan
 
-![Figura 19](../outputs/figures/informe_v2/f19_veces.png)
+![Figura 19](../outputs/figures/informe/f19_veces.png)
 
 **Figura 19.** Cuántas veces más ingresan y cuántas veces más pagan los de arriba que el 10% más
 pobre.
@@ -770,7 +770,7 @@ que también es defendible:
 Se agrega una prueba más, sobre la forma de combinar las tres ediciones de la ENGHo: por tramos de
 años en lugar de interpolarlas. Con la medida del informe son 12 versiones del cálculo.
 
-![Figura 20](../outputs/figures/informe_v2/f20_rangos_supuestos.png)
+![Figura 20](../outputs/figures/informe/f20_rangos_supuestos.png)
 
 **Figura 20.** Cuánto cambia la tasa de cada grupo con cada supuesto, en los años de cambio de
 gobierno.
@@ -786,7 +786,7 @@ franjas mezclan supuestos distintos y por eso se tocan entre grupos, pero compar
 supuesto el decil 1 paga más que cada uno de los deciles 2 a 9 en todos los años. Las franjas de los deciles 2 a 9 se superponen entre sí: con cualquier supuesto pagan parecido. En
 la cima las franjas son anchas y la del 1% cruza el promedio en varios años.
 
-![Figura 21](../outputs/figures/informe_v2/f21_distancias_supuestos.png)
+![Figura 21](../outputs/figures/informe/f21_distancias_supuestos.png)
 
 **Figura 21.** Las tres comparaciones centrales del informe, con todos los supuestos, 2004-2025.
 
@@ -926,7 +926,7 @@ La metodología completa, con las fuentes de cada dato y todas las variantes de 
 
 ### Recaudación y cobertura
 
-![Figura A.1](../outputs/figures/informe_v2/a1_recaudado_consumo.png)
+![Figura A.1](../outputs/figures/informe/a1_recaudado_consumo.png)
 
 **Figura A.1.** Recaudación de IVA, Internos e Ingresos Brutos por cada peso de consumo de los
 hogares, 2004-2025.
@@ -935,7 +935,7 @@ Es la tasa que el estudio aplica al consumo de cada grupo (sección 2): lo que s
 impuesto, según la Dirección Nacional de Investigaciones y Análisis Fiscal, dividido por el consumo
 privado de las Cuentas Nacionales del INDEC.
 
-![Figura A.2](../outputs/figures/informe_v2/a2_cobertura.png)
+![Figura A.2](../outputs/figures/informe/a2_cobertura.png)
 
 **Figura A.2.** Qué parte de todo lo recaudado cubren los impuestos del estudio, 2004-2025.
 
@@ -956,7 +956,7 @@ causas demostradas.
 
 ### Cada año, grupo por grupo
 
-![Figura A.3](../outputs/figures/informe_v2/a3_anios.png)
+![Figura A.3](../outputs/figures/informe/a3_anios.png)
 
 **Figura A.3.** Qué parte de su ingreso pagó cada grupo en impuestos, año por año, 2004-2025.
 
@@ -965,7 +965,7 @@ partido en tres, separada por impuesto, con la versión A.
 
 ### Control del 1% más rico
 
-![Figura A.4](../outputs/figures/informe_v2/a4_control_anios.png)
+![Figura A.4](../outputs/figures/informe/a4_control_anios.png)
 
 **Figura A.4.** El 1% más rico frente al promedio con la versión A y con la medida de control, según
 cuánto ingreso no declara, 2012-2025.
