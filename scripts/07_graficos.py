@@ -522,9 +522,11 @@ def fig_distancia(largo, unidad="canastas", carpeta=None, nombre=None):
 def fig_top1(largo):
     """El 1% más rico: la medida del informe (encuesta completada con las declaraciones juradas,
     11_tramos_decil10.py) y, como control, el 1% armado sólo con las declaraciones juradas
-    (10_top1.py). Ganancias y Bienes Personales salen del mismo dato en las dos; aportes y
-    consumo, en la segunda, de reglas fijas."""
+    (10_top1.py, medida C). Ganancias y Bienes Personales salen del mismo dato en las dos; en la
+    segunda los aportes son los declarados y el consumo, el punto medio entre el que calcula ARCA y
+    el de la encuesta."""
     t = pd.read_csv(TABLES / "top1.csv").set_index("anio")
+    t = t[t.confiable]
     tr = pd.read_csv(TABLES / "tasas_tramos_decil10.csv")
     e = tr[(tr.variante == "principal") & (tr.grupo == 99)].set_index("anio")
     anio = int(e.index.max())
@@ -532,10 +534,10 @@ def fig_top1(largo):
     v = v.set_index("decil").tasa * 100
     r, s = t.loc[anio], e.loc[anio]
     enc = [s.ganancias, s.bienes_personales, s.aportes + s.contrib_trabajador + s.monotributo, s.indirectos]
-    dj = [r.ganancias, r.bienes_personales, r.aportes_contrib, r.consumo_central]
+    dj = [r.ganancias, r.bienes_personales, r.aportes_contrib, r.consumo]
     partes = [("Ganancias", "#2a78d6", "las dos: dato"), ("Bienes Personales", "#eb6834", "las dos: dato"),
-              ("Aportes y contribuciones", "#1baf7a", "DDJJ: supone la mitad\ndel ingreso es sueldo"),
-              ("Impuestos al consumo", "#9a998f", "DDJJ: supone que gasta\ncomo el 5% más rico")]
+              ("Aportes y contribuciones", "#1baf7a", "DDJJ: aportes declarados"),
+              ("Impuestos al consumo", "#9a998f", "DDJJ: consumo estimado")]
     fig, (ax, ax2) = plt.subplots(1, 2, figsize=(13.5, 5.8), gridspec_kw={"width_ratios": [1, 1.1]})
     x = [0, 1.3]
     base = [0.0, 0.0]
@@ -550,10 +552,6 @@ def fig_top1(largo):
     tot_e, tot_d = base
     ax.text(x[0], tot_e + 0.6, pct(tot_e), ha="center", fontsize=11, fontweight="bold", color=TINTA)
     ax.text(x[1], tot_d + 0.6, pct(tot_d), ha="center", fontsize=11, fontweight="bold", color=TINTA)
-    ax.scatter([x[1] + 0.42], [r.completo * 100], marker="D", s=46, facecolor=SUP, edgecolor=TINTA, linewidth=1.4,
-               zorder=5)
-    ax.text(x[1] + 0.32, r.completo * 100 - 1.3, f"{pct(r.completo * 100)}: + mitad de las empresas\ny renta de la "
-            "cartera externa", fontsize=7.8, color=TINTA2, va="top")
     for dec, nombre, color in [(1, "Decil 1", "#e34948"), (10, "Decil 10", "#7fb3ea")]:
         ax.axhline(v[dec], color=color, linewidth=1.4, linestyle=(0, (4, 3)), zorder=1)
         ax.text(-0.5, v[dec] + 0.3, f"{nombre}: {pct(v[dec])}", fontsize=8, color=color, va="bottom",
@@ -576,11 +574,11 @@ def fig_top1(largo):
             (s_[s_.decil == 1].set_index("anio").tasa * 100, "Decil 1", "#e34948", "-", 2.2),
             (s_[s_.decil == 10].set_index("anio").tasa * 100, "Decil 10", "#7fb3ea", "-", 2.2),
             (e.total * 100, "1% encuesta", "#0b3d7a", "-", 2.8),
-            (t.completo * 100, "1% DDJJ (control)", "#0b3d7a", (0, (4, 2)), 1.4)]:
+            (t.total * 100, "1% DDJJ (control)", "#0b3d7a", (0, (4, 2)), 1.4)]:
         lineas.append(ax2.plot(y.index, y, color=color, linestyle=estilo, linewidth=lw, label=nombre)[0])
         finales[nombre] = (y.iloc[-1], color)
-    banda = ax2.fill_between(t.index, t.completo_bajo * 100, t.completo_alto * 100, color="#0b3d7a", alpha=0.10,
-                             linewidth=0, label="DDJJ: rango según cuánto consuma")
+    banda = ax2.fill_between(t.index, t.total_oculta25 * 100, t.total * 100, color="#0b3d7a", alpha=0.10,
+                             linewidth=0, label="DDJJ: si no declara hasta el 25%\nde su ingreso no salarial")
     pos, ult = {}, -1e9
     for nombre, (val, color) in sorted(finales.items(), key=lambda kv: kv[1][0]):
         pos[nombre] = max(val, ult + 1.1)
@@ -589,7 +587,7 @@ def fig_top1(largo):
         ax2.text(ANIO_FIN + 0.4, yv, f"{nombre}  {pct(finales[nombre][0])}", fontsize=8.5, va="center",
                  color=finales[nombre][1], fontweight="bold")
     todos = pd.concat([pd.Series(l.get_ydata()) for l in lineas])
-    bajo, alto = min(todos.min(), t.completo_bajo.min() * 100), max(todos.max(), t.completo_alto.max() * 100)
+    bajo, alto = min(todos.min(), t.total_oculta25.min() * 100), max(todos.max(), t.total.max() * 100)
     ax2.set_ylim(bajo - (alto - bajo) * 0.3, alto + 1)
     ax2.legend(handles=[lineas[2], lineas[3], banda, lineas[0], lineas[1]], loc="lower left", ncol=2, fontsize=8,
                frameon=True, facecolor=SUP, edgecolor=GRILLA, framealpha=1)
@@ -610,18 +608,17 @@ def fig_top1(largo):
     fig.text(0.01, 1.01, "Medida del informe: el 1% de la encuesta, completado con el ingreso y la Ganancias que declara "
              f"al fisco. Control: el 1% armado sólo con las declaraciones juradas. Ganancias y Bienes\nPersonales "
              f"salen del mismo dato y casi coinciden ({pct(enc[0] * 100)} y {pct(dj[0] * 100)}; {pct(enc[1] * 100)} y "
-             f"{pct(dj[1] * 100)}). Las declaraciones no dicen cuánto es sueldo ni cuánto gasta cada uno: esa parte se "
-             "supone, y es la que lleva\nal control más arriba. Por eso la medida es la de la encuesta.",
+             f"{pct(dj[1] * 100)}). El control usa los aportes declarados y estima el consumo; sólo existe para el 1% "
+             "y no se puede combinar con\nlos demás grupos. Por eso la medida es la de la encuesta.",
              fontsize=9.6, color=TINTA2, va="top")
     fig.subplots_adjust(wspace=0.28, top=0.80, right=0.88)
     fig.text(0.01, -0.06, "Fuente: elaboración propia con EPH, ENGHo (INDEC), recaudación DNIAF y anuarios de estadísticas "
              "tributarias de ARCA. Encuesta: tramo superior del decil 10 por ingreso per cápita familiar, medida principal "
              "(scripts/11_tramos_decil10.py).\nDeclaraciones juradas (DDJJ): el 1% de la población con mayores ingresos "
-             "declarados en Ganancias, por declarante. Supuestos: la mitad de su ingreso es sueldo (aportes con tope y "
-             "contribuciones);\ngasta entre la mitad y el total del cociente gasto/ingreso del 5% más rico de la ENGHo (centro: "
-             "tres cuartos); Bienes Personales según su patrimonio declarado. Rombo y línea punteada: además, la mitad de "
-             "las empresas\n(utilidad = impuesto de sociedades / 30%) y 4% anual sobre la cartera externa privada (INDEC), "
-             "sin impuesto, como el ingreso completado (B). Ver scripts/10_top1.py.", fontsize=7.3, color=MUDO,
+             "declarados en Ganancias, por declarante, desde 2012. Aportes: los que declara; contribuciones: sobre la parte "
+             "de su 4ta categoría que corresponde a empleados;\nconsumo: punto medio entre el que calcula ARCA y el de la "
+             "encuesta; Bienes Personales según su patrimonio declarado. Banda: si no declara hasta el 25% de su ingreso "
+             "no salarial.\nVer scripts/10_top1.py.", fontsize=7.3, color=MUDO,
              ha="left", va="top")
     guardar(fig, "fig7_top1")
 

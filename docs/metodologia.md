@@ -142,7 +142,7 @@ Pasos:
      Antes toda la Ganancias faltante se sumaba a los de arriba sin su ingreso: el 1% de la
      encuesta quedaba con más Ganancias sobre su ingreso que el 1% de las declaraciones juradas
      (2016: 20,2% contra 12,4%), lo que es incoherente con un impuesto progresivo. Ahora coinciden
-     (2004: 13,3% y 13,0%; 2024: 12,0% y 11,7%).
+     (2004: 13,3% y 13,0%; 2024: 12,0% y 12,1%).
    - **Piso (`altos_sin_corregir`)**: Ganancias sólo simulada sobre la EPH. Incluye
      Bienes Personales imputado al decil 10; sin él, ver `sin_correcciones`.
    - **Techo (`altos_registros`)**: todo lo recaudado, por habitante, y al ingreso de la
@@ -367,38 +367,63 @@ límites, la media ($442.596) y la población (29.783.755) del cuarto trimestre 
 con el informe "Evolución de la distribución del ingreso (EPH)" del INDEC (cuadro 1). El decil
 10 promedia $1.430.619 por persona en pesos de ese trimestre: es por persona, no por hogar.
 
-## 11. El 1% más rico con declaraciones juradas (control de la figura 7)
+## 11. El 1% más rico con declaraciones juradas (control de la figura 7; medida C del informe)
 
 La medida del 1% del proyecto es la de la encuesta completada (sección 13, figura 8). Esta
 sección es un control: el mismo grupo armado sólo con las declaraciones juradas.
 
 `scripts/10_top1.py`, con las declaraciones juradas de Ganancias por tramo (anuarios de ARCA,
-años fiscales 2002-2024; 2025 extrapolado), como Alvaredo (2010). Grupo: el 1% de la población con mayores
-ingresos declarados (todo el grupo está dentro de las declaraciones). Ingreso, Ganancias y
-patrimonio se acumulan de los tramos más altos hacia abajo, interpolando en el corte.
+años fiscales 2002-2024; 2025 extrapolado), como Alvaredo (2010). Grupo: el 1% de la población con
+mayores ingresos declarados (todo el grupo está dentro de las declaraciones). Todas las columnas se
+acumulan de los tramos más altos hacia abajo, interpolando en el corte. Se informa desde 2012.
 
-**Estimación principal ("completo"): todo lo que se le puede atribuir.** Ingreso = declarado
-al fisco + la mitad de las utilidades de las empresas (impuesto de sociedades / 30%; es dueño
-de la mitad) + renta del 4% sobre la inversión de cartera en el exterior del sector privado
-(INDEC), el mismo supuesto que el panel B de la figura 0 (sección 6). Con 3% sobre cartera y
-depósitos (cota): columna `completo_ext_todo_stock`.
-Impuestos = Ganancias declarada + Bienes Personales según su patrimonio + la mitad de la
-Ganancias de sociedades + aportes y contribuciones (la mitad del ingreso es salario, aportes
-con tope) + impuestos al consumo (entre la mitad y el total del cociente gasto/ingreso del 5%
-más rico de la ENGHo).
+Datos de ARCA (`scripts/aux_anuarios_arca.py`; los cuadros se ubican por su título y sus columnas
+por una identidad contable, porque en los .htm de 2009-2014 los encabezados quedan corridos):
 
-2024: 30,2% (28,7-31,8 según el consumo). Sólo con lo declarado al fisco: 33,0%; sin los
-activos externos: 31,8%. (Hasta el 16/11/2026, con las declaraciones de 2023 extrapoladas,
-daba 30,1%, 35,8% y 33,7%: la Ganancias determinada real del grupo es 11,7% de su ingreso,
-contra 15,8% extrapolado.) 2025 (extrapolado): 28,6% (26,9-30,2); sólo con lo declarado,
-30,2%; sin los activos externos, 30,1%; con 3% sobre cartera y depósitos, 26,6%.
+| Columna | Cuadro | Qué es |
+|---|---|---|
+| `resultado_neto`, `exentos`, `exentos_ventas` | 2.2.2.1.3, 2.2.2.1.9 | Ingreso: resultado neto + exentos − ventas exentas |
+| `impuesto` | 2.2.2.1.11 | Ganancias determinada |
+| `patrimonio_neto` | 2.2.2.1.7 | Reparto de Bienes Personales |
+| `cuarta_bruta`, `cuarta_gastos`, `casos_cuarta` | 2.2.2.1.1, 2.2.2.1.2 | 4ta categoría (trabajo personal: sueldos, jubilaciones, directores, independientes) |
+| `aportes_deducidos`, `casos_aportes_empleado` | 2.2.2.1.4 | Aportes a jubilación, obra social, cajas y autónomos deducidos; cuántos aportan como empleados |
+| `monto_consumido` | 2.2.2.1.8 | Consumo que el sistema de ARCA calcula como saldo de la justificación patrimonial (no lo declara el contribuyente) |
 
-**Por qué es control y no medida.** Ganancias y Bienes Personales coinciden con el 1% de la
-encuesta (2025: 11,7% y 2,3% contra 12,4% y 1,8%). Aportes y consumo no se pueden medir con las
-declaraciones y se suponen: la mitad del ingreso es salario (aportes y contribuciones: 8,6% del
-ingreso) y el gasto es el del 5% más rico de la ENGHo (consumo: 7,6%). La encuesta mide para su
-propio 1% 4,3% y 3,3%. Esos dos supuestos explican casi toda la diferencia entre las dos medidas
-(30,2% contra 21,7%).
+Componentes (2025, % del ingreso):
+
+- **Ganancias** (dato): 12,1%. **Bienes Personales**: recaudación × parte del patrimonio declarado,
+  2,4%.
+- **Aportes personales** (dato): los deducidos, 2,0%.
+- **Contribuciones patronales**: la mitad del 20% sobre los sueldos del grupo, 1,4%. Sueldos = 4ta
+  categoría neta × (quienes aportan como empleados / quienes declaran 4ta categoría): 43% en 2025.
+  Supuesto: los empleados ganan, en promedio, lo mismo que el resto de quienes declaran 4ta.
+- **Impuestos al consumo**: 5,0%. Consumo = punto medio entre el monto consumido que calcula ARCA
+  (35,0% del ingreso; alto: incluye el gasto en el exterior y crece si el patrimonio se declara por
+  debajo de su valor) y el consumo del 1% en la versión A (18,5%; bajo: el 5% más rico de la ENGHo,
+  fijo en pesos). Impuestos por peso: (IVA + Internos + Ingresos Brutos + ½ contribuciones) /
+  consumo privado.
+- **Total**: 22,8%. Sin Ganancias de sociedades ni renta de activos externos, como la versión A.
+
+**Ingreso no declarado.** Tres escenarios: el grupo no declara el 5%, el 10% o el 25% de su ingreso
+no salarial (todo lo que no es sueldo: el 85% de lo que declara; el sueldo de un empleado lo
+informa también el empleador). Ese ingreso se suma al denominador sin impuesto: 21,8%, 20,8% y
+17,8% en 2025. El 25% es del orden de lo que Alstadsæter, Johannesen y Zucman (2019) encuentran
+para el 0,01% más rico, y funciona como techo para el 1%.
+
+**Desde 2012.** Antes, pocos empleados descontaban sus aportes en la declaración jurada (dentro del
+1%, entre el 3% y el 25% de quienes declaraban 4ta categoría, contra 39% a 61% desde 2012).
+
+**Por qué es control y no medida.** Sólo existe para el 1% (las declaraciones cubren a unas 800.000
+personas) y no se puede combinar con los demás grupos: ordena declaraciones individuales y no
+personas por ingreso per cápita del hogar, y trae su propio ingreso y sus propios impuestos. Ganancias
+coincide con el 1% de la encuesta (2025: 12,1% contra 12,4%). La diferencia con la versión A (22,8%
+contra 21,7%) está casi toda en el consumo.
+
+**Versión anterior (hasta el 26/11/2026).** Suponía que la mitad del ingreso del grupo era sueldo
+(aportes con tope y contribuciones: 8,6% del ingreso) y que gastaba como el 5% más rico de la ENGHo
+(consumo: 7,6%), y sumaba la mitad de las empresas y la renta de la cartera externa. Daba 28,6% en
+2025. Además, los ingresos exentos faltaban en los años fiscales 2006 y 2009-2013, y la medida bajó
+entre 2 y 3 puntos en esos años al completarlos.
 
 ## 12. Impuesto al cheque y combustibles
 
@@ -434,9 +459,7 @@ ingreso (encuesta más el ingreso declarado al fisco que la encuesta no capta) y
 de los impuestos). El 1% de la encuesta, completado, tiene 24,5 canastas por adulto equivalente
 (`canastas_por_adulto_eq` en `tasas_tramos_decil10.csv`); el de las declaraciones juradas, 35 por
 declarante. Con la renta de activos externos, el 1% de la encuesta
-paga 20,1%. El 1% de la sección 11 da 28,6% porque supone que la mitad de su ingreso es salario y
-que gasta como el 5% más rico de la ENGHo; sumar la mitad del impuesto de sociedades (y de las
-utilidades al ingreso) casi no cambia su tasa.
+paga 20,1%. El 1% de la sección 11 (sólo declaraciones juradas) da 22,8%.
 
 (Hasta la corrección del 16/11/2026 este tramo daba 29,0%: la Ganancias faltante se le sumaba sin
 su ingreso.)

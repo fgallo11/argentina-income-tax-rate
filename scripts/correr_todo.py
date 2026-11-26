@@ -29,8 +29,8 @@ PASOS = [
     ("05", "05_incidencia.py"),                 # tasas por decil, todas las variantes
     ("06", "06_validacion.py"),
     ("08", "08_poblacion_fija.py"),
-    ("10", "10_top1.py"),                       # el 1% más rico
     ("11", "11_tramos_decil10.py"),             # el decil 10 partido en P90-95, P95-99 y 1%
+    ("10", "10_top1.py"),                       # el 1% con declaraciones juradas (control; usa 11)
     ("07", "07_graficos.py"),                   # todas las figuras
     ("12", "12_informe_graficos.py"),           # gráficos de la versión anterior del informe
     ("13", "13_brecha_recaudacion.py"),         # cuánta plata: proporcional y progresivo

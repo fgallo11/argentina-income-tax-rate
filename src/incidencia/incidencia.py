@@ -220,6 +220,8 @@ def incidencia_trimestre(q: pd.DataFrame, anio: int, engho: pd.DataFrame, rec: p
     tasas["indirectos"] = tasas[INDIRECTOS].sum(axis=1)
     tasas["ingreso_rel"] = np.append(rel, 1.0)
     tasas["gasto_sobre_ingreso_declarado"] = np.append((consumo / q.ipcf).values, consumo.sum() / q.ipcf.sum())
+    # consumo sobre el mismo ingreso con que se calculan las tasas (para la medida de control del 1%)
+    tasas["consumo_sobre_ingreso"] = np.append((consumo / den).values, consumo.sum() / den.sum())
     tasas["ajuste_recursos"] = np.append((base / q.ipcf - 1).values, base.sum() / q.ipcf.sum() - 1)
     # totales mensuales del grupo (pesos corrientes, población EPH): para participaciones
     tasas["ingreso_total"] = np.append(den.values, den.sum())

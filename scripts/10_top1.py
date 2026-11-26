@@ -1,47 +1,53 @@
 #!/usr/bin/env python
-"""Tasa efectiva del 1% más rico a partir de las declaraciones juradas de Ganancias.
+"""Medida de control del 1% más rico: el grupo armado sólo con las declaraciones juradas de Ganancias.
 
-La EPH casi no capta a los más ricos. Este script estima su ingreso y su carga con los
-anuarios de ARCA (declaraciones juradas de personas humanas por tramo de ingresos
-gravados; scripts/aux_anuarios_arca.py), siguiendo a Alvaredo (2010).
+La EPH casi no capta a los más ricos. La medida del informe completa la encuesta con las
+declaraciones juradas (11_tramos_decil10.py, versión A). Este script arma el 1% con los
+anuarios de ARCA solos (declaraciones juradas de personas humanas por tramo de ingresos
+gravados; scripts/aux_anuarios_arca.py), siguiendo a Alvaredo (2010). Es la "medida C" del
+informe: un control, porque sólo existe para el 1% y no se puede combinar con los demás grupos.
 
 Definiciones (supuestos marcados con *):
   Grupo        las N = 1% de la población total de mayores ingresos declarados al fisco*.
-               Con N menor que la cantidad de declarantes, el grupo entero está dentro de
-               las declaraciones. (Con adultos como unidad el grupo sería algo más chico.)
-  Corte        los tramos se acumulan de mayor a menor; en el tramo donde se llega a N se
-               interpola linealmente (casos, ingreso, impuesto y patrimonio).
+               Los tramos se acumulan de mayor a menor; en el tramo donde se llega a N se
+               interpola linealmente.
   Ingreso      resultado neto (antes de deducciones personales) + ingresos exentos o no
                alcanzados, sin la venta de bienes o moneda extranjera; más la mitad de las
-               contribuciones patronales sobre su parte salarial (como en los deciles).
-  Ganancias    impuesto determinado del grupo.
+               contribuciones patronales sobre sus sueldos (como en los deciles).
+  Ganancias    impuesto determinado del grupo (dato).
   B. Pers.     recaudación de Bienes Personales × participación del grupo en el patrimonio
                neto declarado en Ganancias*.
-  Aportes      PARTE_SALARIAL* del ingreso es salario: aportes personales (14%, con tope)
-               y la mitad de las contribuciones patronales (sin tope).
-  Consumo      ingreso × gasto/ingreso del veintil más rico de la ENGHo (cota alta*; el
-               1% gasta una proporción menor) y la mitad (cota baja*). Impuestos por peso de
-               consumo: (IVA + Internos + Ingresos Brutos + ½ contribuciones) / consumo privado.
-  Sociedades   sensibilidad: el grupo es dueño de PARTE_SOCIEDADES* de las empresas. Se le
-               atribuyen esa parte de la Ganancias de sociedades y de las utilidades antes de
-               impuesto que la generaron (impuesto / TASA_SOCIEDADES*), como hacen las cuentas
-               nacionales distributivas: las ganancias retenidas en las empresas son ingreso de
-               sus dueños. No hay datos de tenencia accionaria.
-  Activos ext. renta de RENTA_EXTERIOR* sobre la inversión de cartera en el exterior del sector
-               privado no financiero (acciones y bonos, PII del INDEC), toda atribuida al grupo y
-               sin impuesto: el mismo supuesto que el panel B de la figura 0 (variante
-               ajuste_cn_rentas_cartera_ext de incidencia.py). Moneda y depósitos (billetes
-               fuera del sistema, que no rinden) quedan afuera; la versión con todo el stock al
-               RENTA_EXTERIOR_TODO* queda como cota (columna completo_ext_todo_stock).
-Estimación principal ("completo"): ingreso declarado + utilidades de las empresas + renta de
-activos externos, y todos los impuestos atribuibles; el rango refleja el consumo. Aun así el
-ingreso declarado al fisco sigue subdeclarado (rentas internas no declaradas): la tasa es
-un techo.
+  Aportes      los aportes personales que el grupo descuenta en su declaración: jubilación,
+               obra social, cajas provinciales y complementarias y autónomos (dato).
+  Contrib.     la mitad del 20% sobre los sueldos del grupo. Sueldos = 4ta categoría neta ×
+               (quienes descuentan aportes como empleados / quienes declaran 4ta categoría)*:
+               se supone que los empleados del grupo ganan lo mismo, en promedio, que el resto
+               de quienes declaran trabajo personal (jubilados, directores, independientes).
+  Consumo      ninguna fuente lo mide. Dos aproximaciones que fallan en sentidos opuestos:
+               - el "monto consumido" que ARCA calcula como saldo de la justificación
+                 patrimonial (no lo declara el contribuyente; incluye el gasto en el exterior
+                 y crece si el patrimonio se declara por debajo de su valor): alta;
+               - el consumo del 1% en la versión A (lo mismo en pesos que el 5% más rico de la
+                 ENGHo; columna consumo_sobre_ingreso de tasas_tramos_decil10.csv): baja.
+               Se usa el punto medio*, año por año. Impuestos por peso de consumo:
+               (IVA + Internos + Ingresos Brutos + ½ contribuciones) / consumo privado.
+  Ingreso no declarado
+               escenarios: el grupo no declara el 5%, el 10% o el 25% de su ingreso no
+               salarial (todo lo que no es sueldo). Ese ingreso se suma al denominador y no
+               paga impuestos. El 25% es del orden de lo que Alstadsæter, Johannesen y Zucman
+               (2019) encuentran para el 0,01% más rico: un techo para el 1%.
+Para que sea comparable con la versión A, no incluye Ganancias de sociedades ni la renta de
+activos en el exterior.
+
+Antes de 2012 pocos empleados descontaban sus aportes en la declaración jurada: dentro del 1%,
+entre el 3% y el 25% de quienes declaraban 4ta categoría, contra 39% a 61% desde 2012. La
+medida se informa desde 2012 (columna confiable).
 
 Años sin declaraciones publicadas (hoy, 2025: el último anuario de ARCA, el de 2025, informa el
 año fiscal 2024): se usan las del último año fiscal disponible llevadas al año con la variación
 del ingreso del decil 10 de la EPH (como en 09_ingresos_altos.py).
 
+Requiere outputs/tables/tasas_tramos_decil10.csv (11_tramos_decil10.py).
 Salida: outputs/tables/top1.csv
 """
 import sys
@@ -51,27 +57,24 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-from incidencia.config import ANIO_FIN, PARAMS, PROCESSED, TABLES  # noqa: E402
+from incidencia.config import ANIO_FIN, PROCESSED, TABLES  # noqa: E402
 
 FRACCION = 0.01
-PARTE_SALARIAL = 0.5
-PARTE_SOCIEDADES = 0.5
-TASA_SOCIEDADES = 0.30    # impuesto / utilidad antes de impuesto (alícuota legal 25%-35%)
-RENTA_EXTERIOR = 0.04      # sobre la cartera, como incidencia.py
-RENTA_EXTERIOR_TODO = 0.03 # cota: sobre cartera + moneda y depósitos
-APORTES = 0.14            # jubilación 11% + INSSJP 3%
 CONTRIB = 0.20            # contribución patronal aproximada (Dto. 814/2001 y modif.)
+DESDE_CONFIABLE = 2012    # antes, pocos empleados declaraban sus aportes
+NO_DECLARADO = {"oculta05": 0.05, "oculta10": 0.10, "oculta25": 0.25}
+COLS = ["ingreso", "impuesto", "patrimonio_neto", "cuarta", "aportes_deducidos", "monto_consumido",
+        "casos_cuarta", "casos_aportes_empleado"]
 
 
 def acumular(d: pd.DataFrame, n: float) -> dict:
     """Totales de las n declaraciones de mayores ingresos (interpolación lineal en el corte)."""
     d = d.sort_values("desde", ascending=False)
-    cols = ["ingreso", "impuesto", "patrimonio_neto"]
-    acc = {c: 0.0 for c in cols}
+    acc = {c: 0.0 for c in COLS}
     restante = n
     for _, f in d.iterrows():
         k = min(1.0, restante / f.casos)
-        for c in cols:
+        for c in COLS:
             acc[c] += k * f[c]
         restante -= k * f.casos
         if restante <= 1e-9:
@@ -81,24 +84,18 @@ def acumular(d: pd.DataFrame, n: float) -> dict:
     return acc
 
 
-def gasto_top(engho: pd.DataFrame, anio: int) -> float:
-    ed = 2004 if anio < 2009 else (2012 if anio < 2016 else 2017)
-    return float(engho[(engho.edicion == ed) & (engho.grupo == engho.grupo.max())].gasto_sobre_ingreso.iloc[0])
-
-
 def main() -> None:
     ddjj = pd.read_csv(PROCESSED / "ddjj_ganancias_tramos.csv")
     total = ddjj[ddjj.es_total].set_index("anio_fiscal")
     tramos = ddjj[~ddjj.es_total].copy()
     tramos["ingreso"] = tramos.resultado_neto + (tramos.exentos.fillna(0) - tramos.exentos_ventas.fillna(0))
+    tramos["cuarta"] = tramos.cuarta_bruta - tramos.cuarta_gastos
     rec = pd.read_csv(PROCESSED / "recaudacion_macro.csv", index_col=0)
-    engho = pd.read_csv(PROCESSED / "engho_grupos.csv")
-    lmi = pd.read_csv(PARAMS / "lmi.csv")
-    lmi["anio"] = lmi.mes.str[:4].astype(int)
-    tope = lmi.groupby("anio").tope_jubilacion.mean() * 13
     q = pd.read_csv(PROCESSED / "eph_trimestral_decil.csv")
     d10 = q[q.decil == 10].groupby("anio").mean(numeric_only=True)
     crec = (d10.ipcf / d10.personas)
+    tr = pd.read_csv(TABLES / "tasas_tramos_decil10.csv")
+    cons_a = tr[(tr.variante == "principal") & (tr.grupo == 99)].set_index("anio").consumo_sobre_ingreso
 
     filas = []
     for anio in range(2004, ANIO_FIN + 1):
@@ -108,50 +105,41 @@ def main() -> None:
         a = acumular(tramos[tramos.anio_fiscal == fiscal], n)
         r = rec.loc[anio]
         ing = a["ingreso"] * esc
-        salario = PARTE_SALARIAL * ing
-        ing_total = ing + 0.5 * CONTRIB * salario
+        parte_emp = a["casos_aportes_empleado"] / a["casos_cuarta"]
+        sueldos = a["cuarta"] * esc * parte_emp
+        contrib = 0.5 * CONTRIB * sueldos
+        ing_total = ing + contrib
         ganancias = a["impuesto"] * esc
         bp = r.bienes_personales * 1e6 * a["patrimonio_neto"] / total.patrimonio_neto[fiscal]
-        aportes = APORTES * np.minimum(salario / n, tope[anio]) * n + 0.5 * CONTRIB * salario
+        aportes = a["aportes_deducidos"] * esc
         por_peso = (r.iva + r.internos_modelados + r.ingresos_brutos + 0.5 * r.ss_empleadores) / r.consumo_privado
-        c_alto = gasto_top(engho, anio)
-        consumo_alto = por_peso * c_alto * ing
-        imp_soc = PARTE_SOCIEDADES * r.ganancias_sociedades * 1e6
-        util_soc = imp_soc / TASA_SOCIEDADES
-        cn = pd.read_csv(PROCESSED / "cn_ingresos.csv", index_col=0).loc[anio]
-        renta_ext = RENTA_EXTERIOR * cn.pii_cartera_musd * cn.tc * 1e6
-        renta_ext_todo = RENTA_EXTERIOR_TODO * (cn.pii_cartera_musd + cn.pii_mondep_musd) * cn.tc * 1e6
-        base = ganancias + bp + aportes
-        centro = base + 0.75 * consumo_alto
-        filas.append({
-            "anio": anio, "anio_fiscal_ddjj": fiscal, "personas": n,
+        c_arca = a["monto_consumido"] * esc / ing_total
+        c_enc = float(cons_a[anio])
+        c_usado = (c_arca + c_enc) / 2
+        consumo = por_peso * c_usado * ing_total
+        imp = ganancias + bp + aportes + contrib + consumo
+        no_salarial = ing - sueldos
+        fila = {
+            "anio": anio, "anio_fiscal_ddjj": fiscal, "personas": n, "confiable": anio >= DESDE_CONFIABLE,
             "umbral_anual": a["umbral"] * esc, "ingreso_medio_anual": ing_total / n,
             "ganancias": ganancias / ing_total, "bienes_personales": bp / ing_total,
-            "aportes_contrib": aportes / ing_total,
-            "consumo_cota_alta": consumo_alto / ing_total, "consumo_cota_baja": 0.5 * consumo_alto / ing_total,
-            "total_bajo": (base + 0.5 * consumo_alto) / ing_total,
-            "total_alto": (base + consumo_alto) / ing_total,
-            "total_central": centro / ing_total,
-            "con_sociedades": (centro + imp_soc) / (ing_total + util_soc),
-            "con_sociedades_y_activos_ext": (centro + imp_soc) / (ing_total + util_soc + renta_ext),
-            # estimación completa (principal): todo el ingreso y todos los impuestos que se pueden
-            # atribuir; el rango es el del consumo
-            "completo": (centro + imp_soc) / (ing_total + util_soc + renta_ext),
-            "completo_bajo": (base + 0.5 * consumo_alto + imp_soc) / (ing_total + util_soc + renta_ext),
-            "completo_alto": (base + consumo_alto + imp_soc) / (ing_total + util_soc + renta_ext),
-            "completo_ext_todo_stock": (centro + imp_soc) / (ing_total + util_soc + renta_ext_todo),
-            # composición comparable con el 1% de la encuesta (figura 7)
-            "consumo_central": 0.75 * consumo_alto / ing_total,
-            "utilidades_sobre_ingreso": util_soc / ing_total, "renta_ext_sobre_ingreso": renta_ext / ing_total,
-            "gasto_sobre_ingreso_usado": c_alto,
-        })
+            "aportes_personales": aportes / ing_total, "contribuciones": contrib / ing_total,
+            "aportes_contrib": (aportes + contrib) / ing_total, "consumo": consumo / ing_total,
+            "parte_empleados": parte_emp, "no_salarial_sobre_ingreso": no_salarial / ing_total,
+            "consumo_arca": c_arca, "consumo_encuesta": c_enc, "consumo_usado": c_usado,
+            "impuesto_por_peso_consumido": por_peso,
+            "total": imp / ing_total,
+        }
+        for k, x in NO_DECLARADO.items():
+            # no declara la fracción x de su ingreso no salarial: lo declarado es (1 - x) del real
+            fila[f"total_{k}"] = imp / (ing_total + no_salarial * x / (1 - x))
+        filas.append(fila)
     out = pd.DataFrame(filas)
     out.to_csv(TABLES / "top1.csv", index=False)
-    v = out.set_index("anio")
-    print((v[["ganancias", "bienes_personales", "aportes_contrib", "consumo_cota_baja", "consumo_cota_alta",
-              "total_bajo", "total_alto", "total_central", "con_sociedades", "completo_bajo", "completo",
-              "completo_alto",
-              "utilidades_sobre_ingreso", "renta_ext_sobre_ingreso"]] * 100).round(1).to_string())
+    v = out[out.confiable].set_index("anio")
+    print((v[["ganancias", "bienes_personales", "aportes_personales", "contribuciones", "consumo", "total",
+              "total_oculta05", "total_oculta10", "total_oculta25", "consumo_arca", "consumo_encuesta",
+              "parte_empleados"]] * 100).round(1).to_string())
     print("OK ->", TABLES / "top1.csv")
 
 

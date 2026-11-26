@@ -86,7 +86,8 @@ if __name__ == "__main__":
     t["nombre"] = t.grupo.map(NOMBRES)
     cols = ["variante", "anio", "grupo", "nombre"] + IMPUESTOS + ["total", "directos", "indirectos", "part_ingreso",
                                                                    "part_impuestos", "canastas_por_persona", "canastas_por_adulto_eq",
-                                                                   "gasto_sobre_ingreso_declarado", "trimestres"]
+                                                                   "gasto_sobre_ingreso_declarado", "consumo_sobre_ingreso",
+                                                                   "trimestres"]
     t[cols].to_csv(TABLES / "tasas_tramos_decil10.csv", index=False)
 
     filas = []

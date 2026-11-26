@@ -138,7 +138,7 @@ flowchart LR
 | `aux_cuentas_nacionales` | salida de `04`, recaudación, CGI, PII, dólar | `cn_ingresos.csv` |
 | `05_incidencia` | `04`, `02`, `03`, `09`, `aux_cuentas_nacionales` | tasas por decil, todas las variantes |
 | `11_tramos_decil10` | lo mismo, con los tramos | tasas del decil 10 partido |
-| `10_top1` | declaraciones por tramo, `02`, `03`, `04`, `aux_cuentas_nacionales` | `top1.csv` |
+| `10_top1` | declaraciones por tramo, `03`, `04`, `11` (consumo del 1% en la versión A) | `top1.csv` (medida de control del 1%) |
 | `08_poblacion_fija` | EPH de 2004 y 2017, `params/`, `02`, `03`, `09` | `serie_poblacion_fija.csv` |
 | `06_validacion` | `04`, `02`, `03`, `09` | tablas de validación |
 | `07_graficos` | tablas, `aux_deflactor` | `outputs/figures/` |

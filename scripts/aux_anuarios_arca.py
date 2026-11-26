@@ -13,7 +13,10 @@ pesos corrientes:
   cuarta_bruta y cuarta_gastos (4ta categoría: trabajo personal, incluye jubilaciones,
   honorarios y directores), aportes_deducidos (aportes obligatorios a jubilación, obra
   social, cajas provinciales y complementarias y autónomos, deducidos como deducciones
-  generales) y monto_consumido (el consumo que surge de la justificación patrimonial).
+  generales) y monto_consumido (el consumo que el sistema de ARCA calcula como saldo de la
+  justificación patrimonial: no lo declara el contribuyente). Además, casos_cuarta (cuántos
+  declaran 4ta categoría) y casos_aportes_empleado (cuántos descuentan aportes jubilatorios
+  como empleados), para estimar qué parte de la 4ta categoría es sueldo.
 Cada cuadro se ubica por su título, no por su número, y se controla contra su fila TOTAL.
 En los cuadros de composición las columnas se ubican por una identidad contable (las
 categorías suman el subtotal; los conceptos suman el total), porque en los .htm de
@@ -55,6 +58,7 @@ def rol(t: str) -> str | None:
 
 CATEGORIA = r"^\s*[1-4](RA|DA|TA)\.?\s*CATEGOR"
 CUARTA = r"^\s*4TA\.?\s*CATEGOR"
+EMPLEADOS = r"^(APORTES OBLIGAT\. A )?FONDOS DE JUBILACIONES"
 APORTES = (r"OBRA SOCIAL|^(APORTES OBLIGAT\. A )?FONDOS DE JUBILACIONES|CAJAS PROVINCIALES|"
            r"CAJAS COMPLEMENTARIAS|FONDOS COMPENSADORES|TRABAJADORES AUT")
 
@@ -89,12 +93,16 @@ def id_exentos(tot):
 def composicion(hallados: dict, n_tramos: int) -> pd.DataFrame:
     """4ta categoría bruta y gastos, aportes deducidos y monto consumido, por tramo (fila 0 = TOTAL)."""
     out = {}
-    v, _, _ = importes(leer(hallados["categorias"]), id_categorias)
+    v, c, _, _ = importes(leer(hallados["categorias"]), id_categorias, con_casos=True)
     out["cuarta_bruta"] = v[buscar(v, CUARTA)]
+    out["casos_cuarta"] = c[buscar(v, CUARTA)]
     v, _, _ = importes(leer(hallados["gastos_categorias"]), id_categorias)
     out["cuarta_gastos"] = v[buscar(v, CUARTA)]
-    v, _, _ = importes(leer(hallados["deducciones"]), id_deducciones)
+    v, c, _, _ = importes(leer(hallados["deducciones"]), id_deducciones, con_casos=True)
     out["aportes_deducidos"] = [sum(x) for x in zip(*(v[n] for n in buscar(v, APORTES, True)))]
+    # quienes descuentan aportes jubilatorios como empleados (los autónomos y las cajas
+    # profesionales van en otros renglones; los jubilados no aportan)
+    out["casos_aportes_empleado"] = c[buscar(v, EMPLEADOS)]
     v, _, _ = importes(leer(hallados["justificacion"]), id_justificacion)
     out["monto_consumido"] = v[buscar(v, r"MONTO CONSUMIDO")]
     for k, x in out.items():
@@ -191,7 +199,8 @@ if __name__ == "__main__":
     todo = pd.concat([extraer(a) for a in range(2003, 2026)], ignore_index=True)
     # control: la suma de tramos reproduce la fila TOTAL
     cols = ["casos", "gnsi", "impuesto", "resultado_neto", "patrimonio_neto",
-            "cuarta_bruta", "cuarta_gastos", "aportes_deducidos", "monto_consumido"]
+            "cuarta_bruta", "cuarta_gastos", "aportes_deducidos", "monto_consumido",
+            "casos_cuarta", "casos_aportes_empleado"]
     s = todo[~todo.es_total].groupby("anio_fiscal")[cols].sum()
     tot = todo[todo.es_total].set_index("anio_fiscal")[cols]
     dif = (s / tot - 1).abs().max()

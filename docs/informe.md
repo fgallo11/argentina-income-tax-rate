@@ -15,7 +15,8 @@ ganan, y la 4 parte el decil 10 y explica cómo se completa el ingreso que las e
 Con ese grupo separado, la sección 5 vuelve a mirar la evolución en el tiempo, la 6 compara el
 sistema con uno proporcional y uno progresivo, y la 7 resume la distancia entre los de arriba y
 los de abajo. La sección 8 prueba cada resultado con otros supuestos, la 9 resume las limitaciones
-y la 10 presenta las conclusiones. El anexo tiene la figura de cada año.
+y la 10 presenta las conclusiones. El anexo tiene la figura de cada año y el control del 1% con las
+declaraciones juradas.
 
 ## 1. Lo que muestran otros estudios
 
@@ -303,7 +304,7 @@ siguiente:
 
 El resultado se puede verificar: con esta corrección, la Ganancias que paga el 1% de la encuesta,
 como parte de su ingreso, coincide con la que surge de las declaraciones juradas del 1% de mayores
-ingresos (12,0% contra 11,7% en 2024). Para 2025 todavía no hay declaraciones publicadas y se usan
+ingresos (12,0% contra 12,1% en 2024; sección 4). Para 2025 todavía no hay declaraciones publicadas y se usan
 las de 2024, actualizadas con la variación del ingreso del decil 10 de la encuesta.
 
 Partir el decil 10 cambia también un cálculo. En la figura 2 el consumo del decil 10 sale del
@@ -349,7 +350,7 @@ una se apoya en una fuente distinta:
 | Qué se suma | De dónde sale | Qué es dato y qué es supuesto |
 |---|---|---|
 | Sueldos e ingreso de cuentapropistas que faltan en la encuesta | Cuenta de generación del ingreso de las Cuentas Nacionales (INDEC), que mide el total del país | El faltante total es un dato. Repartirlo en proporción a lo que cada persona ya declara es un supuesto |
-| Rentas del capital (alquileres, intereses, utilidades) | Las rentas declaradas en la encuesta se multiplican por 7. Las encuestas latinoamericanas captan entre un quinto y un décimo de esas rentas (De Rosa, Flores y Morgan, 2024) | Supuesto: el INDEC no publica el total de rentas de los hogares |
+| Rentas del capital (alquileres, intereses, utilidades) | Las rentas declaradas en la encuesta se multiplican por 7. En las encuestas de América Latina el ingreso del capital es el que peor se capta: hay que multiplicarlo por 5 a 10 en la mayoría de los países para llegar a las Cuentas Nacionales (De Rosa, Flores y Morgan, 2024). Para Argentina no pueden medirlo y usan el promedio de la región | Supuesto: el INDEC no publica el total de rentas de los hogares |
 | Renta de los activos financieros privados en el exterior | 4% anual sobre las acciones y bonos que el sector privado tiene afuera, según la Posición de inversión internacional del INDEC, atribuido al 1% más rico | Supuesto: que esa cartera es de la cima y que su renta no se declara |
 
 La tercera parte necesita una justificación propia. De los US$378.000 millones que el sector privado
@@ -376,39 +377,122 @@ del 5% de lo que el INDEC estima que hay afuera, así que la atribución de la c
 puede verificar persona por persona. Y la Posición de inversión internacional incluye también a
 empresas, no sólo a hogares.
 
+### La medida de control: el 1% con lo que declara a ARCA
+
+Hay una tercera forma de medir la tasa del 1%, que no usa la encuesta: armar el grupo sólo con las
+declaraciones juradas de Ganancias. Los anuarios de ARCA informan, por tramo de ingreso, el ingreso
+y el impuesto declarados. También informan qué parte del ingreso es trabajo personal (4ta
+categoría), cuántos contribuyentes descuentan aportes jubilatorios como empleados y cuánto aportan.
+Con esos datos se arma la **medida de control (C)**. El grupo son las 459.000 declaraciones de mayor
+ingreso, el 1% de la población.
+
+| Componente | Cómo se obtiene | % del ingreso, 2025 |
+|---|---|---|
+| Ganancias | Impuesto determinado que declara el grupo | 12,1 |
+| Bienes Personales | Recaudación, repartida según la parte del patrimonio declarado que tiene el grupo | 2,4 |
+| Aportes personales | Aportes a jubilación, obra social, cajas profesionales y autónomos que el grupo descuenta en su declaración | 2,0 |
+| Contribuciones patronales | La mitad del 20% sobre la parte del trabajo personal que corresponde a empleados. En 2024, el 43% de quienes declaran 4ta categoría en el grupo descuenta aportes como empleado; el resto son jubilados, directores e independientes | 1,4 |
+| Impuestos al consumo | Consumo estimado (26,7% del ingreso, ver abajo) por los impuestos que se pagan por cada peso consumido | 5,0 |
+| **Total** | | **22,8** |
+
+Para que sea comparable con la versión A, la medida de control no incluye Ganancias de sociedades
+ni la renta de activos en el exterior.
+
+El consumo del 1% no lo mide ninguna fuente. Hay dos aproximaciones, y cada una falla en una
+dirección:
+
+- La versión A supone que el 1% gasta en pesos lo mismo que el 5% más rico de la ENGHo. Con eso
+  gasta el 18,5% de su ingreso. Es probablemente bajo: quien gana más gasta más.
+- ARCA calcula un "monto consumido" para cada contribuyente. No lo declara el contribuyente: el
+  sistema de ARCA lo obtiene como saldo de lo que sí declara, es decir, lo que entra en el año menos
+  lo que aumenta su patrimonio y los impuestos que paga. Para el 1% da el 35,0% de su ingreso. Es
+  probablemente alto: incluye el gasto en el exterior, que no paga IVA ni Ingresos Brutos en el país,
+  y crece cuando el patrimonio se declara por debajo de su valor.
+
+La medida de control usa el punto medio entre las dos, calculado año por año: el 26,7% del ingreso
+en 2025.
+
+| Medida | 1% más rico, 2025 | Qué sale de datos | Qué se supone | Uso en el informe |
+|---|---|---|---|---|
+| A. Encuesta completada con declaraciones juradas | 21,7% | Ingreso de la encuesta, ingreso y Ganancias declarados a ARCA, recaudación | El consumo por encima del percentil 95 | Principal |
+| B. A más el ingreso estimado | 18,5% | Lo mismo que A y el total de sueldos de las Cuentas Nacionales | Rentas ×7, reparto del faltante, renta de la cartera externa | Cota inferior |
+| C. Declaraciones juradas | 22,8% (21,8%, 20,8% y 17,8% si no declara el 5%, el 10% o el 25% de su ingreso no salarial) | Ingreso, Ganancias, patrimonio, aportes y cantidad de empleados declarados a ARCA | El consumo, que no se mide; qué parte del trabajo personal es sueldo; el impuesto por peso consumido | Control para el 1% |
+
+Las tres medidas coinciden en Ganancias, que es un dato (12,4% del ingreso en la versión A y 12,1%
+en la medida de control), y en 2025 las tres dan al 1% una tasa menor que el promedio (23,6%). La
+medida de control queda 1,1 puntos por encima de la versión A si el 1% declara todo su ingreso.
+
+La medida de control sólo registra el ingreso que se declara al fisco, y hay evidencia de que la
+cima declara menos de lo que gana. En el sinceramiento fiscal de 2016 (Ley 27.260) se exteriorizaron
+US$116.800 millones en bienes que no estaban declarados, el 80% en el exterior. En Noruega, Suecia y
+Dinamarca, con listas filtradas de bancos offshore, el 0,01% más rico evadía alrededor de un cuarto
+de sus impuestos, contra un 3% del promedio de la población (Alstadsæter, Johannesen y Zucman, 2019).
+No hay una estimación de cuánto ingreso no declara el 1% en Argentina.
+
+Por eso la medida de control se informa siempre con tres escenarios: que el 1% no declare el 5%, el
+10% o el 25% de su **ingreso no salarial**. Es el ingreso que se puede ocultar. Del sueldo de un
+empleado informan otros: el empleador lo declara todos los meses y retiene Ganancias y aportes antes
+de pagarlo, y para ocultarlo haría falta que el empleador también lo oculte. Los alquileres, los
+intereses, los dividendos, las ganancias de un negocio o los honorarios dependen en gran parte de
+lo que declara el propio contribuyente. Los dos primeros escenarios son moderados. El tercero está
+en el orden de lo que Alstadsæter, Johannesen y Zucman encuentran para el 0,01% más rico, y funciona
+como techo para el 1%.
+
+![Figura 10](../outputs/figures/informe_v2/f10_control_1pct.png)
+
+**Figura 10.** Medida de control: tasa del 1% más rico según qué parte de su ingreso no salarial
+declara a ARCA, 2025.
+
+La línea negra muestra la tasa del 1% si declarara a ARCA sólo una parte de su ingreso no salarial.
+El ingreso no salarial es todo lo que no es sueldo: alquileres, intereses, dividendos, ganancias de
+negocios, honorarios, jubilaciones e ingresos exentos. Es el 85% de lo que el 1% declara. La parte no
+declarada se suma a su ingreso y no paga ningún impuesto. Las líneas horizontales son el promedio
+de la población, que es la tasa de un sistema proporcional, las versiones A y B, y la tasa que le
+correspondería al 1% en el sistema progresivo de referencia de la sección 6.
+
+Las fuentes son los anuarios de ARCA (cuadros 2.2.2.1.1, 2.2.2.1.2, 2.2.2.1.4 y 2.2.2.1.8; para 2025
+se usan las declaraciones de 2024, llevadas a 2025 con la variación del ingreso del decil 10 de la
+encuesta), la recaudación de la Dirección Nacional de Investigaciones y Análisis Fiscal, la ENGHo y
+la EPH.
+
+Con todo su ingreso declarado, el 1% paga 22,8%, 0,8 puntos menos que el promedio (23,6%). Cada parte
+que no declara baja todavía más su tasa: 21,8%, 20,8% y 17,8% si no declara el 5%, el 10% o el 25% de
+su ingreso no salarial. En ningún caso se acerca al 37,0% que pagaría en el sistema progresivo de
+referencia. La figura A.4 del anexo hace el mismo cálculo año por año, entre 2012 y 2025.
+
 ### Qué medida se usa en adelante
 
-Para 2025, el 1% más rico paga 21,7% de su ingreso con la versión A y 18,5% con la versión B. Hay
-una tercera forma de medirlo, que no usa la encuesta: armar el 1% sólo con las declaraciones
-juradas de Ganancias. Las tres coinciden en lo que surge de un mismo dato, la Ganancias (12,4% del
-ingreso en la encuesta completada y 11,7% en las declaraciones juradas), y se separan en lo demás:
+De aquí en adelante se usa la **versión A**. Frente a la versión B, por dos razones. La primera es que
+todos sus componentes salvo el consumo de la cima salen de fuentes observadas, mientras que la
+versión B depende de un multiplicador tomado de otros países y de la atribución de una cartera que
+no se puede verificar. La segunda es que la versión A es la más prudente para las conclusiones que
+siguen: si el ingreso que falta está arriba, la tasa real de la cima es menor que la de la versión
+A, no mayor. Cuando la versión A muestra que la cima paga menos que el promedio o menos que un
+sistema progresivo, la versión B refuerza ese resultado. La versión B queda como cota: indica cuánto
+más baja podría ser la tasa de la cima.
 
-| Medida | 1% más rico, 2025 | Qué sale de datos | Qué se supone |
-|---|---|---|---|
-| A. Encuesta completada con declaraciones juradas | 21,7% | Ingreso de la encuesta, ingreso y Ganancias declarados a ARCA, recaudación | El consumo por encima del percentil 95 |
-| B. A más el ingreso estimado | 18,5% | Lo mismo que A y el total de sueldos de las Cuentas Nacionales | Rentas ×7, reparto del faltante, renta de la cartera externa |
-| Sólo declaraciones juradas | 28,6% | Ingreso, Ganancias y patrimonio declarados | Que la mitad del ingreso es sueldo y que gasta como el 5% más rico de la ENGHo, de donde salen aportes y consumo |
+La medida de control tiene menos supuestos para el 1%, pero no puede reemplazar a la versión A por
+dos razones:
 
-La tercera medida queda más arriba porque no puede medir los aportes ni el consumo y los supone:
-le asigna al 1% el doble de aportes y más del doble de impuestos al consumo que los que la encuesta
-mide para el 1% que releva. Por eso se descarta.
+- **Sólo existe para el 1%.** Las declaraciones juradas de Ganancias cubren a unas 800.000 personas.
+  Para el resto de la población no hay medida de control.
+- **No se puede combinar con los demás grupos.** Las secciones que siguen comparan la parte del
+  ingreso y la parte de los impuestos de cada grupo, y esas partes tienen que sumar el total del
+  país. La versión A ordena a las personas por el ingreso per cápita de su hogar y la medida de
+  control ordena declaraciones individuales: su 1% no son exactamente las mismas personas. Además,
+  trae su propio ingreso y sus propios impuestos. Reemplazar sólo el 1% de la versión A por el de la
+  medida de control haría que las partes dejaran de sumar el total.
 
-De aquí en adelante se usa la **versión A**, por dos razones. La primera es que todos sus
-componentes salvo el consumo de la cima salen de fuentes observadas, mientras que la versión B
-depende de un multiplicador tomado de otros países y de la atribución de una cartera que no se
-puede verificar. La segunda es que la versión A es la más prudente para las conclusiones que siguen:
-si el ingreso que falta está arriba, la tasa real de la cima es menor que la de la versión A, no
-mayor. Cuando la versión A muestra que la cima paga menos que el promedio o menos que un sistema
-progresivo, la versión B refuerza ese resultado. La versión B queda como cota: indica cuánto más
-baja podría ser la tasa de la cima.
+La medida de control queda como control: en cada afirmación sobre el 1% se informa si la sostiene o
+no.
 
 ## 5. El decil 10 partido a lo largo del tiempo
 
-![Figura 10](../outputs/figures/informe_v2/f10_composicion_1pct.png)
+![Figura 11](../outputs/figures/informe_v2/f11_composicion_1pct.png)
 
-**Figura 10.** Qué impuestos paga cada grupo, año por año: deciles 1, 5 y 10 y el 1% más rico.
+**Figura 11.** Qué impuestos paga cada grupo, año por año: deciles 1, 5 y 10 y el 1% más rico.
 
-La figura 10 repite el gráfico de la figura 4 con el 1% más rico como cuarto panel. Los deciles 1,
+La figura 11 repite el gráfico de la figura 4 con el 1% más rico como cuarto panel. Los deciles 1,
 5 y 10 son los mismos de antes; el 1% es un tramo del decil 10, separado con la versión A.
 
 El 1% es el grupo cuya tasa más se mueve: entre 21,6% (2016) y 34,9% (2013). La razón está en su
@@ -418,12 +502,12 @@ alícuotas de Bienes Personales bajaron en 2016 (Ley 27.260, con blanqueo), subi
 27.541) y volvieron a bajar en 2024 (Ley 27.743). Son coincidencias en el tiempo, no causas
 demostradas; el estudio no aísla el efecto de cada ley.
 
-![Figura 11](../outputs/figures/informe_v2/f11_partido_anios_gobierno.png)
+![Figura 12](../outputs/figures/informe_v2/f12_partido_anios_gobierno.png)
 
-**Figura 11.** Qué parte de su ingreso pagó cada grupo, con el decil 10 partido, en los años de cambio
+**Figura 12.** Qué parte de su ingreso pagó cada grupo, con el decil 10 partido, en los años de cambio
 de gobierno.
 
-La figura 11 vuelve a los siete años de la figura 3 con el decil 10 partido. Muestra que el decil 10
+La figura 12 vuelve a los siete años de la figura 3 con el decil 10 partido. Muestra que el decil 10
 entero esconde movimientos de signo contrario adentro:
 
 | Año | Decil 10 | P90-95 | P95-99 | 1% | Promedio |
@@ -441,6 +525,14 @@ Entre 2004 y 2011 la tasa sube dentro del decil 10: el 1% paga más que los otro
 todos. En 2004 el decil 10 y el promedio de la población estaban casi a la par (23,1% y 22,7%), con el
 1% por encima de ambos; en 2025 también están a la par (23,4% y 23,6%), pero con el 1% dos puntos por
 debajo.
+
+Con la medida de control, la tasa del 1% sigue el mismo recorrido: sube hasta 2014-2015, cae en 2016
+y vuelve a subir en 2020-2022, pero se mantiene más alta que con la versión A en casi todos los años
+(figura A.4). La diferencia está en el consumo y en el ingreso, porque la medida de control usa sólo
+lo que el 1% declara al fisco. Con ella, el 1% paga menos que los percentiles 90-95 en 2016 y 2025 si
+declara todo su ingreso; también en 2024 si no declara el 5% o el 10% de su ingreso no salarial; y en
+todos los años salvo 2017 y 2020-2022 si no declara el 25%. Que la tasa baje hacia la cima depende
+entonces de la medida en la mayoría de los años; en 2016 y 2025 se sostiene con las dos.
 
 ## 6. ¿Proporcional o progresivo?
 
@@ -463,12 +555,12 @@ elección: un valor mayor daría un sistema más progresivo y uno menor, uno má
 proporcional. Sirve para medir cuán lejos está el sistema real de un sistema progresivo concreto.
 Al final de la sección se muestra cuánto cambian los resultados con otros exponentes.
 
-![Figura 12](../outputs/figures/informe_v2/f12_matriz_deltas.png)
+![Figura 13](../outputs/figures/informe_v2/f13_matriz_deltas.png)
 
-**Figura 12.** Qué parte de los impuestos paga cada grupo frente a dos sistemas de referencia, año por
+**Figura 13.** Qué parte de los impuestos paga cada grupo frente a dos sistemas de referencia, año por
 año.
 
-La figura 12 tiene dos tablas de colores. Cada fila es un grupo y cada columna, un año; las líneas
+La figura 13 tiene dos tablas de colores. Cada fila es un grupo y cada columna, un año; las líneas
 horizontales separan el 1%, la clase alta, la clase media y la clase baja. En la tabla A, cada celda
 es la parte de todo lo que se paga en impuestos que pone el grupo, menos la parte del ingreso total
 que recibe, en puntos de la recaudación. Si la diferencia es cero, el grupo paga en proporción a su
@@ -476,7 +568,7 @@ ingreso, como en un sistema proporcional. En la tabla B, cada celda es la parte 
 pone el grupo menos la que pondría en el sistema progresivo de referencia. Azul significa que el
 grupo paga una parte mayor que en la referencia; rojo, una parte menor; blanco, la misma. Las dos
 tablas tienen escalas distintas. Las columnas recuadradas son los años más lejos y más cerca de cada
-referencia, que la figura 13 muestra en detalle.
+referencia, que la figura 14 muestra en detalle.
 
 En la tabla de arriba, frente al sistema proporcional, casi todas las celdas están cerca de cero:
 las diferencias son de décimas de punto. El decil 1 paga una parte mayor que su parte del ingreso
@@ -490,11 +582,11 @@ años (entre 0,3 y 1,8 puntos), y el 1% una parte menor todos los años (entre 2
 es lo esperable en un sistema casi proporcional: cualquier referencia progresiva le asigna más a la
 cima y menos a la base que un sistema donde todos pagan parecido.
 
-![Figura 13](../outputs/figures/informe_v2/f13_flujos_extremos.png)
+![Figura 14](../outputs/figures/informe_v2/f14_flujos_extremos.png)
 
-**Figura 13.** Los años extremos de la figura 12, grupo por grupo.
+**Figura 14.** Los años extremos de la figura 13, grupo por grupo.
 
-La figura 13 muestra en detalle los cuatro años recuadrados en la figura 12. Cada panel es un gráfico
+La figura 14 muestra en detalle los cuatro años recuadrados en la figura 13. Cada panel es un gráfico
 de flujo: cada franja es un grupo, y su altura en cada columna es la parte que le corresponde de un
 total. Para calcular la parte de los impuestos, se suman los pesos que paga el grupo en los siete
 impuestos y se dividen por lo que pagan todos los grupos juntos. Las partes suman siempre 100%: si un
@@ -517,11 +609,11 @@ tenía el 38,0% del ingreso, pagaría el 30,7% y pagó el 38,1%. En 2013, el má
 1% pagó el 9,5% frente al 11,9% que le tocaría, y la clase media, el 38,8% frente al 36,3%. Incluso el
 año más cercano al sistema progresivo está más lejos de él que el año más lejano al proporcional.
 
-![Figura 14](../outputs/figures/informe_v2/f14_kakwani.png)
+![Figura 15](../outputs/figures/informe_v2/f15_kakwani.png)
 
-**Figura 14.** Índice de Kakwani: qué tan progresivo es el sistema, año por año.
+**Figura 15.** Índice de Kakwani: qué tan progresivo es el sistema, año por año.
 
-La figura 14 resume cada año en un número, el **índice de Kakwani**. Compara dos repartos: cómo se
+La figura 15 resume cada año en un número, el **índice de Kakwani**. Compara dos repartos: cómo se
 concentra la recaudación entre los grupos y cómo se concentra el ingreso. El segundo se mide con el
 coeficiente de Gini, que vale 0 si todos tienen el mismo ingreso y 1 si una sola persona tiene todo;
 el primero se calcula igual, con los impuestos en lugar del ingreso. El índice es la diferencia
@@ -532,16 +624,16 @@ están menos concentrados, es negativo y el sistema es regresivo.
 La línea roja es Argentina, con una franja que muestra cómo cambia el índice con todos los
 supuestos que se prueban en la sección 8. Con la medida del informe va de −0,021 (2016) a +0,031
 (2022), y con cualquier supuesto queda entre −0,039 y +0,040: prácticamente cero en todo el período, con cambios de
-signo que siguen a los del 1% en la figura 12. La línea azul punteada es el índice que tendría el
+signo que siguen a los del 1% en la figura 13. La línea azul punteada es el índice que tendría el
 sistema progresivo de referencia, con la misma recaudación: alrededor de 0,10 en todos los años
 (0,109 en 2025). La franja azul muestra ese valor con exponentes entre 0,15 y 0,40: va de 0,06 a 0,18.
 Incluso el más suave de esos sistemas progresivos queda lejos del sistema argentino.
 
-![Figura 15](../outputs/figures/informe_v2/f15_brecha_grupos.png)
+![Figura 16](../outputs/figures/informe_v2/f16_brecha_grupos.png)
 
-**Figura 15.** Cuánto más o menos pagaría cada grupo con otro sistema que recaude lo mismo, 2025.
+**Figura 16.** Cuánto más o menos pagaría cada grupo con otro sistema que recaude lo mismo, 2025.
 
-Las diferencias de la figura 12 se pueden pasar a dinero. Para cada grupo, la diferencia entre la
+Las diferencias de la figura 13 se pueden pasar a dinero. Para cada grupo, la diferencia entre la
 parte de la recaudación que le tocaría y la que paga se multiplica por lo que efectivamente se
 recaudó en el año con los siete impuestos del estudio (18,7% del PIB en 2025, según la Dirección
 Nacional de Investigaciones y Análisis Fiscal). Se usa lo recaudado y no lo que reconstruye el
@@ -549,7 +641,7 @@ modelo porque la encuesta capta menos ingreso y consumo que las Cuentas Nacional
 reproduce bien cómo se reparte la carga, no cuánto suma. Los montos se pasan a dólares con el tipo
 de cambio oficial promedio del año.
 
-En la figura 15, cada grupo tiene dos barras: gris, frente al sistema proporcional; azul, frente al
+En la figura 16, cada grupo tiene dos barras: gris, frente al sistema proporcional; azul, frente al
 progresivo. Debajo de cada grupo está la tasa que paga hoy. En cada color, lo que suman unos grupos
 lo restan otros, porque la recaudación total no cambia.
 
@@ -572,12 +664,12 @@ recaudar con una reforma: una suba de impuestos en la cima traería más elusió
 activos afuera. Mide la distancia entre cómo se reparte hoy la carga y cómo se repartiría con cada
 referencia.
 
-![Figura 16](../outputs/figures/informe_v2/f16_brecha_1pct.png)
+![Figura 17](../outputs/figures/informe_v2/f17_brecha_1pct.png)
 
-**Figura 16.** El 1% más rico: la tasa que paga y la que pagaría con cada sistema de referencia,
+**Figura 17.** El 1% más rico: la tasa que paga y la que pagaría con cada sistema de referencia,
 2004-2025.
 
-La figura 16 sigue al 1% en el tiempo con tres tasas. La roja es la que paga. La gris es la tasa
+La figura 17 sigue al 1% en el tiempo con tres tasas. La roja es la que paga. La gris es la tasa
 promedio, que es la que pagaría con un sistema proporcional. La azul es la que pagaría con el
 progresivo de referencia. El sombreado gris marca los años en que el 1% paga más que el promedio; el
 rojo, los años en que paga menos; el celeste, la distancia hasta el progresivo.
@@ -592,16 +684,29 @@ El monto frente al progresivo depende del exponente elegido. En 2025, con un exp
 sistema menos progresivo) el 1% pagaría US$5.500 millones más (0,81% del PIB); con 0,25, US$8.900
 millones (1,31%); con 0,40, US$14.800 millones (2,17%). Cambia el monto, no la dirección.
 
-![Figura 17](../outputs/figures/informe_v2/f17_deltas_2025.png)
+La figura A.4 del anexo muestra, año por año, cuánto se aparta el 1% del promedio con la versión A y
+con la medida de control. Frente al sistema progresivo, la medida de control da el mismo resultado
+que la versión A: el 1% paga menos de lo que le correspondería todos los años, aunque la distancia
+es menor (en 2025, 14,3 puntos con la medida de control y 15,4 con la versión A; con la medida de
+control, entre 15,3 y 19,3 puntos si no declara el 5%, el 10% o el 25% de su ingreso no salarial).
+Frente al proporcional, con la medida de control el 1% paga menos que el promedio en 2016 y 2025 si
+declara todo su ingreso; también en 2024 si no declara el 5% o el 10% de su ingreso no salarial; y
+además en 2012, 2013, 2018, 2019 y 2023 si no declara el 25%.
 
-**Figura 17.** Qué parte de los impuestos paga cada grupo frente a lo que pagaría con cada
+Las matrices (figura 13), el índice de Kakwani (figura 15) y los montos en dólares (figura 16) quedan
+con la versión A, porque comparan las partes de todos los grupos y la medida de control sólo existe
+para el 1%.
+
+![Figura 18](../outputs/figures/informe_v2/f18_deltas_2025.png)
+
+**Figura 18.** Qué parte de los impuestos paga cada grupo frente a lo que pagaría con cada
 referencia, 2025.
 
-La figura 17 es la columna de 2025 de la figura 12, dibujada en barras para leer los valores. A la
+La figura 18 es la columna de 2025 de la figura 13, dibujada en barras para leer los valores. A la
 izquierda, frente al sistema proporcional; a la derecha, frente al progresivo, con la tasa que le
 tocaría a cada grupo al lado de su nombre.
 
-Los fondos de color marcan las mismas clases que la figura 15. Frente al proporcional, en 2025 el 1% paga 0,86 puntos menos de la recaudación que su parte del
+Los fondos de color marcan las mismas clases que la figura 16. Frente al proporcional, en 2025 el 1% paga 0,86 puntos menos de la recaudación que su parte del
 ingreso, y el decil 1 y los percentiles 90-95 pagan algo más (0,32 y 0,46 puntos). Los demás grupos
 quedan a menos de una décima. Frente al progresivo, todos los deciles 1 a 9 pagan una parte mayor
 que la que les tocaría (entre 0,5 y 1,5 puntos cada uno), los percentiles 90-95 casi la misma, los
@@ -609,12 +714,12 @@ que la que les tocaría (entre 0,5 y 1,5 puntos cada uno), los percentiles 90-95
 
 ## 7. Cuántas veces más ingresan y cuántas veces más pagan
 
-![Figura 18](../outputs/figures/informe_v2/f18_veces.png)
+![Figura 19](../outputs/figures/informe_v2/f19_veces.png)
 
-**Figura 18.** Cuántas veces más ingresan y cuántas veces más pagan los de arriba que el 10% más
+**Figura 19.** Cuántas veces más ingresan y cuántas veces más pagan los de arriba que el 10% más
 pobre.
 
-La figura 18 compara a los de arriba con el decil 1 dividiendo una cosa por otra. Todo está por
+La figura 19 compara a los de arriba con el decil 1 dividiendo una cosa por otra. Todo está por
 persona: el ingreso o los impuestos del grupo divididos por la cantidad de personas del grupo.
 
 El panel A divide el ingreso por persona del decil 10 por el del decil 1, antes y después de pagar
@@ -630,7 +735,9 @@ paga 21 veces más; la línea de impuestos queda debajo de la de ingreso todos l
 El panel C hace lo mismo con el 1% más rico. En 2025 ingresa 72 veces lo del decil 1 por persona y
 paga 55 veces más en impuestos. La línea de impuestos queda debajo de la de ingreso todos los años
 salvo 2022. La distancia entre las dos se achicó en los años en que el 1% pagó más (2009-2015 y
-2020-2023) y se agrandó en 2016-2019 y desde 2024.
+2020-2023) y se agrandó en 2016-2019 y desde 2024. Con la medida de control pasa lo mismo, salvo en 2021
+y 2022, cuando el 1% paga una tasa mayor que el decil 1. Si no declara el 10% de su ingreso no
+salarial, la excepción queda sólo en 2022; si no declara el 25%, no hay excepciones.
 
 Los tres paneles comparan contra el decil 1 y usan su ingreso declarado, con la aclaración de la
 sección 2: una parte de su consumo se financia con recursos que no son ese ingreso. En los paneles B
@@ -663,12 +770,12 @@ que también es defendible:
 Se agrega una prueba más, sobre la forma de combinar las tres ediciones de la ENGHo: por tramos de
 años en lugar de interpolarlas. Con la medida del informe son 12 versiones del cálculo.
 
-![Figura 19](../outputs/figures/informe_v2/f19_rangos_supuestos.png)
+![Figura 20](../outputs/figures/informe_v2/f20_rangos_supuestos.png)
 
-**Figura 19.** Cuánto cambia la tasa de cada grupo con cada supuesto, en los años de cambio de
+**Figura 20.** Cuánto cambia la tasa de cada grupo con cada supuesto, en los años de cambio de
 gobierno.
 
-La figura 19 muestra, para los mismos siete años de las figuras 3 y 11, entre qué valores queda la
+La figura 20 muestra, para los mismos siete años de las figuras 3 y 12, entre qué valores queda la
 tasa de cada grupo con los supuestos de las familias 1, 2 y 4, sin completar la cima y con la otra
 forma de combinar la ENGHo (franja celeste). El punto negro es la medida del informe y el rombo
 azul, el cálculo con el ingreso que la encuesta no capta estimado (la versión B de la sección 4). La línea punteada es el promedio de la población.
@@ -679,11 +786,11 @@ franjas mezclan supuestos distintos y por eso se tocan entre grupos, pero compar
 supuesto el decil 1 paga más que cada uno de los deciles 2 a 9 en todos los años. Las franjas de los deciles 2 a 9 se superponen entre sí: con cualquier supuesto pagan parecido. En
 la cima las franjas son anchas y la del 1% cruza el promedio en varios años.
 
-![Figura 20](../outputs/figures/informe_v2/f20_distancias_supuestos.png)
+![Figura 21](../outputs/figures/informe_v2/f21_distancias_supuestos.png)
 
-**Figura 20.** Las tres comparaciones centrales del informe, con todos los supuestos, 2004-2025.
+**Figura 21.** Las tres comparaciones centrales del informe, con todos los supuestos, 2004-2025.
 
-La figura 20 sigue las tres comparaciones en las que se apoya el informe, año por año. Cada panel es
+La figura 21 sigue las tres comparaciones en las que se apoya el informe, año por año. Cada panel es
 una diferencia de tasas en puntos de ingreso: por encima de cero, el primer grupo paga una
 proporción de su ingreso mayor que el segundo. La línea llena es la medida del informe; la franja,
 el rango con los demás supuestos; la línea azul punteada, el cálculo con el ingreso que la encuesta no
@@ -709,18 +816,20 @@ y más con cualquier supuesto en 2011-2013, 2020 y 2022. En el resto de los año
 | Los deciles 2 a 9 pagan casi lo mismo | Sección 2 | Firme | La diferencia entre el que más paga y el que menos es de hasta 3,9 puntos en la medida del informe y de hasta 5,6 con contribuciones cargadas enteras a los consumidores (2012) |
 | La distancia del decil 1 al promedio se achicó | Secciones 2 y 8 | Firme sobre el ingreso declarado | Baja entre 7 y 11 puntos de 2004 a 2025 con todos los supuestos. El valor de 2009 depende de cómo se combinan las ediciones de la ENGHo |
 | El decil 10 esconde mucha diferencia adentro | Sección 3 | Firme | No depende de los supuestos sobre impuestos; con la versión B la diferencia es mayor |
-| La tasa baja hacia la cima (el 1% paga menos que los percentiles 90-95) | Secciones 4 y 5 | Depende del año | Con cualquier supuesto en 2018, 2019 y 2025; nunca en 2011-2013, 2020 y 2022 |
-| El 1% paga menos que el promedio | Secciones 5 y 6 | Depende del año | Con cualquier supuesto en 2018, 2019 y 2025, y con todos salvo uno en 2016, 2017 y 2024. Paga más con cualquier supuesto en 2012, 2013 y 2020-2022 |
-| En 2025 el 1% paga menos que cualquier decil | Sección 4 | Depende de un supuesto | Se sostiene con 10 de las 12 versiones. No se sostiene si la cima consume en proporción a su ingreso o si las contribuciones se cargan enteras al trabajador |
-| El sistema es casi proporcional | Sección 6 | Firme | El índice de Kakwani queda entre −0,039 y +0,040 con todos los supuestos, lejos del 0,06 del sistema progresivo más suave de la figura 14 |
-| El 1% paga menos y el decil 1 más que en un sistema progresivo | Sección 6 | Firme en la dirección | Con todos los supuestos y todos los años. El monto depende del exponente de la referencia y de la versión (sección 6) |
-| Los de arriba pagan, en proporción a su ingreso, menos que el decil 1 | Sección 7 | Firme sobre el ingreso declarado | Salvo el 1% en 2022 |
+| La tasa baja hacia la cima (el 1% paga menos que los percentiles 90-95) | Secciones 4 y 5 | Depende del año y de la medida | Con la versión A, con cualquier supuesto en 2018, 2019 y 2025; nunca en 2011-2013, 2020 y 2022. Con la medida de control, en 2016 y 2025 si declara todo; también en 2024 si no declara el 5% o el 10% de su ingreso no salarial, y en todos los años salvo 2017 y 2020-2022 si no declara el 25% |
+| El 1% paga menos que el promedio | Secciones 4 a 6 | Depende del año y de la medida | Con la versión A, con cualquier supuesto en 2018, 2019 y 2025, y con todos salvo uno en 2016, 2017 y 2024; paga más con cualquier supuesto en 2012, 2013 y 2020-2022. Con la medida de control, en 2016 y 2025 si declara todo; también en 2024 si no declara el 5% o el 10% de su ingreso no salarial, y en 2012, 2013, 2018, 2019 y 2023 si no declara el 25% |
+| En 2025 el 1% paga menos que cualquier decil | Sección 4 | Depende de un supuesto | Se sostiene con 10 de las 12 versiones y con la medida de control (22,8%, contra 23,0% del decil que menos paga). No se sostiene si la cima consume en proporción a su ingreso o si las contribuciones se cargan enteras al trabajador |
+| El sistema es casi proporcional | Sección 6 | Firme | El índice de Kakwani queda entre −0,039 y +0,040 con todos los supuestos, lejos del 0,06 del sistema progresivo más suave de la figura 15 |
+| El 1% paga menos y el decil 1 más que en un sistema progresivo | Sección 6 | Firme en la dirección | Con todos los supuestos, todos los años y con la medida de control en sus cuatro escenarios. El monto depende del exponente de la referencia y de la versión (sección 6) |
+| Los de arriba pagan, en proporción a su ingreso, menos que el decil 1 | Sección 7 | Firme sobre el ingreso declarado | Salvo el 1% en 2022. Con la medida de control, también salvo 2021 si declara todo o no declara el 5%; sin excepciones si no declara el 25% |
 
 Los resultados se ordenan entonces en dos grupos. Son firmes la forma del sistema para la gran
 mayoría de la población (los deciles 2 a 9 pagan parecido y el sistema, en conjunto, es casi
 proporcional), la distancia frente a un sistema progresivo y que la carga relativa del decil 1 bajó.
-Dependen del año los resultados sobre el 1%: en 2018, 2019 y 2025 paga menos que el promedio y que los
-percentiles 90-95 con cualquier supuesto, y en 2012, 2013 y 2020-2022 paga más. La carga más alta
+Dependen del año, y en parte de la medida, los resultados sobre el 1%: con la versión A, en 2018, 2019
+y 2025 paga menos que el promedio y que los percentiles 90-95 con cualquier supuesto, y en 2012, 2013 y
+2020-2022 paga más. La medida de control coincide en 2016 y 2025 aun si el 1% declara todo su ingreso;
+en los demás años da al 1% una tasa más alta. La carga más alta
 del decil 1 es firme frente a todos los supuestos; se mide sobre el ingreso que declara, con la
 aclaración de la sección 2.
 
@@ -739,6 +848,15 @@ tener presentes al leer sus resultados.
   tasa de un año a otro se debe al azar de la muestra.
 - **El decil 1.** Su consumo estimado es mayor que su ingreso declarado (sección 2), y su tasa se
   expresa sobre el ingreso que declara.
+- **El consumo del 1%.** Ninguna fuente lo mide. La versión A lo supone a partir de la ENGHo, que no
+  llega al 1%. La medida de control usa el punto medio entre ese supuesto y el "monto consumido" que
+  ARCA calcula como saldo de la declaración jurada.
+- **Aportes declarados antes de 2012.** Hasta 2011, pocos empleados descontaban sus aportes en la
+  declaración jurada (dentro del 1%, entre el 3% y el 25% de quienes declaraban trabajo personal,
+  contra 39% a 61% desde 2012). Por eso la medida de control se informa desde 2012.
+- **El ingreso no declarado.** No hay una estimación de cuánto ingreso no declara el 1% en Argentina.
+  La medida de control se informa con tres escenarios (5%, 10% y 25% de su ingreso no salarial), no
+  con un valor medido.
 - **Impuestos que quedan afuera.** Ganancias de sociedades, retenciones a la exportación, impuestos
   provinciales distintos de Ingresos Brutos y tasas municipales. Entre los incluidos, se cubre entre
   el 56% y el 71% de todo lo recaudado (figura A.2). Ganancias de sociedades es el más importante. Si
@@ -748,30 +866,58 @@ tener presentes al leer sus resultados.
 
 ## 10. Conclusiones
 
-**Para la gran mayoría de la población, el sistema tributario argentino es proporcional.** La clase
-baja, la clase media y la clase alta pagan cada una una parte de los impuestos casi igual a su parte
-del ingreso: en 2025, la clase media recibe el 38,8% del ingreso y paga el 39,0% de los impuestos. Que
-el sistema en su conjunto sea casi proporcional se sostiene con todos los supuestos que se probaron
-(sección 8). Cada impuesto se reparte
-de manera muy distinta, pero se compensan: los impuestos al consumo pesan más abajo, los aportes y
-contribuciones en el medio, y Ganancias y Bienes Personales arriba.
+**El sistema tributario argentino es proporcional en el centro, se aparta en sentido regresivo en las
+puntas y nunca se acerca a uno progresivo.** Las conclusiones que siguen desarrollan cada parte de
+esa afirmación.
 
-**El único grupo que se aparta es el 1% más rico, y lo hace en las dos direcciones.** Pagó más de lo
-que le correspondería en un sistema proporcional en 2004-2015 y en 2020-2023, y menos de lo que le
-correspondería en 2016-2019 y en 2024-2025. En 2018, 2019 y 2025 pagó menos que el promedio con
-cualquier supuesto. Su carga depende de Ganancias y Bienes Personales, que son entre el 61% y el 75%
-de lo que paga, y se mueve con los cambios de esas leyes.
+**En el centro, el sistema es proporcional.** Los deciles 2 a 9 pagan cada uno una parte de los
+impuestos casi igual a su parte del ingreso: en 2025, la clase media recibe el 38,8% del ingreso y
+paga el 39,0% de los impuestos (figuras 13 y 18). Cada impuesto se reparte de manera muy distinta,
+pero se compensan: los impuestos al consumo pesan más abajo, los aportes y contribuciones en el
+medio, y Ganancias y Bienes Personales arriba (figura 4). Que el sistema en su conjunto sea casi
+proporcional se sostiene con todos los supuestos que se probaron (figuras 20 y 21).
 
-**Frente a un sistema progresivo, el 1% paga menos de lo que le correspondería todos los años, y la
-clase media y la baja pagan más.** Con la misma recaudación y el sistema progresivo de referencia, en
-2025 la clase media pagaría unos US$8.800 millones menos por año y el 1%, unos US$8.900 millones más.
-Entre 2016 y 2025, lo que la clase media pagó de más frente a ese sistema suma US$65.700 millones, y
-lo que el 1% pagó de menos, US$73.100 millones.
+**En la punta de abajo, el decil más pobre paga la tasa más alta.** Sobre el ingreso que declara,
+paga más que cualquier otro decil todos los años (figuras 2 y 3). La distancia al promedio se
+achicó: era de 12,5 puntos en 2004 y de 4,9 en 2025 (figura 3). Como su consumo supera a su ingreso
+declarado, esa carga incluye los impuestos que se pagan al consumir bienes financiados con ayuda de
+otros hogares o con deudas (sección 2).
 
-**El decil 1 tiene la carga más alta sobre el ingreso que declara, y su distancia al resto se
-achicó.** Pagaba 12,5 puntos más que el promedio en 2004 y 4,9 en 2025. Como su consumo supera a su
-ingreso declarado, esa carga incluye los impuestos que se pagan al consumir bienes financiados con
-ayuda de otros hogares o con deudas (sección 2).
+**En la punta de arriba, el 1% más rico paga una tasa menor que el decil más pobre.** Pasa todos los
+años salvo 2022 con la medida del informe, y salvo 2021 y 2022 con la medida de control, que usa sólo
+lo que el 1% declara a ARCA (figura 19). Frente al promedio, el resultado depende del período. En
+2016-2019 y 2024-2025 el 1% paga menos que el promedio, es decir, menos de lo que le correspondería en
+un sistema proporcional; en 2004-2015 y 2020-2023 paga más (figura 17). En 2025 paga menos también con
+la medida de control, aun suponiendo que declara todo su ingreso: 22,8%, y 21,8%, 20,8% y 17,8% si no
+declara el 5%, el 10% o el 25% de su ingreso no salarial (figuras 10 y A.4). Su carga depende de
+Ganancias y Bienes Personales, que son entre el 61% y el 75% de lo que paga, y se mueve con los
+cambios de esas leyes (figura 11).
+
+**El sistema nunca se acerca a uno progresivo.** El índice de Kakwani, que resume en un número cuánto
+más se concentran los impuestos que el ingreso, va de −0,021 a +0,031 entre 2004 y 2025. Un sistema
+progresivo con la misma recaudación tendría alrededor de 0,10, y el más suave de los que se probaron,
+0,06. En su año más progresivo (2022), el sistema argentino llega a menos de un tercio del valor de la
+referencia (figura 15). Frente a ese sistema, el 1% paga menos de lo que le correspondería todos los
+años, también con la medida de control: en 2025 le correspondería el 37,0% de su ingreso y paga entre
+el 17,8% y el 22,8%, según la medida y el escenario (figura 17 y sección 4).
+
+**Lo que el 1% deja de pagar lo pagan los demás.** Las comparaciones mantienen la misma recaudación,
+así que lo que un grupo paga de menos lo pagan otros de más (figura 16).
+
+- **Frente a un sistema proporcional**, en 2025 el 1% pagaría US$1.100 millones más por año. El decil
+  más pobre pagaría US$410 millones menos, unos US$90 por persona, y la clase alta sin el 1%, US$700
+  millones menos. Entre 2016 y 2025, lo que el 1% pagó de menos en unos años y de más en otros casi
+  se compensa (figura 17).
+- **Frente al sistema progresivo de referencia**, la diferencia es mucho mayor y va siempre en la
+  misma dirección. En 2025 el 1% pagaría US$8.900 millones más (US$19.500 por persona) y el resto de
+  la clase alta, US$3.900 millones más. La clase media pagaría US$8.800 millones menos (US$385 por
+  persona) y la clase baja, US$4.000 millones menos (US$290 por persona). Entre 2016 y 2025, frente a
+  ese sistema, la clase media pagó US$65.700 millones de más y la clase baja, US$35.500 millones; el
+  1% pagó US$73.100 millones de menos.
+
+Son cuentas mecánicas, que suponen que nadie cambia su comportamiento. Miden la distancia entre cómo
+se reparte hoy la carga y cómo se repartiría con cada referencia, no lo que se podría recaudar con
+una reforma (sección 6).
 
 ## Anexo
 
@@ -801,12 +947,12 @@ causas demostradas.
 | Año | Hecho | Dónde se ve |
 |---|---|---|
 | 2008 | Fin de las AFJP: los aportes pasan al Estado | Aportes de los deciles medios (figura 4) |
-| 2013 | Decreto 1242/2013: piso de Ganancias para asalariados | Ganancias del decil 10 (figuras 4 y 10) |
-| 2016 | Ley 27.260: baja de alícuotas de Bienes Personales y blanqueo | El 1% (figuras 10 y 12) |
-| 2019-2020 | Ley 27.541: suben las alícuotas de Bienes Personales | El 1% (figuras 10 y 12) |
+| 2013 | Decreto 1242/2013: piso de Ganancias para asalariados | Ganancias del decil 10 (figuras 4 y 11) |
+| 2016 | Ley 27.260: baja de alícuotas de Bienes Personales y blanqueo | El 1% (figuras 11 y 13) |
+| 2019-2020 | Ley 27.541: suben las alícuotas de Bienes Personales | El 1% (figuras 11 y 13) |
 | 2021 | Ley 27.617: suben los mínimos de Ganancias | Ganancias del decil 10 (figura 4) |
 | 10/2023-06/2024 | Régimen cedular: casi todos los asalariados dejan de pagar Ganancias | Ganancias del decil 10 (figura 4) |
-| 2024 | Ley 27.743: vuelve Ganancias a los asalariados y bajan las alícuotas de Bienes Personales | Ganancias y Bienes Personales (figura 10) |
+| 2024 | Ley 27.743: vuelve Ganancias a los asalariados y bajan las alícuotas de Bienes Personales | Ganancias y Bienes Personales (figura 11) |
 
 ### Cada año, grupo por grupo
 
@@ -816,3 +962,23 @@ causas demostradas.
 
 La figura A.3 repite la figura 8 para cada año de 2004 a 2025: la tasa de cada decil y del decil 10
 partido en tres, separada por impuesto, con la versión A.
+
+### Control del 1% más rico
+
+![Figura A.4](../outputs/figures/informe_v2/a4_control_anios.png)
+
+**Figura A.4.** El 1% más rico frente al promedio con la versión A y con la medida de control, según
+cuánto ingreso no declara, 2012-2025.
+
+Cada línea muestra cuántos puntos paga el 1% por encima o por debajo del promedio de la población.
+Por encima de cero paga más que lo que le correspondería en un sistema proporcional; en la zona
+celeste, por debajo de cero, paga menos. La línea roja es la versión A. Las azules son la medida de
+control de la sección 4: declarando todo su ingreso, y si no declarara el 5%, el 10% o el 25% de su
+ingreso no salarial. Esos porcentajes equivalen a no declarar alrededor del 4%, el 9% y el 22% de su
+ingreso total. Empieza en 2012 porque antes pocos empleados descontaban sus aportes en la
+declaración jurada. Las fuentes son las de la figura 10.
+
+Las dos medidas coinciden en 2014-2015 y 2020-2022: el 1% paga más que el promedio en todos los
+escenarios, en los años en que Ganancias y Bienes Personales pesaron más. También coinciden en 2016
+y 2025, cuando paga menos aun declarando todo. En 2024 coinciden si el 1% no declara el 5% de su
+ingreso no salarial. En 2018 y 2019 coinciden sólo si no declara una cuarta parte, y en 2017, ni así.

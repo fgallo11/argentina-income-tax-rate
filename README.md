@@ -38,7 +38,7 @@ no capta se sumaba a los de arriba sin el ingreso que la genera: el 1% de la enc
 más Ganancias sobre su ingreso que el 1% de las declaraciones juradas (2016: 20,2% contra 12,4%).
 Ahora se suman juntos el ingreso faltante (con las rentas exentas declaradas) y la Ganancias que
 le corresponde, los dos de las declaraciones juradas; la Ganancias del 1% de la encuesta coincide
-con la de las declaraciones (2024: 12,0% contra 11,7%). El decil 10 bajó de 26,8% a 25,0% (2024)
+con la de las declaraciones (2024: 12,0% contra 12,1%). El decil 10 bajó de 26,8% a 25,0% (2024)
 y de 26,5% a 23,8% (2025); los deciles 1 a 8 no cambian.
 
 **Auditoría externa:** `docs/auditoria.md` (13/11/2026). Ya se corrigieron el aguinaldo,
@@ -51,27 +51,20 @@ corregía la subdeclaración de los demás (queda como variante `recursos_gasto`
 **El 1% más rico** (`outputs/figures/fig7_top1.png`). La medida es la del 1% de la encuesta,
 completado con lo que declara al fisco: 21,7% en 2025, menos que el decil 1 (28,7%) y que el
 decil 10 (23,8%). Como control, el 1% estimado sólo con las declaraciones juradas de Ganancias
-(`scripts/10_top1.py`), con todo lo que se le puede atribuir (la mitad de las ganancias de las
-empresas y de su impuesto, y 4% sobre la cartera externa privada, como el panel B de la figura 0):
-30,2% en 2024 (28,7% a 31,8% según cuánto consuma); sólo con lo que declara al fisco, 33,0%.
-Ganancias y Bienes Personales coinciden con la encuesta; el control queda más arriba porque supone
-que la mitad del ingreso es sueldo y que gasta como el 5% más rico de la ENGHo (aportes y consumo:
-16,2% del ingreso en 2025, contra 7,6% que la encuesta mide para su 1%). Estas cifras de 2024 ya usan las
-declaraciones juradas del año fiscal 2024 (anuario 2025 de ARCA); la versión anterior las
-extrapolaba desde 2023 y daba 30,1% (35,8% sólo con lo declarado). La diferencia es sobre todo
-Ganancias: con las declaraciones reales el impuesto determinado es 11,7% del ingreso del grupo,
-contra 15,8% en la extrapolación (el ingreso declarado también resultó menor: $96 millones
-anuales por persona, contra $112 millones extrapolados). 2025: 28,6% (26,9% a 30,2%);
-sólo con lo declarado, 30,2%. 2025 todavía es
-extrapolado (declaraciones de 2024 llevadas a 2025 con el ingreso del decil 10 de la EPH).
+(`scripts/10_top1.py`, medida C del informe, desde 2012): 22,8% en 2025. Usa lo que el 1% declara a
+ARCA (ingreso, Ganancias, patrimonio, aportes y cuántos aportan como empleados) y estima el consumo
+como el punto medio entre el "monto consumido" que calcula ARCA (35,0% del ingreso) y el de la
+encuesta (18,5%). Con tres escenarios de ingreso no declarado (5%, 10% y 25% de su ingreso no
+salarial) da 21,8%, 20,8% y 17,8%. Es un control y no la medida, porque sólo existe para el 1% y no
+se puede combinar con los demás grupos. 2025 todavía es extrapolado (declaraciones de 2024 llevadas
+a 2025 con el ingreso del decil 10 de la EPH).
 
 **El decil 10 partido** (`outputs/figures/fig8_decil10_partido.png`, `scripts/11_tramos_decil10.py`):
 percentiles 90-95, 95-99 y el 1% superior de la encuesta, con el mismo método que los deciles.
 2025: 24,6%, 23,7% y 21,7%: en la cima la tasa baja, por debajo de los deciles medios. El 1% de
 la encuesta, completado con el ingreso de las declaraciones juradas, tiene 24,5 canastas por
 adulto equivalente; con la renta de activos externos paga 20,1%. El 1% medido sólo con las declaraciones
-juradas (control de la figura 7) da 28,6% porque supone que la mitad de su ingreso es salario y que
-gasta como el 5% más rico de la ENGHo; sumar la mitad de las empresas casi no cambia su tasa.
+juradas (control de la figura 7) da 22,8%.
 
 **El decil 10 a lo largo del tiempo** (`outputs/figures/fig9_decil10_serie.png`; la figura 8 de cada
 año en `outputs/figures/por_anio/`): el 1% de la encuesta paga más que los percentiles 90-95 en 14

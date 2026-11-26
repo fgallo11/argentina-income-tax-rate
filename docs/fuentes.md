@@ -32,6 +32,8 @@ combinan, en los [diagramas](diagramas.md); el método completo, en la [metodolo
 | [Argendata / Pessino et al.](#argendata-fundar--pessino-rasteletti-artana-y-lustig) | Fundar; Oxford Open Economics | Comparar; dos supuestos tomados | Comparación |
 | [International Tax Observatory](#international-tax-observatory-ito) | Paris School of Economics | Comparar | Comparación |
 | [De Rosa, Flores y Morgan](#de-rosa-flores-y-morgan-2024) | World Development | Comparar; multiplicador de rentas | Comparación y variante |
+| [Alstadsæter, Johannesen y Zucman](#alstadsæter-johannesen-y-zucman-2019) | American Economic Review | Escenario de ingreso no declarado del 1% | Control del 1% |
+| [Sinceramiento fiscal 2016](#sinceramiento-fiscal-2016-ley-27260) | AFIP | Evidencia de bienes no declarados | Sólo texto |
 | [Revenue Statistics (OCDE)](#revenue-statistics-in-latin-america-and-the-caribbean-ocde) | OCDE, CEPAL, CIAT, BID | Entender la comparación con el ITO | Comparación |
 | [Estudios previos](#estudios-previos-de-incidencia-en-argentina) | CEPAL, CEQ y otros | Comparar | Comparación |
 
@@ -111,14 +113,18 @@ combinan, en los [diagramas](diagramas.md); el método completo, en la [metodolo
   2002-2024).
 - **Qué aporta.** Por tramo: cuántas personas declaran, su ingreso (ingresos gravados,
   ganancia neta sujeta a impuesto, resultado neto, rentas exentas), el impuesto determinado y el
-  patrimonio neto que declaran en esa misma presentación. Es la única fuente que ve bien a los de
-  más ingresos. No se usan las declaraciones de Bienes Personales.
+  patrimonio neto que declaran en esa misma presentación. También: el ingreso de cada categoría
+  (cuadros 2.2.2.1.1 y 2.2.2.1.2; la 4ta es el trabajo personal), las deducciones generales con los
+  aportes y cuántos aportan como empleados (2.2.2.1.4) y el "monto consumido", que el sistema de
+  ARCA calcula como saldo de la justificación patrimonial (2.2.2.1.8). Es la única fuente que ve
+  bien a los de más ingresos. No se usan las declaraciones de Bienes Personales.
 - **Cómo se usó.**
   - Completar la cima de la EPH: donde lo declarado al fisco más supera a la encuesta, se les
     suma a esas personas el ingreso que la encuesta no capta y la Ganancias que pagan por él.
   - Repartir el resto de la Ganancias no simulada y Bienes Personales (este último según el
     patrimonio declarado en Ganancias).
-  - Estimar el 1% más rico sólo con declaraciones juradas (figura 7).
+  - Estimar el 1% más rico sólo con declaraciones juradas: la medida de control (figuras 10 y A.4
+    del informe, figura 7 del conjunto anterior).
   - Saber quién tiene bienes en el exterior: los declaran en Bienes Personales unas 87.000 personas
     (cuadro 2.5.1.2.3), lo que justifica atribuir la renta de la cartera externa al 1% más rico.
   - 2025 usa las declaraciones de 2024 actualizadas (las de 2025 todavía no se publicaron).
@@ -313,12 +319,31 @@ README.
 - **Qué es.** *More unequal or not as rich? Revisiting the Latin American exception* (World
   Development, vol. 184). Distribución del ingreso nacional y de los impuestos en diez países de
   América Latina. Es la base de los números del ITO. El paper está en `papers/`.
-- **Qué aporta.** Que las encuestas captan entre un quinto y un décimo de las rentas del capital
-  de Cuentas Nacionales, y cómo se reparten los impuestos por tipo (Argentina 2019).
+- **Qué aporta.** Que en las encuestas el ingreso del capital es el que peor se capta: hay que
+  multiplicarlo "por un factor de 5 a 10 en la mayoría de los casos" para llegar a las Cuentas
+  Nacionales (para Argentina no lo miden y usan el promedio regional). Y cómo se reparten los
+  impuestos por tipo (Argentina 2019): en la región la carga total resulta regresiva.
 - **Cómo se usó.**
   - El multiplicador de rentas (×7, punto medio de su rango) de la variante
     `ajuste_cn_rentas`.
   - Entender de dónde salen las cifras del ITO.
+
+### Alstadsæter, Johannesen y Zucman (2019)
+
+- **Qué es.** *Tax Evasion and Inequality*, American Economic Review 109(6). Cruza listas filtradas
+  de clientes de bancos offshore con registros de patrimonio de Noruega, Suecia y Dinamarca.
+- **Qué aporta.** El 0,01% más rico evade alrededor de un cuarto de sus impuestos, contra un 3% del
+  promedio; las auditorías al azar detectan menos de 5% de esa evasión.
+- **Cómo se usó.** El escenario de 25% de ingreso no salarial no declarado de la medida de control
+  del 1% (`scripts/10_top1.py`), como techo: es un dato del 0,01% y de otros países.
+
+### Sinceramiento fiscal 2016 (Ley 27.260)
+
+- **Qué es.** El blanqueo de 2016. Se exteriorizaron US$116.800 millones en bienes no declarados,
+  unos 254.000 contribuyentes, el 80% de lo declarado en el exterior (AFIP; notas de Ámbito y
+  Chequeado).
+- **Cómo se usó.** Sólo en el texto del informe (sección 4), como evidencia de que la cima declaraba
+  menos patrimonio, y por lo tanto menos renta, de la que tenía.
 
 ### Revenue Statistics in Latin America and the Caribbean (OCDE)
 
